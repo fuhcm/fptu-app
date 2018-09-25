@@ -6,18 +6,20 @@ import {
     Redirect
 } from "react-router-dom";
 
-import Header from '../app/modules/header/Header';
-import Footer from '../app/modules/footer/Footer';
+import HeaderPage from '../app/modules/header/Header';
+import FooterPage from '../app/modules/footer/Footer';
 import Routes from '../app/Routes';
 
 import './App.css';
+
+import { Layout } from 'antd';
 
 class App extends Component {
     render() {
         return (
             <Router>
-                <div className="wrapper">
-                    <Header />
+                <Layout className="layout">
+                    <HeaderPage />
                     <Switch>
                         {Routes.map((route, i) => {
                             return (
@@ -31,8 +33,8 @@ class App extends Component {
                         })}
                         <Redirect to="/home" />
                     </Switch>
-                    <Footer />
-                </div>
+                    <FooterPage />
+                </Layout>
             </Router>
         );
     }
