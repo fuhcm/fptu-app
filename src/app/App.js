@@ -31,7 +31,7 @@ class App extends Component {
                                 />
                             );
                         })}
-                        <Redirect to="/home" />
+                        <Redirect to="/send" />
                     </Switch>
                     <FooterPage />
                 </Layout>

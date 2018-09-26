@@ -8,7 +8,7 @@ class FooterPage extends Component {
     render() {
         return (
             <Footer style={{ textAlign: 'center' }}>
-                Ant Design ©2018 Created by Ant UED
+                FPTU Confessions ©2018 Thiết kế bởi Tu Huynh, dựa trên ReactJS và NodeJS.
             </Footer>
         );
     }

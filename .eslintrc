@@ -1,13 +1,17 @@
 {
   "extends": [
     "airbnb",
+    "eslint:recommended",
     "plugin:react/recommended",
     "prettier",
     "prettier/react",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:jest/recommended",
+    "plugin:import/recommended"
   ],
   "parser": "babel-eslint",
-  "plugins": ["prettier"],
+  "plugins": ["react", "prettier", "jsx-a11y", "jest", "import"],
   "rules": {
     "react/jsx-filename-extension": [
       "error",
@@ -21,9 +25,13 @@
     "es6": true,
     "browser": true,
     "node": true,
-    "jest": true
+    "jest": true,
+    "worker": true,
+    "serviceworker": true,
+    "jest/globals": true
   },
   "parserOptions": {
+    "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
