@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Layout, Breadcrumb } from 'antd';
+import { Layout } from 'antd';
 
 const { Content } = Layout;
 
@@ -8,12 +8,9 @@ class Home extends Component {
     render() {
         return (
             <Content style={{ padding: '0 50px' }}>
-                <Breadcrumb style={{ margin: '16px 0' }}>
-                    <Breadcrumb.Item>Home</Breadcrumb.Item>
-                    <Breadcrumb.Item>List</Breadcrumb.Item>
-                    <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
-                <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>Content</div>
+                <div style={{ background: '#fff', padding: '2rem', minHeight: 540 }}>
+                    Voluptate reprehenderit Lorem voluptate Lorem irure officia sunt. Qui aliquip pariatur sint in ipsum commodo officia Lorem sint dolore nisi. Sunt consequat occaecat excepteur et.
+                </div>
             </Content>
         );
     }
