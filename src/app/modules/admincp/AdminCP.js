@@ -7,7 +7,7 @@ import { apiPath } from "../../../config/api";
 
 const { Content } = Layout;
 
-const apiUrl = apiPath + "/confessions/get/";
+const apiUrl = apiPath + "/confessions/admincp/";
 const stepLoad = 10;
 
 class AdminCP extends Component {
@@ -45,9 +45,7 @@ class AdminCP extends Component {
 
     this.setState({
       loading: true,
-      list: data
-        .concat([...new Array(stepLoad)].map(() => ({ loading: true })))
-        .reverse()
+      list: data.concat([...new Array(stepLoad)].map(() => ({ loading: true })))
     });
     this.getData(numLoad + stepLoad, data => {
       this.setState(
