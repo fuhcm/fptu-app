@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "./Send.css";
 
 import { Layout, Row, Button, Input, Divider, Alert, message } from "antd";
-import axios from "axios";
-import { apiPath } from "../../../config/api";
+import { post } from "../../utils/ApiCaller";
+import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -54,15 +54,12 @@ class Send extends Component {
             );
     };
 
-    onSend = (content, callback) => {
-        const apiUrl = apiPath + "/confessions";
-
-        return axios
-            .post(apiUrl, {
-                content,
-                sender: "Tu Huynh",
-                status: 0,
-            })
+    onSend = content => {
+        return post(GUEST__POST_CONFESS, {
+            content,
+            sender: "Tu Huynh",
+            status: 0,
+        })
             .then(res => {
                 console.log(res);
                 return { status: "ok", message: "" };

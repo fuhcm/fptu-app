@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
-import { Form, Icon, Input, Button, Checkbox, Layout } from "antd";
+import { post } from "../../utils/ApiCaller";
+import { AUTH__LOGIN } from "../../utils/ApiEndpoint";
+import localStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
+
+import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
 
 const { Content } = Layout;
 const FormItem = Form.Item;
@@ -10,13 +14,30 @@ class LoginForm extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log("Received values of form: ", values);
-
-                // Redirect to AdminCP
-                this.props.history.push("/admin-cp");
+                this.onLogin(values.email, values.password, token => {
+                    if (token) {
+                        localStorageUtils.setItem(LOCAL_STORAGE_KEY.JWT, token);
+                        this.props.history.push("/admin-cp");
+                    } else {
+                        message.error("Thông tin đăng nhập không chính xác!");
+                    }
+                });
             }
         });
     };
+
+    onLogin(email, password, cb) {
+        post(AUTH__LOGIN, {
+            email,
+            password,
+        })
+            .then(res => {
+                cb(res.data.token);
+            })
+            .catch(err => {
+                cb(null);
+            });
+    }
 
     render() {
         const { getFieldDecorator } = this.props.form;

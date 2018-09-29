@@ -2,12 +2,11 @@ import React, { Component } from "react";
 import "./AdminCP.css";
 
 import { Layout, List, Button, Skeleton } from "antd";
-import axios from "axios";
-import { apiPath } from "../../../config/api";
+import { get } from "../../utils/ApiCaller";
+import { ADMINCP__GET_CONFESS } from "../../utils/ApiEndpoint";
 
 const { Content } = Layout;
 
-const apiUrl = apiPath + "/confessions/admincp/";
 const stepLoad = 10;
 
 class AdminCP extends Component {
@@ -34,7 +33,7 @@ class AdminCP extends Component {
     }
 
     getData = (numLoad, callback) => {
-        axios.get(apiUrl + numLoad).then(res => {
+        get(ADMINCP__GET_CONFESS + "/" + numLoad).then(res => {
             callback(res.data);
         });
     };
