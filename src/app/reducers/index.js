@@ -1,4 +1,3 @@
 import { combineReducers } from "redux";
 
-export const reducers = combineReducers({
-});
+export const reducers = combineReducers({});
