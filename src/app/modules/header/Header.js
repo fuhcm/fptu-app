@@ -1,12 +1,19 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "./Header.css";
+
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
 import { Layout, Menu, Icon } from "antd";
 
 const { Header } = Layout;
 
 class HeaderPage extends Component {
+    onLogout = () => {
+        LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.JWT);
+        this.props.history.push("/login");
+    };
+
     render() {
         return (
             <Header>
@@ -22,7 +29,7 @@ class HeaderPage extends Component {
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="2">
-                        <Link to="/login">
+                        <Link to="/admin-cp">
                             <Icon type="login" />
                             admin
                         </Link>
@@ -39,10 +46,15 @@ class HeaderPage extends Component {
                             confess của tui
                         </Link>
                     </Menu.Item>
+                    {LocalStorageUtils.isAuthenticated() && (
+                        <Menu.Item key="5">
+                            <a onClick={() => this.onLogout()}>thoát</a>
+                        </Menu.Item>
+                    )}
                 </Menu>
             </Header>
         );
     }
 }
 
-export default HeaderPage;
+export default withRouter(HeaderPage);

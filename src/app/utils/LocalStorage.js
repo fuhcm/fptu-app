@@ -2,7 +2,7 @@ export const LOCAL_STORAGE_KEY = {
     JWT: "fptucf_jwt",
 };
 
-class localStorageUtils {
+class LocalStorageUtils {
     getItem(key, defaultValue) {
         if (typeof localStorage !== "undefined") {
             return localStorage.getItem(key) || defaultValue;
@@ -39,4 +39,4 @@ class localStorageUtils {
     }
 }
 
-export default new localStorageUtils();
+export default new LocalStorageUtils();

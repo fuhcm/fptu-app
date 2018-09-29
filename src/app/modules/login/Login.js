@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { post } from "../../utils/ApiCaller";
 import { AUTH__LOGIN } from "../../utils/ApiEndpoint";
-import localStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
 
@@ -10,13 +10,19 @@ const { Content } = Layout;
 const FormItem = Form.Item;
 
 class LoginForm extends Component {
+    componentDidMount() {
+        if (LocalStorageUtils.isAuthenticated()) {
+            this.props.history.push("/admin-cp");
+        }
+    }
+
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.onLogin(values.email, values.password, token => {
                     if (token) {
-                        localStorageUtils.setItem(LOCAL_STORAGE_KEY.JWT, token);
+                        LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.JWT, token);
                         this.props.history.push("/admin-cp");
                     } else {
                         message.error("Thông tin đăng nhập không chính xác!");
