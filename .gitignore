@@ -7,10 +7,11 @@
 /coverage
 
 # production
-# /build
+/build
 
 # misc
 .DS_Store
+.evn
 .env.local
 .env.development.local
 .env.test.local
