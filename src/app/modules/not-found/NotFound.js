@@ -8,7 +8,7 @@ const { Content } = Layout;
 class NotFound extends Component {
     render() {
         return (
-            <Content style={{ padding: "0 50px" }}>
+            <Content className="content-container">
                 <div
                     style={{
                         background: "#fff",

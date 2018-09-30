@@ -96,7 +96,7 @@ class Send extends Component {
         const { disabledSendButton, contentTextarea } = this.state;
 
         return (
-            <Content style={{ padding: "0 50px" }}>
+            <Content className="content-container">
                 <div
                     style={{
                         background: "#fff",

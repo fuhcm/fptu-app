@@ -97,7 +97,7 @@ class AdminCP extends Component {
             ) : null;
 
         return (
-            <Content style={{ padding: "0 50px" }}>
+            <Content className="content-container">
                 <div
                     style={{
                         background: "#fff",

@@ -53,7 +53,7 @@ class LoginForm extends Component {
         const { getFieldDecorator } = this.props.form;
 
         return (
-            <Content style={{ padding: "0 50px" }}>
+            <Content className="content-container">
                 <div
                     style={{
                         background: "#fff",
