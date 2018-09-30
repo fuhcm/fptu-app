@@ -31,7 +31,7 @@ class HeaderPage extends Component {
                     <Menu.Item key="/admin-cp">
                         <Link to="/admin-cp">
                             <Icon type="login" />
-                            admin
+                            admin {LocalStorageUtils.isAuthenticated() && `(chào ${LocalStorageUtils.getName() || "bạn"})`}
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="/send">
