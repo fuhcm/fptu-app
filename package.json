@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ant-design-pro": "^1.4.4",
     "antd": "^3.9.3",
     "axios": "^0.18.0",
     "react": "^16.5.2",

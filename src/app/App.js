@@ -3,12 +3,12 @@ import {
     BrowserRouter as Router,
     Route,
     Switch,
-    Redirect,
 } from "react-router-dom";
 
 import HeaderPage from "../app/modules/header/Header";
 import FooterPage from "../app/modules/footer/Footer";
 import Routes from "../app/Routes";
+import NotFound from "./modules/not-found/NotFound";
 
 import "./App.css";
 
@@ -31,7 +31,7 @@ class App extends Component {
                                 />
                             );
                         })}
-                        <Redirect to="/send" />
+                        <Route path="*" component={NotFound} />
                     </Switch>
                     <FooterPage />
                 </Layout>

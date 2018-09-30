@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./AdminCP.css";
 
-import { Layout, List, Button, Skeleton } from "antd";
+import moment from "moment";
+
+import { Layout, List, Button, Skeleton, Tag } from "antd";
 import { get } from "../../utils/ApiCaller";
 import { ADMINCP__GET_CONFESS } from "../../utils/ApiEndpoint";
 
@@ -106,22 +108,35 @@ class AdminCP extends Component {
                     <h2>Quản lí confession</h2>
 
                     <List
+                        size="large"
                         loading={initLoading}
-                        itemLayout="horizontal"
+                        itemLayout="vertical"
                         loadMore={loadMore}
                         dataSource={list}
                         locale={{ emptyText: "Không có dữ liệu" }}
-                        renderItem={item => (
-                            <List.Item>
+                        renderItem={(item, index) => (
+                            <List.Item
+                                key={index}
+                                actions={[<Button type="primary">duyệt</Button>, <Button type="danger">từ chối</Button>]}
+                            >
                                 <Skeleton
                                     title={true}
                                     loading={item.loading}
                                     active
                                 >
                                     <List.Item.Meta
-                                        title={item.sender}
-                                        description={item.content}
+                                        // title={item.sender}
+                                        description={moment(
+                                            item.createdAt
+                                        ).format("HH:mm DD/MM/YYYY")}
                                     />
+                                    {item.content}
+                                    <div style={{ margin: ".5rem 0" }}>
+                                        <Tag>
+                                            #fptucfs
+                                            {index}
+                                        </Tag>
+                                    </div>
                                 </Skeleton>
                             </List.Item>
                         )}

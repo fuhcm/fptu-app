@@ -9,7 +9,7 @@ const withAuth = withAuthRouteComponent("/login");
 
 export default [
     {
-        path: "/home",
+        path: "/",
         title: "Home",
         component: Home,
     },

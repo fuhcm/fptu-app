@@ -18,12 +18,12 @@ class HeaderPage extends Component {
         return (
             <Header>
                 <Menu
-                    theme="dark"
+                    theme="light"
                     mode="horizontal"
                     style={{ lineHeight: "64px" }}
                 >
-                    <Menu.Item key="/home">
-                        <Link to="/home">
+                    <Menu.Item key="/">
+                        <Link to="/">
                             <Icon type="home" />
                             trang chủ
                         </Link>
@@ -34,18 +34,18 @@ class HeaderPage extends Component {
                             admin {LocalStorageUtils.isAuthenticated() && `(chào ${LocalStorageUtils.getName() || "bạn"})`}
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="/send">
+                    {!LocalStorageUtils.isAuthenticated() && <Menu.Item key="/send">
                         <Link to="/send">
                             <Icon type="mail" />
                             gửi confess
                         </Link>
-                    </Menu.Item>
-                    <Menu.Item key="/my-confess">
+                    </Menu.Item>}
+                    {!LocalStorageUtils.isAuthenticated() && <Menu.Item key="/my-confess">
                         <Link to="/my-confess">
                             <Icon type="folder" />
                             confess của tui
                         </Link>
-                    </Menu.Item>
+                    </Menu.Item>}
                     {LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item key="/logout">
                             <a onClick={() => this.onLogout()}>thoát</a>
