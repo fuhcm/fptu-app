@@ -85,8 +85,8 @@ class AdminCP extends Component {
         const { list } = this.state;
 
         Modal.success({
-            title: "Approved",
-            content: `Confessions ID ${index} has been approved.`,
+            title: "Đã duyệt",
+            content: `Confession có ID ${index} đã được duyệt`,
         });
 
         list[index].content = (
@@ -110,7 +110,7 @@ class AdminCP extends Component {
     handleReject = index => {
         const { list } = this.state;
 
-        message.success(`Confessions ID ${index} has been rejected`)
+        message.success(`Confession có ID ${index} đã bị từ chối`)
 
         list[index].content = (
             <div>
