@@ -11,6 +11,7 @@ const { Header } = Layout;
 class HeaderPage extends Component {
     onLogout = () => {
         LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.JWT);
+        LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.EMAIL);
         this.props.history.push("/login");
     };
 

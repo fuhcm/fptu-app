@@ -2,7 +2,7 @@ import Login from "../app/modules/login/Login";
 import Home from "../app/modules/home/Home";
 import Send from "../app/modules/send/Send";
 import AdminCP from "./modules/admincp/AdminCP";
-
+import MyConfess from "./modules/my-confess/MyConfess";
 import withAuthRouteComponent from "./shared/auth/withAuthRouteComponent";
 
 const withAuth = withAuthRouteComponent("/login");
@@ -27,5 +27,10 @@ export default [
         path: "/admin-cp",
         title: "Admin CP",
         component: withAuth(AdminCP),
+    },
+    {
+        path: "/my-confess",
+        title: "My Confess",
+        component: MyConfess,
     },
 ];

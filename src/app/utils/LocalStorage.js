@@ -1,6 +1,9 @@
+import uuidv4 from "uuid/v4";
+
 export const LOCAL_STORAGE_KEY = {
     JWT: "fptucf_jwt",
     EMAIL: "fptucf_email",
+    SENDER: "fptucf_sendertoken",
 };
 
 class LocalStorageUtils {
@@ -45,8 +48,22 @@ class LocalStorageUtils {
 
     getName() {
         const email = this.getItem(LOCAL_STORAGE_KEY.EMAIL, "");
-        
+
         return email.substring(0, email.lastIndexOf("@"));
+    }
+
+    generateSenderToken() {
+        const token = this.getItem(LOCAL_STORAGE_KEY.SENDER);
+
+        if (!token || token === "undefined") {
+            const newSenderToken = uuidv4();
+
+            this.setItem(LOCAL_STORAGE_KEY.SENDER, newSenderToken);
+        }
+    }
+
+    getSenderToken() {
+        return this.getItem(LOCAL_STORAGE_KEY.SENDER, "guest");
     }
 }
 

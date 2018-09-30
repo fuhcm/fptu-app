@@ -1,18 +1,28 @@
 import React, { Component } from "react";
-import "./AdminCP.css";
+import "./MyConfess.css";
 
 import moment from "moment";
 
-import { Layout, List, Button, Skeleton, Tag, Modal, message } from "antd";
-import { get } from "../../utils/ApiCaller";
-import { ADMINCP__GET_CONFESS } from "../../utils/ApiEndpoint";
+import {
+    Layout,
+    List,
+    Button,
+    Skeleton,
+    Tag,
+    Row,
+    Alert,
+    Icon,
+    message,
+} from "antd";
+import { post } from "../../utils/ApiCaller";
+import { GUEST__GET_MY_CONFESS } from "../../utils/ApiEndpoint";
 import LocalStorageUtils from "../../utils/LocalStorage";
 
 const { Content } = Layout;
 
 const stepLoad = 10;
 
-class AdminCP extends Component {
+class MyConfess extends Component {
     state = {
         numLoad: stepLoad,
         initLoading: true,
@@ -37,7 +47,9 @@ class AdminCP extends Component {
 
     getData = async (numLoad, callback) => {
         await setTimeout(() => {
-            get(ADMINCP__GET_CONFESS + "/" + numLoad).then(res => {
+            post(GUEST__GET_MY_CONFESS + "/" + numLoad, {
+                token: LocalStorageUtils.getSenderToken(),
+            }).then(res => {
                 callback(res.data);
             });
         }, 1000);
@@ -81,50 +93,9 @@ class AdminCP extends Component {
         );
     };
 
-    handleApprove = index => {
-        const { list } = this.state;
-
-        Modal.success({
-            title: "Approved",
-            content: `Confessions ID ${index} has been approved.`,
-        });
-
-        list[index].content = (
-            <div>
-                {list[index].content}
-                <div style={{ margin: ".5rem 0" }}>
-                    <Tag>
-                        #fptucfs
-                        {index}
-                    </Tag>
-                    <Tag>#{LocalStorageUtils.getName() || "admin"}</Tag>
-                </div>
-            </div>
-        );
-        list[index].rejected = false;
-        list[index].approved = true;
-
-        this.setState({ list });
-    };
-
-    handleReject = index => {
-        const { list } = this.state;
-
-        message.success(`Confessions ID ${index} has been rejected`)
-
-        list[index].content = (
-            <div>
-                <strike>{list[index].content}</strike>
-                <div style={{ margin: ".5rem 0" }}>
-                    <Tag>#{LocalStorageUtils.getName() || "admin"}</Tag>
-                </div>
-            </div>
-        );
-        list[index].approved = false;
-        list[index].rejected = true;
-
-        this.setState({ list });
-    };
+    handleLoginFacebook = () => {
+        message.warning("Tính này hiện chưa sẵn sàng, bạn vui lòng thử lại sau nha");
+    }
 
     render() {
         const { initLoading, loading, list } = this.state;
@@ -138,7 +109,9 @@ class AdminCP extends Component {
                         lineHeight: "32px",
                     }}
                 >
-                    <Button onClick={this.onLoadMore}>tải thêm confess</Button>
+                    <Button onClick={this.onLoadMore}>
+                        cho xem thêm vài cài nữa đê
+                    </Button>
                 </div>
             ) : null;
 
@@ -151,7 +124,27 @@ class AdminCP extends Component {
                         minHeight: 540,
                     }}
                 >
-                    <h2>Quản lí confession</h2>
+                    <h2>Danh sách confession tui đã gửi</h2>
+                    <Row style={{ marginBottom: "10px" }}>
+                        Sender Token của tui là:{" "}
+                        <strong>{LocalStorageUtils.getSenderToken()}</strong>
+                    </Row>
+
+                    <Row style={{ marginBottom: "10px" }}>
+                        <Alert
+                            message="Sender Token chỉ lưu trên trình duyệt"
+                            description="Nếu bạn muốn lưu lâu dài và truy vấn trên nhiều trình duyệt, hãy chọn đăng nhập bằng Facebook hoặc Google để lưu confession an toàn hơn nhé."
+                            type="warning"
+                            showIcon
+                        />
+                    </Row>
+
+                    <Row style={{ marginBottom: "20px", marginLeft: "10px" }}>
+                        <Button type="primary" onClick={this.handleLoginFacebook}>
+                            <Icon type="facebook" />
+                            Đăng nhập bằng Facebook
+                        </Button>
+                    </Row>
 
                     <List
                         size="large"
@@ -161,32 +154,7 @@ class AdminCP extends Component {
                         dataSource={list}
                         locale={{ emptyText: "Không có dữ liệu" }}
                         renderItem={(item, index) => (
-                            <List.Item
-                                key={index}
-                                actions={
-                                    !item.approved &&
-                                    !item.rejected && [
-                                        <Button
-                                            type="primary"
-                                            disabled={item.loading}
-                                            onClick={() =>
-                                                this.handleApprove(index)
-                                            }
-                                        >
-                                            duyệt
-                                        </Button>,
-                                        <Button
-                                            type="danger"
-                                            disabled={item.loading}
-                                            onClick={() =>
-                                                this.handleReject(index)
-                                            }
-                                        >
-                                            từ chối
-                                        </Button>,
-                                    ]
-                                }
-                            >
+                            <List.Item key={index}>
                                 <Skeleton title loading={item.loading} active>
                                     <List.Item.Meta
                                         // title={item.sender}
@@ -195,6 +163,9 @@ class AdminCP extends Component {
                                         ).format("HH:mm DD/MM/YYYY")}
                                     />
                                     {item.content}
+                                    <div style={{ margin: ".5rem 0" }}>
+                                        <Tag>#đang đợi duyệt</Tag>
+                                    </div>
                                 </Skeleton>
                             </List.Item>
                         )}
@@ -205,4 +176,4 @@ class AdminCP extends Component {
     }
 }
 
-export default AdminCP;
+export default MyConfess;

@@ -12,6 +12,7 @@ import {
 } from "antd";
 import { post } from "../../utils/ApiCaller";
 import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
+import LocalStorage from "../../utils/LocalStorage";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -63,9 +64,11 @@ class Send extends Component {
     };
 
     onSend = content => {
+        LocalStorage.generateSenderToken();
+
         return post(GUEST__POST_CONFESS, {
             content,
-            sender: "Tu Huynh",
+            sender: LocalStorage.getSenderToken(),
             status: 0,
         })
             .then(res => {
