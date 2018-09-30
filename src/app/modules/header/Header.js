@@ -22,32 +22,32 @@ class HeaderPage extends Component {
                     mode="horizontal"
                     style={{ lineHeight: "64px" }}
                 >
-                    <Menu.Item key="1">
+                    <Menu.Item key="/home">
                         <Link to="/home">
                             <Icon type="home" />
                             trang chủ
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="2">
+                    <Menu.Item key="/admin-cp">
                         <Link to="/admin-cp">
                             <Icon type="login" />
                             admin
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="3">
+                    <Menu.Item key="/send">
                         <Link to="/send">
                             <Icon type="mail" />
                             gửi confess
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="4">
+                    <Menu.Item key="/my-confess">
                         <Link to="/my-confess">
                             <Icon type="folder" />
                             confess của tui
                         </Link>
                     </Menu.Item>
                     {LocalStorageUtils.isAuthenticated() && (
-                        <Menu.Item key="5">
+                        <Menu.Item key="/logout">
                             <a onClick={() => this.onLogout()}>thoát</a>
                         </Menu.Item>
                     )}

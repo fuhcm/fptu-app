@@ -23,6 +23,10 @@ class LoginForm extends Component {
                 this.onLogin(values.email, values.password, token => {
                     if (token) {
                         LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.JWT, token);
+                        LocalStorageUtils.setItem(
+                            LOCAL_STORAGE_KEY.EMAIL,
+                            values.email
+                        );
                         this.props.history.push("/admin-cp");
                     } else {
                         message.error("Thông tin đăng nhập không chính xác!");

@@ -1,5 +1,6 @@
 export const LOCAL_STORAGE_KEY = {
     JWT: "fptucf_jwt",
+    EMAIL: "fptucf_email",
 };
 
 class LocalStorageUtils {
@@ -36,6 +37,16 @@ class LocalStorageUtils {
 
     getJWT() {
         return this.getItem(LOCAL_STORAGE_KEY.JWT, "");
+    }
+
+    getEmail() {
+        return this.getItem(LOCAL_STORAGE_KEY.EMAIL, "");
+    }
+
+    getName() {
+        const email = this.getItem(LOCAL_STORAGE_KEY.EMAIL, "");
+        
+        return email.substring(0, email.lastIndexOf("@"));
     }
 }
 

@@ -32,10 +32,12 @@ class AdminCP extends Component {
         setTimeout(() => this.setState({ initLoading: false }), 5000);
     }
 
-    getData = (numLoad, callback) => {
-        get(ADMINCP__GET_CONFESS + "/" + numLoad).then(res => {
-            callback(res.data);
-        });
+    getData = async (numLoad, callback) => {
+        await setTimeout(() => {
+            get(ADMINCP__GET_CONFESS + "/" + numLoad).then(res => {
+                callback(res.data);
+            });
+        }, 1000);
     };
 
     onLoadMore = () => {

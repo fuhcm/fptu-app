@@ -117,10 +117,10 @@ class Send extends Component {
                         type="primary"
                         onClick={this.handleSend}
                         disabled={disabledSendButton}
+                        style={{ margin: ".5rem" }}
                     >
                         Gửi liền!
-                    </Button>{" "}
-                    &nbsp;{" "}
+                    </Button>
                     <Button onClick={this.handleUploadHelper}>
                         Làm sao để tui up hình?!
                     </Button>

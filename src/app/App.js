@@ -18,7 +18,7 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Layout className="layout">
+                <Layout>
                     <HeaderPage />
                     <Switch>
                         {Routes.map((route, i) => {
