@@ -28,24 +28,37 @@ class HeaderPage extends Component {
                             trang chủ
                         </Link>
                     </Menu.Item>
+                    {!LocalStorageUtils.isAuthenticated() && (
+                        <Menu.Item key="/send">
+                            <Link to="/send">
+                                <Icon type="mail" />
+                                gửi confess
+                            </Link>
+                        </Menu.Item>
+                    )}
+                    {!LocalStorageUtils.isAuthenticated() && (
+                        <Menu.Item key="/my-confess">
+                            <Link to="/my-confess">
+                                <Icon type="folder" />
+                                confess của tui
+                            </Link>
+                        </Menu.Item>
+                    )}
+                    <Menu.Item key="/faq">
+                        <Link to="/faq">
+                            <Icon type="question" />
+                            hỏi đáp
+                        </Link>
+                    </Menu.Item>
                     <Menu.Item key="/admin-cp">
                         <Link to="/admin-cp">
                             <Icon type="login" />
-                            admin {LocalStorageUtils.isAuthenticated() && `(chào ${LocalStorageUtils.getName() || "bạn"})`}
+                            admin{" "}
+                            {LocalStorageUtils.isAuthenticated() &&
+                                `(chào ${LocalStorageUtils.getName() ||
+                                    "bạn"})`}
                         </Link>
                     </Menu.Item>
-                    {!LocalStorageUtils.isAuthenticated() && <Menu.Item key="/send">
-                        <Link to="/send">
-                            <Icon type="mail" />
-                            gửi confess
-                        </Link>
-                    </Menu.Item>}
-                    {!LocalStorageUtils.isAuthenticated() && <Menu.Item key="/my-confess">
-                        <Link to="/my-confess">
-                            <Icon type="folder" />
-                            confess của tui
-                        </Link>
-                    </Menu.Item>}
                     {LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item key="/logout">
                             <a onClick={() => this.onLogout()}>thoát</a>
