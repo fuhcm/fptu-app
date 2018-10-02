@@ -62,7 +62,7 @@ class HeaderPage extends Component {
                     </Menu.Item>
                     {LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item key="/logout">
-                            <a onClick={() => this.onLogout()}>thoát</a>
+                            <a href="#" onClick={() => this.onLogout()}>thoát</a>
                         </Menu.Item>
                     )}
                 </Menu>

@@ -1,11 +1,9 @@
 .logo {
-    width: 120px;
-    height: 31px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px 24px 16px 0;
-    float: left;
-}
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left; }
 
 .ant-menu {
-    white-space: normal !important;
-}
+  white-space: normal !important; }
