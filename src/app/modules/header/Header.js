@@ -9,7 +9,9 @@ import { Layout, Menu, Icon } from "antd";
 const { Header } = Layout;
 
 class HeaderPage extends Component {
-    onLogout = () => {
+    onLogout = e => {
+        e.preventDefault();
+
         LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.JWT);
         LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.EMAIL);
         this.props.history.push("/login");
@@ -62,7 +64,9 @@ class HeaderPage extends Component {
                     </Menu.Item>
                     {LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item key="/logout">
-                            <a href="#" onClick={() => this.onLogout()}>thoát</a>
+                            <a href="/logout" onClick={e => this.onLogout(e)}>
+                                thoát
+                            </a>
                         </Menu.Item>
                     )}
                 </Menu>
