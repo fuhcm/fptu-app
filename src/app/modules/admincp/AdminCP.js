@@ -57,6 +57,7 @@ class AdminCP extends Component {
                 [...new Array(stepLoad)].map(() => ({ loading: true }))
             ),
         });
+
         this.getData(numLoad + stepLoad, data => {
             this.setState(
                 {
@@ -73,16 +74,6 @@ class AdminCP extends Component {
                 }
             );
         });
-
-        setTimeout(
-            () =>
-                this.setState({
-                    data: timeoutDate,
-                    list: data,
-                    loading: false,
-                }),
-            5000
-        );
     };
 
     findIndex(id) {
@@ -144,7 +135,11 @@ class AdminCP extends Component {
     };
 
     getNameFromEmail(email) {
-        return email.substring(0, email.lastIndexOf("@"));
+        if (email !== null) {
+            return email.substring(0, email.lastIndexOf("@"));
+        }
+
+        return "admin@fptu.cf";
     }
 
     pendingConfess = content => (
