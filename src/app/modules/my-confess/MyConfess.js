@@ -11,11 +11,12 @@ import {
     Tag,
     Row,
     Alert,
-    Icon,
-    message,
 } from "antd";
-import { post } from "../../utils/ApiCaller";
-import { GUEST__GET_MY_CONFESS } from "../../utils/ApiEndpoint";
+import { get, post } from "../../utils/ApiCaller";
+import {
+    GUEST__GET_MY_CONFESS,
+    GUEST__GET_OVERVIEW,
+} from "../../utils/ApiEndpoint";
 import LocalStorageUtils from "../../utils/LocalStorage";
 
 const { Content } = Layout;
@@ -29,6 +30,7 @@ class MyConfess extends Component {
         loading: false,
         data: [],
         list: [],
+        overview: {},
     };
 
     componentDidMount() {
@@ -42,7 +44,11 @@ class MyConfess extends Component {
             });
         });
 
-        setTimeout(() => this.setState({ initLoading: false }), 5000);
+        this.getOverview(data => {
+            this.setState({
+                overview: data,
+            });
+        });
     }
 
     getData = async (numLoad, callback) => {
@@ -53,6 +59,12 @@ class MyConfess extends Component {
                 callback(res.data);
             });
         }, 1000);
+    };
+
+    getOverview = callback => {
+        get(GUEST__GET_OVERVIEW).then(res => {
+            callback(res.data);
+        });
     };
 
     onLoadMore = () => {
@@ -93,12 +105,6 @@ class MyConfess extends Component {
         );
     };
 
-    handleLoginFacebook = () => {
-        message.warning(
-            "Tính này hiện chưa sẵn sàng, bạn vui lòng thử lại sau nha"
-        );
-    };
-
     getNameFromEmail(email) {
         return email.substring(0, email.lastIndexOf("@"));
     }
@@ -125,17 +131,25 @@ class MyConfess extends Component {
         </div>
     );
 
-    rejectedConfess = (content, approver = "admin@fptu.cf") => (
+    rejectedConfess = (content, approver = "admin@fptu.cf", reason) => (
         <div>
-            <div className="confess-content"><strike>{content}</strike></div>
+            <div className="confess-content">
+                <strike>{content}</strike>
+            </div>
             <div style={{ margin: ".5rem 0" }}>
                 <Tag color="red">#{this.getNameFromEmail(approver)}</Tag>
+            </div>
+            <div style={{ margin: ".5rem 0" }}>
+                <strong>
+                    Lí do bị {this.getNameFromEmail(approver)} từ chối:{" "}
+                </strong>{" "}
+                {reason || "Hem có"}
             </div>
         </div>
     );
 
     render() {
-        const { initLoading, loading, list } = this.state;
+        const { initLoading, loading, list, overview } = this.state;
         const loadMore =
             !initLoading && !loading ? (
                 <div
@@ -169,21 +183,41 @@ class MyConfess extends Component {
 
                     <Row style={{ marginBottom: "10px" }}>
                         <Alert
-                            message="Sender Token chỉ lưu trên trình duyệt"
-                            description="Nếu bạn muốn lưu lâu dài và truy vấn trên nhiều trình duyệt, hãy chọn đăng nhập bằng Facebook hoặc Google để lưu confession an toàn hơn nhé."
-                            type="warning"
+                            message="Thống kê tổng quan"
+                            description={
+                                <div>
+                                    <Row>
+                                        Lời nhắn đã nhận:{" "}
+                                        <strong>
+                                            {overview.total || "đang tải"}
+                                        </strong>{" "}
+                                        cái
+                                    </Row>
+                                    <Row>
+                                        Đang chờ duyệt:{" "}
+                                        <strong>
+                                            {overview.pending || "đang tải"}
+                                        </strong>{" "}
+                                        cái
+                                    </Row>
+                                    <Row>
+                                        Đã bị từ chối:{" "}
+                                        <strong>
+                                            {overview.rejected || "đang tải"}
+                                        </strong>{" "}
+                                        cái (tỉ lệ:{" "}
+                                        {Math.round(
+                                            (overview.rejected /
+                                                overview.total) *
+                                                100
+                                        )}
+                                        %)
+                                    </Row>
+                                </div>
+                            }
+                            type="info"
                             showIcon
                         />
-                    </Row>
-
-                    <Row style={{ marginBottom: "20px", marginLeft: "10px" }}>
-                        <Button
-                            type="primary"
-                            onClick={this.handleLoginFacebook}
-                        >
-                            <Icon type="facebook" />
-                            Đăng nhập bằng Facebook
-                        </Button>
                     </Row>
 
                     <List
@@ -213,7 +247,8 @@ class MyConfess extends Component {
                                     {item.status === 2 &&
                                         this.rejectedConfess(
                                             item.content,
-                                            item.approver
+                                            item.approver,
+                                            item.reason
                                         )}
                                 </Skeleton>
                             </List.Item>

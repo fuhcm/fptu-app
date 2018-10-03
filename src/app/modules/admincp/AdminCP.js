@@ -3,14 +3,26 @@ import "./AdminCP.css";
 
 import moment from "moment";
 
-import { Layout, List, Button, Skeleton, Tag, message } from "antd";
+import {
+    Layout,
+    List,
+    Button,
+    Skeleton,
+    Tag,
+    Alert,
+    Row,
+    Modal,
+    message,
+} from "antd";
 import { get, put } from "../../utils/ApiCaller";
 import {
     ADMINCP__GET_CONFESS,
     ADMINCP__APPROVE_CONFESS,
     ADMINCP__REJECT_CONFESS,
+    GUEST__GET_OVERVIEW,
 } from "../../utils/ApiEndpoint";
 import LocalStorage from "../../utils/LocalStorage";
+import TextArea from "antd/lib/input/TextArea";
 
 const { Content } = Layout;
 
@@ -23,6 +35,13 @@ class AdminCP extends Component {
         loading: false,
         data: [],
         list: [],
+        overview: {},
+        rejectModal: {
+            visible: false,
+        },
+        approveModal: {
+            visible: false,
+        },
     };
 
     componentDidMount() {
@@ -36,7 +55,11 @@ class AdminCP extends Component {
             });
         });
 
-        setTimeout(() => this.setState({ initLoading: false }), 5000);
+        this.getOverview(data => {
+            this.setState({
+                overview: data,
+            });
+        });
     }
 
     getData = async (numLoad, callback) => {
@@ -47,9 +70,14 @@ class AdminCP extends Component {
         }, 1000);
     };
 
+    getOverview = callback => {
+        get(GUEST__GET_OVERVIEW).then(res => {
+            callback(res.data);
+        });
+    };
+
     onLoadMore = () => {
         const { numLoad, data } = this.state;
-        const timeoutDate = data;
 
         this.setState({
             loading: true,
@@ -101,36 +129,41 @@ class AdminCP extends Component {
                 list[index].cfsid = res.data.cfsid;
 
                 this.setState({ list });
-                message.success(`Confession có ID ${id} đã bị được duyệt`);
+                message.success(
+                    `Confession có đã được duyệt với ID là ${res.data.cfsid}`
+                );
+
+                this.showApproveModal(
+                    res.data.cfsid,
+                    moment(res.data.createdAt).format("HH:mm DD/MM/YYYY"),
+                    res.data.content,
+                    this.getNameFromEmail(LocalStorage.getEmail())
+                );
             })
             .catch(err => {
                 console.log(err);
 
-                message.error(
-                    `Đã xảy ra lỗi, chưa thể duyệt Confession có ID ${id}`
-                );
+                message.error(`Đã xảy ra lỗi, chưa thể duyệt Confession này`);
             });
     };
 
-    handleReject = id => {
+    handleReject = (id, reason) => {
         const { list } = this.state;
         const index = this.findIndex(id);
 
-        put(ADMINCP__REJECT_CONFESS, { id, reason: "" })
+        put(ADMINCP__REJECT_CONFESS, { id, reason })
             .then(res => {
                 // Update UI
                 list[index].approver = LocalStorage.getEmail();
                 list[index].status = 2;
 
                 this.setState({ list });
-                message.success(`Confession có ID ${id} đã bị từ chối`);
+                message.success(`Confession này đã bị từ chối`);
             })
             .catch(err => {
                 console.log(err);
 
-                message.error(
-                    `Đã xảy ra lỗi, chưa thể từ chối Confession có ID ${id}`
-                );
+                message.error(`Đã xảy ra lỗi, chưa thể từ chối Confession này`);
             });
     };
 
@@ -139,7 +172,7 @@ class AdminCP extends Component {
             return email.substring(0, email.lastIndexOf("@"));
         }
 
-        return "admin@fptu.cf";
+        return "admin";
     }
 
     pendingConfess = content => (
@@ -170,8 +203,91 @@ class AdminCP extends Component {
         </div>
     );
 
+    showModal = id => {
+        this.setState({
+            rejectModal: {
+                visible: true,
+                id,
+            },
+        });
+    };
+
+    handleOkRejectModal = e => {
+        e.preventDefault();
+        const { id, reason } = this.state.rejectModal;
+
+        this.handleReject(id, (reason && reason.trim()) || null);
+
+        this.setState({
+            rejectModal: {
+                visible: false,
+            },
+        });
+    };
+
+    handleCancelRejectModal = e => {
+        e.preventDefault();
+
+        this.setState({
+            rejectModal: {
+                visible: false,
+            },
+        });
+    };
+
+    handleChangeTextarea = e => {
+        e.preventDefault();
+        const { rejectModal } = this.state;
+
+        this.setState({
+            rejectModal: {
+                ...rejectModal,
+                reason: e.target.value,
+            },
+        });
+    };
+
+    showApproveModal = (cfsid, time, content, admin) => {
+        this.setState({
+            approveModal: {
+                visible: true,
+                cfsid,
+                time,
+                content,
+                admin,
+            },
+        });
+    };
+
+    handleOkApproveModal = e => {
+        e.preventDefault();
+
+        this.setState({
+            approveModal: {
+                visible: false,
+            },
+        });
+    };
+
+    handleCancelApproveModal = e => {
+        e.preventDefault();
+
+        this.setState({
+            approveModal: {
+                visible: false,
+            },
+        });
+    };
+
     render() {
-        const { initLoading, loading, list } = this.state;
+        const {
+            initLoading,
+            loading,
+            list,
+            overview,
+            rejectModal,
+            approveModal,
+        } = this.state;
         const loadMore =
             !initLoading && !loading ? (
                 <div
@@ -196,6 +312,42 @@ class AdminCP extends Component {
                     }}
                 >
                     <h2>Quản lí confession</h2>
+
+                    <Alert
+                        message="Thống kê tổng quan"
+                        description={
+                            <div>
+                                <Row>
+                                    Lời nhắn đã nhận:{" "}
+                                    <strong>
+                                        {overview.total || "đang tải"}
+                                    </strong>{" "}
+                                    cái
+                                </Row>
+                                <Row>
+                                    Đang chờ duyệt:{" "}
+                                    <strong>
+                                        {overview.pending || "đang tải"}
+                                    </strong>{" "}
+                                    cái
+                                </Row>
+                                <Row>
+                                    Đã bị từ chối:{" "}
+                                    <strong>
+                                        {overview.rejected || "đang tải"}
+                                    </strong>{" "}
+                                    cái (tỉ lệ:{" "}
+                                    {Math.round(
+                                        (overview.rejected / overview.total) *
+                                            100
+                                    )}
+                                    %)
+                                </Row>
+                            </div>
+                        }
+                        type="info"
+                        showIcon
+                    />
 
                     <List
                         size="large"
@@ -223,7 +375,7 @@ class AdminCP extends Component {
                                             type="danger"
                                             disabled={item.loading}
                                             onClick={() => {
-                                                this.handleReject(item.id);
+                                                this.showModal(item.id);
                                             }}
                                         >
                                             từ chối
@@ -256,6 +408,62 @@ class AdminCP extends Component {
                         )}
                     />
                 </div>
+
+                <Modal
+                    title="Lí do từ chối"
+                    visible={rejectModal.visible}
+                    onOk={this.handleOkRejectModal}
+                    onCancel={this.handleCancelRejectModal}
+                    footer={[
+                        <Button
+                            key="back"
+                            onClick={this.handleCancelRejectModal}
+                        >
+                            Hủy bỏ
+                        </Button>,
+                        <Button
+                            key="submit"
+                            type="primary"
+                            onClick={this.handleOkRejectModal}
+                        >
+                            Từ cmn chối
+                        </Button>,
+                    ]}
+                >
+                    <TextArea
+                        value={rejectModal.reason}
+                        onChange={e => this.handleChangeTextarea(e)}
+                        rows={4}
+                        placeholder="Ghi gì lí do vì sao confess này bị từ chối..."
+                    />
+                </Modal>
+
+                <Modal
+                    title="Chỉ cần Copy & Paste trên Page"
+                    visible={approveModal.visible}
+                    onOk={this.handleOkApproveModal}
+                    onCancel={this.handleCancelApproveModal}
+                    footer={[
+                        <Button
+                            key="submit"
+                            type="primary"
+                            onClick={this.handleOkApproveModal}
+                        >
+                            Copy xong rùi
+                        </Button>,
+                    ]}
+                >
+                    <div>
+                        #FPTUC_
+                        {approveModal.cfsid} [{approveModal.time}]<br />"
+                        {approveModal.content}"<br />
+                        -----------------
+                        <br />
+                        {approveModal.admin}
+                        <br />
+                        #FPTUCfs
+                    </div>
+                </Modal>
             </Content>
         );
     }
