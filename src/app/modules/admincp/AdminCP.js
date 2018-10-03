@@ -94,7 +94,7 @@ class AdminCP extends Component {
                 {list[index].content}
                 <div style={{ margin: ".5rem 0" }}>
                     <Tag>
-                        #fptucfs
+                        #cfsapp
                         {index}
                     </Tag>
                     <Tag>#{LocalStorageUtils.getName() || "admin"}</Tag>

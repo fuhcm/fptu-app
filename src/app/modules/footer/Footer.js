@@ -8,8 +8,7 @@ class FooterPage extends Component {
     render() {
         return (
             <Footer style={{ textAlign: "center" }}>
-                FPTU Confessions ©2018 Thiết kế bởi Tu Huynh, dựa trên ReactJS
-                và NodeJS.
+                Confession App ©2018 Thiết kế dựa trên ReactJS và NodeJS.
             </Footer>
         );
     }

@@ -1,4 +1,4 @@
-# FPTUCF Frontend
+# Confessions App Frontend
 This project is written by ReactJS, Redux
 
 ## Development

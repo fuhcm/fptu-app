@@ -26,7 +26,7 @@ class Home extends Component {
                     <Exception
                         type="500"
                         actions={<Button type="primary">tới trang gửi confess</Button>}
-                        title="fptu.cf"
+                        title="cf-app"
                         desc="sad, giờ méo có gì hết á, đi gửi confession nha?"
                     />
                 </div>

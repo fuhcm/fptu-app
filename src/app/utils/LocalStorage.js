@@ -1,9 +1,9 @@
 import uuidv4 from "uuid/v4";
 
 export const LOCAL_STORAGE_KEY = {
-    JWT: "fptucf_jwt",
-    EMAIL: "fptucf_email",
-    SENDER: "fptucf_sendertoken",
+    JWT: "cfapp_jwt",
+    EMAIL: "cfapp_email",
+    SENDER: "cfapp_sendertoken",
 };
 
 class LocalStorageUtils {
