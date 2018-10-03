@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 import "./Send.css";
 
-import {
-    Layout,
-    Row,
-    Button,
-    Input,
-    Divider,
-    Alert,
-    message,
-} from "antd";
+import { Layout, Row, Button, Input, Divider, Alert, message } from "antd";
 import { post } from "../../utils/ApiCaller";
 import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
 import LocalStorage from "../../utils/LocalStorage";
@@ -38,7 +30,7 @@ class Send extends Component {
             return;
         }
 
-        this.onSend(contentTextarea).then(res => {
+        this.onSend(contentTextarea.trim()).then(res => {
             if (res.status === "ok") {
                 // Save in localStorage
             } else {

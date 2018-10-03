@@ -3,10 +3,14 @@ import "./AdminCP.css";
 
 import moment from "moment";
 
-import { Layout, List, Button, Skeleton, Tag, Modal, message } from "antd";
-import { get } from "../../utils/ApiCaller";
-import { ADMINCP__GET_CONFESS } from "../../utils/ApiEndpoint";
-import LocalStorageUtils from "../../utils/LocalStorage";
+import { Layout, List, Button, Skeleton, Tag, message } from "antd";
+import { get, put } from "../../utils/ApiCaller";
+import {
+    ADMINCP__GET_CONFESS,
+    ADMINCP__APPROVE_CONFESS,
+    ADMINCP__REJECT_CONFESS,
+} from "../../utils/ApiEndpoint";
+import LocalStorage from "../../utils/LocalStorage";
 
 const { Content } = Layout;
 
@@ -81,50 +85,95 @@ class AdminCP extends Component {
         );
     };
 
-    handleApprove = index => {
+    findIndex(id) {
         const { list } = this.state;
 
-        Modal.success({
-            title: "Đã duyệt",
-            content: `Confession có ID ${index} đã được duyệt`,
-        });
+        for (var i = 0; i < list.length; i += 1) {
+            if (list[i].id === id) {
+                return i;
+            }
+        }
 
-        list[index].content = (
-            <div>
-                {list[index].content}
-                <div style={{ margin: ".5rem 0" }}>
-                    <Tag>
-                        #cfsapp
-                        {index}
-                    </Tag>
-                    <Tag>#{LocalStorageUtils.getName() || "admin"}</Tag>
-                </div>
-            </div>
-        );
-        list[index].rejected = false;
-        list[index].approved = true;
+        return -1;
+    }
 
-        this.setState({ list });
-    };
-
-    handleReject = index => {
+    handleApprove = id => {
         const { list } = this.state;
+        const index = this.findIndex(id);
 
-        message.success(`Confession có ID ${index} đã bị từ chối`)
+        // Call API
+        put(ADMINCP__APPROVE_CONFESS, { id })
+            .then(res => {
+                // Update UI
+                list[index].approver = LocalStorage.getEmail();
+                list[index].status = 1;
+                list[index].cfsid = res.data.cfsid;
 
-        list[index].content = (
-            <div>
-                <strike>{list[index].content}</strike>
-                <div style={{ margin: ".5rem 0" }}>
-                    <Tag>#{LocalStorageUtils.getName() || "admin"}</Tag>
-                </div>
-            </div>
-        );
-        list[index].approved = false;
-        list[index].rejected = true;
+                this.setState({ list });
+                message.success(`Confession có ID ${id} đã bị được duyệt`);
+            })
+            .catch(err => {
+                console.log(err);
 
-        this.setState({ list });
+                message.error(
+                    `Đã xảy ra lỗi, chưa thể duyệt Confession có ID ${id}`
+                );
+            });
     };
+
+    handleReject = id => {
+        const { list } = this.state;
+        const index = this.findIndex(id);
+
+        put(ADMINCP__REJECT_CONFESS, { id, reason: "" })
+            .then(res => {
+                // Update UI
+                list[index].approver = LocalStorage.getEmail();
+                list[index].status = 2;
+
+                this.setState({ list });
+                message.success(`Confession có ID ${id} đã bị từ chối`);
+            })
+            .catch(err => {
+                console.log(err);
+
+                message.error(
+                    `Đã xảy ra lỗi, chưa thể từ chối Confession có ID ${id}`
+                );
+            });
+    };
+
+    getNameFromEmail(email) {
+        return email.substring(0, email.lastIndexOf("@"));
+    }
+
+    pendingConfess = content => (
+        <div className="confess-content">{content}</div>
+    );
+
+    approvedConfess = (content, approver = "admin@fptu.cf", cfsid = "0") => (
+        <div>
+            <div className="confess-content">{content}</div>
+            <div style={{ margin: ".5rem 0" }}>
+                <Tag color="green">
+                    #cfsapp
+                    {cfsid}
+                </Tag>
+                <Tag color="blue">#{this.getNameFromEmail(approver)}</Tag>
+            </div>
+        </div>
+    );
+
+    rejectedConfess = (content, approver = "admin@fptu.cf") => (
+        <div>
+            <div className="confess-content">
+                <strike>{content}</strike>
+            </div>
+            <div style={{ margin: ".5rem 0" }}>
+                <Tag color="red">#{this.getNameFromEmail(approver)}</Tag>
+            </div>
+        </div>
+    );
 
     render() {
         const { initLoading, loading, list } = this.state;
@@ -164,23 +213,23 @@ class AdminCP extends Component {
                             <List.Item
                                 key={index}
                                 actions={
-                                    !item.approved &&
-                                    !item.rejected && [
+                                    (item.status === 0 ||
+                                        item.status === null) && [
                                         <Button
                                             type="primary"
                                             disabled={item.loading}
-                                            onClick={() =>
-                                                this.handleApprove(index)
-                                            }
+                                            onClick={() => {
+                                                this.handleApprove(item.id);
+                                            }}
                                         >
                                             duyệt
                                         </Button>,
                                         <Button
                                             type="danger"
                                             disabled={item.loading}
-                                            onClick={() =>
-                                                this.handleReject(index)
-                                            }
+                                            onClick={() => {
+                                                this.handleReject(item.id);
+                                            }}
                                         >
                                             từ chối
                                         </Button>,
@@ -189,12 +238,24 @@ class AdminCP extends Component {
                             >
                                 <Skeleton title loading={item.loading} active>
                                     <List.Item.Meta
-                                        // title={item.sender}
                                         description={moment(
                                             item.createdAt
                                         ).format("HH:mm DD/MM/YYYY")}
                                     />
-                                    {item.content}
+                                    {(item.status === null ||
+                                        item.status === 0) &&
+                                        this.pendingConfess(item.content)}
+                                    {item.status === 1 &&
+                                        this.approvedConfess(
+                                            item.content,
+                                            item.approver,
+                                            item.cfsid
+                                        )}
+                                    {item.status === 2 &&
+                                        this.rejectedConfess(
+                                            item.content,
+                                            item.approver
+                                        )}
                                 </Skeleton>
                             </List.Item>
                         )}

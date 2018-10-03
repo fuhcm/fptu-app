@@ -94,8 +94,45 @@ class MyConfess extends Component {
     };
 
     handleLoginFacebook = () => {
-        message.warning("Tính này hiện chưa sẵn sàng, bạn vui lòng thử lại sau nha");
+        message.warning(
+            "Tính này hiện chưa sẵn sàng, bạn vui lòng thử lại sau nha"
+        );
+    };
+
+    getNameFromEmail(email) {
+        return email.substring(0, email.lastIndexOf("@"));
     }
+
+    pendingConfess = content => (
+        <div>
+            <div className="confess-content">{content}</div>
+            <div style={{ margin: ".5rem 0" }}>
+                <Tag color="pink">#đang_đợi_duyệt</Tag>
+            </div>
+        </div>
+    );
+
+    approvedConfess = (content, approver = "admin@fptu.cf", cfsid = "0") => (
+        <div>
+            <div className="confess-content">{content}</div>
+            <div style={{ margin: ".5rem 0" }}>
+                <Tag color="green">
+                    #cfsapp
+                    {cfsid}
+                </Tag>
+                <Tag color="blue">#{this.getNameFromEmail(approver)}</Tag>
+            </div>
+        </div>
+    );
+
+    rejectedConfess = (content, approver = "admin@fptu.cf") => (
+        <div>
+            <div className="confess-content"><strike>{content}</strike></div>
+            <div style={{ margin: ".5rem 0" }}>
+                <Tag color="red">#{this.getNameFromEmail(approver)}</Tag>
+            </div>
+        </div>
+    );
 
     render() {
         const { initLoading, loading, list } = this.state;
@@ -140,7 +177,10 @@ class MyConfess extends Component {
                     </Row>
 
                     <Row style={{ marginBottom: "20px", marginLeft: "10px" }}>
-                        <Button type="primary" onClick={this.handleLoginFacebook}>
+                        <Button
+                            type="primary"
+                            onClick={this.handleLoginFacebook}
+                        >
                             <Icon type="facebook" />
                             Đăng nhập bằng Facebook
                         </Button>
@@ -157,15 +197,24 @@ class MyConfess extends Component {
                             <List.Item key={index}>
                                 <Skeleton title loading={item.loading} active>
                                     <List.Item.Meta
-                                        // title={item.sender}
                                         description={moment(
                                             item.createdAt
                                         ).format("HH:mm DD/MM/YYYY")}
                                     />
-                                    {item.content}
-                                    <div style={{ margin: ".5rem 0" }}>
-                                        <Tag>#đang đợi duyệt</Tag>
-                                    </div>
+                                    {(item.status === null ||
+                                        item.status === 0) &&
+                                        this.pendingConfess(item.content)}
+                                    {item.status === 1 &&
+                                        this.approvedConfess(
+                                            item.content,
+                                            item.approver,
+                                            item.cfsid
+                                        )}
+                                    {item.status === 2 &&
+                                        this.rejectedConfess(
+                                            item.content,
+                                            item.approver
+                                        )}
                                 </Skeleton>
                             </List.Item>
                         )}
