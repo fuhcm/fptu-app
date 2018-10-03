@@ -1,0 +1,20 @@
+@import "~antd/dist/antd.css";
+@import "~ant-design-pro/dist/ant-design-pro.css";
+
+body {
+    background-color: #f0f2f5;
+}
+
+.content-container {
+    padding: 0 50px;
+}
+
+@media screen and (max-width: 640px) {
+    .ant-layout-header {
+        padding: 0;
+    }
+
+    .ant-layout-content {
+        padding: 0;
+    }
+}

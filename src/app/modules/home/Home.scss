@@ -1,0 +1,9 @@
+.home-video {
+    max-width: 75%;
+}
+
+@media only screen and (max-width: 1024px) {
+    .home-video {
+        max-width: 100%;
+    }
+}
