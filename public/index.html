@@ -27,6 +27,20 @@
     <link rel="icon" type="image/png" sizes="96x96" href="%PUBLIC_URL%/img/icon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/img/icon/favicon-16x16.png">
 
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function () {
+            OneSignal.init({
+                appId: "60e8e142-f184-498e-9347-d868d21c9fc9",
+                autoRegister: false,
+                notifyButton: {
+                    enable: true,
+                },
+            });
+        });
+    </script>
+
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -54,20 +68,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
-        var OneSignal = window.OneSignal || [];
-        OneSignal.push(function () {
-            OneSignal.init({
-                appId: "60e8e142-f184-498e-9347-d868d21c9fc9",
-                autoRegister: false,
-                notifyButton: {
-                    enable: true,
-                },
-            });
-        });
-    </script>
 </body>
 
 </html>
