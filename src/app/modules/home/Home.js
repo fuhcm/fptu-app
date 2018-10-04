@@ -33,7 +33,7 @@ class Home extends Component {
                             </Button>
                         }
                         title={config.meta.short_name}
-                        desc="sad, giờ méo có gì hết á, đi gửi confession nha?"
+                        desc="trang chủ méo có gì hết á, đi gửi confession nha?"
                     />
                 </div>
             </Content>

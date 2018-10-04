@@ -3,21 +3,14 @@ import "./MyConfess.css";
 
 import moment from "moment";
 
-import {
-    Layout,
-    List,
-    Button,
-    Skeleton,
-    Tag,
-    Row,
-    Alert,
-} from "antd";
+import { Layout, List, Button, Skeleton, Tag, Row, Alert } from "antd";
 import { get, post } from "../../utils/ApiCaller";
 import {
     GUEST__GET_MY_CONFESS,
     GUEST__GET_OVERVIEW,
 } from "../../utils/ApiEndpoint";
 import LocalStorageUtils from "../../utils/LocalStorage";
+import { config } from "../../../config";
 
 const { Content } = Layout;
 
@@ -69,7 +62,6 @@ class MyConfess extends Component {
 
     onLoadMore = () => {
         const { numLoad, data } = this.state;
-        const timeoutDate = data;
 
         this.setState({
             loading: true,
@@ -93,16 +85,6 @@ class MyConfess extends Component {
                 }
             );
         });
-
-        setTimeout(
-            () =>
-                this.setState({
-                    data: timeoutDate,
-                    list: data,
-                    loading: false,
-                }),
-            5000
-        );
     };
 
     getNameFromEmail(email) {
@@ -123,8 +105,16 @@ class MyConfess extends Component {
             <div className="confess-content">{content}</div>
             <div style={{ margin: ".5rem 0" }}>
                 <Tag color="green">
-                    #cfsapp
-                    {cfsid}
+                    <a
+                        href={`https://www.facebook.com/hashtag/${
+                            config.meta.fb_tagname
+                        }_${cfsid}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        #{config.meta.fb_tagname}
+                        {cfsid}
+                    </a>
                 </Tag>
                 <Tag color="blue">#{this.getNameFromEmail(approver)}</Tag>
             </div>
@@ -178,7 +168,9 @@ class MyConfess extends Component {
                     <h2>Danh sách confession tui đã gửi</h2>
                     <Row style={{ marginBottom: "10px" }}>
                         Sender Token của tui là:{" "}
-                        <strong>{LocalStorageUtils.getSenderToken()}</strong>
+                        <Tag color="cyan">
+                            {LocalStorageUtils.getSenderToken()}
+                        </Tag>
                     </Row>
 
                     <Row style={{ marginBottom: "10px" }}>
@@ -188,29 +180,27 @@ class MyConfess extends Component {
                                 <div>
                                     <Row>
                                         Lời nhắn đã nhận:{" "}
-                                        <strong>
-                                            {overview.total || "đang tải"}
-                                        </strong>{" "}
+                                        <strong>{overview.total || "0"}</strong>{" "}
                                         cái
                                     </Row>
                                     <Row>
                                         Đang chờ duyệt:{" "}
                                         <strong>
-                                            {overview.pending || "đang tải"}
+                                            {overview.pending || "0"}
                                         </strong>{" "}
                                         cái
                                     </Row>
                                     <Row>
                                         Đã bị từ chối:{" "}
                                         <strong>
-                                            {overview.rejected || "đang tải"}
+                                            {overview.rejected || "0"}
                                         </strong>{" "}
                                         cái (tỉ lệ:{" "}
                                         {Math.round(
                                             (overview.rejected /
                                                 overview.total) *
                                                 100
-                                        )}
+                                        ) || 0}
                                         %)
                                     </Row>
                                 </div>

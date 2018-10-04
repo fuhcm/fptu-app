@@ -23,6 +23,7 @@ import {
 } from "../../utils/ApiEndpoint";
 import LocalStorage from "../../utils/LocalStorage";
 import TextArea from "antd/lib/input/TextArea";
+import { config } from "../../../config";
 
 const { Content } = Layout;
 
@@ -184,8 +185,16 @@ class AdminCP extends Component {
             <div className="confess-content">{content}</div>
             <div style={{ margin: ".5rem 0" }}>
                 <Tag color="green">
-                    #cfsapp
-                    {cfsid}
+                    <a
+                        href={`https://www.facebook.com/hashtag/${
+                            config.meta.fb_tagname
+                        }_${cfsid}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        #{config.meta.fb_tagname}
+                        {cfsid}
+                    </a>
                 </Tag>
                 <Tag color="blue">#{this.getNameFromEmail(approver)}</Tag>
             </div>
@@ -319,28 +328,21 @@ class AdminCP extends Component {
                             <div>
                                 <Row>
                                     Lời nhắn đã nhận:{" "}
-                                    <strong>
-                                        {overview.total || "đang tải"}
-                                    </strong>{" "}
-                                    cái
+                                    <strong>{overview.total || "0"}</strong> cái
                                 </Row>
                                 <Row>
                                     Đang chờ duyệt:{" "}
-                                    <strong>
-                                        {overview.pending || "đang tải"}
-                                    </strong>{" "}
+                                    <strong>{overview.pending || "0"}</strong>{" "}
                                     cái
                                 </Row>
                                 <Row>
                                     Đã bị từ chối:{" "}
-                                    <strong>
-                                        {overview.rejected || "đang tải"}
-                                    </strong>{" "}
+                                    <strong>{overview.rejected || "0"}</strong>{" "}
                                     cái (tỉ lệ:{" "}
                                     {Math.round(
                                         (overview.rejected / overview.total) *
                                             100
-                                    )}
+                                    ) || "0"}
                                     %)
                                 </Row>
                             </div>
