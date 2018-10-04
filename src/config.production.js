@@ -6,7 +6,7 @@ export const config = {
     meta: {
         name: "FPTU Confessions",
         short_name: "beta.fptu.cf",
-        fb_tagname: "cfapp",
+        fb_tagname: "fptuc",
     },
     assets: {
         server_url: "",

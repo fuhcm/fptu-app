@@ -6,7 +6,7 @@ export const config = {
     meta: {
         name: "Confession App",
         short_name: "cfapp.gosu.team",
-        fb_tagname: "fptuc",
+        fb_tagname: "cfapp",
     },
     assets: {
         server_url: "",
