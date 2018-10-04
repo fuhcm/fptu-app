@@ -16,7 +16,12 @@ class NotFound extends Component {
                         textAlign: "center",
                     }}
                 >
-                    <Exception type="404" actions={<Button type="primary">về trang chủ</Button>} title="404" desc="đi chỗ khác đi, méo có trang này ok?" />
+                    <Exception
+                        type="404"
+                        actions={<Button type="primary">về trang chủ</Button>}
+                        title="404"
+                        desc="đi chỗ khác đi, méo có trang này ok?"
+                    />
                 </div>
             </Content>
         );

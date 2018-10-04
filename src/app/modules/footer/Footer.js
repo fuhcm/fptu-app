@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { config } from "../../../config";
+
 import { Layout } from "antd";
 
 const { Footer } = Layout;
@@ -8,7 +10,8 @@ class FooterPage extends Component {
     render() {
         return (
             <Footer style={{ textAlign: "center" }}>
-                Confession App ©2018 Thiết kế dựa trên ReactJS và NodeJS.
+                {config.meta.name} ©2018 Designed by <strong>Tu Huynh</strong>.
+                Built on top of NodeJS & ReactJS.
             </Footer>
         );
     }

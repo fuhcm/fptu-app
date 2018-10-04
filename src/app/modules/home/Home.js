@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./Home.css";
 import Exception from "ant-design-pro/lib/Exception";
 
+import { config } from "../../../config";
+
 import { Layout, Button } from "antd";
 
 const { Content } = Layout;
@@ -25,8 +27,12 @@ class Home extends Component {
                     </video> */}
                     <Exception
                         type="500"
-                        actions={<Button type="primary">tới trang gửi confess</Button>}
-                        title="cf-app"
+                        actions={
+                            <Button type="primary">
+                                tới trang gửi confess
+                            </Button>
+                        }
+                        title={config.meta.short_name}
                         desc="sad, giờ méo có gì hết á, đi gửi confession nha?"
                     />
                 </div>
