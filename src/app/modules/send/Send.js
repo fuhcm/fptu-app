@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Send.css";
+import "./Send.scss";
 
 import { Layout, Row, Button, Input, Divider, Alert, message } from "antd";
 import { post } from "../../utils/ApiCaller";

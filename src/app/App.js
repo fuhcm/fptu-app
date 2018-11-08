@@ -10,7 +10,7 @@ import FooterPage from "../app/modules/footer/Footer";
 import Routes from "../app/Routes";
 import NotFound from "./modules/not-found/NotFound";
 
-import "./App.css";
+import "./App.scss";
 
 import { Layout } from "antd";
 

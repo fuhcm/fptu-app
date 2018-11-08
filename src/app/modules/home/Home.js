@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./Home.css";
+import "./Home.scss";
 import Exception from "ant-design-pro/lib/Exception";
 
 import { config } from "../../../config";

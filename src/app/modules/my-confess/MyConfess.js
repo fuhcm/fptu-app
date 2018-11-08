@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./MyConfess.css";
+import "./MyConfess.scss";
 
 import moment from "moment";
 

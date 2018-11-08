@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./AdminCP.css";
+import "./AdminCP.scss";
 
 import moment from "moment";
 
