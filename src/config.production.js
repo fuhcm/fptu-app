@@ -1,11 +1,11 @@
 export const config = {
     apis: {
-        base_url: "https://api.fptu.cf",
+        base_url: "https://fptucf-api.gosu.team",
         mocogateway_base_url: "",
     },
     meta: {
         name: "FPTU Confessions",
-        short_name: "beta.fptu.cf",
+        short_name: "fptucfs.app",
         fb_tagname: "fptuc",
     },
     assets: {

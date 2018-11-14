@@ -166,12 +166,12 @@ class MyConfess extends Component {
                     }}
                 >
                     <h2>Danh sách confession tui đã gửi</h2>
-                    <Row style={{ marginBottom: "10px" }}>
+                    {/* <Row style={{ marginBottom: "10px" }}>
                         Sender Token của tui là:{" "}
                         <Tag color="cyan">
                             {LocalStorageUtils.getSenderToken()}
                         </Tag>
-                    </Row>
+                    </Row> */}
 
                     <Row style={{ marginBottom: "10px" }}>
                         <Alert
@@ -216,7 +216,7 @@ class MyConfess extends Component {
                         itemLayout="vertical"
                         loadMore={loadMore}
                         dataSource={list}
-                        locale={{ emptyText: "Không có dữ liệu" }}
+                        locale={{ emptyText: "Méo có dữ liệu" }}
                         renderItem={(item, index) => (
                             <List.Item key={index}>
                                 <Skeleton title loading={item.loading} active>

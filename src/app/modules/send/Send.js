@@ -112,7 +112,7 @@ class Send extends Component {
                         value={contentTextarea}
                         onChange={e => this.handleChangeTextarea(e)}
                         rows={4}
-                        placeholder="Ghi gì chả được..."
+                        placeholder="Baby em trót thích anh rồi đấy này chàng trai đáng yêu... I need to tell you something..."
                         disabled={disabledSendButton}
                     />
                     <Divider />

@@ -1,11 +1,11 @@
 export const config = {
     apis: {
-        base_url: "http://localhost:3000",
+        base_url: "https://fptucf-api.gosu.team",
         mocogateway_base_url: "",
     },
     meta: {
         name: "Confession App",
-        short_name: "cfapp.gosu.team",
+        short_name: "fptucfs.app",
         fb_tagname: "cfapp",
     },
     assets: {
