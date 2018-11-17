@@ -216,7 +216,9 @@ class MyConfess extends Component {
                         itemLayout="vertical"
                         loadMore={loadMore}
                         dataSource={list}
-                        locale={{ emptyText: "Méo có dữ liệu" }}
+                        locale={{
+                            emptyText: "Thím chưa gửi cái confess nào hết",
+                        }}
                         renderItem={(item, index) => (
                             <List.Item key={index}>
                                 <Skeleton title loading={item.loading} active>

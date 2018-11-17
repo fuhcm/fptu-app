@@ -4,7 +4,7 @@ export const config = {
         mocogateway_base_url: "",
     },
     meta: {
-        name: "Confession App",
+        name: "FPTU Confession App",
         short_name: "fptucfs.app",
         fb_tagname: "cfapp",
     },

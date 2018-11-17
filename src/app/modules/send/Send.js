@@ -1,13 +1,25 @@
 import React, { Component } from "react";
 import "./Send.scss";
 
-import { Layout, Row, Button, Input, Divider, Alert, message } from "antd";
+import {
+    Layout,
+    Row,
+    Button,
+    Input,
+    Divider,
+    Alert,
+    Upload,
+    Icon,
+    Steps,
+    message,
+} from "antd";
 import { post } from "../../utils/ApiCaller";
 import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
 import LocalStorage from "../../utils/LocalStorage";
 
 const { Content } = Layout;
 const { TextArea } = Input;
+const Step = Steps.Step;
 
 class Send extends Component {
     constructor(props) {
@@ -16,6 +28,9 @@ class Send extends Component {
         this.state = {
             disabledSendButton: false,
             contentTextarea: "",
+            loading: false,
+            imageUrl: "",
+            step: 0,
         };
     }
 
@@ -45,6 +60,7 @@ class Send extends Component {
                 this.setState({
                     disabledSendButton: false,
                     contentTextarea: "",
+                    step: 1,
                 })
             )
             .then(() =>
@@ -87,8 +103,58 @@ class Send extends Component {
         });
     };
 
+    getBase64 = (img, callback) => {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => callback(reader.result));
+        reader.readAsDataURL(img);
+    };
+
+    beforeUpload = file => {
+        const isJPG = file.type === "image/jpeg";
+        if (!isJPG) {
+            message.error(
+                "Bạn chỉ có thể up ảnh JPG thôi, nếu ảnh định dạng khác thì bạn up lên host ảnh khác rồi dán link vào đây!"
+            );
+        }
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if (!isLt2M) {
+            message.error(
+                "Dung lượng ảnh bự vãi, bạn up lên host khác rồi dán link vào đây được không?"
+            );
+        }
+        return isJPG && isLt2M;
+    };
+
+    handleChange = info => {
+        if (info.file.status === "uploading") {
+            this.setState({ loading: true });
+            return;
+        }
+        if (info.file.status === "done") {
+            // Get this url from response in real world.
+            this.getBase64(info.file.originFileObj, imageUrl =>
+                this.setState({
+                    imageUrl,
+                    loading: false,
+                })
+            );
+        }
+    };
+
     render() {
-        const { disabledSendButton, contentTextarea } = this.state;
+        const {
+            disabledSendButton,
+            contentTextarea,
+            imageUrl,
+            step,
+        } = this.state;
+
+        const uploadButton = (
+            <div>
+                <Icon type={this.state.loading ? "loading" : "plus"} />
+                <div className="ant-upload-text">Thêm ảnh</div>
+            </div>
+        );
 
         return (
             <Content className="content-container">
@@ -108,25 +174,64 @@ class Send extends Component {
                         tiếp? Đừng lo vì bây giờ đã có confession nơi bạn có thể
                         thổ lộ mà đố ai biết được.
                     </p>
-                    <TextArea
-                        value={contentTextarea}
-                        onChange={e => this.handleChangeTextarea(e)}
-                        rows={4}
-                        placeholder="Baby em trót thích anh rồi đấy này chàng trai đáng yêu... I need to tell you something..."
-                        disabled={disabledSendButton}
-                    />
-                    <Divider />
-                    <Button
-                        type="primary"
-                        onClick={this.handleSend}
-                        disabled={disabledSendButton}
-                        style={{ margin: ".5rem" }}
+
+                    <Steps
+                        current={step}
+                        style={{ marginTop: "1rem", marginBottom: "2rem" }}
                     >
-                        Gửi liền!
-                    </Button>
-                    <Button onClick={this.handleUploadHelper}>
+                        <Step title="Nhập nội dung confess" />
+                        <Step title="Chờ duyệt" />
+                        <Step title="Được đăng lên page" />
+                    </Steps>
+
+                    <div hidden={step === 1}>
+                        <TextArea
+                            value={contentTextarea}
+                            onChange={e => this.handleChangeTextarea(e)}
+                            rows={4}
+                            placeholder="Baby em trót thích anh rồi đấy này chàng trai đáng yêu... I need to tell you something..."
+                            disabled={disabledSendButton}
+                            style={{
+                                float: "left",
+                                width: "80%",
+                                marginRight: "2rem",
+                                marginBottom: "1rem",
+                            }}
+                        />
+                        <Upload
+                            name="avatar"
+                            listType="picture-card"
+                            className="avatar-uploader"
+                            showUploadList={false}
+                            action="//jsonplaceholder.typicode.com/posts"
+                            beforeUpload={this.beforeUpload}
+                            onChange={this.handleChange}
+                        >
+                            {imageUrl ? (
+                                <img
+                                    src={imageUrl}
+                                    alt="avatar"
+                                    style={{ maxWidth: "100px" }}
+                                />
+                            ) : (
+                                uploadButton
+                            )}
+                        </Upload>
+                        <Button
+                            type="primary"
+                            onClick={this.handleSend}
+                            disabled={disabledSendButton}
+                            style={{ margin: ".5rem" }}
+                        >
+                            <Icon type="thunderbolt" />
+                            Gửi ngay và luôn!
+                        </Button>
+                    </div>
+
+                    {/* <Button onClick={this.handleUploadHelper}>
                         Làm sao để tui up hình?!
-                    </Button>
+                    </Button> */}
+
                     <Divider dashed />
                     <Row>
                         <Alert

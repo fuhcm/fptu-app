@@ -4,7 +4,7 @@ import "./Header.scss";
 
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu, Icon, Button, notification } from "antd";
 
 const { Header } = Layout;
 
@@ -17,7 +17,35 @@ class HeaderPage extends Component {
         this.props.history.push("/login");
     };
 
+    openNotification = () => {
+        const key = `open${Date.now()}`;
+        const btn = (
+            <Button
+                type="primary"
+                size="small"
+                onClick={() => notification.close(key)}
+            >
+                Tui biết rồi
+            </Button>
+        );
+
+        notification.open({
+            message: "Thông báo từ FPTUCF-DEV",
+            description:
+                "Bạn có thể xem những confess bạn đã gửi trong mục 'confess của tui', trong đó có luôn trạng thái được duyệt hay chưa, người duyệt và lí do bị từ chối ngoài ra còn có ID để bạn xem lại trên fanpage nữa, chúc zui!!",
+            btn,
+            key,
+            duration: 0,
+            icon: <Icon type="github" style={{ color: "#108ee9" }} />,
+        });
+    };
+
     render() {
+        if (!LocalStorageUtils.isNotificationLoaded()) {
+            this.openNotification();
+            LocalStorageUtils.setNotificationLoaded();
+        }
+
         return (
             <Header>
                 <Menu

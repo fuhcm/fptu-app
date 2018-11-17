@@ -61,7 +61,7 @@ class LoginForm extends Component {
                         minHeight: 540,
                     }}
                 >
-                    <h2>Đăng nhập</h2>
+                    <h2>Đăng nhập dành cho admin</h2>
                     <Form
                         onSubmit={this.handleSubmit}
                         className="login-form"

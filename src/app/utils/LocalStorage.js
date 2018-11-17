@@ -4,6 +4,7 @@ export const LOCAL_STORAGE_KEY = {
     JWT: "cfapp_jwt",
     EMAIL: "cfapp_email",
     SENDER: "cfapp_sendertoken",
+    NOTIFICATION: "cfapp_notification_v0",
 };
 
 class LocalStorageUtils {
@@ -64,6 +65,15 @@ class LocalStorageUtils {
 
     getSenderToken() {
         return this.getItem(LOCAL_STORAGE_KEY.SENDER, "guest");
+    }
+
+    setNotificationLoaded() {
+        this.setItem(LOCAL_STORAGE_KEY.NOTIFICATION, true);
+    }
+
+    isNotificationLoaded() {
+        const loaded = this.getItem(LOCAL_STORAGE_KEY.NOTIFICATION);
+        return loaded && loaded !== "undefined";
     }
 }
 
