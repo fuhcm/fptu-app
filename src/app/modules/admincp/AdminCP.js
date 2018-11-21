@@ -24,6 +24,7 @@ import {
 import LocalStorage from "../../utils/LocalStorage";
 import TextArea from "antd/lib/input/TextArea";
 import { config } from "../../../config";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
 const { Content } = Layout;
 
@@ -65,9 +66,22 @@ class AdminCP extends Component {
 
     getData = async (numLoad, callback) => {
         await setTimeout(() => {
-            get(ADMINCP__GET_CONFESS + "/" + numLoad).then(res => {
-                callback(res.data);
-            });
+            get(ADMINCP__GET_CONFESS + "?load=" + numLoad)
+                .then(res => {
+                    callback(res.data);
+                })
+                .catch(err => {
+                    if (err.response.status === 401) {
+                        message.error(
+                            "Hết hạn đăng nhập, vui lòng đăng nhập lại, ahihi."
+                        );
+
+                        // Do logout
+                        LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.JWT);
+                        LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.EMAIL);
+                        this.props.history.push("/login");
+                    }
+                });
         }, 1000);
     };
 
@@ -127,15 +141,15 @@ class AdminCP extends Component {
                 // Update UI
                 list[index].approver = LocalStorage.getEmail();
                 list[index].status = 1;
-                list[index].cfsid = res.data.cfsid;
+                list[index].cfs_id = res.data.cfs_id;
 
                 this.setState({ list });
                 message.success(
-                    `Confession có đã được duyệt với ID là ${res.data.cfsid}`
+                    `Confession có đã được duyệt với ID là ${res.data.cfs_id}`
                 );
 
                 this.showApproveModal(
-                    res.data.cfsid,
+                    res.data.cfs_id,
                     moment(res.data.createdAt).format("HH:mm DD/MM/YYYY"),
                     res.data.content,
                     this.getNameFromEmail(LocalStorage.getEmail())
@@ -180,7 +194,7 @@ class AdminCP extends Component {
         <div className="confess-content">{content}</div>
     );
 
-    approvedConfess = (content, approver = "admin@fptu.cf", cfsid = "0") => (
+    approvedConfess = (content, approver = "admin@fptu.cf", cfs_id = "0") => (
         <div>
             <div className="confess-content">{content}</div>
             <div style={{ margin: ".5rem 0" }}>
@@ -188,12 +202,12 @@ class AdminCP extends Component {
                     <a
                         href={`https://www.facebook.com/hashtag/${
                             config.meta.fb_tagname
-                        }_${cfsid}`}
+                        }_${cfs_id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         #{config.meta.fb_tagname}
-                        {cfsid}
+                        {cfs_id}
                     </a>
                 </Tag>
                 <Tag color="blue">#{this.getNameFromEmail(approver)}</Tag>
@@ -256,11 +270,11 @@ class AdminCP extends Component {
         });
     };
 
-    showApproveModal = (cfsid, time, content, admin) => {
+    showApproveModal = (cfs_id, time, content, admin) => {
         this.setState({
             approveModal: {
                 visible: true,
-                cfsid,
+                cfs_id,
                 time,
                 content,
                 admin,
@@ -398,7 +412,7 @@ class AdminCP extends Component {
                                         this.approvedConfess(
                                             item.content,
                                             item.approver,
-                                            item.cfsid
+                                            item.cfs_id
                                         )}
                                     {item.status === 2 &&
                                         this.rejectedConfess(
@@ -457,7 +471,7 @@ class AdminCP extends Component {
                 >
                     <div>
                         #FPTUC_
-                        {approveModal.cfsid} [{approveModal.time}]<br />"
+                        {approveModal.cfs_id} [{approveModal.time}]<br />"
                         {approveModal.content}"<br />
                         -----------------
                         <br />

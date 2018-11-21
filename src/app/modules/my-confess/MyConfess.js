@@ -46,7 +46,7 @@ class MyConfess extends Component {
 
     getData = async (numLoad, callback) => {
         await setTimeout(() => {
-            post(GUEST__GET_MY_CONFESS + "/" + numLoad, {
+            post(GUEST__GET_MY_CONFESS + "?load=" + numLoad, {
                 token: LocalStorageUtils.getSenderToken(),
             }).then(res => {
                 callback(res.data);
@@ -100,7 +100,7 @@ class MyConfess extends Component {
         </div>
     );
 
-    approvedConfess = (content, approver = "admin@fptu.cf", cfsid = "0") => (
+    approvedConfess = (content, approver = "admin@fptu.cf", cfs_id = "0") => (
         <div>
             <div className="confess-content">{content}</div>
             <div style={{ margin: ".5rem 0" }}>
@@ -108,12 +108,12 @@ class MyConfess extends Component {
                     <a
                         href={`https://www.facebook.com/hashtag/${
                             config.meta.fb_tagname
-                        }_${cfsid}`}
+                        }_${cfs_id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         #{config.meta.fb_tagname}
-                        {cfsid}
+                        {cfs_id}
                     </a>
                 </Tag>
                 <Tag color="blue">#{this.getNameFromEmail(approver)}</Tag>
@@ -234,7 +234,7 @@ class MyConfess extends Component {
                                         this.approvedConfess(
                                             item.content,
                                             item.approver,
-                                            item.cfsid
+                                            item.cfs_id
                                         )}
                                     {item.status === 2 &&
                                         this.rejectedConfess(
