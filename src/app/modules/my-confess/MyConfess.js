@@ -215,7 +215,7 @@ class MyConfess extends Component {
                         loading={initLoading}
                         itemLayout="vertical"
                         loadMore={loadMore}
-                        dataSource={list}
+                        dataSource={list || []}
                         locale={{
                             emptyText: "Thím chưa gửi cái confess nào hết",
                         }}
