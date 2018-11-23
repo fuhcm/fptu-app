@@ -1,6 +1,6 @@
 export const config = {
     apis: {
-        base_url: "https://fptucf-go.gosu.team",
+        base_url: "https://cf-api.fptu.tech",
         mocogateway_base_url: "",
     },
     meta: {
