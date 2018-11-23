@@ -5,7 +5,7 @@ export const config = {
     },
     meta: {
         name: "FPTU Confession App",
-        short_name: "fptucfs.app",
+        short_name: "cf.fptu.tech",
         fb_tagname: "cfapp",
     },
     assets: {
