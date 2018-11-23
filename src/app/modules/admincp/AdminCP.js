@@ -370,7 +370,7 @@ class AdminCP extends Component {
                         loading={initLoading}
                         itemLayout="vertical"
                         loadMore={loadMore}
-                        dataSource={list}
+                        dataSource={list || []}
                         locale={{ emptyText: "Méo có dữ liệu" }}
                         renderItem={(item, index) => (
                             <List.Item
