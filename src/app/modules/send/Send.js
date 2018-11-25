@@ -206,6 +206,7 @@ class Send extends Component {
                             action="//jsonplaceholder.typicode.com/posts"
                             beforeUpload={this.beforeUpload}
                             onChange={this.handleChange}
+                            disabled
                         >
                             {imageUrl ? (
                                 <img
@@ -228,9 +229,9 @@ class Send extends Component {
                         </Button>
                     </div>
 
-                    {/* <Button onClick={this.handleUploadHelper}>
-                        Làm sao để tui up hình?!
-                    </Button> */}
+                    <Button onClick={this.handleUploadHelper}>
+                        Chức năng upload ảnh đang bị lỗi, up ảnh sao?!
+                    </Button>
 
                     <Divider dashed />
                     <Row>

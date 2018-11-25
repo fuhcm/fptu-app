@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 
-import { post } from "../../utils/ApiCaller";
-import { AUTH__LOGIN } from "../../utils/ApiEndpoint";
+import { get, post } from "../../utils/ApiCaller";
+import { AUTH__LOGIN, AUTH__LOGIN_FACEBOOK } from "../../utils/ApiEndpoint";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
+
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
 
@@ -16,38 +18,73 @@ class LoginForm extends Component {
         }
     }
 
-    handleSubmit = e => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                this.onLogin(values.email, values.password, token => {
-                    if (token) {
-                        LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.JWT, token);
-                        LocalStorageUtils.setItem(
-                            LOCAL_STORAGE_KEY.EMAIL,
-                            values.email
-                        );
-                        this.props.history.push("/admin-cp");
-                    } else {
-                        message.error("Thông tin đăng nhập không chính xác!");
-                    }
-                });
-            }
-        });
-    };
-
     onLogin(email, password, cb) {
         post(AUTH__LOGIN, {
             email,
             password,
         })
             .then(res => {
-                cb(res.data.token);
+                cb(res.data);
             })
             .catch(err => {
                 cb(null);
             });
     }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                this.onLogin(values.email, values.password, data => {
+                    this.handleLogin(data.token, values.email, data.nickname);
+                });
+            }
+        });
+    };
+
+    handleLogin(token, email, nickname) {
+        if (token) {
+            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.JWT, token);
+            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.EMAIL, email);
+            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.NICKNAME, nickname);
+            this.props.history.push("/admin-cp");
+        } else {
+            message.error("Thông tin đăng nhập không chính xác!");
+        }
+    }
+
+    responseFacebook = data => {
+        LocalStorageUtils.setItem(
+            LOCAL_STORAGE_KEY.USER_ACCESS_TOKEN,
+            data.accessToken
+        );
+
+        post(AUTH__LOGIN_FACEBOOK, {
+            email: data.email,
+            token: data.accessToken,
+        })
+            .then(res => {
+                const token = res.data.token;
+                const nickname = res.data.nickname;
+
+                // Get page_access_token
+                get(
+                    `https://graph.facebook.com/v3.2/1745366302422769?fields=access_token&access_token=${
+                        data.accessToken
+                    }`
+                ).then(res => {
+                    LocalStorageUtils.setItem(
+                        LOCAL_STORAGE_KEY.PAGE_ACCESS_TOKEN,
+                        res.data.access_token
+                    );
+                });
+
+                this.handleLogin(token, data.email, nickname);
+            })
+            .catch(err => {
+                message.error("Không có quyền!");
+            });
+    };
 
     render() {
         const { getFieldDecorator } = this.props.form;
@@ -113,6 +150,7 @@ class LoginForm extends Component {
                                 type="primary"
                                 htmlType="submit"
                                 className="login-form-button"
+                                disabled
                             >
                                 Đăng nhập
                             </Button>
@@ -126,6 +164,26 @@ class LoginForm extends Component {
                             )}
                         </FormItem>
                     </Form>
+
+                    <FacebookLogin
+                        appId="505017836663886"
+                        autoLoad={false}
+                        fields="name,email,picture"
+                        scope="pages_show_list,manage_pages,publish_pages"
+                        onClick={this.componentClicked}
+                        callback={this.responseFacebook}
+                        render={renderProps => (
+                            <Button
+                                type="primary"
+                                size="large"
+                                className="login-form-button"
+                                onClick={renderProps.onClick}
+                            >
+                                <Icon type="facebook" />
+                                Đăng nhập bằng Facebook
+                            </Button>
+                        )}
+                    />
                 </div>
             </Content>
         );

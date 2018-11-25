@@ -86,7 +86,7 @@ class HeaderPage extends Component {
                             <Icon type="login" />
                             admin{" "}
                             {LocalStorageUtils.isAuthenticated() &&
-                                `(chào ${LocalStorageUtils.getName() ||
+                                `(chào ${LocalStorageUtils.getNickName() ||
                                     "bạn"})`}
                         </Link>
                     </Menu.Item>

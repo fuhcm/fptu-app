@@ -3,8 +3,11 @@ import uuidv4 from "uuid/v4";
 export const LOCAL_STORAGE_KEY = {
     JWT: "cfapp_jwt",
     EMAIL: "cfapp_email",
+    NICKNAME: "cfapp_nickname",
     SENDER: "cfapp_sendertoken",
     NOTIFICATION: "cfapp_notification_v0",
+    USER_ACCESS_TOKEN: "cfapp_user_access_token",
+    PAGE_ACCESS_TOKEN: "cfapp_page_acess_token",
 };
 
 class LocalStorageUtils {
@@ -51,6 +54,10 @@ class LocalStorageUtils {
         const email = this.getItem(LOCAL_STORAGE_KEY.EMAIL, "");
 
         return email.substring(0, email.lastIndexOf("@"));
+    }
+
+    getNickName() {
+        return this.getItem(LOCAL_STORAGE_KEY.NICKNAME, "");
     }
 
     generateSenderToken() {

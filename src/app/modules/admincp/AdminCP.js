@@ -12,14 +12,16 @@ import {
     Alert,
     Row,
     Modal,
+    DatePicker,
     message,
 } from "antd";
-import { get, put } from "../../utils/ApiCaller";
+import { get, put, post } from "../../utils/ApiCaller";
 import {
     ADMINCP__GET_CONFESS,
     ADMINCP__APPROVE_CONFESS,
     ADMINCP__REJECT_CONFESS,
     GUEST__GET_OVERVIEW,
+    ADMINCP__GET_NEXT_ID,
 } from "../../utils/ApiEndpoint";
 import LocalStorage from "../../utils/LocalStorage";
 import TextArea from "antd/lib/input/TextArea";
@@ -44,6 +46,8 @@ class AdminCP extends Component {
         approveModal: {
             visible: false,
         },
+        scheduledTime: null,
+        isPosting: false,
     };
 
     componentDidMount() {
@@ -131,29 +135,100 @@ class AdminCP extends Component {
         return -1;
     }
 
-    handleApprove = id => {
+    handleApprove = async (id, manual = false) => {
         const { list } = this.state;
         const index = this.findIndex(id);
 
-        // Call API
+        // Get Next ID
+        const idNextData = await get(ADMINCP__GET_NEXT_ID);
+        const nextID = idNextData.data.id;
+
+        // Call API post to page
+        const page_access_token = LocalStorageUtils.getItem(
+            LOCAL_STORAGE_KEY.PAGE_ACCESS_TOKEN,
+            ""
+        );
+
+        const postingConfess = list.find(el => el.id === id);
+
+        const postingContent = `#FPTUC_${nextID} [${moment(
+            postingConfess.created_at
+        ).format("HH:mm DD/MM/YYYY")}]
+"${postingConfess.content}"
+-----------------
+-${LocalStorageUtils.getNickName()}-
+#FPTUCfs`;
+
+        if (!manual) {
+            let facebookPosted;
+            const { scheduledTime } = this.state;
+
+            // Set state is posting Facebook
+            this.setState({
+                isPosting: true,
+            });
+
+            try {
+                facebookPosted = await post(
+                    "https://graph.facebook.com/v3.2/1745366302422769/feed",
+                    {},
+                    {
+                        message: postingContent,
+                        access_token: page_access_token,
+                        published: false,
+                        scheduled_publish_time: scheduledTime,
+                    }
+                );
+            } catch (error) {
+                console.log(error.response);
+
+                if (!error.response) {
+                    message.error(
+                        "Thoát rồi đăng nhập lại admin đi vì Facebook Token hết hạn mất rùi :("
+                    );
+                } else {
+                    if (error.response.data.error.code === 100) {
+                        message.error(
+                            "Chọn ngày đăng tào lao quá, chọn lại đi"
+                        );
+                    } else {
+                        message.error("Lỗi gì đó éo biết!");
+                    }
+                }
+            }
+
+            // Set state is posting Facebook done
+            this.setState({
+                isPosting: false,
+            });
+
+            if (!facebookPosted) {
+                return;
+            }
+        }
+
+        // Call API update database
         put(ADMINCP__APPROVE_CONFESS, { id })
             .then(res => {
                 // Update UI
-                list[index].approver = LocalStorage.getEmail();
+                list[index].approver = LocalStorageUtils.getNickName();
                 list[index].status = 1;
                 list[index].cfs_id = res.data.cfs_id;
 
                 this.setState({ list });
                 message.success(
-                    `Confession có đã được duyệt với ID là ${res.data.cfs_id}`
+                    `Confession đã được duyệt với ID là ${res.data.cfs_id}`
                 );
 
-                this.showApproveModal(
-                    res.data.cfs_id,
-                    moment(res.data.createdAt).format("HH:mm DD/MM/YYYY"),
-                    res.data.content,
-                    this.getNameFromEmail(LocalStorage.getEmail())
-                );
+                // Only show modal in manual mode
+                if (manual) {
+                    this.showApproveModal(
+                        res.data.cfs_id,
+                        moment(res.data.created_at).format("HH:mm DD/MM/YYYY"),
+                        res.data.content,
+                        LocalStorageUtils.getNickName()
+                    );
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -182,19 +257,11 @@ class AdminCP extends Component {
             });
     };
 
-    getNameFromEmail(email) {
-        if (email !== null) {
-            return email.substring(0, email.lastIndexOf("@"));
-        }
-
-        return "admin";
-    }
-
     pendingConfess = content => (
         <div className="confess-content">{content}</div>
     );
 
-    approvedConfess = (content, approver = "admin@fptu.cf", cfs_id = "0") => (
+    approvedConfess = (content, approver = "admin", cfs_id = "0") => (
         <div>
             <div className="confess-content">{content}</div>
             <div style={{ margin: ".5rem 0" }}>
@@ -210,18 +277,18 @@ class AdminCP extends Component {
                         {cfs_id}
                     </a>
                 </Tag>
-                <Tag color="blue">#{this.getNameFromEmail(approver)}</Tag>
+                <Tag color="blue">#{approver}</Tag>
             </div>
         </div>
     );
 
-    rejectedConfess = (content, approver = "admin@fptu.cf") => (
+    rejectedConfess = (content, approver = "admin") => (
         <div>
             <div className="confess-content">
                 <strike>{content}</strike>
             </div>
             <div style={{ margin: ".5rem 0" }}>
-                <Tag color="red">#{this.getNameFromEmail(approver)}</Tag>
+                <Tag color="red">#{approver}</Tag>
             </div>
         </div>
     );
@@ -302,6 +369,29 @@ class AdminCP extends Component {
         });
     };
 
+    onOKDateTime = scheduledTime => {
+        const minMin = 30;
+        const minimumNextTime = moment().add(minMin, "minutes");
+
+        if (moment(scheduledTime).isAfter(minimumNextTime)) {
+            this.setState({
+                scheduledTime: moment(scheduledTime).unix(),
+            });
+
+            message.success(
+                `Đã đặt thời gian đăng là: ${moment(scheduledTime).format(
+                    "HH:mm DD/MM/YYYY"
+                )}`
+            );
+        } else {
+            message.success(
+                `Thời gian đặt phải tối thiểu là sau ít nhất ${minMin} phút kể từ bây giờ, tức là sau ${moment(
+                    minimumNextTime
+                ).format("HH:mm")}`
+            );
+        }
+    };
+
     render() {
         const {
             initLoading,
@@ -310,7 +400,10 @@ class AdminCP extends Component {
             overview,
             rejectModal,
             approveModal,
+            scheduledTime,
+            isPosting,
         } = this.state;
+
         const loadMore =
             !initLoading && !loading ? (
                 <div
@@ -378,14 +471,38 @@ class AdminCP extends Component {
                                 actions={
                                     (item.status === 0 ||
                                         item.status === null) && [
+                                        <DatePicker
+                                            showTime={{ format: "HH:mm" }}
+                                            format="DD-MM-YYYY HH:mm"
+                                            placeholder="Chọn thời gian đăng"
+                                            showToday={false}
+                                            // onChange={onChange}
+                                            onOk={this.onOKDateTime}
+                                        />,
                                         <Button
                                             type="primary"
-                                            disabled={item.loading}
+                                            disabled={
+                                                item.loading ||
+                                                !scheduledTime ||
+                                                isPosting
+                                            }
                                             onClick={() => {
                                                 this.handleApprove(item.id);
                                             }}
                                         >
-                                            duyệt
+                                            duyệt tự động
+                                        </Button>,
+                                        <Button
+                                            type="primary"
+                                            disabled={item.loading || isPosting}
+                                            onClick={() => {
+                                                this.handleApprove(
+                                                    item.id,
+                                                    true
+                                                );
+                                            }}
+                                        >
+                                            duyệt thủ công
                                         </Button>,
                                         <Button
                                             type="danger"
@@ -402,7 +519,7 @@ class AdminCP extends Component {
                                 <Skeleton title loading={item.loading} active>
                                     <List.Item.Meta
                                         description={moment(
-                                            item.createdAt
+                                            item.created_at
                                         ).format("HH:mm DD/MM/YYYY")}
                                     />
                                     {(item.status === null ||
@@ -474,8 +591,7 @@ class AdminCP extends Component {
                         {approveModal.cfs_id} [{approveModal.time}]<br />"
                         {approveModal.content}"<br />
                         -----------------
-                        <br />
-                        {approveModal.admin}
+                        <br />-{approveModal.admin}-
                         <br />
                         #FPTUCfs
                     </div>

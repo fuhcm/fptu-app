@@ -87,10 +87,6 @@ class MyConfess extends Component {
         });
     };
 
-    getNameFromEmail(email) {
-        return email.substring(0, email.lastIndexOf("@"));
-    }
-
     pendingConfess = content => (
         <div>
             <div className="confess-content">{content}</div>
@@ -116,7 +112,7 @@ class MyConfess extends Component {
                         {cfs_id}
                     </a>
                 </Tag>
-                <Tag color="blue">#{this.getNameFromEmail(approver)}</Tag>
+                <Tag color="blue">#{approver}</Tag>
             </div>
         </div>
     );
@@ -127,12 +123,10 @@ class MyConfess extends Component {
                 <strike>{content}</strike>
             </div>
             <div style={{ margin: ".5rem 0" }}>
-                <Tag color="red">#{this.getNameFromEmail(approver)}</Tag>
+                <Tag color="red">#{approver}</Tag>
             </div>
             <div style={{ margin: ".5rem 0" }}>
-                <strong>
-                    Lí do bị {this.getNameFromEmail(approver)} từ chối:{" "}
-                </strong>{" "}
+                <strong>Lí do bị {approver} từ chối: </strong>{" "}
                 {reason || "Hem có"}
             </div>
         </div>
@@ -224,7 +218,7 @@ class MyConfess extends Component {
                                 <Skeleton title loading={item.loading} active>
                                     <List.Item.Meta
                                         description={moment(
-                                            item.createdAt
+                                            item.created_at
                                         ).format("HH:mm DD/MM/YYYY")}
                                     />
                                     {(item.status === null ||
