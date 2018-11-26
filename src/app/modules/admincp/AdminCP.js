@@ -184,7 +184,7 @@ class AdminCP extends Component {
 
                 if (!error.response) {
                     message.error(
-                        "Thoát rồi đăng nhập lại admin đi vì Facebook Token hết hạn mất rùi :("
+                        "Thoát rồi đăng nhập lại admin đi vì Facebook Token đã hết hạn mất rùi :("
                     );
                 } else {
                     if (error.response.data.error.code === 100) {

@@ -145,7 +145,7 @@ class MyConfess extends Component {
                     }}
                 >
                     <Button onClick={this.onLoadMore}>
-                        cho xem thêm vài cài nữa đê
+                        Cho xem thêm vài cài nữa đê
                     </Button>
                 </div>
             ) : null;

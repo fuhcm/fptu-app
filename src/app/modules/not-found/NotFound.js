@@ -20,7 +20,7 @@ class NotFound extends Component {
                         type="404"
                         actions={<Button type="primary">về trang chủ</Button>}
                         title="404"
-                        desc="đi chỗ khác đi, méo có trang này ok?"
+                        desc="Đi chỗ khác đi, méo có trang này ok?"
                     />
                 </div>
             </Content>

@@ -29,7 +29,7 @@ class Home extends Component {
                         type="500"
                         actions={
                             <Button type="primary">
-                                tới trang gửi confess
+                                Tới trang gửi confess
                             </Button>
                         }
                         title={config.meta.short_name}
