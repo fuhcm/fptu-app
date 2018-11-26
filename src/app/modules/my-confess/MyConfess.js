@@ -144,7 +144,7 @@ class MyConfess extends Component {
                         lineHeight: "32px",
                     }}
                 >
-                    <Button onClick={this.onLoadMore}>
+                    <Button onClick={this.onLoadMore} hidden={!list}>
                         Cho xem thêm vài cài nữa đê
                     </Button>
                 </div>

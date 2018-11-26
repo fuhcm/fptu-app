@@ -54,6 +54,13 @@ class LoginForm extends Component {
     }
 
     responseFacebook = data => {
+        if (!data.email || data.email === "") {
+            message.error(
+                "Bạn không cho lấy tên địa chỉ email nên không định danh được, báo lỗi cho team dev!"
+            );
+            return;
+        }
+
         LocalStorageUtils.setItem(
             LOCAL_STORAGE_KEY.USER_ACCESS_TOKEN,
             data.accessToken
@@ -121,6 +128,7 @@ class LoginForm extends Component {
                                         />
                                     }
                                     placeholder="Email"
+                                    disabled
                                 />
                             )}
                         </FormItem>
@@ -142,6 +150,7 @@ class LoginForm extends Component {
                                     }
                                     type="password"
                                     placeholder="Mật khẩu"
+                                    disabled
                                 />
                             )}
                         </FormItem>

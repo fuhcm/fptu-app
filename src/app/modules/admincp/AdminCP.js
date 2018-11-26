@@ -244,7 +244,7 @@ class AdminCP extends Component {
         put(ADMINCP__REJECT_CONFESS, { id, reason })
             .then(res => {
                 // Update UI
-                list[index].approver = LocalStorage.getEmail();
+                list[index].approver = LocalStorage.getNickName();
                 list[index].status = 2;
 
                 this.setState({ list });
@@ -414,7 +414,9 @@ class AdminCP extends Component {
                         lineHeight: "32px",
                     }}
                 >
-                    <Button onClick={this.onLoadMore}>tải thêm confess</Button>
+                    <Button onClick={this.onLoadMore} hidden={!list}>
+                        tải thêm confess
+                    </Button>
                 </div>
             ) : null;
 

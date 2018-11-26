@@ -4,9 +4,7 @@ import "./Header.scss";
 import { get, post } from "../../utils/ApiCaller";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { AUTH__LOGIN_FACEBOOK } from "../../utils/ApiEndpoint";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-
-import { Layout, Menu, Icon, Button, notification, message} from "antd";
+import { Layout, Menu, Icon, Button, notification, message } from "antd";
 
 const { Header } = Layout;
 
@@ -41,7 +39,6 @@ class HeaderPage extends Component {
             icon: <Icon type="github" style={{ color: "#108ee9" }} />,
         });
     };
-
 
     responseFacebook = data => {
         LocalStorageUtils.setItem(
@@ -128,27 +125,25 @@ class HeaderPage extends Component {
                             Hỏi đáp
                         </Link>
                     </Menu.Item>
-                    <Menu.Item>
-                    <FacebookLogin
-                        appId="505017836663886"
-                        autoLoad={false}
-                        fields="name,email,picture"
-                        scope="pages_show_list,manage_pages,publish_pages"
-                        onClick={this.componentClicked}
-                        callback={this.responseFacebook}
-                        render={renderProps => (
-                            <Button
-                                type="primary"
-                                size="large"
-                                className="login-form-button"
-                                onClick={renderProps.onClick}
-                            >
-                                <Icon type="facebook" />
+
+                    {!LocalStorageUtils.isAuthenticated() && (
+                        <Menu.Item>
+                            <Link to="/admin-cp">
+                                <Button type="primary" size="large">
+                                    <Icon type="facebook" />
+                                    Admin CP
+                                </Button>
+                            </Link>
+                        </Menu.Item>
+                    )}
+                    {LocalStorageUtils.isAuthenticated() && (
+                        <Menu.Item key="/admin-cp">
+                            <Link to="/admin-cp">
+                                <Icon type="dashboard" />
                                 Admin CP
-                            </Button>
-                        )}
-                    />
-                    </Menu.Item>
+                            </Link>
+                        </Menu.Item>
+                    )}
                     {LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item key="/logout">
                             <a href="/logout" onClick={e => this.onLogout(e)}>
