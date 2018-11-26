@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import "./Header.scss";
-
+import { get, post } from "../../utils/ApiCaller";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
+import { AUTH__LOGIN_FACEBOOK } from "../../utils/ApiEndpoint";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
-import { Layout, Menu, Icon, Button, notification } from "antd";
+import { Layout, Menu, Icon, Button, notification, message} from "antd";
 
 const { Header } = Layout;
 
@@ -25,7 +27,7 @@ class HeaderPage extends Component {
                 size="small"
                 onClick={() => notification.close(key)}
             >
-                Tui biết rồi
+                Got It!
             </Button>
         );
 
@@ -39,6 +41,51 @@ class HeaderPage extends Component {
             icon: <Icon type="github" style={{ color: "#108ee9" }} />,
         });
     };
+
+
+    responseFacebook = data => {
+        LocalStorageUtils.setItem(
+            LOCAL_STORAGE_KEY.USER_ACCESS_TOKEN,
+            data.accessToken
+        );
+
+        post(AUTH__LOGIN_FACEBOOK, {
+            email: data.email,
+            token: data.accessToken,
+        })
+            .then(res => {
+                const token = res.data.token;
+                const nickname = res.data.nickname;
+
+                // Get page_access_token
+                get(
+                    `https://graph.facebook.com/v3.2/1745366302422769?fields=access_token&access_token=${
+                        data.accessToken
+                    }`
+                ).then(res => {
+                    LocalStorageUtils.setItem(
+                        LOCAL_STORAGE_KEY.PAGE_ACCESS_TOKEN,
+                        res.data.access_token
+                    );
+                });
+
+                this.handleLogin(token, data.email, nickname);
+            })
+            .catch(err => {
+                message.error("Không có quyền truy cập trang này!");
+            });
+    };
+
+    handleLogin(token, email, nickname) {
+        if (token) {
+            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.JWT, token);
+            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.EMAIL, email);
+            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.NICKNAME, nickname);
+            this.props.history.push("/admin-cp");
+        } else {
+            message.error("Thông tin đăng nhập không chính xác!");
+        }
+    }
 
     render() {
         if (!LocalStorageUtils.isNotificationLoaded()) {
@@ -56,14 +103,14 @@ class HeaderPage extends Component {
                     <Menu.Item key="/">
                         <Link to="/">
                             <Icon type="home" />
-                            trang chủ
+                            Trang chủ
                         </Link>
                     </Menu.Item>
                     {!LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item key="/send">
                             <Link to="/send">
                                 <Icon type="mail" />
-                                gửi confess
+                                Gửi confess
                             </Link>
                         </Menu.Item>
                     )}
@@ -71,29 +118,41 @@ class HeaderPage extends Component {
                         <Menu.Item key="/my-confess">
                             <Link to="/my-confess">
                                 <Icon type="folder" />
-                                confess của tui
+                                Confess của tui
                             </Link>
                         </Menu.Item>
                     )}
                     <Menu.Item key="/faq">
                         <Link to="/faq">
                             <Icon type="question" />
-                            hỏi đáp
+                            Hỏi đáp
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="/admin-cp">
-                        <Link to="/admin-cp">
-                            <Icon type="login" />
-                            admin{" "}
-                            {LocalStorageUtils.isAuthenticated() &&
-                                `(chào ${LocalStorageUtils.getNickName() ||
-                                    "bạn"})`}
-                        </Link>
+                    <Menu.Item>
+                    <FacebookLogin
+                        appId="505017836663886"
+                        autoLoad={false}
+                        fields="name,email,picture"
+                        scope="pages_show_list,manage_pages,publish_pages"
+                        onClick={this.componentClicked}
+                        callback={this.responseFacebook}
+                        render={renderProps => (
+                            <Button
+                                type="primary"
+                                size="large"
+                                className="login-form-button"
+                                onClick={renderProps.onClick}
+                            >
+                                <Icon type="facebook" />
+                                Admin CP
+                            </Button>
+                        )}
+                    />
                     </Menu.Item>
                     {LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item key="/logout">
                             <a href="/logout" onClick={e => this.onLogout(e)}>
-                                thoát
+                                Thoát
                             </a>
                         </Menu.Item>
                     )}
