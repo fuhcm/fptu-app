@@ -400,7 +400,7 @@ class AdminCP extends Component {
             overview,
             rejectModal,
             approveModal,
-            scheduledTime,
+            // scheduledTime,
             isPosting,
         } = this.state;
 
@@ -429,7 +429,7 @@ class AdminCP extends Component {
                         minHeight: 540,
                     }}
                 >
-                    <h2>Quản lí confession</h2>
+                    <h2>Quản lí confession cho admin</h2>
 
                     <Alert
                         message="Thống kê tổng quan"
@@ -483,11 +483,12 @@ class AdminCP extends Component {
                                         />,
                                         <Button
                                             type="primary"
-                                            disabled={
-                                                item.loading ||
-                                                !scheduledTime ||
-                                                isPosting
-                                            }
+                                            // disabled={
+                                            //     item.loading ||
+                                            //     !scheduledTime ||
+                                            //     isPosting
+                                            // }
+                                            disabled
                                             onClick={() => {
                                                 this.handleApprove(item.id);
                                             }}

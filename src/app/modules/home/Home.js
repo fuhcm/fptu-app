@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Home.scss";
 import Exception from "ant-design-pro/lib/Exception";
 
@@ -28,9 +29,11 @@ class Home extends Component {
                     <Exception
                         type="500"
                         actions={
-                            <Button type="primary">
-                                Tới trang gửi confess
-                            </Button>
+                            <Link to="/send">
+                                <Button type="primary">
+                                    Tới trang gửi confess
+                                </Button>
+                            </Link>
                         }
                         title={config.meta.short_name}
                         desc="source code github.com/gosu-team"

@@ -54,13 +54,6 @@ class LoginForm extends Component {
     }
 
     responseFacebook = data => {
-        if (!data.email || data.email === "") {
-            message.error(
-                "Bạn không cho lấy tên địa chỉ email nên không định danh được, báo lỗi cho team dev!"
-            );
-            return;
-        }
-
         LocalStorageUtils.setItem(
             LOCAL_STORAGE_KEY.USER_ACCESS_TOKEN,
             data.accessToken
@@ -71,8 +64,7 @@ class LoginForm extends Component {
             token: data.accessToken,
         })
             .then(res => {
-                const token = res.data.token;
-                const nickname = res.data.nickname;
+                const { token, nickname } = res.data;
 
                 // Get page_access_token
                 get(
@@ -89,7 +81,9 @@ class LoginForm extends Component {
                 this.handleLogin(token, data.email, nickname);
             })
             .catch(err => {
-                message.error("Không có quyền!");
+                message.error(
+                    "Bạn phải cấp quyền đăng nhập bằng tài khoản Facebook tư cách là admin fanpage!"
+                );
             });
     };
 
@@ -128,7 +122,6 @@ class LoginForm extends Component {
                                         />
                                     }
                                     placeholder="Email"
-                                    disabled
                                 />
                             )}
                         </FormItem>
@@ -150,7 +143,6 @@ class LoginForm extends Component {
                                     }
                                     type="password"
                                     placeholder="Mật khẩu"
-                                    disabled
                                 />
                             )}
                         </FormItem>
@@ -159,8 +151,8 @@ class LoginForm extends Component {
                                 type="primary"
                                 htmlType="submit"
                                 className="login-form-button"
-                                disabled
                             >
+                                <Icon type="github" />
                                 Đăng nhập
                             </Button>
                             {getFieldDecorator("remember", {
