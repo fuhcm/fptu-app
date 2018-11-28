@@ -83,10 +83,8 @@ class HeaderPage extends Component {
                     {!LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item>
                             <Link to="/admin-cp">
-                                <Button type="primary" size="large">
-                                    <Icon type="github" />
-                                    Admin CP
-                                </Button>
+                                <Icon type="github" />
+                                Admin CP
                             </Link>
                         </Menu.Item>
                     )}
