@@ -36,7 +36,15 @@ class LoginForm extends Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.onLogin(values.email, values.password, data => {
-                    this.handleLogin(data.token, values.email, data.nickname);
+                    if (!data) {
+                        message.error("Thông tin đăng nhập không chính xác!");
+                    } else {
+                        this.handleLogin(
+                            data.token,
+                            values.email,
+                            data.nickname
+                        );
+                    }
                 });
             }
         });
