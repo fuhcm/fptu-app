@@ -39,7 +39,10 @@ class HeaderPage extends Component {
     };
 
     render() {
-        if (!LocalStorageUtils.isNotificationLoaded()) {
+        if (
+            !LocalStorageUtils.isNotificationLoaded() &&
+            typeof window !== "undefined"
+        ) {
             this.openNotification();
             LocalStorageUtils.setNotificationLoaded();
         }
