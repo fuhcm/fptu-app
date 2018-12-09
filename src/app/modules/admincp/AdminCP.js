@@ -473,28 +473,6 @@ class AdminCP extends Component {
                                 actions={
                                     (item.status === 0 ||
                                         item.status === null) && [
-                                        <DatePicker
-                                            showTime={{ format: "HH:mm" }}
-                                            format="DD-MM-YYYY HH:mm"
-                                            placeholder="Chọn thời gian đăng"
-                                            showToday={false}
-                                            // onChange={onChange}
-                                            onOk={this.onOKDateTime}
-                                        />,
-                                        <Button
-                                            type="primary"
-                                            // disabled={
-                                            //     item.loading ||
-                                            //     !scheduledTime ||
-                                            //     isPosting
-                                            // }
-                                            disabled
-                                            onClick={() => {
-                                                this.handleApprove(item.id);
-                                            }}
-                                        >
-                                            duyệt tự động
-                                        </Button>,
                                         <Button
                                             type="primary"
                                             disabled={item.loading || isPosting}
@@ -505,7 +483,7 @@ class AdminCP extends Component {
                                                 );
                                             }}
                                         >
-                                            duyệt thủ công
+                                            duyệt
                                         </Button>,
                                         <Button
                                             type="danger"
