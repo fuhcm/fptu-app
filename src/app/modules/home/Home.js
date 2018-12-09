@@ -1,43 +1,101 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "./Home.scss";
-import Exception from "ant-design-pro/lib/Exception";
 
-import { config } from "../../../config";
+import { getPure } from "../../utils/ApiCaller";
 
-import { Layout, Button } from "antd";
+import { Layout, Card, Row, Col, Spin, Icon } from "antd";
 
 const { Content } = Layout;
+const { Meta } = Card;
 
 class Home extends Component {
+    state = {
+        posts: [],
+    };
+
+    componentDidMount() {
+        getPure(
+            "https://api.rss2json.com/v1/api.json?rss_url=https://daihoc.fpt.edu.vn/feed/"
+        ).then(res => {
+            if (res && res.data && res.data.items) {
+                console.log(res.data.items);
+
+                this.setState({
+                    posts: res.data.items,
+                });
+            }
+        });
+    }
+
+    renderPosts = posts => {
+        return posts.map((post, index) => {
+            post.description = post.description
+                .replace(/<(.|\n)*?>/g, "")
+                .trim();
+            post.description = post.description.substring(0, 250) + "...";
+
+            return (
+                <a href={post.link} target="_blank" rel="noopener noreferrer">
+                    <Col lg={8} md={12} key={index}>
+                        <Card
+                            hoverable
+                            cover={
+                                <img
+                                    alt={post.title}
+                                    src={post.thumbnail}
+                                    style={{
+                                        objectFit: "cover",
+                                        height: "15rem",
+                                    }}
+                                />
+                            }
+                            style={{ marginBottom: "1rem" }}
+                        >
+                            <Meta
+                                style={{
+                                    height: "10rem",
+                                    overflow: "hidden",
+                                }}
+                                title={post.title}
+                                description={post.description}
+                            />
+                        </Card>
+                    </Col>
+                </a>
+            );
+        });
+    };
+
     render() {
+        const { posts } = this.state;
         return (
             <Content className="content-container">
                 <div
                     style={{
                         background: "#fff",
                         padding: "2rem",
-                        textAlign: "center",
                     }}
                 >
-                    {/* <video controls className="home-video">
-                        <source
-                            src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t66.18014-6/30642662_216616559196126_5297810338946876100_n.mp4?_nc_cat=109&efg=eyJ2ZW5jb2RlX3RhZyI6Im9lcF9oZCJ9&oh=bef6c4f59283297955938e10164fd3ed&oe=5C237C4D"
-                            type="video/mp4"
+                    <h2
+                        style={{
+                            fontSize: "2rem",
+                            textAlign: "center",
+                            fontWeight: "lighter",
+                        }}
+                    >
+                        FPT University News
+                    </h2>
+                    {posts && <Row gutter={16}>{this.renderPosts(posts)}</Row>}
+                    {!posts && (
+                        <Spin
+                            indicator={
+                                <Icon
+                                    type="loading"
+                                    style={{ fontSize: 24 }}
+                                    spin
+                                />
+                            }
                         />
-                    </video> */}
-                    <Exception
-                        type="500"
-                        actions={
-                            <Link to="/send">
-                                <Button type="primary">
-                                    Tới trang gửi confess
-                                </Button>
-                            </Link>
-                        }
-                        title={config.meta.short_name}
-                        desc="source code github.com/gosu-team"
-                    />
+                    )}
                 </div>
             </Content>
         );

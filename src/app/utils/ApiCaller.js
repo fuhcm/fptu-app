@@ -1,5 +1,5 @@
 import axios from "axios";
-import objectAssign from 'object-assign';
+import objectAssign from "object-assign";
 import LocalStorage from "../utils/LocalStorage";
 
 export const getHeaders = () => {
@@ -27,6 +27,16 @@ export const request = (
 
 export const get = (endpoint, params = {}, headers = {}) => {
     return request(endpoint, "GET", headers, params);
+};
+
+export const getPure = (endpoint, params = {}, headers = {}) => {
+    return axios({
+        url: endpoint,
+        method: "GET",
+        headers: headers,
+        params: objectAssign(params),
+        data: {},
+    });
 };
 
 export const post = (endpoint, body = {}, params = {}, headers = {}) => {
