@@ -14,12 +14,16 @@ class Post extends Component {
 
         this.state = { loading: true };
 
-        if (!JSON.parse(LocalStorageUtils.getItem("news", null))) {
-            this.post = null;
+        if (typeof window !== undefined) {
+            if (!JSON.parse(LocalStorageUtils.getItem("news", null))) {
+                this.post = null;
+            } else {
+                this.post = JSON.parse(LocalStorageUtils.getItem("news", null))[
+                    this.props.match.params.id
+                ];
+            }
         } else {
-            this.post = JSON.parse(LocalStorageUtils.getItem("news", null))[
-                this.props.match.params.id
-            ];
+            this.post = null;
         }
     }
 
