@@ -17,8 +17,6 @@ class Home extends Component {
             "https://api.rss2json.com/v1/api.json?rss_url=https://daihoc.fpt.edu.vn/feed/"
         ).then(res => {
             if (res && res.data && res.data.items) {
-                console.log(res.data.items);
-
                 this.setState({
                     posts: res.data.items,
                 });
