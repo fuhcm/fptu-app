@@ -44,7 +44,7 @@ const MyConfess = Loadable({
     loader: () =>
         import(/* webpackChunkName: "myconfess" */ "../app/modules/my-confess/MyConfess"),
     loading: () => <Loading />,
-    modules: ["admincp"],
+    modules: ["myconfess"],
 });
 
 export default [

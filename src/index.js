@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import Loadable from "react-loadable";
 import App from "./app/App";
 
-import registerServiceWorker from "./registerServiceWorker";
+// import registerServiceWorker from "./registerServiceWorker";
 import configureStore from "./store";
 
 const store = configureStore();
@@ -24,4 +24,4 @@ window.onload = () => {
     });
 };
 
-registerServiceWorker();
+// registerServiceWorker();
