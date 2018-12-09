@@ -54,7 +54,7 @@ class Post extends Component {
                     }}
                 >
                     <Link to="/news">
-                        <Button type="primary">
+                        <Button type="primary" style={{ float: "left" }}>
                             <Icon type="caret-left" /> Go back to list
                         </Button>
                     </Link>
@@ -63,7 +63,13 @@ class Post extends Component {
                             className="post-title"
                             dangerouslySetInnerHTML={{ __html: post.title }}
                         />
-                        {loading && <Skeleton active />}
+                        {loading && (
+                            <div>
+                                <Skeleton active />
+                                <Skeleton active />
+                                <Skeleton active />
+                            </div>
+                        )}
                         {!loading && (
                             <div
                                 className="post-content"
