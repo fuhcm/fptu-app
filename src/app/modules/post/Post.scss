@@ -1,0 +1,22 @@
+img {
+    max-width: 100%;
+}
+
+.post-body {
+    padding: 0px 20%;
+
+    @media screen and (max-width: 1024px) {
+        padding: 0;
+    }
+}
+
+.post-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: Georgia;
+}
+
+.post-content {
+    font-size: 1.25rem;
+    font-family: Georgia;
+}

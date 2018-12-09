@@ -2,9 +2,10 @@ import React, { Component } from "react";
 
 import { getPure } from "../../utils/ApiCaller";
 
-import { Layout, Card, Row, Col, Skeleton, Icon } from "antd";
+import { Layout, Card, Row, Col, Skeleton, Icon, BackTop } from "antd";
 
 import moment from "moment";
+import { Link } from "react-router-dom";
 import LocalStorageUtils from "../../utils/LocalStorage";
 
 const { Content } = Layout;
@@ -26,6 +27,8 @@ class News extends Component {
             this.setState({
                 posts,
             });
+
+            this.syncNews(posts);
 
             setTimeout(() => {
                 this.setState({
@@ -53,6 +56,14 @@ class News extends Component {
 
             return [];
         }
+    }
+
+    syncNews(posts) {
+        const expireTime = moment()
+            .add(30, "minutes")
+            .unix();
+        LocalStorageUtils.setItem("news_expire", JSON.stringify(expireTime));
+        LocalStorageUtils.setItem("news", JSON.stringify(posts));
     }
 
     componentDidMount() {
@@ -94,18 +105,9 @@ class News extends Component {
 
             setTimeout(() => {
                 const { posts } = this.state;
-                const expireTime = moment()
-                    .add(30, "minutes")
-                    .unix();
 
-                LocalStorageUtils.setItem(
-                    "news_expire",
-                    JSON.stringify(expireTime)
-                );
-                LocalStorageUtils.setItem("news", JSON.stringify(posts));
-                console.log(
-                    "Saved posts to Local Storage, expire at " + expireTime
-                );
+                this.syncNews(posts);
+                console.log("Saved posts to Local Storage.");
             }, 5000);
         }
     }
@@ -118,12 +120,7 @@ class News extends Component {
             post.description = post.description.substring(0, 250) + "...";
 
             return (
-                <a
-                    href={post.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    key={index}
-                >
+                <Link to={`/post/${index}`} key={index}>
                     <Col lg={8} md={12}>
                         <Card
                             hoverable
@@ -149,7 +146,7 @@ class News extends Component {
                             />
                         </Card>
                     </Col>
-                </a>
+                </Link>
             );
         });
     };
@@ -164,6 +161,7 @@ class News extends Component {
 
         return (
             <Content className="content-container">
+                <BackTop />
                 <div
                     style={{
                         background: "#fff",

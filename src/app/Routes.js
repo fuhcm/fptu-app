@@ -49,6 +49,13 @@ const News = Loadable({
     modules: ["news"],
 });
 
+const Post = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "post" */ "../app/modules/post/Post"),
+    loading: () => <Loading />,
+    modules: ["post"],
+});
+
 export default [
     {
         path: "/",
@@ -79,5 +86,10 @@ export default [
         path: "/news",
         title: "News",
         component: News,
+    },
+    {
+        path: "/post/:id",
+        title: "Post",
+        component: Post,
     },
 ];
