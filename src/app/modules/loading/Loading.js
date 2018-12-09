@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
-import { Layout, Spin, Icon } from "antd";
+import { Layout, Skeleton } from "antd";
 
 const { Content } = Layout;
-
-const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
 class Loading extends Component {
     render() {
@@ -14,10 +12,11 @@ class Loading extends Component {
                     style={{
                         background: "#fff",
                         padding: "2rem",
-                        textAlign: "center",
                     }}
                 >
-                    <Spin indicator={antIcon} />
+                    <Skeleton active />
+                    <Skeleton active />
+                    <Skeleton active />
                 </div>
             </Content>
         );
