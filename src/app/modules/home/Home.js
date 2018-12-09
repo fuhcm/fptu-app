@@ -2,13 +2,16 @@ import React, { Component } from "react";
 
 import { getPure } from "../../utils/ApiCaller";
 
-import { Layout, Card, Row, Col, Spin, Icon } from "antd";
+import { Layout, Card, Row, Col, Skeleton } from "antd";
+
+import logoFU from "./images/logo-fu.png";
 
 const { Content } = Layout;
 const { Meta } = Card;
 
 class Home extends Component {
     state = {
+        loading: true,
         posts: [],
     };
 
@@ -17,9 +20,12 @@ class Home extends Component {
             "https://api.rss2json.com/v1/api.json?rss_url=https://daihoc.fpt.edu.vn/feed/"
         ).then(res => {
             if (res && res.data && res.data.items) {
-                this.setState({
-                    posts: res.data.items,
-                });
+                setTimeout(() => {
+                    this.setState({
+                        loading: false,
+                        posts: res.data.items,
+                    });
+                }, 1000);
             }
         });
     }
@@ -64,7 +70,7 @@ class Home extends Component {
     };
 
     render() {
-        const { posts } = this.state;
+        const { loading, posts } = this.state;
         return (
             <Content className="content-container">
                 <div
@@ -73,29 +79,21 @@ class Home extends Component {
                         padding: "2rem",
                     }}
                 >
-                    <h2
+                    <div
                         style={{
-                            fontSize: "2rem",
                             textAlign: "center",
-                            fontWeight: "lighter",
+                            marginBottom: "2rem",
                         }}
                     >
-                        FPT University News
-                    </h2>
+                        <img src={logoFU} alt="FPT University" />
+                    </div>
                     {posts && <Row gutter={16}>{this.renderPosts(posts)}</Row>}
-                    {!posts && (
-                        <Spin
-                            indicator={
-                                <Icon
-                                    type="loading"
-                                    style={{
-                                        fontSize: 24,
-                                        textAlign: "center",
-                                    }}
-                                    spin
-                                />
-                            }
-                        />
+                    {loading && (
+                        <div>
+                            <Skeleton active />
+                            <Skeleton active />
+                            <Skeleton active />
+                        </div>
                     )}
                 </div>
             </Content>
