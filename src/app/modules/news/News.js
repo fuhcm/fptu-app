@@ -5,6 +5,7 @@ import { getPure } from "../../utils/ApiCaller";
 import { Layout, Card, Row, Col, Skeleton, Icon } from "antd";
 
 import moment from "moment";
+import LocalStorageUtils from "../../utils/LocalStorage";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -37,7 +38,9 @@ class News extends Component {
     async parseUrl(url) {
         try {
             const res = await getPure(
-                "https://api.rss2json.com/v1/api.json?rss_url=" + url
+                "https://api.rss2json.com/v1/api.json?rss_url=" +
+                    url +
+                    "&api_key=ykktbaje0v8srrjd7pzshawjnvmbe3fjifx0gfyq&count=10&order_by=pubDate"
             );
 
             if (res && res.data && res.data.items) {
@@ -53,16 +56,54 @@ class News extends Component {
     }
 
     componentDidMount() {
-        let sources = [
-            "https://codeburst.io/feed",
-            "https://medium.freecodecamp.org/feed",
-            "https://hackernoon.com/feed",
-            "https://medium.com/feed/javascript-scene",
-            "https://medium.com/feed/dev-channel",
-            "https://medium.com/feed/google-developers",
-        ];
+        const newsExpire = parseInt(
+            LocalStorageUtils.getItem("news_expire", null)
+        );
+        const now = parseInt(moment().unix());
 
-        this.getArticles(sources);
+        if (
+            LocalStorageUtils.getItem("news", null) !== null &&
+            now - newsExpire <= 0
+        ) {
+            const posts = JSON.parse(LocalStorageUtils.getItem("news", null));
+
+            this.setState(
+                {
+                    posts,
+                    loading: false,
+                },
+                () => {
+                    console.log("Done extracting posts from Local Storage.");
+                }
+            );
+        } else {
+            let sources = [
+                "https://codeburst.io/feed",
+                "https://medium.freecodecamp.org/feed",
+                "https://hackernoon.com/feed",
+                "https://medium.com/feed/javascript-scene",
+                "https://medium.com/feed/dev-channel",
+                "https://medium.com/feed/google-developers",
+            ];
+
+            this.getArticles(sources);
+
+            setTimeout(() => {
+                const { posts } = this.state;
+                const expireTime = moment()
+                    .add(30, "minutes")
+                    .unix();
+
+                LocalStorageUtils.setItem(
+                    "news_expire",
+                    JSON.stringify(expireTime)
+                );
+                LocalStorageUtils.setItem("news", JSON.stringify(posts));
+                console.log(
+                    "Saved posts to Local Storage, expire at " + expireTime
+                );
+            }, 5000);
+        }
     }
 
     renderPosts = posts => {

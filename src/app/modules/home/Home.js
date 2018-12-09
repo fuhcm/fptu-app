@@ -15,7 +15,7 @@ class Home extends Component {
 
     componentDidMount() {
         getPure(
-            "https://api.rss2json.com/v1/api.json?rss_url=https://daihoc.fpt.edu.vn/feed/"
+            "https://api.rss2json.com/v1/api.json?rss_url=https://daihoc.fpt.edu.vn/feed/&api_key=ykktbaje0v8srrjd7pzshawjnvmbe3fjifx0gfyq&count=9&order_by=pubDate"
         ).then(res => {
             if (res && res.data && res.data.items) {
                 setTimeout(() => {

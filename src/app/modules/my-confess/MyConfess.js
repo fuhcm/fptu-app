@@ -3,7 +3,7 @@ import "./MyConfess.scss";
 
 import moment from "moment";
 
-import { Layout, List, Button, Skeleton, Tag, Row, Alert } from "antd";
+import { Layout, List, Button, Skeleton, Tag, Row, Alert, message } from "antd";
 import { get, post } from "../../utils/ApiCaller";
 import {
     GUEST__GET_MY_CONFESS,
@@ -48,9 +48,20 @@ class MyConfess extends Component {
         await setTimeout(() => {
             post(GUEST__GET_MY_CONFESS + "?load=" + numLoad, {
                 token: LocalStorageUtils.getSenderToken(),
-            }).then(res => {
-                callback(res.data);
-            });
+            })
+                .then(res => {
+                    callback(res.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                    message.error(
+                        "Kết nối tới máy chủ bị lỗi, vui lòng báo lại cho admin để xử lí"
+                    );
+
+                    this.setState({
+                        loading: false,
+                    });
+                });
         }, 1000);
     };
 
