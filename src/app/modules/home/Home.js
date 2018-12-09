@@ -88,7 +88,10 @@ class Home extends Component {
                             indicator={
                                 <Icon
                                     type="loading"
-                                    style={{ fontSize: 24 }}
+                                    style={{
+                                        fontSize: 24,
+                                        textAlign: "center",
+                                    }}
                                     spin
                                 />
                             }

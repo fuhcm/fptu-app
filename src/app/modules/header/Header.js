@@ -60,6 +60,7 @@ class HeaderPage extends Component {
                             Trang chủ
                         </Link>
                     </Menu.Item>
+
                     {!LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item key="/send">
                             <Link to="/send">
@@ -68,6 +69,7 @@ class HeaderPage extends Component {
                             </Link>
                         </Menu.Item>
                     )}
+
                     {!LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item key="/my-confess">
                             <Link to="/my-confess">
@@ -76,12 +78,6 @@ class HeaderPage extends Component {
                             </Link>
                         </Menu.Item>
                     )}
-                    <Menu.Item key="/faq">
-                        <Link to="/faq">
-                            <Icon type="question" />
-                            Hỏi đáp
-                        </Link>
-                    </Menu.Item>
 
                     {!LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item>
