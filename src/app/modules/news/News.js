@@ -30,7 +30,7 @@ class News extends Component {
                 this.setState({
                     loading: false,
                 });
-            }, 2000);
+            }, 100);
         });
     };
 
@@ -131,7 +131,7 @@ class News extends Component {
                         style={{
                             textAlign: "center",
                             marginBottom: "2rem",
-                            fontSize: "2rem",
+                            fontSize: "1.2rem",
                         }}
                     >
                         <h2>
