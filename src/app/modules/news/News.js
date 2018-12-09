@@ -2,30 +2,67 @@ import React, { Component } from "react";
 
 import { getPure } from "../../utils/ApiCaller";
 
-import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
+import { Layout, Card, Row, Col, Skeleton, Icon } from "antd";
+
+import moment from "moment";
 
 const { Content } = Layout;
 const { Meta } = Card;
 
-class Home extends Component {
+class News extends Component {
     state = {
         loading: true,
         posts: [],
     };
 
-    componentDidMount() {
-        getPure(
-            "https://api.rss2json.com/v1/api.json?rss_url=https://daihoc.fpt.edu.vn/feed/"
-        ).then(res => {
-            if (res && res.data && res.data.items) {
-                setTimeout(() => {
-                    this.setState({
-                        loading: false,
-                        posts: res.data.items,
-                    });
-                }, 100);
-            }
+    getArticles = async sources => {
+        let { posts } = this.state;
+
+        await sources.map(async url => {
+            let rss = await this.parseUrl(url);
+            posts = posts.concat(rss);
+
+            this.setState({
+                posts,
+            });
+
+            setTimeout(() => {
+                this.setState({
+                    loading: false,
+                });
+            }, 2000);
         });
+    };
+
+    async parseUrl(url) {
+        try {
+            const res = await getPure(
+                "https://api.rss2json.com/v1/api.json?rss_url=" + url
+            );
+
+            if (res && res.data && res.data.items) {
+                return res.data.items;
+            } else {
+                return [];
+            }
+        } catch (err) {
+            console.log(err);
+
+            return [];
+        }
+    }
+
+    componentDidMount() {
+        let sources = [
+            "https://codeburst.io/feed",
+            "https://medium.freecodecamp.org/feed",
+            "https://hackernoon.com/feed",
+            "https://medium.com/feed/javascript-scene",
+            "https://medium.com/feed/dev-channel",
+            "https://medium.com/feed/google-developers",
+        ];
+
+        this.getArticles(sources);
     }
 
     renderPosts = posts => {
@@ -74,6 +111,14 @@ class Home extends Component {
 
     render() {
         const { loading, posts } = this.state;
+
+        // Sort posts by pubDate
+        posts.sort((left, right) => {
+            return moment.utc(right.pubDate).diff(moment.utc(left.pubDate));
+        });
+
+        console.log(JSON.stringify(posts));
+
         return (
             <Content className="content-container">
                 <div
@@ -86,17 +131,22 @@ class Home extends Component {
                         style={{
                             textAlign: "center",
                             marginBottom: "2rem",
+                            fontSize: "2rem",
                         }}
                     >
-                        <img
-                            src="https://daihoc.fpt.edu.vn/media/2016/12/Logo-FU-01.png"
-                            alt="FPT University"
-                        />
+                        <h2>
+                            Developer Reader
+                            {loading && (
+                                <Icon
+                                    type="loading"
+                                    style={{ marginLeft: "1rem" }}
+                                />
+                            )}
+                        </h2>
                     </div>
-                    <Divider style={{ fontWeight: "lighter" }}>
-                        FPT University News Crawler
-                    </Divider>
-                    {posts && <Row gutter={16}>{this.renderPosts(posts)}</Row>}
+                    {posts && !loading && (
+                        <Row gutter={16}>{this.renderPosts(posts)}</Row>
+                    )}
                     {loading && (
                         <div>
                             <Skeleton active />
@@ -110,4 +160,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default News;

@@ -61,6 +61,13 @@ class HeaderPage extends Component {
                         </Link>
                     </Menu.Item>
 
+                    <Menu.Item key="/news">
+                        <Link to="/news">
+                            <Icon type="medium" />
+                            Medium for Devs
+                        </Link>
+                    </Menu.Item>
+
                     {!LocalStorageUtils.isAuthenticated() && (
                         <Menu.Item key="/send">
                             <Link to="/send">
