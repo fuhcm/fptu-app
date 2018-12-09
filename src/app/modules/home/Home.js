@@ -36,8 +36,13 @@ class Home extends Component {
             post.description = post.description.substring(0, 250) + "...";
 
             return (
-                <a href={post.link} target="_blank" rel="noopener noreferrer">
-                    <Col lg={8} md={12} key={index}>
+                <a
+                    href={post.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    key={index}
+                >
+                    <Col lg={8} md={12}>
                         <Card
                             hoverable
                             cover={
