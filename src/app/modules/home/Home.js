@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { getPure } from "../../utils/ApiCaller";
 
-import { Layout, Card, Row, Col, Skeleton } from "antd";
+import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -88,6 +88,9 @@ class Home extends Component {
                             alt="FPT University"
                         />
                     </div>
+                    <Divider style={{ fontWeight: "lighter" }}>
+                        FPT University News Crawler
+                    </Divider>
                     {posts && <Row gutter={16}>{this.renderPosts(posts)}</Row>}
                     {loading && (
                         <div>
