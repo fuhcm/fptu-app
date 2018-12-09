@@ -67,15 +67,19 @@ class News extends Component {
         ) {
             const posts = JSON.parse(LocalStorageUtils.getItem("news", null));
 
-            this.setState(
-                {
-                    posts,
-                    loading: false,
-                },
-                () => {
-                    console.log("Done extracting posts from Local Storage.");
-                }
-            );
+            setTimeout(() => {
+                this.setState(
+                    {
+                        posts,
+                        loading: false,
+                    },
+                    () => {
+                        console.log(
+                            "Done extracting posts from Local Storage."
+                        );
+                    }
+                );
+            }, 1000);
         } else {
             let sources = [
                 "https://codeburst.io/feed",
