@@ -4,8 +4,6 @@ import { getPure } from "../../utils/ApiCaller";
 
 import { Layout, Card, Row, Col, Skeleton } from "antd";
 
-import logoFU from "./images/logo-fu.png";
-
 const { Content } = Layout;
 const { Meta } = Card;
 
@@ -85,7 +83,10 @@ class Home extends Component {
                             marginBottom: "2rem",
                         }}
                     >
-                        <img src={logoFU} alt="FPT University" />
+                        <img
+                            src="https://daihoc.fpt.edu.vn/media/2016/12/Logo-FU-01.png"
+                            alt="FPT University"
+                        />
                     </div>
                     {posts && <Row gutter={16}>{this.renderPosts(posts)}</Row>}
                     {loading && (
