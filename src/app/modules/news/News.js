@@ -117,8 +117,6 @@ class News extends Component {
             return moment.utc(right.pubDate).diff(moment.utc(left.pubDate));
         });
 
-        console.log(JSON.stringify(posts));
-
         return (
             <Content className="content-container">
                 <div
