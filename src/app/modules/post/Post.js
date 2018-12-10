@@ -61,6 +61,10 @@ class Post extends Component {
             }
         }
 
+        if (!post) {
+            return <Redirect to={`/404`} />;
+        }
+
         const { loading } = this.state;
 
         return (
