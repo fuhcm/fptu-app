@@ -170,7 +170,7 @@ class News extends Component {
         if (
             this.props.match.params.id &&
             !this.state.loading &&
-            this.state.posts >= 59
+            this.state.posts.length >= 59
         ) {
             this.props.history.push(`/post/${this.props.match.params.id}`);
         }
