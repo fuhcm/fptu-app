@@ -54,9 +54,7 @@ class News extends Component {
     async parseUrl(url) {
         try {
             const res = await getPure(
-                "https://api.rss2json.com/v1/api.json?rss_url=" +
-                    url +
-                    "&api_key=ykktbaje0v8srrjd7pzshawjnvmbe3fjifx0gfyq&count=10&order_by=pubDate"
+                "https://cf-api.fptu.tech/crawl?url=" + url
             );
 
             if (res && res.data && res.data.items) {
