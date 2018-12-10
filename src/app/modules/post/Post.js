@@ -14,7 +14,7 @@ class Post extends Component {
 
         this.state = { loading: true };
 
-        if (typeof window !== undefined) {
+        if (typeof window !== "undefined") {
             if (!JSON.parse(LocalStorageUtils.getItem("news", null))) {
                 this.post = null;
             } else {
@@ -28,7 +28,7 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        if (typeof window !== undefined) {
+        if (typeof window !== "undefined") {
             window.scrollTo(0, 0);
         }
 
