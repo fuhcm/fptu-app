@@ -28,3 +28,11 @@ img {
         font-size: 1rem;
     }
 }
+
+hr {
+    display: none;
+}
+
+p:last-child {
+    display: none;
+}

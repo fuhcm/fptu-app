@@ -119,10 +119,8 @@ class News extends Component {
 
             setTimeout(loadingMsg, 500);
             setTimeout(() => {
-                this.props.history.push(
-                    `/post/${parseInt(this.props.match.params.id) + 1}`
-                );
-            }, 2000);
+                this.props.history.push(`/post/${this.props.match.params.id}`);
+            }, 1000);
         }
     }
 
@@ -133,11 +131,11 @@ class News extends Component {
                 .trim();
             post.description = post.description.substring(0, 250) + "...";
 
+            const patt = /https:\/\/medium.com\/p\/(.*)/;
+            const guid = patt.exec(post.guid)[1];
+
             return (
-                <Link
-                    to={`/post/${index + 1}/${paramCase(post.title)}`}
-                    key={index}
-                >
+                <Link to={`/post/${guid}/${paramCase(post.title)}`} key={index}>
                     <Col lg={8} md={12}>
                         <Card
                             hoverable

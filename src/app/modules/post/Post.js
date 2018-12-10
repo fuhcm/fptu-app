@@ -19,9 +19,15 @@ class Post extends Component {
             if (!JSON.parse(LocalStorageUtils.getItem("news", null))) {
                 this.post = null;
             } else {
-                this.post = JSON.parse(LocalStorageUtils.getItem("news", null))[
-                    this.props.match.params.id - 1
-                ];
+                const guid = this.props.match.params.id;
+                const posts = JSON.parse(
+                    LocalStorageUtils.getItem("news", null)
+                );
+                const post = posts.find(obj => {
+                    return obj.guid === "https://medium.com/p/" + guid;
+                });
+
+                this.post = post;
             }
         } else {
             this.post = null;
@@ -43,12 +49,16 @@ class Post extends Component {
     render() {
         const { post } = this;
 
-        if (!post) {
-            return (
-                <Redirect
-                    to={`/news/fallback/${this.props.match.params.id - 1}`}
-                />
-            );
+        if (typeof window !== "undefined") {
+            if (!JSON.parse(LocalStorageUtils.getItem("news", null))) {
+                return (
+                    <Redirect
+                        to={`/news/fallback/${this.props.match.params.id}`}
+                    />
+                );
+            } else if (!post) {
+                return <Redirect to={`/404`} />;
+            }
         }
 
         const { loading } = this.state;
