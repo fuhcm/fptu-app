@@ -168,7 +168,9 @@ class News extends Component {
     render() {
         // Check Fallback case
         if (this.props.match.params.id && !this.state.loading) {
-            this.props.history.push(`/post/${this.props.match.params.id}`);
+            setTimeout(() => {
+                this.props.history.push(`/post/${this.props.match.params.id}`);
+            }, 1000);
         }
 
         const { loading, posts } = this.state;

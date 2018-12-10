@@ -57,12 +57,12 @@ class Post extends Component {
                     />
                 );
             } else if (!post) {
-                return <Redirect to={`/404`} />;
+                return <Redirect to={`/news`} />;
             }
         }
 
         if (!post) {
-            return <Redirect to={`/404`} />;
+            return <Redirect to={`/news`} />;
         }
 
         const { loading } = this.state;
