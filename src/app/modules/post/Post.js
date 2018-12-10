@@ -98,7 +98,7 @@ class Post extends Component {
                             {post.categories.map((obj, index) => {
                                 return (
                                     <Tag color="geekblue" key={index}>
-                                        {obj}
+                                        #{obj}
                                     </Tag>
                                 );
                             })}

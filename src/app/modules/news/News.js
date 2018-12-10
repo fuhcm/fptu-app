@@ -11,6 +11,7 @@ import {
     Icon,
     BackTop,
     Badge,
+    Divider,
     message,
 } from "antd";
 
@@ -201,12 +202,12 @@ class News extends Component {
                     <div
                         style={{
                             textAlign: "center",
-                            marginBottom: "2rem",
                             fontSize: "1.2rem",
                         }}
                     >
                         <h2>
-                            Developer Reader
+                            <span style={{ color: "darkblue" }}>DEVs</span>{" "}
+                            Reader
                             {loading && (
                                 <Icon
                                     type="loading"
@@ -230,6 +231,9 @@ class News extends Component {
                             )}
                         </h2>
                     </div>
+                    <Divider style={{ fontWeight: "lighter" }}>
+                        Crawl from 6 best Medium channels for Devs
+                    </Divider>
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>
                     )}
