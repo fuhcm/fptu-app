@@ -41,7 +41,8 @@ class HeaderPage extends Component {
     render() {
         if (
             !LocalStorageUtils.isNotificationLoaded() &&
-            typeof window !== "undefined"
+            typeof window !== "undefined" &&
+            this.props.history.location.pathname === "/send"
         ) {
             this.openNotification();
             LocalStorageUtils.setNotificationLoaded();
@@ -51,6 +52,8 @@ class HeaderPage extends Component {
         let currentKey = this.props.history.location.pathname;
         if (currentKey === "/") {
             currentKey = "/home";
+        } else if (currentKey === "/admin-c[") {
+            currentKey = "/login";
         } else if (currentKey.includes("/post")) {
             currentKey = "/news";
         }
