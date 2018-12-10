@@ -97,12 +97,12 @@ class News extends Component {
             }, 100);
         } else {
             let sources = [
-                "https://codeburst.io/feed",
-                "https://medium.freecodecamp.org/feed",
-                "https://hackernoon.com/feed",
-                "https://medium.com/feed/javascript-scene",
-                "https://medium.com/feed/dev-channel",
-                "https://medium.com/feed/google-developers",
+                "https://codeburst.io",
+                "https://medium.freecodecamp.org",
+                "https://hackernoon.com",
+                "https://medium.com/javascript-scene",
+                "https://medium.com/dev-channel",
+                "https://medium.com/google-developers",
             ];
 
             this.getArticles(sources);
