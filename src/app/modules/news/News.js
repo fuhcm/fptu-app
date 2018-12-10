@@ -2,10 +2,12 @@ import React, { Component } from "react";
 
 import { getPure } from "../../utils/ApiCaller";
 
-import { Layout, Card, Row, Col, Skeleton, Icon, BackTop } from "antd";
+import { Layout, Card, Row, Col, Skeleton, Icon, BackTop, message } from "antd";
 
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import paramCase from "param-case";
 import LocalStorageUtils from "../../utils/LocalStorage";
 
 const { Content } = Layout;
@@ -110,6 +112,18 @@ class News extends Component {
                 console.log("Saved posts to Local Storage.");
             }, 5000);
         }
+
+        // Check Fallback case
+        if (this.props.match.params.id) {
+            const loadingMsg = message.loading("Đang cào dữ liệu...", 0);
+
+            setTimeout(loadingMsg, 1000);
+            setTimeout(() => {
+                this.props.history.push(
+                    `/post/${parseInt(this.props.match.params.id) + 1}`
+                );
+            }, 500);
+        }
     }
 
     renderPosts = posts => {
@@ -120,7 +134,10 @@ class News extends Component {
             post.description = post.description.substring(0, 250) + "...";
 
             return (
-                <Link to={`/post/${index}`} key={index}>
+                <Link
+                    to={`/post/${index + 1}/${paramCase(post.title)}`}
+                    key={index}
+                >
                     <Col lg={8} md={12}>
                         <Card
                             hoverable
@@ -161,6 +178,10 @@ class News extends Component {
 
         return (
             <Content className="content-container">
+                <Helmet>
+                    <title>Medium for Devs</title>
+                    <meta name="description" content="Medium for Devs" />
+                </Helmet>
                 <BackTop />
                 <div
                     style={{
@@ -201,4 +222,4 @@ class News extends Component {
     }
 }
 
-export default News;
+export default withRouter(News);

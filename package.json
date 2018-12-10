@@ -3,27 +3,29 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@babel/register": "^7.0.0",
         "ant-design-pro": "^1.4.4",
         "antd": "^3.9.3",
         "axios": "^0.18.0",
-        "@babel/register": "^7.0.0",
         "babel-plugin-dynamic-import-node": "^2.0.0",
         "babel-plugin-syntax-dynamic-import": "^6.18.0",
         "express": "^4.16.2",
         "file-loader": "^2.0.0",
         "ignore-styles": "^5.0.1",
         "node-sass": "^4.10.0",
+        "param-case": "^2.1.1",
         "react": "^16.5.2",
         "react-dom": "^16.5.2",
         "react-facebook-login": "^4.1.1",
+        "react-helmet": "^5.2.0",
         "react-loadable": "^5.3.1",
         "react-redux": "^5.0.7",
         "react-router-dom": "^4.3.1",
         "react-scripts": "2.0.3",
         "redux": "^4.0.0",
         "redux-thunk": "^2.3.0",
-        "uuid": "^3.3.2",
-        "url-loader": "^1.0.1"
+        "url-loader": "^1.0.1",
+        "uuid": "^3.3.2"
     },
     "resolutions": {
         "babel-core": "7.0.0-bridge.0"

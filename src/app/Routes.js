@@ -88,7 +88,17 @@ export default [
         component: News,
     },
     {
+        path: "/news/fallback/:id",
+        title: "News",
+        component: News,
+    },
+    {
         path: "/post/:id",
+        title: "Post",
+        component: Post,
+    },
+    {
+        path: "/post/:id/:title",
         title: "Post",
         component: Post,
     },
