@@ -113,14 +113,10 @@ class News extends Component {
             }, 5000);
         }
 
-        // Check Fallback case
         if (this.props.match.params.id) {
             const loadingMsg = message.loading("Đang cào dữ liệu...", 0);
 
             setTimeout(loadingMsg, 2000);
-            setTimeout(() => {
-                this.props.history.push(`/post/${this.props.match.params.id}`);
-            }, 2000);
         }
     }
 
@@ -167,6 +163,11 @@ class News extends Component {
     };
 
     render() {
+        // Check Fallback case
+        if (this.props.match.params.id && !this.state.loading) {
+            this.props.history.push(`/post/${this.props.match.params.id}`);
+        }
+
         const { loading, posts } = this.state;
 
         // Sort posts by pubDate
