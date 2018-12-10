@@ -8,10 +8,11 @@ a {
 }
 
 .post-body {
-    padding: 0px 20%;
+    width: 740px;
+    margin: 0 auto;
 
     @media screen and (max-width: 1024px) {
-        padding: 0;
+        width: 100%;
     }
 }
 
