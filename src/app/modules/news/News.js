@@ -92,7 +92,7 @@ class News extends Component {
                         );
                     }
                 );
-            }, 1000);
+            }, 100);
         } else {
             let sources = [
                 "https://codeburst.io/feed",

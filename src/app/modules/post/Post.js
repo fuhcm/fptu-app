@@ -81,7 +81,11 @@ class Post extends Component {
                     }}
                 >
                     <Link to="/news">
-                        <Button type="primary" style={{ marginBottom: "1rem" }}>
+                        <Button
+                            type="primary"
+                            size="large"
+                            style={{ marginBottom: "1rem" }}
+                        >
                             <Icon type="caret-left" /> Go back to list
                         </Button>
                     </Link>
