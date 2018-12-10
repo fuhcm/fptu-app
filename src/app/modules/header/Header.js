@@ -47,14 +47,23 @@ class HeaderPage extends Component {
             LocalStorageUtils.setNotificationLoaded();
         }
 
+        // Handle selected key
+        let currentKey = this.props.history.location.pathname;
+        if (currentKey === "/") {
+            currentKey = "/home";
+        } else if (currentKey.includes("/post")) {
+            currentKey = "/news";
+        }
+
         return (
             <Header>
                 <Menu
                     theme="light"
                     mode="horizontal"
                     style={{ lineHeight: "64px" }}
+                    selectedKeys={[currentKey]}
                 >
-                    <Menu.Item key="/">
+                    <Menu.Item key="/home">
                         <Link to="/">
                             <Icon type="home" />
                             Trang chủ
@@ -87,7 +96,7 @@ class HeaderPage extends Component {
                     )}
 
                     {!LocalStorageUtils.isAuthenticated() && (
-                        <Menu.Item>
+                        <Menu.Item key="/login">
                             <Link to="/admin-cp">
                                 <Icon type="github" />
                                 Admin CP
