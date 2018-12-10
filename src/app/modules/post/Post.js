@@ -97,7 +97,11 @@ class Post extends Component {
                         <div className="post-tags">
                             {post.categories.map((obj, index) => {
                                 return (
-                                    <Tag color="geekblue" key={index}>
+                                    <Tag
+                                        color="geekblue"
+                                        key={index}
+                                        style={{ marginBottom: "0.5rem" }}
+                                    >
                                         #{obj}
                                     </Tag>
                                 );
