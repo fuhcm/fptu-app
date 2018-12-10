@@ -25,7 +25,7 @@ const Send = Loadable({
     loader: () =>
         import(/* webpackChunkName: "send" */ "../app/modules/send/Send"),
     loading: () => <Loading />,
-    modules: ["login"],
+    modules: ["send"],
 });
 
 const AdminCP = Loadable({
