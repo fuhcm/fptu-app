@@ -92,17 +92,10 @@ class News extends Component {
             const posts = JSON.parse(LocalStorageUtils.getItem("news", null));
 
             setTimeout(() => {
-                this.setState(
-                    {
-                        posts,
-                        loading: false,
-                    },
-                    () => {
-                        console.log(
-                            "Done extracting posts from Local Storage."
-                        );
-                    }
-                );
+                this.setState({
+                    posts,
+                    loading: false,
+                });
             }, 1000);
         } else {
             let sources = [
@@ -120,7 +113,6 @@ class News extends Component {
                 const { posts } = this.state;
 
                 this.syncNews(posts);
-                console.log("Saved posts to Local Storage.");
             }, 5000);
         }
 
