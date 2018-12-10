@@ -117,12 +117,12 @@ class News extends Component {
         if (this.props.match.params.id) {
             const loadingMsg = message.loading("Đang cào dữ liệu...", 0);
 
-            setTimeout(loadingMsg, 1000);
+            setTimeout(loadingMsg, 500);
             setTimeout(() => {
                 this.props.history.push(
                     `/post/${parseInt(this.props.match.params.id) + 1}`
                 );
-            }, 500);
+            }, 2000);
         }
     }
 
