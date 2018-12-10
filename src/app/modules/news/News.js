@@ -96,7 +96,7 @@ class News extends Component {
                     posts,
                     loading: false,
                 });
-            }, 1000);
+            }, 100);
         } else {
             let sources = [
                 "https://codeburst.io/feed",
@@ -132,6 +132,20 @@ class News extends Component {
 
             const patt = /https:\/\/medium.com\/p\/(.*)/;
             const guid = patt.exec(post.guid)[1];
+
+            // Solve Medium image null
+            if (!post.thumbnail.includes("https://cdn")) {
+                const imageArr = [
+                    "https://cdn-images-1.medium.com/max/1024/1*FqumB-IFSXQk9wW9ElYvqw.jpeg",
+                    "https://cdn-images-1.medium.com/max/1024/0*k5_YVMBW9-yD10yN",
+                    "https://cdn-images-1.medium.com/max/1024/1*BUA0Pq-I3lEqnFv1sVl47w.jpeg",
+                    "https://cdn-images-1.medium.com/max/1024/1*kIC9VHwIsNQAIOpjraB-Iw.jpeg",
+                    "https://cdn-images-1.medium.com/max/1024/0*DdOLxRL3KAHZ7Nwq",
+                ];
+
+                post.thumbnail =
+                    imageArr[Math.floor(Math.random() * imageArr.length)];
+            }
 
             return (
                 <Link to={`/post/${guid}/${paramCase(post.title)}`} key={index}>
@@ -228,7 +242,7 @@ class News extends Component {
                         </h2>
                     </div>
                     <Divider style={{ fontWeight: "lighter" }}>
-                        Crawl from 6 best Medium channels for Devs
+                        Daily Dev News
                     </Divider>
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>

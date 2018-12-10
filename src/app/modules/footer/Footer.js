@@ -12,8 +12,17 @@ class FooterPage extends Component {
             <Footer style={{ textAlign: "center" }}>
                 <div>
                     {config.meta.name} ©2018 Designed by{" "}
-                    <strong>Gosu Team</strong>. Built on top of Golang &
-                    ReactJS, hosted at Google Cloud Platform.
+                    <strong>
+                        <a
+                            href="https://mrhmt.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Tu Huynh
+                        </a>
+                    </strong>
+                    . Built on top of Golang & ReactJS, hosted at Google Cloud
+                    Platform.
                 </div>
 
                 <div
