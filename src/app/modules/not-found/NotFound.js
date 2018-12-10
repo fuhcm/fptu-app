@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Exception from "ant-design-pro/lib/Exception";
+import { Link } from "react-router-dom";
 
 import { Layout, Button } from "antd";
 
@@ -18,7 +19,11 @@ class NotFound extends Component {
                 >
                     <Exception
                         type="404"
-                        actions={<Button type="primary">về trang chủ</Button>}
+                        actions={
+                            <Link to="/">
+                                <Button type="primary">Về trang chủ</Button>
+                            </Link>
+                        }
                         title="404"
                         desc="Đi chỗ khác đi, méo có trang này ok?"
                     />

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./Post.scss";
 
-import { Layout, Button, Icon, Skeleton, BackTop } from "antd";
+import { Layout, Button, Icon, Skeleton, BackTop, Tag } from "antd";
 import LocalStorageUtils from "../../utils/LocalStorage";
 import { Redirect, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -94,6 +94,15 @@ class Post extends Component {
                             className="post-title"
                             dangerouslySetInnerHTML={{ __html: post.title }}
                         />
+                        <div className="post-tags">
+                            {post.categories.map((obj, index) => {
+                                return (
+                                    <Tag color="geekblue" key={index}>
+                                        {obj}
+                                    </Tag>
+                                );
+                            })}
+                        </div>
                         {loading && (
                             <div>
                                 <Skeleton active />

@@ -2,7 +2,17 @@ import React, { Component } from "react";
 
 import { getPure } from "../../utils/ApiCaller";
 
-import { Layout, Card, Row, Col, Skeleton, Icon, BackTop, message } from "antd";
+import {
+    Layout,
+    Card,
+    Row,
+    Col,
+    Skeleton,
+    Icon,
+    BackTop,
+    Badge,
+    message,
+} from "antd";
 
 import moment from "moment";
 import { Link, withRouter } from "react-router-dom";
@@ -202,6 +212,21 @@ class News extends Component {
                                     type="loading"
                                     style={{ marginLeft: "1rem" }}
                                 />
+                            )}
+                            {!loading && (
+                                <span
+                                    style={{
+                                        marginLeft: "1rem",
+                                    }}
+                                >
+                                    <Badge
+                                        count={posts.length + "+"}
+                                        style={{
+                                            backgroundColor: "#40A9FF",
+                                            color: "#fff",
+                                        }}
+                                    />
+                                </span>
                             )}
                         </h2>
                     </div>
