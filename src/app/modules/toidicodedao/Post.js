@@ -145,6 +145,13 @@ class Post extends Component {
                                     );
                                 })}
                         </div>
+
+                        <img
+                            src={post.thumbnail || ""}
+                            alt=""
+                            hidden={loading}
+                        />
+
                         {loading && (
                             <div>
                                 <Skeleton active />
