@@ -57,12 +57,12 @@ class Post extends Component {
             if (
                 !JSON.parse(
                     LocalStorageUtils.getItem(
-                        LOCAL_STORAGE_KEY.MEDIUM_NEWS,
+                        LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS,
                         null
                     )
                 )
             ) {
-                const loadingMsg = message.loading("Đang cào dữ liệu...", 0);
+                const loadingMsg = message.loading("cào dữ liệu...", 0);
 
                 setTimeout(loadingMsg, 2000);
 
