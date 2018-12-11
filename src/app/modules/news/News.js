@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import { getPure } from "../../utils/ApiCaller";
-
 import {
     Layout,
     Card,
@@ -12,13 +10,13 @@ import {
     BackTop,
     Badge,
     Divider,
-    message,
 } from "antd";
 
 import moment from "moment";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import paramCase from "param-case";
+import { getArticles } from "../../utils/Crawl";
 import LocalStorageUtils from "../../utils/LocalStorage";
 
 const { Content } = Layout;
@@ -29,53 +27,6 @@ class News extends Component {
         loading: true,
         posts: [],
     };
-
-    getArticles = async sources => {
-        let { posts } = this.state;
-
-        await sources.map(async url => {
-            let rss = await this.parseUrl(url);
-            posts = posts.concat(rss);
-
-            this.setState({
-                posts,
-            });
-
-            this.syncNews(posts);
-
-            setTimeout(() => {
-                this.setState({
-                    loading: false,
-                });
-            }, 100);
-        });
-    };
-
-    async parseUrl(url) {
-        try {
-            const res = await getPure(
-                "https://cf-api.fptu.tech/crawl?url=" + url
-            );
-
-            if (res && res.data && res.data.items) {
-                return res.data.items;
-            } else {
-                return [];
-            }
-        } catch (err) {
-            console.log(err);
-
-            return [];
-        }
-    }
-
-    syncNews(posts) {
-        const expireTime = moment()
-            .add(30, "minutes")
-            .unix();
-        LocalStorageUtils.setItem("news_expire", JSON.stringify(expireTime));
-        LocalStorageUtils.setItem("news", JSON.stringify(posts));
-    }
 
     componentDidMount() {
         const newsExpire = parseInt(
@@ -96,28 +47,12 @@ class News extends Component {
                 });
             }, 100);
         } else {
-            let sources = [
-                "https://codeburst.io",
-                "https://medium.freecodecamp.org",
-                "https://hackernoon.com",
-                "https://medium.com/javascript-scene",
-                "https://medium.com/dev-channel",
-                "https://medium.com/google-developers",
-            ];
-
-            this.getArticles(sources);
-
-            setTimeout(() => {
-                const { posts } = this.state;
-
-                this.syncNews(posts);
-            }, 5000);
-        }
-
-        if (this.props.match.params.id) {
-            const loadingMsg = message.loading("Đang cào dữ liệu...", 0);
-
-            setTimeout(loadingMsg, 2000);
+            getArticles().then(posts => {
+                this.setState({
+                    posts,
+                    loading: false,
+                });
+            });
         }
     }
 
@@ -178,15 +113,6 @@ class News extends Component {
     };
 
     render() {
-        // Check Fallback case
-        if (
-            this.props.match.params.id &&
-            !this.state.loading &&
-            this.state.posts.length >= 59
-        ) {
-            this.props.history.push(`/post/${this.props.match.params.id}`);
-        }
-
         const { loading, posts } = this.state;
 
         // Sort posts by pubDate
@@ -258,4 +184,4 @@ class News extends Component {
     }
 }
 
-export default withRouter(News);
+export default News;

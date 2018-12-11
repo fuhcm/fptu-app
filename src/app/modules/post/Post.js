@@ -2,10 +2,11 @@ import React, { Component } from "react";
 
 import "./Post.scss";
 
-import { Layout, Button, Icon, Skeleton, BackTop, Tag } from "antd";
+import { Layout, Button, Icon, Skeleton, BackTop, Tag, message } from "antd";
 import LocalStorageUtils from "../../utils/LocalStorage";
 import { Redirect, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { getArticles } from "../../utils/Crawl";
 
 const { Content } = Layout;
 
@@ -39,39 +40,45 @@ class Post extends Component {
             window.scrollTo(0, 0);
         }
 
-        setTimeout(() => {
-            this.setState({
-                loading: false,
-            });
-        }, 1000);
+        if (typeof window !== "undefined") {
+            if (!JSON.parse(LocalStorageUtils.getItem("news", null))) {
+                const loadingMsg = message.loading("Đang cào dữ liệu...", 0);
+
+                setTimeout(loadingMsg, 2000);
+
+                getArticles().then(posts => {
+                    const guid = this.props.match.params.id;
+                    const post = posts.find(obj => {
+                        return obj.guid === "https://medium.com/p/" + guid;
+                    });
+                    this.post = post;
+
+                    this.setState({
+                        loading: false,
+                    });
+                });
+            } else {
+                setTimeout(() => {
+                    this.setState({
+                        loading: false,
+                    });
+                }, 1000);
+            }
+        }
     }
 
     render() {
         const { post } = this;
+        const { loading } = this.state;
 
-        if (typeof window !== "undefined") {
-            if (!JSON.parse(LocalStorageUtils.getItem("news", null))) {
-                return (
-                    <Redirect
-                        to={`/news/fallback/${this.props.match.params.id}`}
-                    />
-                );
-            } else if (!post) {
-                return <Redirect to={`/news`} />;
-            }
-        }
-
-        if (!post) {
+        if (!post && !loading) {
             return <Redirect to={`/news`} />;
         }
-
-        const { loading } = this.state;
 
         return (
             <Content className="content-container">
                 <Helmet>
-                    <title>{post.title}</title>
-                    <meta name="description" content={post.description} />
+                    <title>{(post && post.title) || "Loading"}</title>
                 </Helmet>
                 <BackTop />
                 <div
@@ -92,20 +99,23 @@ class Post extends Component {
                     <div className="post-body">
                         <h2
                             className="post-title"
-                            dangerouslySetInnerHTML={{ __html: post.title }}
+                            dangerouslySetInnerHTML={{
+                                __html: post && post.title,
+                            }}
                         />
                         <div className="post-tags">
-                            {post.categories.map((obj, index) => {
-                                return (
-                                    <Tag
-                                        color="geekblue"
-                                        key={index}
-                                        style={{ marginBottom: "0.5rem" }}
-                                    >
-                                        #{obj}
-                                    </Tag>
-                                );
-                            })}
+                            {post &&
+                                post.categories.map((obj, index) => {
+                                    return (
+                                        <Tag
+                                            color="geekblue"
+                                            key={index}
+                                            style={{ marginBottom: "0.5rem" }}
+                                        >
+                                            #{obj}
+                                        </Tag>
+                                    );
+                                })}
                         </div>
                         {loading && (
                             <div>
@@ -118,7 +128,7 @@ class Post extends Component {
                             <div
                                 className="post-content"
                                 dangerouslySetInnerHTML={{
-                                    __html: post.content,
+                                    __html: post && post.content,
                                 }}
                             />
                         )}
