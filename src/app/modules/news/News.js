@@ -18,6 +18,7 @@ import { Helmet } from "react-helmet";
 import paramCase from "param-case";
 import { getArticles } from "../../utils/Crawl";
 import LocalStorageUtils from "../../utils/LocalStorage";
+import queryString from "query-string";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -45,7 +46,15 @@ class News extends Component {
                     posts,
                     loading: false,
                 });
-            }, 100);
+
+                if (typeof window !== undefined) {
+                    const { pos } = queryString.parse(window.location.search);
+
+                    if (pos) {
+                        window.scrollTo(0, pos);
+                    }
+                }
+            }, 0);
         } else {
             getArticles().then(posts => {
                 this.setState({
