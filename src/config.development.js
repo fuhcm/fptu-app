@@ -1,6 +1,6 @@
 export const config = {
     apis: {
-        base_url: "http://localhost:3000",
+        base_url: "https://cf-api.fptu.tech",
         mocogateway_base_url: "",
     },
     meta: {

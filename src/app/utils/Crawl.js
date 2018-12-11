@@ -1,5 +1,6 @@
 import { getPure } from "../utils/ApiCaller";
 import LocalStorageUtils from "../utils/LocalStorage";
+import { CRAWL__URL } from "../utils/ApiEndpoint";
 import moment from "moment";
 
 const defaultSources = [
@@ -11,7 +12,7 @@ const defaultSources = [
     "https://medium.com/google-developers",
 ];
 
-export const getArticles = async (sources = defaultSources) => {
+export const getArticles = async (sources = defaultSources, sync = true) => {
     const listPromise = sources.map(item => {
         return parseUrl(item);
     });
@@ -24,7 +25,14 @@ export const getArticles = async (sources = defaultSources) => {
             posts = posts.concat(arr);
         });
 
-        syncNews(posts);
+        // Sort posts by pubDate
+        posts.sort((left, right) => {
+            return moment.utc(right.pubDate).diff(moment.utc(left.pubDate));
+        });
+
+        if (sync) {
+            syncNews(posts);
+        }
         return posts;
     } catch (err) {
         console.log(err);
@@ -33,7 +41,7 @@ export const getArticles = async (sources = defaultSources) => {
 
 const parseUrl = async url => {
     try {
-        const res = await getPure("https://cf-api.fptu.tech/crawl?url=" + url);
+        const res = await getPure(CRAWL__URL + "?url=" + url);
 
         if (res && res.data && res.data.items) {
             return res.data.items;
@@ -48,9 +56,11 @@ const parseUrl = async url => {
 };
 
 const syncNews = posts => {
-    const expireTime = moment()
-        .add(30, "minutes")
-        .unix();
-    LocalStorageUtils.setItem("news_expire", JSON.stringify(expireTime));
-    LocalStorageUtils.setItem("news", JSON.stringify(posts));
+    if (posts.length) {
+        const expireTime = moment()
+            .add(30, "minutes")
+            .unix();
+        LocalStorageUtils.setItem("news_expire", JSON.stringify(expireTime));
+        LocalStorageUtils.setItem("news", JSON.stringify(posts));
+    }
 };

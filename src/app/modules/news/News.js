@@ -115,11 +115,6 @@ class News extends Component {
     render() {
         const { loading, posts } = this.state;
 
-        // Sort posts by pubDate
-        posts.sort((left, right) => {
-            return moment.utc(right.pubDate).diff(moment.utc(left.pubDate));
-        });
-
         return (
             <Content className="content-container">
                 <Helmet>

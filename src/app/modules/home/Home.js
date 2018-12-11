@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { getPure } from "../../utils/ApiCaller";
+import { getArticles } from "../../utils/Crawl";
 
 import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
 
@@ -14,17 +14,11 @@ class Home extends Component {
     };
 
     componentDidMount() {
-        getPure(
-            "https://cf-api.fptu.tech/crawl?url=https://daihoc.fpt.edu.vn"
-        ).then(res => {
-            if (res && res.data && res.data.items) {
-                setTimeout(() => {
-                    this.setState({
-                        loading: false,
-                        posts: res.data.items,
-                    });
-                }, 100);
-            }
+        getArticles(["https://daihoc.fpt.edu.vn"], false).then(posts => {
+            this.setState({
+                loading: false,
+                posts,
+            });
         });
     }
 

@@ -21,3 +21,6 @@ export const ADMINCP__GET_NEXT_ID = API_BASE_URL + "/next_confession_id";
 export const GUEST__POST_CONFESS = API_BASE_URL + "/confessions";
 export const GUEST__GET_MY_CONFESS = API_BASE_URL + "/myconfess";
 export const GUEST__GET_OVERVIEW = API_BASE_URL + "/confessions/overview";
+
+// Crawl
+export const CRAWL__URL = BASE_URL + "/crawl";
