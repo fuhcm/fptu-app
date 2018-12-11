@@ -62,7 +62,7 @@ class Post extends Component {
                     )
                 )
             ) {
-                const loadingMsg = message.loading("cào dữ liệu...", 0);
+                const loadingMsg = message.loading("Đang cào dữ liệu...", 0);
 
                 setTimeout(loadingMsg, 2000);
 
