@@ -8,6 +8,10 @@ export const LOCAL_STORAGE_KEY = {
     NOTIFICATION: "cfapp_notification_v0",
     USER_ACCESS_TOKEN: "cfapp_user_access_token",
     PAGE_ACCESS_TOKEN: "cfapp_page_acess_token",
+    MEDIUM_NEWS: "cfapp_medium_news",
+    MEDIUM_NEWS_EXPIRE: "cfapp_medium_news_expire",
+    TOIDICODEDAO_NEWS: "cfapp_toidicodedao_new",
+    TOIDICODEDAO_NEWS_EXPIRE: "cfapp_toidicodedao_new_expire",
 };
 
 class LocalStorageUtils {

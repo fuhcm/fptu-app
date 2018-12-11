@@ -1,5 +1,5 @@
 import { getPure } from "../utils/ApiCaller";
-import LocalStorageUtils from "../utils/LocalStorage";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../utils/LocalStorage";
 import { CRAWL__URL } from "../utils/ApiEndpoint";
 import moment from "moment";
 
@@ -12,7 +12,11 @@ const defaultSources = [
     "https://medium.com/google-developers",
 ];
 
-export const getArticles = async (sources = defaultSources, sync = true) => {
+export const getArticles = async (
+    sources = defaultSources,
+    sync = true,
+    target = "medium"
+) => {
     const listPromise = sources.map(item => {
         return parseUrl(item);
     });
@@ -31,7 +35,7 @@ export const getArticles = async (sources = defaultSources, sync = true) => {
         });
 
         if (sync) {
-            syncNews(posts);
+            syncNews(posts, target);
         }
         return posts;
     } catch (err) {
@@ -55,12 +59,29 @@ const parseUrl = async url => {
     }
 };
 
-const syncNews = posts => {
+const syncNews = (posts, target) => {
     if (posts.length) {
+        let news = "",
+            expire = "";
+
+        switch (target) {
+            case "medium":
+                news = LOCAL_STORAGE_KEY.MEDIUM_NEWS;
+                expire = LOCAL_STORAGE_KEY.MEDIUM_NEWS_EXPIRE;
+                break;
+            case "toidicodedao":
+                news = LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS;
+                expire = LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS_EXPIRE;
+                break;
+            default:
+                news = LOCAL_STORAGE_KEY.MEDIUM_NEWS;
+                expire = LOCAL_STORAGE_KEY.MEDIUM_NEWS_EXPIRE;
+        }
+
         const expireTime = moment()
             .add(30, "minutes")
             .unix();
-        LocalStorageUtils.setItem("news_expire", JSON.stringify(expireTime));
-        LocalStorageUtils.setItem("news", JSON.stringify(posts));
+        LocalStorageUtils.setItem(expire, JSON.stringify(expireTime));
+        LocalStorageUtils.setItem(news, JSON.stringify(posts));
     }
 };

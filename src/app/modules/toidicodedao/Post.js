@@ -18,7 +18,7 @@ class Post extends Component {
             if (
                 !JSON.parse(
                     LocalStorageUtils.getItem(
-                        LOCAL_STORAGE_KEY.MEDIUM_NEWS,
+                        LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS,
                         null
                     )
                 )
@@ -28,12 +28,15 @@ class Post extends Component {
                 const guid = this.props.match.params.id;
                 const posts = JSON.parse(
                     LocalStorageUtils.getItem(
-                        LOCAL_STORAGE_KEY.MEDIUM_NEWS,
+                        LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS,
                         null
                     )
                 );
                 const post = posts.find(obj => {
-                    return obj.guid === "https://medium.com/p/" + guid;
+                    return (
+                        obj.guid === "http://toidicodedao.com/?p=" + guid ||
+                        obj.guid === "http://codeaholicguy.com/?p=" + guid
+                    );
                 });
 
                 this.post = post;
@@ -66,7 +69,10 @@ class Post extends Component {
                 getArticles().then(posts => {
                     const guid = this.props.match.params.id;
                     const post = posts.find(obj => {
-                        return obj.guid === "https://medium.com/p/" + guid;
+                        return (
+                            obj.guid === "http://toidicodedao.com/?p=" + guid ||
+                            obj.guid === "http://codeaholicguy.com/?p=" + guid
+                        );
                     });
                     this.post = post;
 
@@ -89,7 +95,7 @@ class Post extends Component {
         const { loading } = this.state;
 
         if (!post && !loading) {
-            return <Redirect to={`/news`} />;
+            return <Redirect to={`/toidicodedao`} />;
         }
 
         return (
@@ -104,13 +110,13 @@ class Post extends Component {
                         padding: "2rem",
                     }}
                 >
-                    <Link to="/news">
+                    <Link to="/toidicodedao">
                         <Button
                             type="primary"
                             size="large"
                             style={{ marginBottom: "1rem" }}
                         >
-                            <Icon type="caret-left" /> Go back to list
+                            <Icon type="caret-left" /> Quay lại danh sách bài
                         </Button>
                     </Link>
                     <div className="post-body">
@@ -125,11 +131,12 @@ class Post extends Component {
                                 post.categories.map((obj, index) => {
                                     return (
                                         <Tag
-                                            color="geekblue"
+                                            color="green"
                                             key={index}
                                             style={{ marginBottom: "0.5rem" }}
                                         >
-                                            #{obj}
+                                            {obj.charAt(0).toLowerCase() +
+                                                obj.slice(1)}
                                         </Tag>
                                     );
                                 })}

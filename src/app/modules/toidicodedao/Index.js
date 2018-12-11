@@ -22,7 +22,7 @@ import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 const { Content } = Layout;
 const { Meta } = Card;
 
-class News extends Component {
+class Index extends Component {
     state = {
         loading: true,
         posts: [],
@@ -31,33 +31,50 @@ class News extends Component {
     componentDidMount() {
         const newsExpire = parseInt(
             LocalStorageUtils.getItem(
-                LOCAL_STORAGE_KEY.MEDIUM_NEWS_EXPIRE,
+                LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS_EXPIRE,
                 null
             )
         );
         const now = parseInt(moment().unix());
 
         if (
-            LocalStorageUtils.getItem(LOCAL_STORAGE_KEY.MEDIUM_NEWS, null) !==
-                null &&
+            LocalStorageUtils.getItem(
+                LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS,
+                null
+            ) !== null &&
             now - newsExpire <= 0
         ) {
-            const posts = JSON.parse(
-                LocalStorageUtils.getItem(LOCAL_STORAGE_KEY.MEDIUM_NEWS, null)
+            let posts = JSON.parse(
+                LocalStorageUtils.getItem(
+                    LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS,
+                    null
+                )
             );
+
+            posts = this.filterNotLightningTalk(posts);
 
             this.setState({
                 posts,
                 loading: false,
             });
         } else {
-            getArticles().then(posts => {
+            getArticles(
+                ["https://toidicodedao.com", "https://codeaholicguy.com"],
+                true,
+                "toidicodedao"
+            ).then(posts => {
+                posts = this.filterNotLightningTalk(posts);
+
                 this.setState({
                     posts,
                     loading: false,
                 });
             });
         }
+    }
+
+    filterNotLightningTalk(posts) {
+        return posts.filter(post => !post.title.includes("Lightning Talk"));
     }
 
     renderPosts = posts => {
@@ -67,32 +84,26 @@ class News extends Component {
                 .trim();
             post.description = post.description.substring(0, 250) + "...";
 
-            const patt = /https:\/\/medium.com\/p\/(.*)/;
+            const patt = /p=(\d+)$/;
             const guid = patt.exec(post.guid)[1];
 
-            // Solve Medium image null
-            if (!post.thumbnail.includes("https://cdn")) {
-                const imageArr = [
-                    "https://cdn-images-1.medium.com/max/1024/1*FqumB-IFSXQk9wW9ElYvqw.jpeg",
-                    "https://cdn-images-1.medium.com/max/1024/0*k5_YVMBW9-yD10yN",
-                    "https://cdn-images-1.medium.com/max/1024/1*BUA0Pq-I3lEqnFv1sVl47w.jpeg",
-                    "https://cdn-images-1.medium.com/max/1024/1*kIC9VHwIsNQAIOpjraB-Iw.jpeg",
-                    "https://cdn-images-1.medium.com/max/1024/0*DdOLxRL3KAHZ7Nwq",
-                ];
-
-                post.thumbnail =
-                    imageArr[Math.floor(Math.random() * imageArr.length)];
-            }
-
             return (
-                <Link to={`/post/${guid}/${paramCase(post.title)}`} key={index}>
+                <Link
+                    to={`/toidicodedao/bai-viet/${guid}/${paramCase(
+                        post.title
+                    )}`}
+                    key={index}
+                >
                     <Col lg={8} md={12}>
                         <Card
                             hoverable
                             cover={
                                 <img
                                     alt={post.title}
-                                    src={post.thumbnail}
+                                    src={
+                                        post.thumbnail ||
+                                        "https://cdn-images-1.medium.com/max/1024/1*7aJPlxn8gwhI7JjcBFr-tQ.jpeg"
+                                    }
                                     style={{
                                         objectFit: "cover",
                                         height: "15rem",
@@ -122,8 +133,8 @@ class News extends Component {
         return (
             <Content className="content-container">
                 <Helmet>
-                    <title>Medium for Devs</title>
-                    <meta name="description" content="Medium for Devs" />
+                    <title>Tôi đi code dạo</title>
+                    <meta name="description" content="Từ coder đến developer" />
                 </Helmet>
                 <BackTop />
                 <div
@@ -139,8 +150,7 @@ class News extends Component {
                         }}
                     >
                         <h2>
-                            <span style={{ color: "darkblue" }}>DEVs</span>{" "}
-                            Reader
+                            <img src="https://i.imgur.com/uzF6Fok.png" alt="" />
                             {loading && (
                                 <Icon
                                     type="loading"
@@ -165,7 +175,7 @@ class News extends Component {
                         </h2>
                     </div>
                     <Divider style={{ fontWeight: "lighter" }}>
-                        Daily Dev News
+                        Từ coder đến developer
                     </Divider>
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>
@@ -183,4 +193,4 @@ class News extends Component {
     }
 }
 
-export default News;
+export default Index;

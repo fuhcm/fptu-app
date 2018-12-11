@@ -56,6 +56,8 @@ class HeaderPage extends Component {
             currentKey = "/login";
         } else if (currentKey.includes("/post")) {
             currentKey = "/news";
+        } else if (currentKey.includes("/toidicodedao")) {
+            currentKey = "/toidicodedao";
         }
 
         return (
@@ -77,6 +79,13 @@ class HeaderPage extends Component {
                         <Link to="/news">
                             <Icon type="medium" />
                             Medium for Devs
+                        </Link>
+                    </Menu.Item>
+
+                    <Menu.Item key="/toidicodedao">
+                        <Link to="/toidicodedao">
+                            <Icon type="read" />
+                            Tôi đi code dạo
                         </Link>
                     </Menu.Item>
 

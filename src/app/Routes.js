@@ -56,6 +56,20 @@ const Post = Loadable({
     modules: ["post"],
 });
 
+const ToiDiCodeDao_Index = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "toidicodedao_index" */ "../app/modules/toidicodedao/Index"),
+    loading: () => <Loading />,
+    modules: ["toidicodedao_index"],
+});
+
+const ToiDiCodeDao_Post = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "toidicodedao_post" */ "../app/modules/toidicodedao/Post"),
+    loading: () => <Loading />,
+    modules: ["toidicodedao_post"],
+});
+
 export default [
     {
         path: "/",
@@ -88,11 +102,6 @@ export default [
         component: News,
     },
     {
-        path: "/news/fallback/:id",
-        title: "News",
-        component: News,
-    },
-    {
         path: "/post/:id",
         title: "Post",
         component: Post,
@@ -101,5 +110,20 @@ export default [
         path: "/post/:id/:title",
         title: "Post",
         component: Post,
+    },
+    {
+        path: "/toidicodedao",
+        title: "Toi Di Code Dao",
+        component: ToiDiCodeDao_Index,
+    },
+    {
+        path: "/toidicodedao/bai-viet/:id",
+        title: "Toi Di Code Dao Post",
+        component: ToiDiCodeDao_Post,
+    },
+    {
+        path: "/toidicodedao/bai-viet/:id/:title",
+        title: "Toi Di Code Dao Post",
+        component: ToiDiCodeDao_Post,
     },
 ];
