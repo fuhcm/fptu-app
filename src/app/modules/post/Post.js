@@ -14,9 +14,7 @@ class Post extends Component {
     constructor(props) {
         super(props);
 
-        let pos = 0;
         if (typeof window !== "undefined") {
-            pos = window.pageYOffset;
             if (!JSON.parse(LocalStorageUtils.getItem("news", null))) {
                 this.post = null;
             } else {
@@ -34,7 +32,7 @@ class Post extends Component {
             this.post = null;
         }
 
-        this.state = { loading: true, pos: pos };
+        this.state = { loading: true };
     }
 
     componentDidMount() {
@@ -71,7 +69,7 @@ class Post extends Component {
 
     render() {
         const { post } = this;
-        const { loading, pos } = this.state;
+        const { loading } = this.state;
 
         if (!post && !loading) {
             return <Redirect to={`/news`} />;
@@ -89,7 +87,7 @@ class Post extends Component {
                         padding: "2rem",
                     }}
                 >
-                    <Link to={`/news?pos=${pos}`}>
+                    <Link to="/news">
                         <Button
                             type="primary"
                             size="large"
