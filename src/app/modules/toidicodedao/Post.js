@@ -147,7 +147,7 @@ class Post extends Component {
                         </div>
 
                         <img
-                            src={post.thumbnail || ""}
+                            src={(post.thumbnail && post.thumbnail) || ""}
                             alt=""
                             hidden={loading}
                         />
