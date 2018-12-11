@@ -66,7 +66,11 @@ class Post extends Component {
 
                 setTimeout(loadingMsg, 2000);
 
-                getArticles().then(posts => {
+                getArticles(
+                    ["https://toidicodedao.com", "https://codeaholicguy.com"],
+                    true,
+                    "toidicodedao"
+                ).then(posts => {
                     const guid = this.props.match.params.id;
                     const post = posts.find(obj => {
                         return (
