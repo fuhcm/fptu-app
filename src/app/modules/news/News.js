@@ -139,8 +139,7 @@ class News extends Component {
                         }}
                     >
                         <h2>
-                            <span style={{ color: "darkblue" }}>DEVs</span>{" "}
-                            Reader
+                            <span style={{ color: "darkblue" }}>DEV</span> Đọc
                             {loading && (
                                 <Icon
                                     type="loading"
@@ -165,7 +164,7 @@ class News extends Component {
                         </h2>
                     </div>
                     <Divider style={{ fontWeight: "lighter" }}>
-                        Bài hay trên Medium hàng ngày
+                        Bài hay trên <strong>Medium</strong> hàng ngày
                     </Divider>
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>

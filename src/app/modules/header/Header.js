@@ -126,7 +126,8 @@ class HeaderPage extends Component {
                                     href="/logout"
                                     onClick={e => this.onLogout(e)}
                                 >
-                                    Thoát
+                                    <Icon type="delete" />
+                                    Thoát khỏi tài khoản
                                 </a>
                             </Menu.Item>
                         )}
@@ -135,7 +136,7 @@ class HeaderPage extends Component {
                     <SubMenu
                         title={
                             <span>
-                                <Icon type="book" />
+                                <Icon type="coffee" />
                                 Dev Đọc
                             </span>
                         }
@@ -149,7 +150,7 @@ class HeaderPage extends Component {
 
                         <Menu.Item key="/toidicodedao">
                             <Link to="/toidicodedao">
-                                <Icon type="read" />
+                                <Icon type="laptop" />
                                 Tôi đi code dạo
                             </Link>
                         </Menu.Item>
