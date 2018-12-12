@@ -165,7 +165,7 @@ class News extends Component {
                         </h2>
                     </div>
                     <Divider style={{ fontWeight: "lighter" }}>
-                        Daily Dev News
+                        Bài hay trên Medium hàng ngày
                     </Divider>
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>
