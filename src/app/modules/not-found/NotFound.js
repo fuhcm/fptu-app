@@ -4,12 +4,17 @@ import { Link } from "react-router-dom";
 
 import { Layout, Button } from "antd";
 
+import { Helmet } from "react-helmet";
+
 const { Content } = Layout;
 
 class NotFound extends Component {
     render() {
         return (
             <Content className="content-container">
+                <Helmet>
+                    <title>404 - FPTU Tech Insider</title>
+                </Helmet>
                 <div
                     style={{
                         background: "#fff",

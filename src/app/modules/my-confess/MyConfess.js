@@ -10,6 +10,7 @@ import {
     GUEST__GET_OVERVIEW,
 } from "../../utils/ApiEndpoint";
 import LocalStorageUtils from "../../utils/LocalStorage";
+import { Helmet } from "react-helmet";
 import { config } from "../../../config";
 
 const { Content } = Layout;
@@ -163,6 +164,9 @@ class MyConfess extends Component {
 
         return (
             <Content className="content-container">
+                <Helmet>
+                    <title>Confess của tui</title>
+                </Helmet>
                 <div
                     style={{
                         background: "#fff",

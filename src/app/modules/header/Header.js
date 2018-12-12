@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import "./Header.scss";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { Layout, Menu, Icon, Button, notification } from "antd";
+import SubMenu from "antd/lib/menu/SubMenu";
 
 const { Header } = Layout;
 
@@ -75,65 +76,84 @@ class HeaderPage extends Component {
                         </Link>
                     </Menu.Item>
 
-                    <Menu.Item key="/news">
-                        <Link to="/news">
-                            <Icon type="medium" />
-                            Medium for Devs
-                        </Link>
-                    </Menu.Item>
+                    <SubMenu
+                        title={
+                            <span>
+                                <Icon type="heart" />
+                                Confessions
+                            </span>
+                        }
+                    >
+                        {!LocalStorageUtils.isAuthenticated() && (
+                            <Menu.Item key="/send">
+                                <Link to="/send">
+                                    <Icon type="mail" />
+                                    Gửi confess
+                                </Link>
+                            </Menu.Item>
+                        )}
+                        {!LocalStorageUtils.isAuthenticated() && (
+                            <Menu.Item key="/my-confess">
+                                <Link to="/my-confess">
+                                    <Icon type="folder" />
+                                    Confess của tui
+                                </Link>
+                            </Menu.Item>
+                        )}
+                        {!LocalStorageUtils.isAuthenticated() && (
+                            <Menu.Item key="/login">
+                                <Link to="/admin-cp">
+                                    <Icon type="github" />
+                                    Admin CP
+                                </Link>
+                            </Menu.Item>
+                        )}
+                        {LocalStorageUtils.isAuthenticated() && (
+                            <Menu.Item key="/admin-cp">
+                                <Link to="/admin-cp">
+                                    <Icon type="github" />
+                                    Admin CP (chào{" "}
+                                    <strong>
+                                        {LocalStorageUtils.getNickName()}
+                                    </strong>
+                                    )
+                                </Link>
+                            </Menu.Item>
+                        )}
+                        {LocalStorageUtils.isAuthenticated() && (
+                            <Menu.Item key="/logout">
+                                <a
+                                    href="/logout"
+                                    onClick={e => this.onLogout(e)}
+                                >
+                                    Thoát
+                                </a>
+                            </Menu.Item>
+                        )}
+                    </SubMenu>
 
-                    <Menu.Item key="/toidicodedao">
-                        <Link to="/toidicodedao">
-                            <Icon type="read" />
-                            Tôi đi code dạo
-                        </Link>
-                    </Menu.Item>
-
-                    {!LocalStorageUtils.isAuthenticated() && (
-                        <Menu.Item key="/send">
-                            <Link to="/send">
-                                <Icon type="mail" />
-                                Gửi confess
+                    <SubMenu
+                        title={
+                            <span>
+                                <Icon type="book" />
+                                Dev Đọc
+                            </span>
+                        }
+                    >
+                        <Menu.Item key="/news">
+                            <Link to="/news">
+                                <Icon type="medium" />
+                                Medium cho Dev
                             </Link>
                         </Menu.Item>
-                    )}
 
-                    {!LocalStorageUtils.isAuthenticated() && (
-                        <Menu.Item key="/my-confess">
-                            <Link to="/my-confess">
-                                <Icon type="folder" />
-                                Confess của tui
+                        <Menu.Item key="/toidicodedao">
+                            <Link to="/toidicodedao">
+                                <Icon type="read" />
+                                Tôi đi code dạo
                             </Link>
                         </Menu.Item>
-                    )}
-
-                    {!LocalStorageUtils.isAuthenticated() && (
-                        <Menu.Item key="/login">
-                            <Link to="/admin-cp">
-                                <Icon type="github" />
-                                Admin CP
-                            </Link>
-                        </Menu.Item>
-                    )}
-                    {LocalStorageUtils.isAuthenticated() && (
-                        <Menu.Item key="/admin-cp">
-                            <Link to="/admin-cp">
-                                <Icon type="github" />
-                                Admin CP (chào{" "}
-                                <strong>
-                                    {LocalStorageUtils.getNickName()}
-                                </strong>
-                                )
-                            </Link>
-                        </Menu.Item>
-                    )}
-                    {LocalStorageUtils.isAuthenticated() && (
-                        <Menu.Item key="/logout">
-                            <a href="/logout" onClick={e => this.onLogout(e)}>
-                                Thoát
-                            </a>
-                        </Menu.Item>
-                    )}
+                    </SubMenu>
                 </Menu>
             </Header>
         );

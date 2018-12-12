@@ -4,6 +4,8 @@ import { getArticles } from "../../utils/Crawl";
 
 import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
 
+import { Helmet } from "react-helmet";
+
 const { Content } = Layout;
 const { Meta } = Card;
 
@@ -70,6 +72,9 @@ class Home extends Component {
         const { loading, posts } = this.state;
         return (
             <Content className="content-container">
+                <Helmet>
+                    <title>Trang chủ - FPTU Tech Insider</title>
+                </Helmet>
                 <div
                     style={{
                         background: "#fff",
@@ -88,7 +93,7 @@ class Home extends Component {
                         />
                     </div>
                     <Divider style={{ fontWeight: "lighter" }}>
-                        FPT University News Crawler
+                        Trang chủ trường có gì hot?
                     </Divider>
                     {posts && <Row gutter={16}>{this.renderPosts(posts)}</Row>}
                     {loading && (

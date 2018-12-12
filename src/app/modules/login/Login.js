@@ -5,6 +5,7 @@ import { AUTH__LOGIN, AUTH__LOGIN_FACEBOOK } from "../../utils/ApiEndpoint";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import { Helmet } from "react-helmet";
 
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
 
@@ -100,6 +101,9 @@ class LoginForm extends Component {
 
         return (
             <Content className="content-container">
+                <Helmet>
+                    <title>Đăng nhập - FPTU Tech Insider</title>
+                </Helmet>
                 <div
                     style={{
                         background: "#fff",

@@ -26,6 +26,7 @@ import {
 import LocalStorage from "../../utils/LocalStorage";
 import TextArea from "antd/lib/input/TextArea";
 import { config } from "../../../config";
+import { Helmet } from "react-helmet";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
 const { Content } = Layout;
@@ -422,6 +423,9 @@ class AdminCP extends Component {
 
         return (
             <Content className="content-container">
+                <Helmet>
+                    <title>Admin CP</title>
+                </Helmet>
                 <div
                     style={{
                         background: "#fff",

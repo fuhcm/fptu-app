@@ -16,6 +16,7 @@ import {
 import { post } from "../../utils/ApiCaller";
 import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
 import LocalStorage from "../../utils/LocalStorage";
+import { Helmet } from "react-helmet";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -158,6 +159,11 @@ class Send extends Component {
 
         return (
             <Content className="content-container">
+                <Helmet>
+                    <title>
+                        Gửi Confesion - FPTU HCM Confession - FPTU Tech Insider
+                    </title>
+                </Helmet>
                 <div
                     style={{
                         background: "#fff",

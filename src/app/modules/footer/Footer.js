@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import { config } from "../../../config";
-
 import { Layout, Button, Icon } from "antd";
 
 const { Footer } = Layout;
@@ -11,7 +9,8 @@ class FooterPage extends Component {
         return (
             <Footer style={{ textAlign: "center" }}>
                 <div>
-                    {config.meta.name} ©2018 Designed by{" "}
+                    <strong>FPTU</strong> dot <strong>Tech</strong> ©2018
+                    Designed by{" "}
                     <strong>
                         <a
                             href="https://mrhmt.com/"
