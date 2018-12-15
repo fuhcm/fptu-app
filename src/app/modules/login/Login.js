@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./Login.scss";
+
 import { get, post } from "../../utils/ApiCaller";
 import { AUTH__LOGIN, AUTH__LOGIN_FACEBOOK } from "../../utils/ApiEndpoint";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
@@ -197,6 +199,32 @@ class LoginForm extends Component {
                             </Button>
                         )}
                     />
+                    <div
+                        style={{
+                            textAlign: "center",
+                            marginTop: "2rem",
+                            backgroundColor: "#414141",
+                            color: "#fff",
+                            padding: "1rem 1rem .2rem 1rem",
+                            borderRadius: "1rem",
+                        }}
+                    >
+                        <img
+                            src="https://media.licdn.com/dms/image/C5116AQHJEYOPh4eo5w/profile-displaybackgroundimage-shrink_350_1400/0?e=1550102400&v=beta&t=e1zHWfW8ZA-p3GlZA3-07FBi5ugFiVstLNeqLTA28r4"
+                            alt=""
+                            style={{
+                                width: "100%",
+                                maxWidth: "720px",
+                                marginBottom: "1rem",
+                                borderRadius: ".5rem",
+                            }}
+                            className="blur"
+                        />
+                        <p style={{ fontSize: "1rem" }}>
+                            Read more tech posts at{" "}
+                            <strong>fptu.tech/news</strong>
+                        </p>
+                    </div>
                 </div>
             </Content>
         );

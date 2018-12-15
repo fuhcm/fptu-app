@@ -5,7 +5,7 @@ export const LOCAL_STORAGE_KEY = {
     EMAIL: "cfapp_email",
     NICKNAME: "cfapp_nickname",
     SENDER: "cfapp_sendertoken",
-    NOTIFICATION: "cfapp_notification_v0",
+    NOTIFICATION: "cfapp_notification_v1",
     USER_ACCESS_TOKEN: "cfapp_user_access_token",
     PAGE_ACCESS_TOKEN: "cfapp_page_acess_token",
     MEDIUM_NEWS: "cfapp_medium_news",

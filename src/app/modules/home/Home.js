@@ -103,6 +103,34 @@ class Home extends Component {
                             <Skeleton active />
                         </div>
                     )}
+
+                    <Divider dashed />
+
+                    <div
+                        style={{
+                            textAlign: "center",
+                            marginTop: "1rem",
+                            backgroundColor: "#194864",
+                            color: "#fff",
+                            padding: "1rem 1rem .2rem 1rem",
+                            borderRadius: "1rem",
+                        }}
+                    >
+                        <img
+                            src="https://media.licdn.com/dms/image/C5116AQHJEYOPh4eo5w/profile-displaybackgroundimage-shrink_350_1400/0?e=1550102400&v=beta&t=e1zHWfW8ZA-p3GlZA3-07FBi5ugFiVstLNeqLTA28r4"
+                            alt=""
+                            style={{
+                                width: "100%",
+                                maxWidth: "720px",
+                                marginBottom: "1rem",
+                                borderRadius: ".5rem",
+                            }}
+                        />
+                        <p style={{ fontSize: "1rem" }}>
+                            Read more tech posts at{" "}
+                            <strong>fptu.tech/news</strong>
+                        </p>
+                    </div>
                 </div>
             </Content>
         );

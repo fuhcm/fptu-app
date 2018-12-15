@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Layout, Button, Icon } from "antd";
+import { Layout } from "antd";
 
 const { Footer } = Layout;
 
@@ -17,28 +17,11 @@ class FooterPage extends Component {
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            Tu Huynh
+                            Huynh Minh Tu
                         </a>
                     </strong>
                     . Built on top of Golang & ReactJS, hosted at Google Cloud
                     Platform.
-                </div>
-
-                <div
-                    style={{
-                        marginTop: "10px",
-                    }}
-                >
-                    <a
-                        href="https://github.com/gosu-team"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <Button type="default" size="small">
-                            <Icon type="github" />
-                            Wanna contribute to Development Team?
-                        </Button>
-                    </a>
                 </div>
 
                 <div style={{ marginTop: "10px" }}>

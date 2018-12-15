@@ -226,7 +226,8 @@ class MyConfess extends Component {
                         loadMore={loadMore}
                         dataSource={list || []}
                         locale={{
-                            emptyText: "Thím chưa gửi cái confess nào hết",
+                            emptyText:
+                                "Bạn ơi, bạn chưa gửi cái confess nào hết á!!",
                         }}
                         renderItem={(item, index) => (
                             <List.Item key={index}>

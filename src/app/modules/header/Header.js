@@ -22,20 +22,24 @@ class HeaderPage extends Component {
             <Button
                 type="primary"
                 size="small"
-                onClick={() => notification.close(key)}
+                onClick={() => {
+                    const { history } = this.props;
+                    notification.close(key);
+                    history.push("/news");
+                }}
             >
-                Got It!
+                Ờm, để đọc thử xem
             </Button>
         );
 
         notification.open({
-            message: "Thông báo từ FPTUCF-DEV",
+            message: "Dành cho các bạn SE",
             description:
-                "Bạn có thể xem những confess bạn đã gửi trong mục 'confess của tui', trong đó có luôn trạng thái được duyệt hay chưa, người duyệt và lí do bị từ chối ngoài ra còn có ID để bạn xem lại trên fanpage nữa, chúc zui!!",
+                "Tự bổ sung kiến thức cho mình là cách giết thời gian khá tốt. Bạn có thể dễ dàng đọc được những thứ mới, thú vị trên trang news nhé, click vào nút ở dưới để nhảy sang trang đó thử đê",
             btn,
             key,
             duration: 0,
-            icon: <Icon type="github" style={{ color: "#108ee9" }} />,
+            icon: <Icon type="coffee" style={{ color: "#108ee9" }} />,
         });
     };
 
@@ -45,9 +49,8 @@ class HeaderPage extends Component {
             typeof window !== "undefined" &&
             this.props.history.location.pathname === "/send"
         ) {
-            // Disable open notification
-            // this.openNotification();
-            // LocalStorageUtils.setNotificationLoaded();
+            this.openNotification();
+            LocalStorageUtils.setNotificationLoaded();
         }
 
         // Handle selected key
