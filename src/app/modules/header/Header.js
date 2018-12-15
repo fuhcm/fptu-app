@@ -45,8 +45,9 @@ class HeaderPage extends Component {
             typeof window !== "undefined" &&
             this.props.history.location.pathname === "/send"
         ) {
-            this.openNotification();
-            LocalStorageUtils.setNotificationLoaded();
+            // Disable open notification
+            // this.openNotification();
+            // LocalStorageUtils.setNotificationLoaded();
         }
 
         // Handle selected key

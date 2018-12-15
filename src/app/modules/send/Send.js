@@ -171,6 +171,26 @@ class Send extends Component {
                         minHeight: 540,
                     }}
                 >
+                    <div
+                        style={{
+                            textAlign: "center",
+                            marginBottom: "2rem",
+                            backgroundColor: "#000",
+                            color: "#fff",
+                            borderRadius: "10px",
+                            padding: "1rem",
+                        }}
+                    >
+                        <img
+                            src="https://i.imgur.com/tbUpPtP.png"
+                            alt="FPTU HCM Confessions"
+                            style={{ maxWidth: "200px" }}
+                        />
+                        <p style={{ fontSize: "1rem" }}>
+                            Fanpage at{" "}
+                            <strong>fb.com/FPTUHCMConfessions</strong>
+                        </p>
+                    </div>
                     <h2>Gửi Confession</h2>
                     <p>
                         Bạn đang buồn vì chuyện thất tình? Bạn thấy mình không
