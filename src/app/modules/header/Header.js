@@ -105,6 +105,12 @@ class HeaderPage extends Component {
                                 </Link>
                             </Menu.Item>
                         )}
+                        <Menu.Item key="/blame">
+                            <Link to="/blame">
+                                <Icon type="facebook" />
+                                Blame FPTU
+                            </Link>
+                        </Menu.Item>
                         {!LocalStorageUtils.isAuthenticated() && (
                             <Menu.Item key="/login">
                                 <Link to="/admin-cp">

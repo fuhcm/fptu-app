@@ -42,6 +42,13 @@ const MyConfess = Loadable({
     modules: ["myconfess"],
 });
 
+const Blame = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "blame" */ "../app/modules/blame/Blame"),
+    loading: () => <Loading />,
+    modules: ["blame"],
+});
+
 const News = Loadable({
     loader: () =>
         import(/* webpackChunkName: "news" */ "../app/modules/news/News"),
@@ -95,6 +102,11 @@ export default [
         path: "/my-confess",
         title: "My Confess",
         component: MyConfess,
+    },
+    {
+        path: "/blame",
+        title: "Blame",
+        component: Blame,
     },
     {
         path: "/news",
