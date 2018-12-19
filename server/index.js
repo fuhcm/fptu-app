@@ -10,6 +10,13 @@ const path = require("path");
 const app = express();
 const router = express.Router();
 
+// Print logs
+app.use(function(req, res, next) {
+    // Logs
+    console.log(JSON.stringify(req.headers["user-agent"]));
+    next();
+});
+
 // Root (/) should always serve our server rendered page
 router.use("^/$", serverRenderer);
 

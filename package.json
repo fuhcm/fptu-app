@@ -46,5 +46,8 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
-    ]
+    ],
+    "devDependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.2.1"
+    }
 }
