@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import Loadable from "react-loadable";
-import { Provider as ReduxProvider } from "react-redux";
+// import { Provider as ReduxProvider } from "react-redux";
 import { StaticRouter } from "react-router";
 
 // import our main App component
@@ -43,7 +43,7 @@ export default (req, res, next) => {
 
         // map required assets to script tags
         const extraChunks = extractAssets(manifest, modules).map(
-            c => `<script type="text/javascript" src="${c}"></script>`
+            c => `<script async type="text/javascript" src="${c}"></script>`
         );
 
         // now inject the rendered app into our html and send it to the client
