@@ -14,6 +14,11 @@ const router = express.Router();
 app.use(function(req, res, next) {
     // Logs
     console.log(JSON.stringify(req.headers["user-agent"]));
+    console.log(
+        JSON.stringify(
+            req.headers["x-forwarded-for"] || req.connection.remoteAddress
+        )
+    );
     next();
 });
 
