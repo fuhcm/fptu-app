@@ -72,7 +72,6 @@ class HeaderPage extends Component {
                     mode="horizontal"
                     style={{ lineHeight: "64px" }}
                     selectedKeys={[currentKey]}
-                    forceSubMenuRender={true}
                 >
                     <Menu.Item key="/home">
                         <Link to="/">
