@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import "./Header.scss";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { Layout, Menu, Icon, Button, notification } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
