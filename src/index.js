@@ -18,10 +18,8 @@ const AppBundle = (
     </Provider>
 );
 
-window.onload = () => {
-    Loadable.preloadReady().then(() => {
-        ReactDOM.hydrate(AppBundle, document.getElementById("root"));
-    });
-};
+Loadable.preloadReady().then(() => {
+    ReactDOM.hydrate(AppBundle, document.getElementById("root"));
+});
 
 // registerServiceWorker();
