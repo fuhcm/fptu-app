@@ -16,7 +16,6 @@ class Loading extends Component {
                 >
                     <Skeleton active />
                     <Skeleton active />
-                    <Skeleton active />
                 </div>
             </Content>
         );
