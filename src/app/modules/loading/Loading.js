@@ -8,9 +8,7 @@ class Loading extends Component {
     render() {
         return (
             <Content className="content-container">
-                <div className="content-wrapper">
-                    <Skeleton active paragraph={{ rows: 10 }} />
-                </div>
+                <div className="content-wrapper" />
             </Content>
         );
     }
