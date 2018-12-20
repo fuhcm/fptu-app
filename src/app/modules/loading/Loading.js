@@ -14,8 +14,7 @@ class Loading extends Component {
                         padding: "2rem",
                     }}
                 >
-                    <Skeleton active />
-                    <Skeleton active />
+                    <Skeleton active paragraph={{ rows: 10 }} />
                 </div>
             </Content>
         );
