@@ -126,12 +126,7 @@ class News extends Component {
                     <meta name="description" content="Medium for Devs" />
                 </Helmet>
                 <BackTop />
-                <div
-                    style={{
-                        background: "#fff",
-                        padding: "2rem",
-                    }}
-                >
+                <div className="content-wrapper">
                     <div
                         style={{
                             textAlign: "center",

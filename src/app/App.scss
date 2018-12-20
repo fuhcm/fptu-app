@@ -9,6 +9,12 @@ body {
     padding: 0 50px;
 }
 
+.content-wrapper {
+    background: #fff;
+    padding: 2rem;
+    min-height: 50vh;
+}
+
 @media screen and (max-width: 640px) {
     .ant-layout-header {
         padding: 0;

@@ -167,13 +167,7 @@ class MyConfess extends Component {
                 <Helmet>
                     <title>Confess của tui</title>
                 </Helmet>
-                <div
-                    style={{
-                        background: "#fff",
-                        padding: "2rem",
-                        minHeight: 540,
-                    }}
-                >
+                <div className="content-wrapper">
                     <h2>Danh sách confession tui đã gửi</h2>
                     {/* <Row style={{ marginBottom: "10px" }}>
                         Sender Token của tui là:{" "}

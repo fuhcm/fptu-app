@@ -126,4 +126,9 @@ export default [
         title: "Toi Di Code Dao Post",
         component: ToiDiCodeDao_Post,
     },
+    {
+        path: "/loading",
+        title: "Loading",
+        component: Loading,
+    },
 ];

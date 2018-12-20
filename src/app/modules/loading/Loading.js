@@ -8,13 +8,7 @@ class Loading extends Component {
     render() {
         return (
             <Content className="content-container">
-                <div
-                    style={{
-                        background: "#fff",
-                        padding: "2rem",
-                        minHeight: "50vh",
-                    }}
-                />
+                <div className="content-wrapper" />
             </Content>
         );
     }

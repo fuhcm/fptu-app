@@ -98,12 +98,7 @@ class Post extends Component {
                     <title>{(post && post.title) || "Loading"}</title>
                 </Helmet>
                 <BackTop />
-                <div
-                    style={{
-                        background: "#fff",
-                        padding: "2rem",
-                    }}
-                >
+                <div className="content-wrapper">
                     <Link to="/news">
                         <Button
                             type="primary"

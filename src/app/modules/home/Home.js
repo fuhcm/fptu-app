@@ -75,12 +75,7 @@ class Home extends Component {
                 <Helmet>
                     <title>Trang chủ - FPTU Tech Insider</title>
                 </Helmet>
-                <div
-                    style={{
-                        background: "#fff",
-                        padding: "2rem",
-                    }}
-                >
+                <div className="content-wrapper">
                     <div
                         style={{
                             textAlign: "center",

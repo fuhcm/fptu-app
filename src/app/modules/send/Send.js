@@ -164,13 +164,7 @@ class Send extends Component {
                         Gửi Confesion - FPTU HCM Confession - FPTU Tech Insider
                     </title>
                 </Helmet>
-                <div
-                    style={{
-                        background: "#fff",
-                        padding: "2rem",
-                        minHeight: 540,
-                    }}
-                >
+                <div className="content-wrapper">
                     <div
                         style={{
                             textAlign: "center",

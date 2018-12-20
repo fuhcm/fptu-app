@@ -106,13 +106,7 @@ class LoginForm extends Component {
                 <Helmet>
                     <title>Đăng nhập - FPTU Tech Insider</title>
                 </Helmet>
-                <div
-                    style={{
-                        background: "#fff",
-                        padding: "2rem",
-                        minHeight: 540,
-                    }}
-                >
+                <div className="content-wrapper">
                     <h2>Đăng nhập dành cho admin</h2>
                     <Form
                         onSubmit={this.handleSubmit}

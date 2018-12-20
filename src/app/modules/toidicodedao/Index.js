@@ -156,12 +156,7 @@ class Index extends Component {
                     <meta name="description" content="Từ coder đến developer" />
                 </Helmet>
                 <BackTop />
-                <div
-                    style={{
-                        background: "#fff",
-                        padding: "2rem",
-                    }}
-                >
+                <div className="content-wrapper">
                     <div
                         style={{
                             textAlign: "center",

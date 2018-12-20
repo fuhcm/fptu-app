@@ -426,13 +426,7 @@ class AdminCP extends Component {
                 <Helmet>
                     <title>Admin CP</title>
                 </Helmet>
-                <div
-                    style={{
-                        background: "#fff",
-                        padding: "2rem",
-                        minHeight: 540,
-                    }}
-                >
+                <div className="content-wrapper">
                     <h2>Quản lí confession cho admin</h2>
 
                     <Alert
