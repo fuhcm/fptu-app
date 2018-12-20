@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Layout, Skeleton } from "antd";
+import { Layout } from "antd";
 
 const { Content } = Layout;
 
@@ -12,10 +12,9 @@ class Loading extends Component {
                     style={{
                         background: "#fff",
                         padding: "2rem",
+                        minHeight: "50vh",
                     }}
-                >
-                    <Skeleton active paragraph={{ rows: 10 }} />
-                </div>
+                />
             </Content>
         );
     }
