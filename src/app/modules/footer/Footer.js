@@ -13,7 +13,7 @@ class FooterPage extends Component {
                     Designed by{" "}
                     <strong>
                         <a
-                            href="https://mrhmt.com/"
+                            href="https://github.com/huynhminhtufu"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
