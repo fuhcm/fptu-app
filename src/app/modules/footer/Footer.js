@@ -20,8 +20,7 @@ class FooterPage extends Component {
                             Huynh Minh Tu
                         </a>
                     </strong>
-                    . Built on top of Golang & ReactJS, hosted at Google Cloud
-                    Platform.
+                    . Built on top of Golang & ReactJS, hosted at GCP.
                 </div>
 
                 <div style={{ marginTop: "10px" }}>
