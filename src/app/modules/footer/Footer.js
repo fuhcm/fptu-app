@@ -10,7 +10,7 @@ class FooterPage extends Component {
             <Footer style={{ textAlign: "center" }}>
                 <div>
                     <strong>FPTU</strong> dot <strong>Tech</strong> ©2018
-                    Designed by{" "}
+                    Developed by{" "}
                     <strong>
                         <a
                             href="https://github.com/huynhminhtufu"
