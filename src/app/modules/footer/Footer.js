@@ -32,7 +32,7 @@ class FooterPage extends Component {
                     <img
                         src="https://i.imgur.com/dFGn248.png"
                         width="50px"
-                        alt="react"
+                        alt="reactjs"
                     />
                     <img
                         src="https://i.imgur.com/b3EjHhg.png"
