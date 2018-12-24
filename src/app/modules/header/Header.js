@@ -161,12 +161,12 @@ class HeaderPage extends Component {
                         </Menu.Item>
                     </SubMenu>
 
-                    <Menu.Item key="/pentakill">
+                    {/* <Menu.Item key="/pentakill">
                         <Link to="/pentakill">
                             <Icon type="trophy" />
                             How to Pentakill
                         </Link>
-                    </Menu.Item>
+                    </Menu.Item> */}
                 </Menu>
             </Header>
         );
