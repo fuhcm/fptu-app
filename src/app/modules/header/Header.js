@@ -62,6 +62,8 @@ class HeaderPage extends Component {
             currentKey = "/news";
         } else if (currentKey.includes("/toidicodedao")) {
             currentKey = "/toidicodedao";
+        } else if (currentKey.includes("/pentakill")) {
+            currentKey = "/pentakill";
         }
 
         return (
@@ -159,10 +161,10 @@ class HeaderPage extends Component {
                         </Menu.Item>
                     </SubMenu>
 
-                    <Menu.Item key="/review">
-                        <Link to="/review">
-                            <Icon type="star" />
-                            Rì-viu môn học
+                    <Menu.Item key="/pentakill">
+                        <Link to="/pentakill">
+                            <Icon type="trophy" />
+                            How to Pentakill
                         </Link>
                     </Menu.Item>
                 </Menu>

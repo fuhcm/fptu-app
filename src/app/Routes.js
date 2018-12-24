@@ -77,6 +77,13 @@ const Review = Loadable({
     modules: ["review"],
 });
 
+const ReviewDetails = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "review_details" */ "../app/modules/review/Details"),
+    loading: () => <Loading />,
+    modules: ["review_details"],
+});
+
 export default [
     {
         path: "/",
@@ -134,8 +141,13 @@ export default [
         component: ToiDiCodeDao_Post,
     },
     {
-        path: "/review",
+        path: "/pentakill",
         title: "Review",
         component: Review,
+    },
+    {
+        path: "/pentakill/:code",
+        title: "Review Details",
+        component: ReviewDetails,
     },
 ];
