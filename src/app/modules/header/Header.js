@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { Layout, Menu, Icon, Button, notification } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
-import Snow from "react-snow-effect";
 
 const { Header } = Layout;
 
@@ -67,9 +66,9 @@ class HeaderPage extends Component {
             currentKey = "/pentakill";
         }
 
-        let snow = true;
+        let Snow = () => <div />;
         if (typeof window !== "undefined") {
-            snow = false;
+            Snow = require("react-snow-effect");
         }
 
         return (
@@ -175,7 +174,7 @@ class HeaderPage extends Component {
                     </Menu.Item> */}
                 </Menu>
 
-                {snow && <Snow />}
+                <Snow />
             </Header>
         );
     }
