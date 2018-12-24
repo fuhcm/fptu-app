@@ -70,6 +70,13 @@ const ToiDiCodeDao_Post = Loadable({
     modules: ["toidicodedao_post"],
 });
 
+const Review = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "review" */ "../app/modules/review/Review"),
+    loading: () => <Loading />,
+    modules: ["review"],
+});
+
 export default [
     {
         path: "/",
@@ -125,5 +132,10 @@ export default [
         path: "/toidicodedao/bai-viet/:id/:title",
         title: "Toi Di Code Dao Post",
         component: ToiDiCodeDao_Post,
+    },
+    {
+        path: "/review",
+        title: "Review",
+        component: Review,
     },
 ];

@@ -158,6 +158,13 @@ class HeaderPage extends Component {
                             </Link>
                         </Menu.Item>
                     </SubMenu>
+
+                    <Menu.Item key="/review">
+                        <Link to="/review">
+                            <Icon type="star" />
+                            Rì-viu môn học
+                        </Link>
+                    </Menu.Item>
                 </Menu>
             </Header>
         );
