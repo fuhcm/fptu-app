@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { Layout, Menu, Icon, Button, notification } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
+import Snow from "react-snow-effect";
 
 const { Header } = Layout;
 
@@ -168,6 +169,8 @@ class HeaderPage extends Component {
                         </Link>
                     </Menu.Item> */}
                 </Menu>
+
+                <Snow />
             </Header>
         );
     }
