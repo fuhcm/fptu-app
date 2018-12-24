@@ -67,6 +67,11 @@ class HeaderPage extends Component {
             currentKey = "/pentakill";
         }
 
+        let snow = true;
+        if (typeof window !== "undefined") {
+            snow = false;
+        }
+
         return (
             <Header>
                 <Menu
@@ -170,7 +175,7 @@ class HeaderPage extends Component {
                     </Menu.Item> */}
                 </Menu>
 
-                <Snow />
+                {snow && <Snow />}
             </Header>
         );
     }
