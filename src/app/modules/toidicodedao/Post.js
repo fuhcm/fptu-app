@@ -102,7 +102,9 @@ class Post extends Component {
             return <Redirect to={`/toidicodedao`} />;
         }
 
-        console.log("Debug: ", post.title);
+        if (typeof window !== "undefined") {
+            console.log("Debug: ", post.title);
+        }
 
         return (
             <Content className="content-container">
