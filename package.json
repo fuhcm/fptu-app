@@ -48,7 +48,8 @@
         "lint:code": "eslint 'src/**/*.{js,jsx,ts}'",
         "lint:style": "stylelint 'src/**/*.{scss,sass}'",
         "fix:code": "prettier --write 'src/**/*.{js,jsx,ts}' && eslint --fix 'src/**/*.{js,jsx,ts}'",
-        "fix:style": "prettier --write 'src/**/*.{scss,sass}' && stylelint --fix 'src/**/*.{scss,sass}'"
+        "fix:style": "prettier --write 'src/**/*.{scss,sass}' && stylelint --fix 'src/**/*.{scss,sass}'",
+        "count": "cloc --exclude-dir=$(tr '\n' ',' < .clocignore) ."
     },
     "devDependencies": {
         "@babel/core": "^7.1.2",
