@@ -102,6 +102,8 @@ class Post extends Component {
             return <Redirect to={`/toidicodedao`} />;
         }
 
+        console.log("Debug: ", post.title);
+
         return (
             <Content className="content-container">
                 <Helmet>
