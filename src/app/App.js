@@ -2,14 +2,14 @@ import "regenerator-runtime/runtime";
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 
-import HeaderPage from "../app/modules/header/Header";
-import FooterPage from "../app/modules/footer/Footer";
-import Routes from "../app/Routes";
+import { Layout } from "antd";
+
+import HeaderPage from "./modules/header/Header";
+import FooterPage from "./modules/footer/Footer";
+import Routes from "./Routes";
 import NotFound from "./modules/not-found/NotFound";
 
 import "./App.scss";
-
-import { Layout } from "antd";
 
 class App extends Component {
     render() {
@@ -17,13 +17,13 @@ class App extends Component {
             <Layout>
                 <HeaderPage />
                 <Switch>
-                    {Routes.map((route, i) => {
+                    {Routes.map(route => {
                         return (
                             <Route
                                 exact
                                 path={route.path}
                                 component={route.component}
-                                key={i}
+                                key={route.path}
                             />
                         );
                     })}

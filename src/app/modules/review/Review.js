@@ -25,7 +25,11 @@ class Review extends Component {
                     key={item.subjectCode}
                 >
                     <div>
-                        <h3>How to pass {item.subjectCode}?</h3>
+                        <h3>
+                            How to pass
+                            {item.subjectCode}
+?
+                        </h3>
                     </div>
                 </Link>
             );
@@ -65,12 +69,12 @@ class Review extends Component {
                     <List
                         grid={{
                             gutter: 16,
-                            xs: 1,
-                            sm: 2,
-                            md: 2,
-                            lg: 2,
-                            xl: 3,
-                            xxl: 4,
+                            xs    : 1,
+                            sm    : 2,
+                            md    : 2,
+                            lg    : 2,
+                            xl    : 3,
+                            xxl   : 4,
                         }}
                         dataSource={data}
                         renderItem={item => (
@@ -79,7 +83,10 @@ class Review extends Component {
                                     to={`/pentakill/${item.subjectCode.toLowerCase()}`}
                                 >
                                     <Card>
-                                        <strong>{item.subjectCode}</strong> -{" "}
+                                        <strong>{item.subjectCode}</strong>
+                                        {' '}
+-
+                                        {" "}
                                         {item.subjectName}
                                     </Card>
                                 </Link>

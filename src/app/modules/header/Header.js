@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { Layout, Menu, Icon, Button, notification } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
 const { Header } = Layout;
 
@@ -12,7 +12,8 @@ class HeaderPage extends Component {
 
         LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.JWT);
         LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.EMAIL);
-        this.props.history.push("/login");
+        const { history } = this.props;
+        history.push("/login");
     };
 
     openNotification = () => {
@@ -32,31 +33,32 @@ class HeaderPage extends Component {
         );
 
         notification.open({
-            message: "Dành cho các bạn SE",
+            message    : "Dành cho các bạn SE",
             description:
                 "Tự bổ sung kiến thức cho mình là cách giết thời gian khá tốt. Bạn có thể dễ dàng đọc được những thứ mới, thú vị trên trang news nhé, click vào nút ở dưới để nhảy sang trang đó thử đê",
             btn,
             key,
             duration: 0,
-            icon: <Icon type="coffee" style={{ color: "#108ee9" }} />,
+            icon    : <Icon type="coffee" style={{ color: "#108ee9" }} />,
         });
     };
 
     render() {
+        const { history } = this.props;
         if (
             !LocalStorageUtils.isNotificationLoaded() &&
             typeof window !== "undefined" &&
-            this.props.history.location.pathname === "/send"
+            history.location.pathname === "/send"
         ) {
             this.openNotification();
             LocalStorageUtils.setNotificationLoaded();
         }
 
         // Handle selected key
-        let currentKey = this.props.history.location.pathname;
+        let currentKey = history.location.pathname;
         if (currentKey === "/") {
             currentKey = "/home";
-        } else if (currentKey === "/admin-c[") {
+        } else if (currentKey === "/admin-cp") {
             currentKey = "/login";
         } else if (currentKey.includes("/post")) {
             currentKey = "/news";
@@ -87,12 +89,12 @@ class HeaderPage extends Component {
                     </Menu.Item>
 
                     <SubMenu
-                        title={
+                        title={(
                             <span>
                                 <Icon type="heart" />
                                 Confessions
                             </span>
-                        }
+)}
                     >
                         {!LocalStorageUtils.isAuthenticated() && (
                             <Menu.Item key="/send">
@@ -122,7 +124,8 @@ class HeaderPage extends Component {
                             <Menu.Item key="/admin-cp">
                                 <Link to="/admin-cp">
                                     <Icon type="github" />
-                                    Admin CP (chào{" "}
+                                    Admin CP (chào
+                                    {" "}
                                     <strong>
                                         {LocalStorageUtils.getNickName()}
                                     </strong>
@@ -144,12 +147,12 @@ class HeaderPage extends Component {
                     </SubMenu>
 
                     <SubMenu
-                        title={
+                        title={(
                             <span>
                                 <Icon type="coffee" />
                                 Dev Đọc
                             </span>
-                        }
+)}
                     >
                         <Menu.Item key="/news">
                             <Link to="/news">

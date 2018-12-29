@@ -1,6 +1,5 @@
 {
     "editor.formatOnSave": true,
-    "editor.renderWhitespace": "all",
     "files.insertFinalNewline": true,
     "javascript.implicitProjectConfig.checkJs": true,
     "javascript.format.enable": false,

@@ -2,14 +2,12 @@ import React, { Component } from "react";
 
 import "./Login.scss";
 
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+import Helmet from "react-helmet-async";
+import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
 import { get, post } from "../../utils/ApiCaller";
 import { AUTH__LOGIN, AUTH__LOGIN_FACEBOOK } from "../../utils/ApiEndpoint";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
-
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import Helmet from "react-helmet-async";
-
-import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
 
 const { Content } = Layout;
 const FormItem = Form.Item;
@@ -17,7 +15,8 @@ const FormItem = Form.Item;
 class LoginForm extends Component {
     componentDidMount() {
         if (LocalStorageUtils.isAuthenticated()) {
-            this.props.history.push("/admin-cp");
+            const { history } = this.props;
+            history.push("/admin-cp");
         }
     }
 
@@ -29,14 +28,16 @@ class LoginForm extends Component {
             .then(res => {
                 cb(res.data);
             })
-            .catch(err => {
+            .catch(() => {
                 cb(null);
             });
     }
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.form.validateFields((err, values) => {
+        const { form } = this.props;
+
+        form.validateFields((err, values) => {
             if (!err) {
                 this.onLogin(values.email, values.password, data => {
                     if (!data) {
@@ -52,17 +53,6 @@ class LoginForm extends Component {
             }
         });
     };
-
-    handleLogin(token, email, nickname) {
-        if (token) {
-            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.JWT, token);
-            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.EMAIL, email);
-            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.NICKNAME, nickname);
-            this.props.history.push("/admin-cp");
-        } else {
-            message.error("Thông tin đăng nhập không chính xác!");
-        }
-    }
 
     responseFacebook = data => {
         LocalStorageUtils.setItem(
@@ -91,15 +81,28 @@ class LoginForm extends Component {
 
                 this.handleLogin(token, data.email, nickname);
             })
-            .catch(err => {
+            .catch(() => {
                 message.error(
                     "Bạn phải cấp quyền đăng nhập bằng tài khoản Facebook tư cách là admin fanpage!"
                 );
             });
     };
 
+    handleLogin(token, email, nickname) {
+        if (token) {
+            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.JWT, token);
+            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.EMAIL, email);
+            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.NICKNAME, nickname);
+            const { history } = this.props;
+            history.push("/admin-cp");
+        } else {
+            message.error("Thông tin đăng nhập không chính xác!");
+        }
+    }
+
     render() {
-        const { getFieldDecorator } = this.props.form;
+        const { form } = this.props;
+        const { getFieldDecorator } = form;
 
         return (
             <Content className="content-container">
@@ -118,17 +121,17 @@ class LoginForm extends Component {
                                 rules: [
                                     {
                                         required: true,
-                                        message: "Vui lòng nhập email!",
+                                        message : "Vui lòng nhập email!",
                                     },
                                 ],
                             })(
                                 <Input
-                                    prefix={
+                                    prefix={(
                                         <Icon
                                             type="user"
                                             style={{ color: "rgba(0,0,0,.25)" }}
                                         />
-                                    }
+)}
                                     placeholder="Email"
                                 />
                             )}
@@ -138,17 +141,17 @@ class LoginForm extends Component {
                                 rules: [
                                     {
                                         required: true,
-                                        message: "Vui lòng nhập mật khẩu!",
+                                        message : "Vui lòng nhập mật khẩu!",
                                     },
                                 ],
                             })(
                                 <Input
-                                    prefix={
+                                    prefix={(
                                         <Icon
                                             type="lock"
                                             style={{ color: "rgba(0,0,0,.25)" }}
                                         />
-                                    }
+)}
                                     type="password"
                                     placeholder="Mật khẩu"
                                 />
@@ -165,7 +168,7 @@ class LoginForm extends Component {
                             </Button>
                             {getFieldDecorator("remember", {
                                 valuePropName: "checked",
-                                initialValue: true,
+                                initialValue : true,
                             })(
                                 <Checkbox style={{ float: "right" }}>
                                     Ghi nhớ
@@ -195,27 +198,28 @@ class LoginForm extends Component {
                     />
                     <div
                         style={{
-                            textAlign: "center",
-                            marginTop: "2rem",
+                            textAlign      : "center",
+                            marginTop      : "2rem",
                             backgroundColor: "#414141",
-                            color: "#fff",
-                            padding: "1rem 1rem .2rem 1rem",
-                            borderRadius: "1rem",
+                            color          : "#fff",
+                            padding        : "1rem 1rem .2rem 1rem",
+                            borderRadius   : "1rem",
                         }}
                     >
                         <img
                             src="/assets/images/golang-react.jpg"
                             alt=""
                             style={{
-                                width: "100%",
-                                maxWidth: "720px",
+                                width       : "100%",
+                                maxWidth    : "720px",
                                 marginBottom: "1rem",
                                 borderRadius: ".5rem",
                             }}
                             className="blur"
                         />
                         <p style={{ fontSize: "1rem" }}>
-                            Read more tech posts at{" "}
+                            Read more tech posts at
+                            {" "}
                             <strong>fptu.tech/news</strong>
                         </p>
                     </div>

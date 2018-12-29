@@ -9,8 +9,13 @@ class FooterPage extends Component {
         return (
             <Footer style={{ textAlign: "center" }}>
                 <div>
-                    <strong>FPTU</strong>.<strong>Tech</strong> ©2018 Developed
-                    by{" "}
+                    <strong>FPTU</strong>
+.
+                    <strong>Tech</strong>
+                    {' '}
+©2018 Developed
+                    by
+                    {" "}
                     <strong>
                         <a
                             href="https://github.com/huynhminhtufu"

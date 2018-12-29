@@ -13,10 +13,10 @@ import {
     Steps,
     message,
 } from "antd";
+import Helmet from "react-helmet-async";
 import { post } from "../../utils/ApiCaller";
 import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
 import LocalStorage from "../../utils/LocalStorage";
-import Helmet from "react-helmet-async";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -28,10 +28,10 @@ class Send extends Component {
 
         this.state = {
             disabledSendButton: false,
-            contentTextarea: "",
-            loading: false,
-            imageUrl: "",
-            step: 0,
+            contentTextarea   : "",
+            loading           : false,
+            imageUrl          : "",
+            step              : 0,
         };
     }
 
@@ -60,8 +60,8 @@ class Send extends Component {
             .then(() =>
                 this.setState({
                     disabledSendButton: false,
-                    contentTextarea: "",
-                    step: 1,
+                    contentTextarea   : "",
+                    step              : 1,
                 })
             )
             .then(() =>
@@ -80,12 +80,10 @@ class Send extends Component {
             sender: LocalStorage.getSenderToken(),
             status: 0,
         })
-            .then(res => {
-                console.log(res);
+            .then(() => {
                 return { status: "ok", message: "" };
             })
             .catch(err => {
-                console.log(err);
                 return { status: "error", message: err };
             });
     };
@@ -150,9 +148,10 @@ class Send extends Component {
             step,
         } = this.state;
 
+        const { loading } = this.state;
         const uploadButton = (
             <div>
-                <Icon type={this.state.loading ? "loading" : "plus"} />
+                <Icon type={loading ? "loading" : "plus"} />
                 <div className="ant-upload-text">Thêm ảnh</div>
             </div>
         );
@@ -167,12 +166,12 @@ class Send extends Component {
                 <div className="content-wrapper">
                     <div
                         style={{
-                            textAlign: "center",
-                            marginBottom: "2rem",
+                            textAlign      : "center",
+                            marginBottom   : "2rem",
                             backgroundColor: "#000",
-                            color: "#fff",
-                            borderRadius: "10px",
-                            padding: "1rem",
+                            color          : "#fff",
+                            borderRadius   : "10px",
+                            padding        : "1rem",
                         }}
                     >
                         <img
@@ -181,7 +180,8 @@ class Send extends Component {
                             style={{ maxWidth: "200px" }}
                         />
                         <p style={{ fontSize: "1rem" }}>
-                            Fanpage at{" "}
+                            Fanpage at
+                            {" "}
                             <strong>fb.com/FPTUHCMConfessions</strong>
                         </p>
                     </div>
@@ -212,9 +212,9 @@ class Send extends Component {
                             placeholder="Baby em trót thích anh rồi đấy này chàng trai đáng yêu... I need to tell you something..."
                             disabled={disabledSendButton}
                             style={{
-                                float: "left",
-                                width: "80%",
-                                marginRight: "2rem",
+                                float       : "left",
+                                width       : "80%",
+                                marginRight : "2rem",
                                 marginBottom: "1rem",
                             }}
                         />

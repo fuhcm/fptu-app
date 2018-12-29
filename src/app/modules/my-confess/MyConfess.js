@@ -4,13 +4,13 @@ import "./MyConfess.scss";
 import moment from "moment";
 
 import { Layout, List, Button, Skeleton, Tag, Row, Alert, message } from "antd";
+import Helmet from "react-helmet-async";
 import { get, post } from "../../utils/ApiCaller";
 import {
     GUEST__GET_MY_CONFESS,
     GUEST__GET_OVERVIEW,
 } from "../../utils/ApiEndpoint";
 import LocalStorageUtils from "../../utils/LocalStorage";
-import Helmet from "react-helmet-async";
 import { config } from "../../../config";
 
 const { Content } = Layout;
@@ -19,12 +19,12 @@ const stepLoad = 10;
 
 class MyConfess extends Component {
     state = {
-        numLoad: stepLoad,
+        numLoad    : stepLoad,
         initLoading: true,
-        loading: false,
-        data: [],
-        list: [],
-        overview: {},
+        loading    : false,
+        data       : [],
+        list       : [],
+        overview   : {},
     };
 
     componentDidMount() {
@@ -34,7 +34,7 @@ class MyConfess extends Component {
             this.setState({
                 initLoading: false,
                 data,
-                list: data,
+                list       : data,
             });
         });
 
@@ -53,8 +53,7 @@ class MyConfess extends Component {
                 .then(res => {
                     callback(res.data);
                 })
-                .catch(err => {
-                    console.log(err);
+                .catch(() => {
                     message.error(
                         "Kết nối tới máy chủ bị lỗi, vui lòng báo lại cho admin để xử lí"
                     );
@@ -77,7 +76,7 @@ class MyConfess extends Component {
 
         this.setState({
             loading: true,
-            list: data.concat(
+            list   : data.concat(
                 [...new Array(stepLoad)].map(() => ({ loading: true }))
             ),
         });
@@ -85,7 +84,7 @@ class MyConfess extends Component {
             this.setState(
                 {
                     data,
-                    list: data,
+                    list   : data,
                     loading: false,
                     numLoad: numLoad + stepLoad,
                 },
@@ -120,11 +119,15 @@ class MyConfess extends Component {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        #{config.meta.fb_tagname}
+                        #
+                        {config.meta.fb_tagname}
                         {cfs_id}
                     </a>
                 </Tag>
-                <Tag color="blue">#{approver}</Tag>
+                <Tag color="blue">
+#
+                    {approver}
+                </Tag>
             </div>
         </div>
     );
@@ -135,10 +138,20 @@ class MyConfess extends Component {
                 <strike>{content}</strike>
             </div>
             <div style={{ margin: ".5rem 0" }}>
-                <Tag color="red">#{approver}</Tag>
+                <Tag color="red">
+#
+                    {approver}
+                </Tag>
             </div>
             <div style={{ margin: ".5rem 0" }}>
-                <strong>Lí do bị {approver} từ chối: </strong>{" "}
+                <strong>
+                    Lí do bị
+                    {approver}
+                    {' '}
+từ chối:
+                    {" "}
+                </strong>
+                {" "}
                 {reason || "Hem có"}
             </div>
         </div>
@@ -150,9 +163,9 @@ class MyConfess extends Component {
             !initLoading && !loading ? (
                 <div
                     style={{
-                        textAlign: "center",
-                        marginTop: 12,
-                        height: 32,
+                        textAlign : "center",
+                        marginTop : 12,
+                        height    : 32,
                         lineHeight: "32px",
                     }}
                 >
@@ -179,26 +192,33 @@ class MyConfess extends Component {
                     <Row style={{ marginBottom: "10px" }}>
                         <Alert
                             message="Thống kê tổng quan"
-                            description={
+                            description={(
                                 <div>
                                     <Row>
-                                        Lời nhắn đã nhận:{" "}
-                                        <strong>{overview.total || "0"}</strong>{" "}
+                                        Lời nhắn đã nhận:
+                                        {" "}
+                                        <strong>{overview.total || "0"}</strong>
+                                        {" "}
                                         cái
                                     </Row>
                                     <Row>
-                                        Đang chờ duyệt:{" "}
+                                        Đang chờ duyệt:
+                                        {" "}
                                         <strong>
                                             {overview.pending || "0"}
-                                        </strong>{" "}
+                                        </strong>
+                                        {" "}
                                         cái
                                     </Row>
                                     <Row>
-                                        Đã bị từ chối:{" "}
+                                        Đã bị từ chối:
+                                        {" "}
                                         <strong>
                                             {overview.rejected || "0"}
-                                        </strong>{" "}
-                                        cái (tỉ lệ:{" "}
+                                        </strong>
+                                        {" "}
+                                        cái (tỉ lệ:
+                                        {" "}
                                         {Math.round(
                                             (overview.rejected /
                                                 overview.total) *
@@ -207,7 +227,7 @@ class MyConfess extends Component {
                                         %)
                                     </Row>
                                 </div>
-                            }
+)}
                             type="info"
                             showIcon
                         />

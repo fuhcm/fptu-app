@@ -18,17 +18,17 @@ class NotFound extends Component {
                 <div
                     style={{
                         background: "#fff",
-                        padding: "2rem",
-                        textAlign: "center",
+                        padding   : "2rem",
+                        textAlign : "center",
                     }}
                 >
                     <Exception
                         type="404"
-                        actions={
+                        actions={(
                             <Link to="/">
                                 <Button type="primary">Về trang chủ</Button>
                             </Link>
-                        }
+)}
                         title="404"
                         desc="Đi chỗ khác đi, méo có trang này ok?"
                     />

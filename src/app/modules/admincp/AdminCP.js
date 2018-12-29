@@ -12,9 +12,10 @@ import {
     Alert,
     Row,
     Modal,
-    // DatePicker,
     message,
 } from "antd";
+import TextArea from "antd/lib/input/TextArea";
+import Helmet from "react-helmet-async";
 import { get, put, post } from "../../utils/ApiCaller";
 import {
     ADMINCP__GET_CONFESS,
@@ -23,10 +24,7 @@ import {
     GUEST__GET_OVERVIEW,
     ADMINCP__GET_NEXT_ID,
 } from "../../utils/ApiEndpoint";
-import LocalStorage from "../../utils/LocalStorage";
-import TextArea from "antd/lib/input/TextArea";
 import { config } from "../../../config";
-import Helmet from "react-helmet-async";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
 const { Content } = Layout;
@@ -35,12 +33,12 @@ const stepLoad = 10;
 
 class AdminCP extends Component {
     state = {
-        numLoad: stepLoad,
+        numLoad    : stepLoad,
         initLoading: true,
-        loading: false,
-        data: [],
-        list: [],
-        overview: {},
+        loading    : false,
+        data       : [],
+        list       : [],
+        overview   : {},
         rejectModal: {
             visible: false,
         },
@@ -48,7 +46,7 @@ class AdminCP extends Component {
             visible: false,
         },
         scheduledTime: null,
-        isPosting: false,
+        isPosting    : false,
     };
 
     componentDidMount() {
@@ -58,7 +56,7 @@ class AdminCP extends Component {
             this.setState({
                 initLoading: false,
                 data,
-                list: data,
+                list       : data,
             });
         });
 
@@ -84,7 +82,8 @@ class AdminCP extends Component {
                         // Do logout
                         LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.JWT);
                         LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.EMAIL);
-                        this.props.history.push("/login");
+                        const { history } = this.props;
+                        history.push("/login");
                     }
                 });
         }, 1000);
@@ -101,7 +100,7 @@ class AdminCP extends Component {
 
         this.setState({
             loading: true,
-            list: data.concat(
+            list   : data.concat(
                 [...new Array(stepLoad)].map(() => ({ loading: true }))
             ),
         });
@@ -110,7 +109,7 @@ class AdminCP extends Component {
             this.setState(
                 {
                     data,
-                    list: data,
+                    list   : data,
                     loading: false,
                     numLoad: numLoad + stepLoad,
                 },
@@ -123,18 +122,6 @@ class AdminCP extends Component {
             );
         });
     };
-
-    findIndex(id) {
-        const { list } = this.state;
-
-        for (var i = 0; i < list.length; i += 1) {
-            if (list[i].id === id) {
-                return i;
-            }
-        }
-
-        return -1;
-    }
 
     handleApprove = async (id, manual = false) => {
         const { list } = this.state;
@@ -174,15 +161,13 @@ class AdminCP extends Component {
                     "https://graph.facebook.com/v3.2/1745366302422769/feed",
                     {},
                     {
-                        message: postingContent,
-                        access_token: page_access_token,
-                        published: false,
+                        message               : postingContent,
+                        access_token          : page_access_token,
+                        published             : false,
                         scheduled_publish_time: scheduledTime,
                     }
                 );
             } catch (error) {
-                console.log(error.response);
-
                 if (!error.response) {
                     message.error(
                         "Thoát rồi đăng nhập lại admin đi vì Facebook Token đã hết hạn mất rùi :("
@@ -231,9 +216,7 @@ class AdminCP extends Component {
                     );
                 }
             })
-            .catch(err => {
-                console.log(err);
-
+            .catch(() => {
                 message.error(`Đã xảy ra lỗi, chưa thể duyệt Confession này`);
             });
     };
@@ -243,17 +226,15 @@ class AdminCP extends Component {
         const index = this.findIndex(id);
 
         put(ADMINCP__REJECT_CONFESS, { id, reason })
-            .then(res => {
+            .then(() => {
                 // Update UI
-                list[index].approver = LocalStorage.getNickName();
+                list[index].approver = LocalStorageUtils.getNickName();
                 list[index].status = 2;
 
                 this.setState({ list });
                 message.success(`Confession này đã bị từ chối`);
             })
-            .catch(err => {
-                console.log(err);
-
+            .catch(() => {
                 message.error(`Đã xảy ra lỗi, chưa thể từ chối Confession này`);
             });
     };
@@ -274,11 +255,15 @@ class AdminCP extends Component {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        #{config.meta.fb_tagname}
+                        #
+                        {config.meta.fb_tagname}
                         {cfs_id}
                     </a>
                 </Tag>
-                <Tag color="blue">#{approver}</Tag>
+                <Tag color="blue">
+#
+                    {approver}
+                </Tag>
             </div>
         </div>
     );
@@ -289,7 +274,10 @@ class AdminCP extends Component {
                 <strike>{content}</strike>
             </div>
             <div style={{ margin: ".5rem 0" }}>
-                <Tag color="red">#{approver}</Tag>
+                <Tag color="red">
+#
+                    {approver}
+                </Tag>
             </div>
         </div>
     );
@@ -305,7 +293,8 @@ class AdminCP extends Component {
 
     handleOkRejectModal = e => {
         e.preventDefault();
-        const { id, reason } = this.state.rejectModal;
+        const { rejectModal } = this.tate;
+        const { id, reason } = rejectModal;
 
         this.handleReject(id, (reason && reason.trim()) || null);
 
@@ -393,6 +382,18 @@ class AdminCP extends Component {
         }
     };
 
+    findIndex(id) {
+        const { list } = this.state;
+
+        for (var i = 0; i < list.length; i += 1) {
+            if (list[i].id === id) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     render() {
         const {
             initLoading,
@@ -409,9 +410,9 @@ class AdminCP extends Component {
             !initLoading && !loading ? (
                 <div
                     style={{
-                        textAlign: "center",
-                        marginTop: 12,
-                        height: 32,
+                        textAlign : "center",
+                        marginTop : 12,
+                        height    : 32,
                         lineHeight: "32px",
                     }}
                 >
@@ -431,21 +432,29 @@ class AdminCP extends Component {
 
                     <Alert
                         message="Thống kê tổng quan"
-                        description={
+                        description={(
                             <div>
                                 <Row>
-                                    Lời nhắn đã nhận:{" "}
-                                    <strong>{overview.total || "0"}</strong> cái
+                                    Lời nhắn đã nhận:
+                                    {" "}
+                                    <strong>{overview.total || "0"}</strong>
+                                    {' '}
+cái
                                 </Row>
                                 <Row>
-                                    Đang chờ duyệt:{" "}
-                                    <strong>{overview.pending || "0"}</strong>{" "}
+                                    Đang chờ duyệt:
+                                    {" "}
+                                    <strong>{overview.pending || "0"}</strong>
+                                    {" "}
                                     cái
                                 </Row>
                                 <Row>
-                                    Đã bị từ chối:{" "}
-                                    <strong>{overview.rejected || "0"}</strong>{" "}
-                                    cái (tỉ lệ:{" "}
+                                    Đã bị từ chối:
+                                    {" "}
+                                    <strong>{overview.rejected || "0"}</strong>
+                                    {" "}
+                                    cái (tỉ lệ:
+                                    {" "}
                                     {Math.round(
                                         (overview.rejected / overview.total) *
                                             100
@@ -453,7 +462,7 @@ class AdminCP extends Component {
                                     %)
                                 </Row>
                             </div>
-                        }
+)}
                         type="info"
                         showIcon
                     />
@@ -471,27 +480,27 @@ class AdminCP extends Component {
                                 actions={
                                     (item.status === 0 ||
                                         item.status === null) && [
-                                        <Button
-                                            type="primary"
-                                            disabled={item.loading || isPosting}
-                                            onClick={() => {
+                                            <Button
+                                                type="primary"
+                                                disabled={item.loading || isPosting}
+                                                onClick={() => {
                                                 this.handleApprove(
                                                     item.id,
                                                     true
                                                 );
                                             }}
-                                        >
+                                            >
                                             duyệt
-                                        </Button>,
-                                        <Button
-                                            type="danger"
-                                            disabled={item.loading}
-                                            onClick={() => {
+                                            </Button>,
+                                            <Button
+                                                type="danger"
+                                                disabled={item.loading}
+                                                onClick={() => {
                                                 this.showModal(item.id);
                                             }}
-                                        >
+                                            >
                                             từ chối
-                                        </Button>,
+                                            </Button>,
                                     ]
                                 }
                             >
@@ -567,10 +576,21 @@ class AdminCP extends Component {
                 >
                     <div>
                         #FPTUC_
-                        {approveModal.cfs_id} [{approveModal.time}]<br />"
-                        {approveModal.content}"<br />
+                        {approveModal.cfs_id}
+                        {' '}
+[
+                        {approveModal.time}
+                        ]
+                        <br />
+                        {'"'}
+                        {approveModal.content}
+                        {'"'}
+                        <br />
                         -----------------
-                        <br />-{approveModal.admin}-
+                        <br />
+-
+                        {approveModal.admin}
+                        -
                         <br />
                         #FPTUCfs
                     </div>
