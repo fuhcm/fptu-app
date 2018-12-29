@@ -2,9 +2,8 @@ import Loadable from "react-loadable";
 import * as express from "express";
 import bodyParser from "body-parser";
 import compression from "compression";
-import Renderer from "./render";
-
 import morgan from "morgan";
+import Renderer from "./render";
 
 class BaseApp {
     static PORT = 3000;

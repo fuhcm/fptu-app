@@ -3,7 +3,7 @@ import Loadable from "react-loadable";
 
 import withAuthRouteComponent from "./shared/auth/withAuthRouteComponent";
 
-import Loading from "../app/modules/loading/Loading";
+import Loading from "./modules/loading/Loading";
 
 const withAuth = withAuthRouteComponent("/login");
 
@@ -97,68 +97,68 @@ const ReviewDetails = Loadable({
 
 export default [
     {
-        path: "/",
-        title: "Home",
+        path     : "/",
+        title    : "Home",
         component: Home,
     },
     {
-        path: "/login",
-        title: "Login",
+        path     : "/login",
+        title    : "Login",
         component: Login,
     },
     {
-        path: "/send",
-        title: "Send",
+        path     : "/send",
+        title    : "Send",
         component: Send,
     },
     {
-        path: "/admin-cp",
-        title: "Admin CP",
+        path     : "/admin-cp",
+        title    : "Admin CP",
         component: withAuth(AdminCP),
     },
     {
-        path: "/my-confess",
-        title: "My Confess",
+        path     : "/my-confess",
+        title    : "My Confess",
         component: MyConfess,
     },
     {
-        path: "/news",
-        title: "News",
+        path     : "/news",
+        title    : "News",
         component: News,
     },
     {
-        path: "/post/:id",
-        title: "Post",
+        path     : "/post/:id",
+        title    : "Post",
         component: Post,
     },
     {
-        path: "/post/:id/:title",
-        title: "Post",
+        path     : "/post/:id/:title",
+        title    : "Post",
         component: Post,
     },
     {
-        path: "/toidicodedao",
-        title: "Toi Di Code Dao",
+        path     : "/toidicodedao",
+        title    : "Toi Di Code Dao",
         component: ToiDiCodeDao_Index,
     },
     {
-        path: "/toidicodedao/bai-viet/:id",
-        title: "Toi Di Code Dao Post",
+        path     : "/toidicodedao/bai-viet/:id",
+        title    : "Toi Di Code Dao Post",
         component: ToiDiCodeDao_Post,
     },
     {
-        path: "/toidicodedao/bai-viet/:id/:title",
-        title: "Toi Di Code Dao Post",
+        path     : "/toidicodedao/bai-viet/:id/:title",
+        title    : "Toi Di Code Dao Post",
         component: ToiDiCodeDao_Post,
     },
     {
-        path: "/pentakill",
-        title: "Review",
+        path     : "/pentakill",
+        title    : "Review",
         component: Review,
     },
     {
-        path: "/pentakill/:code",
-        title: "Review Details",
+        path     : "/pentakill/:code",
+        title    : "Review Details",
         component: ReviewDetails,
     },
 ];

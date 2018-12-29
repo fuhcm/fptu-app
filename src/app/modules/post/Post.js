@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import "./Post.scss";
 
 import { Layout, Button, Icon, Skeleton, BackTop, Tag, message } from "antd";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { Redirect, Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { getArticles } from "../../utils/Crawl";
 
 const { Content } = Layout;
@@ -25,7 +25,8 @@ class Post extends Component {
             ) {
                 this.post = null;
             } else {
-                const guid = this.props.match.params.id;
+                const { match } = this.props;
+                const guid = match.params.id;
                 const posts = JSON.parse(
                     LocalStorageUtils.getItem(
                         LOCAL_STORAGE_KEY.MEDIUM_NEWS,
@@ -64,7 +65,8 @@ class Post extends Component {
                 setTimeout(loadingMsg, 2000);
 
                 getArticles().then(posts => {
-                    const guid = this.props.match.params.id;
+                    const { match } = this.props;
+                    const guid = match.params.id;
                     const post = posts.find(obj => {
                         return obj.guid === "https://medium.com/p/" + guid;
                     });
@@ -89,7 +91,7 @@ class Post extends Component {
         const { loading } = this.state;
 
         if (!post && !loading) {
-            return <Redirect to={`/news`} />;
+            return <Redirect to="/news" />;
         }
 
         return (
@@ -116,14 +118,15 @@ class Post extends Component {
                         <h2 className="post-title">{post && post.title}</h2>
                         <div className="post-tags">
                             {post &&
-                                post.categories.map((obj, index) => {
+                                post.categories.map(item => {
                                     return (
                                         <Tag
                                             color="geekblue"
-                                            key={index}
+                                            key={item}
                                             style={{ marginBottom: "0.5rem" }}
                                         >
-                                            #{obj}
+                                            #
+                                            {item}
                                         </Tag>
                                     );
                                 })}
@@ -138,6 +141,7 @@ class Post extends Component {
                         {!loading && (
                             <div
                                 className="post-content"
+                                //eslint-disable-next-line
                                 dangerouslySetInnerHTML={{
                                     __html: post && post.content,
                                 }}

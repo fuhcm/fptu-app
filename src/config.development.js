@@ -1,15 +1,15 @@
 export const config = {
     apis: {
-        base_url: "https://api.fptu.tech",
+        base_url            : "https://api.fptu.tech",
         mocogateway_base_url: "",
     },
     meta: {
-        name: "FPTU Tech",
+        name      : "FPTU Tech",
         short_name: "fptu.tech",
         fb_tagname: "cfapp",
     },
     assets: {
-        server_url: "",
+        server_url   : "",
         public_folder: process.env.PUBLIC_URL,
     },
     social: {
@@ -22,6 +22,6 @@ export const config = {
     },
     facebook_app: {
         enabled: false,
-        app_id: "1524500647849245",
+        app_id : "1524500647849245",
     },
 };

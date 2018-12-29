@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import "./Post.scss";
 
 import { Layout, Button, Icon, Skeleton, BackTop, Tag, message } from "antd";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { Redirect, Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { getArticles } from "../../utils/Crawl";
 
 const { Content } = Layout;
@@ -25,7 +25,8 @@ class Post extends Component {
             ) {
                 this.post = null;
             } else {
-                const guid = this.props.match.params.id;
+                const { match } = this.props;
+                const guid = match.params.id;
                 const posts = JSON.parse(
                     LocalStorageUtils.getItem(
                         LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS,
@@ -71,7 +72,8 @@ class Post extends Component {
                     true,
                     "toidicodedao"
                 ).then(posts => {
-                    const guid = this.props.match.params.id;
+                    const { match } = this.props;
+                    const guid = match.params.id;
                     const post = posts.find(obj => {
                         return (
                             obj.guid === "http://toidicodedao.com/?p=" + guid ||
@@ -99,7 +101,7 @@ class Post extends Component {
         const { loading } = this.state;
 
         if (!post && !loading) {
-            return <Redirect to={`/toidicodedao`} />;
+            return <Redirect to="/toidicodedao" />;
         }
 
         return (
@@ -118,22 +120,24 @@ class Post extends Component {
                             size="large"
                             style={{ marginBottom: "1rem" }}
                         >
-                            <Icon type="caret-left" /> Quay lại danh sách bài
+                            <Icon type="caret-left" />
+                            {' '}
+Quay lại danh sách bài
                         </Button>
                     </Link>
                     <div className="post-body">
                         <h2 className="post-title">{post && post.title}</h2>
                         <div className="post-tags">
                             {post &&
-                                post.categories.map((obj, index) => {
+                                post.categories.map(item => {
                                     return (
                                         <Tag
                                             color="green"
-                                            key={index}
+                                            key={item}
                                             style={{ marginBottom: "0.5rem" }}
                                         >
-                                            {obj.charAt(0).toLowerCase() +
-                                                obj.slice(1)}
+                                            {item.charAt(0).toLowerCase() +
+                                                item.slice(1)}
                                         </Tag>
                                     );
                                 })}
@@ -157,6 +161,7 @@ class Post extends Component {
                         {!loading && (
                             <div
                                 className="post-content"
+                                //eslint-disable-next-line
                                 dangerouslySetInnerHTML={{
                                     __html: post && post.content,
                                 }}

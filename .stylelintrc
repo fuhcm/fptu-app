@@ -1,0 +1,44 @@
+{
+    "plugins": [
+        "stylelint-scss",
+        "stylelint-order",
+        "stylelint-no-unsupported-browser-features",
+        "stylelint-declaration-use-variable",
+        "stylelint-declaration-strict-value",
+        "stylelint-at-rule-no-children",
+        "stylelint-declaration-block-no-ignored-properties",
+        "stylelint-value-no-unknown-custom-properties",
+        "stylelint-z-index-value-constraint",
+        "stylelint-selector-no-utility",
+        "stylelint-prettier"
+    ],
+    "extends": [
+        "stylelint-config-sass-guidelines",
+        "stylelint-config-css-modules",
+        "stylelint-prettier/recommended"
+    ],
+    "rules": {
+        "prettier/prettier": true,
+        "sh-waqar/declaration-use-variable": [["color", "font-family"]],
+        "scale-unlimited/declaration-strict-value": [["color", "font-family"]],
+        "plugin/declaration-block-no-ignored-properties": true,
+        "plugin/no-unsupported-browser-features": [
+            true,
+            {
+                "severity": "warning"
+            }
+        ],
+        "csstools/value-no-unknown-custom-properties": true,
+        "plugin/z-index-value-constraint": {
+            "min": 0,
+            "max": 10
+        },
+        "primer/selector-no-utility": true,
+        "at-rule-no-unknown": [
+            true,
+            {
+                "ignoreAtRules": ["function", "if", "each", "include", "mixin"]
+            }
+        ]
+    }
+}

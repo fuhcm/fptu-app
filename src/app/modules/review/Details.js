@@ -2,9 +2,8 @@ import React, { Component } from "react";
 
 import { Layout, Button, Icon, Skeleton, message } from "antd";
 
-import { SE } from "./Data";
-
 import { withRouter, Link } from "react-router-dom";
+import { SE } from "./Data";
 
 const { Content } = Layout;
 
@@ -12,14 +11,15 @@ const data = SE;
 
 class ReviewDetails extends Component {
     componentWillMount() {
-        const { code } = this.props.match.params;
+        const { match } = this.props;
+        const { code } = match.params;
         const { history } = this.props;
 
-        const match = data.find(e => {
+        const matched = data.find(e => {
             return e.subjectCode === code.toUpperCase();
         });
 
-        if (!match) {
+        if (!matched) {
             history.push("/pentakill");
         }
     }
@@ -29,7 +29,8 @@ class ReviewDetails extends Component {
     }
 
     render() {
-        const { code } = this.props.match.params;
+        const { match } = this.props;
+        const { code } = match.params;
 
         return (
             <Content className="content-container">
@@ -40,17 +41,19 @@ class ReviewDetails extends Component {
                             size="large"
                             style={{ marginBottom: "1rem" }}
                         >
-                            <Icon type="caret-left" /> Quay lại danh sách môn
+                            <Icon type="caret-left" />
+                            {' '}
+Quay lại danh sách môn
                         </Button>
                     </Link>
                     <div
                         style={{
-                            textAlign: "center",
-                            fontSize: "2rem",
+                            textAlign      : "center",
+                            fontSize       : "2rem",
                             backgroundColor: "#001528",
-                            color: "white",
-                            padding: "1rem",
-                            borderRadius: "10px",
+                            color          : "white",
+                            padding        : "1rem",
+                            borderRadius   : "10px",
                         }}
                     >
                         {code.toUpperCase()}

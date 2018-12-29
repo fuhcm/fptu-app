@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 
-import { getArticles } from "../../utils/Crawl";
-
 import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
 
 import Helmet from "react-helmet-async";
+import { getArticles } from "../../utils/Crawl";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -12,7 +11,7 @@ const { Meta } = Card;
 class Home extends Component {
     state = {
         loading: true,
-        posts: [],
+        posts  : [],
     };
 
     componentDidMount() {
@@ -25,7 +24,7 @@ class Home extends Component {
     }
 
     renderPosts = posts => {
-        return posts.map((post, index) => {
+        return posts.map(post => {
             post.description = post.description
                 .replace(/<(.|\n)*?>/g, "")
                 .trim();
@@ -36,26 +35,26 @@ class Home extends Component {
                     href={post.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    key={index}
+                    key={post.guid}
                 >
                     <Col lg={8} md={12}>
                         <Card
                             hoverable
-                            cover={
+                            cover={(
                                 <img
                                     alt={post.title}
                                     src={post.thumbnail}
                                     style={{
                                         objectFit: "cover",
-                                        height: "15rem",
+                                        height   : "15rem",
                                     }}
                                 />
-                            }
+)}
                             style={{ marginBottom: "1rem" }}
                         >
                             <Meta
                                 style={{
-                                    height: "10rem",
+                                    height  : "10rem",
                                     overflow: "hidden",
                                 }}
                                 title={post.title}
@@ -78,7 +77,7 @@ class Home extends Component {
                 <div className="content-wrapper">
                     <div
                         style={{
-                            textAlign: "center",
+                            textAlign   : "center",
                             marginBottom: "2rem",
                         }}
                     >
@@ -103,26 +102,27 @@ class Home extends Component {
 
                     <div
                         style={{
-                            textAlign: "center",
-                            marginTop: "1rem",
+                            textAlign      : "center",
+                            marginTop      : "1rem",
                             backgroundColor: "#194864",
-                            color: "#fff",
-                            padding: "1rem 1rem .2rem 1rem",
-                            borderRadius: "1rem",
+                            color          : "#fff",
+                            padding        : "1rem 1rem .2rem 1rem",
+                            borderRadius   : "1rem",
                         }}
                     >
                         <img
                             src="/assets/images/golang-react.jpg"
                             alt=""
                             style={{
-                                width: "100%",
-                                maxWidth: "720px",
+                                width       : "100%",
+                                maxWidth    : "720px",
                                 marginBottom: "1rem",
                                 borderRadius: ".5rem",
                             }}
                         />
                         <p style={{ fontSize: "1rem" }}>
-                            Read more tech posts at{" "}
+                            Read more tech posts at
+                            {" "}
                             <strong>fptu.tech/news</strong>
                         </p>
                     </div>

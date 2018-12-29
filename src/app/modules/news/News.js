@@ -25,7 +25,7 @@ const { Meta } = Card;
 class News extends Component {
     state = {
         loading: true,
-        posts: [],
+        posts  : [],
     };
 
     componentDidMount() {
@@ -61,7 +61,7 @@ class News extends Component {
     }
 
     renderPosts = posts => {
-        return posts.map((post, index) => {
+        return posts.map(post => {
             post.description = post.description
                 .replace(/<(.|\n)*?>/g, "")
                 .trim();
@@ -85,25 +85,28 @@ class News extends Component {
             }
 
             return (
-                <Link to={`/post/${guid}/${paramCase(post.title)}`} key={index}>
+                <Link
+                    to={`/post/${guid}/${paramCase(post.title)}`}
+                    key={post.guid}
+                >
                     <Col lg={8} md={12}>
                         <Card
                             hoverable
-                            cover={
+                            cover={(
                                 <img
                                     alt={post.title}
                                     src={post.thumbnail}
                                     style={{
                                         objectFit: "cover",
-                                        height: "15rem",
+                                        height   : "15rem",
                                     }}
                                 />
-                            }
+)}
                             style={{ marginBottom: "1rem" }}
                         >
                             <Meta
                                 style={{
-                                    height: "10rem",
+                                    height  : "10rem",
                                     overflow: "hidden",
                                 }}
                                 title={post.title}
@@ -130,16 +133,18 @@ class News extends Component {
                     <div
                         style={{
                             textAlign: "center",
-                            fontSize: "1.2rem",
+                            fontSize : "1.2rem",
                         }}
                     >
                         <h2>
-                            <span style={{ color: "darkblue" }}>DEV</span> Đọc
+                            <span style={{ color: "darkblue" }}>DEV</span>
+                            {' '}
+Đọc
                             {loading && (
-                                <Icon
-                                    type="loading"
-                                    style={{ marginLeft: "1rem" }}
-                                />
+                            <Icon
+                                type="loading"
+                                style={{ marginLeft: "1rem" }}
+                            />
                             )}
                             {!loading && (
                                 <span
@@ -151,7 +156,7 @@ class News extends Component {
                                         count={posts.length + "+"}
                                         style={{
                                             backgroundColor: "#40A9FF",
-                                            color: "#fff",
+                                            color          : "#fff",
                                         }}
                                     />
                                 </span>
@@ -159,7 +164,11 @@ class News extends Component {
                         </h2>
                     </div>
                     <Divider style={{ fontWeight: "lighter" }}>
-                        Bài hay trên <strong>Medium</strong> hàng ngày
+                        Bài hay trên 
+                        {' '}
+                        <strong>Medium</strong>
+                        {' '}
+hàng ngày
                     </Divider>
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>

@@ -25,7 +25,7 @@ const { Meta } = Card;
 class Index extends Component {
     state = {
         loading: true,
-        posts: [],
+        posts  : [],
     };
 
     componentDidMount() {
@@ -78,7 +78,7 @@ class Index extends Component {
     }
 
     renderPosts = posts => {
-        return posts.map((post, index) => {
+        return posts.map(post => {
             post.description = post.description
                 .replace(/<(.|\n)*?>/g, "")
                 .trim();
@@ -92,12 +92,12 @@ class Index extends Component {
             return (
                 <Link
                     to={`/toidicodedao/bai-viet/${guid}/${postTitle}`}
-                    key={index}
+                    key={post.guid}
                 >
                     <Col lg={8} md={12}>
                         <Card
                             hoverable
-                            cover={
+                            cover={(
                                 <img
                                     alt={post.title}
                                     src={
@@ -106,15 +106,15 @@ class Index extends Component {
                                     }
                                     style={{
                                         objectFit: "cover",
-                                        height: "15rem",
+                                        height   : "15rem",
                                     }}
                                 />
-                            }
+)}
                             style={{ marginBottom: "1rem" }}
                         >
                             <Meta
                                 style={{
-                                    height: "10rem",
+                                    height  : "10rem",
                                     overflow: "hidden",
                                 }}
                                 title={post.title}
@@ -160,7 +160,7 @@ class Index extends Component {
                     <div
                         style={{
                             textAlign: "center",
-                            fontSize: "1.2rem",
+                            fontSize : "1.2rem",
                         }}
                     >
                         <h2>
@@ -181,7 +181,7 @@ class Index extends Component {
                                         count={posts.length + "+"}
                                         style={{
                                             backgroundColor: "#40A9FF",
-                                            color: "#fff",
+                                            color          : "#fff",
                                         }}
                                     />
                                 </span>

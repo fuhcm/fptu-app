@@ -1,7 +1,7 @@
-import { getPure } from "../utils/ApiCaller";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../utils/LocalStorage";
-import { CRAWL__URL } from "../utils/ApiEndpoint";
 import moment from "moment";
+import { getPure } from "./ApiCaller";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "./LocalStorage";
+import { CRAWL__URL } from "./ApiEndpoint";
 
 const defaultSources = [
     "https://codeburst.io",
@@ -39,22 +39,17 @@ export const getArticles = async (
         }
         return posts;
     } catch (err) {
+        //eslint-disable-next-line
         console.log(err);
     }
 };
 
 const parseUrl = async url => {
-    try {
-        const res = await getPure(CRAWL__URL + "?url=" + url);
+    const res = await getPure(CRAWL__URL + "?url=" + url);
 
-        if (res && res.data && res.data.items) {
-            return res.data.items;
-        } else {
-            return [];
-        }
-    } catch (err) {
-        console.log(err);
-
+    if (res && res.data && res.data.items) {
+        return res.data.items;
+    } else {
         return [];
     }
 };

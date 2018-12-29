@@ -1,2 +1,25 @@
 {
+    "editor.formatOnSave": true,
+    "files.insertFinalNewline": true,
+    "javascript.implicitProjectConfig.checkJs": true,
+    "javascript.format.enable": false,
+    "javascript.validate.enable": false,
+    "typescript.validate.enable": false,
+    "typescript.suggestionActions.enabled": false,
+    "prettier.eslintIntegration": true,
+    "prettier.stylelintIntegration": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "stylelint.config": {
+        "extends": "./.stylelintrc"
+    },
+    "eslint.packageManager": "yarn",
+    "files.exclude": {
+        "node_modules/": true,
+        "**/._*": true,
+        "**/*.css": true
+    },
+    "git.autofetch": true
 }

@@ -1,0 +1,6 @@
+node_modules
+dis
+build
+*.*
+!*.scss
+!*.sass
