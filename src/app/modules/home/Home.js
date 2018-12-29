@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
 
@@ -8,7 +8,7 @@ import { getArticles } from "../../utils/Crawl";
 const { Content } = Layout;
 const { Meta } = Card;
 
-class Home extends Component {
+class Home extends PureComponent {
     state = {
         loading: true,
         posts  : [],

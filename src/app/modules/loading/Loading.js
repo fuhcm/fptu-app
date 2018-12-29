@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import { Layout, Skeleton } from "antd";
 
 const { Content } = Layout;
 
-class Loading extends Component {
+class Loading extends PureComponent {
     render() {
         return (
             <Content className="content-container">

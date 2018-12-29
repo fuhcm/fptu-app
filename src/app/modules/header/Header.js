@@ -58,8 +58,6 @@ class HeaderPage extends Component {
         let currentKey = history.location.pathname;
         if (currentKey === "/") {
             currentKey = "/home";
-        } else if (currentKey === "/admin-cp") {
-            currentKey = "/login";
         } else if (currentKey.includes("/post")) {
             currentKey = "/news";
         } else if (currentKey.includes("/toidicodedao")) {
