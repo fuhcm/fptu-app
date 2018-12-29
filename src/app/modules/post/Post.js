@@ -113,12 +113,7 @@ class Post extends Component {
                         </Button>
                     </Link>
                     <div className="post-body">
-                        <h2
-                            className="post-title"
-                            dangerouslySetInnerHTML={{
-                                __html: post && post.title,
-                            }}
-                        />
+                        <h2 className="post-title">{post && post.title}</h2>
                         <div className="post-tags">
                             {post &&
                                 post.categories.map((obj, index) => {
