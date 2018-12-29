@@ -61,22 +61,6 @@ Run image:
 $ docker run -dit -p 3000:3000 fptu-fe:latest
 ```
 
-## Lines of Code
-
--------------------------------------------------------------------------------
-Language                     files          blank        comment           code
--------------------------------------------------------------------------------
-JavaScript                      32            342             43           3122
-JSON                             3              0              0            131
-Sass                             5             23              0             98
-Markdown                         1             26              0             47
-HTML                             1              3              1             27
-Dockerfile                       1             10             10             13
-Bourne Shell                     1              0              0             10
--------------------------------------------------------------------------------
-SUM:                            44            404             54           3448
--------------------------------------------------------------------------------
-
 ## License
 
 Copyright © 2018-present Gosu Team. This source code is licensed under the MIT
