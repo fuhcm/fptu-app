@@ -24,7 +24,6 @@ import {
     GUEST__GET_OVERVIEW,
     ADMINCP__GET_NEXT_ID,
 } from "../../utils/ApiEndpoint";
-import { config } from "../../../config";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
 const { Content } = Layout;
@@ -250,13 +249,13 @@ class AdminCP extends Component {
                 <Tag color="green">
                     <a
                         href={`https://www.facebook.com/hashtag/${
-                            config.meta.fb_tagname
+                            APP_ENV.FB_TAGNAME
                         }_${cfs_id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         #
-                        {config.meta.fb_tagname}
+                        {APP_ENV.FB_TAGNAME}
                         {cfs_id}
                     </a>
                 </Tag>

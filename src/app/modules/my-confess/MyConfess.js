@@ -11,7 +11,6 @@ import {
     GUEST__GET_OVERVIEW,
 } from "../../utils/ApiEndpoint";
 import LocalStorageUtils from "../../utils/LocalStorage";
-import { config } from "../../../config";
 
 const { Content } = Layout;
 
@@ -114,13 +113,13 @@ class MyConfess extends Component {
                 <Tag color="green">
                     <a
                         href={`https://www.facebook.com/hashtag/${
-                            config.meta.fb_tagname
+                            APP_ENV.FB_TAGNAME
                         }_${cfs_id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         #
-                        {config.meta.fb_tagname}
+                        {APP_ENV.FB_TAGNAME}
                         {cfs_id}
                     </a>
                 </Tag>

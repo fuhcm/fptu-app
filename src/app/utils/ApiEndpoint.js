@@ -1,6 +1,4 @@
-import { config } from "../../config";
-
-export const BASE_URL = config.apis.base_url;
+export const BASE_URL = APP_ENV.API_BASE_URL;
 export const AUTH_BASE_URL = BASE_URL + "/auth";
 export const API_BASE_URL = BASE_URL + "/api/v1";
 
