@@ -10,13 +10,14 @@ COPY . .
 
 # Fetch dependencies, run script optimize images, build
 RUN yarn
-RUN npm run build:all
+RUN npm run build
 
 # Copy files to machine
 FROM node:8.12.0-alpine
 
 WORKDIR /root/src/app
 
+COPY --from=builder /root/src/app/package.json /root/src/app/package.json
 COPY --from=builder /root/src/app/dist /root/src/app/dist
 
 # Expose port
