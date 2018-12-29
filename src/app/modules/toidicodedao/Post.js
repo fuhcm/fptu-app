@@ -98,7 +98,7 @@ class Post extends Component {
         const { post } = this;
         const { loading } = this.state;
 
-        if (!post && !loading) {
+        if ((!post || !post.title) && !loading) {
             return <Redirect to={`/toidicodedao`} />;
         }
 
