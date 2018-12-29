@@ -44,7 +44,11 @@
         "build:client": "webpack --config webpack/production/client.js",
         "build:server": "webpack --config webpack/production/server.js",
         "build": "npm run sync-source && npm run build:client && npm run build:server",
-        "start": "node ./dist/server/server.js"
+        "start": "node ./dist/server/server.js",
+        "lint:code": "eslint 'src/**/*.{js,jsx,ts}'",
+        "lint:style": "stylelint 'src/**/*.{scss,sass}'",
+        "fix:code": "prettier --write 'src/**/*.{js,jsx,ts}' && eslint --fix 'src/**/*.{js,jsx,ts}'",
+        "fix:style": "prettier --write 'src/**/*.{scss,sass}' && stylelint --fix 'src/**/*.{scss,sass}'"
     },
     "devDependencies": {
         "@babel/core": "^7.1.2",

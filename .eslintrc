@@ -1,0 +1,73 @@
+{
+    "extends": ["react-app", "airbnb", "eslint:recommended"],
+    "parser": "babel-eslint",
+    "plugins": ["react"],
+    "rules": {
+        "react/jsx-filename-extension": [
+            "error",
+            {
+                "extensions": [".js", ".jsx", ".ts"]
+            }
+        ],
+        "semi": ["error", "always"],
+        "jsx-a11y/href-no-hash": ["off"],
+        "import/prefer-default-export": "off",
+        "react/prefer-stateless-function": "off",
+        "import/no-extraneous-dependencies": "off",
+        "key-spacing": [
+            1,
+            {
+                "singleLine": {
+                    "beforeColon": false,
+                    "afterColon": true
+                },
+                "multiLine": {
+                    "align": "colon",
+                    "mode": "minimum"
+                }
+            }
+        ],
+        "comma-dangle": [
+            "error",
+            "always-multiline",
+            {
+                "functions": "never"
+            }
+        ],
+        "react/jsx-indent": [1, 4],
+        "react/jsx-indent-props": [1, 4],
+        "react/prop-types": 0
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"],
+                "paths": ["src"]
+            },
+            "alias": [
+                ["#utils", "./src/utils"],
+                ["#modules", "./src/app/modules"],
+                ["#views", "./src/app/views"],
+                ["#i18n", "./src/i18n"],
+                ["#routes", "./src/routes.js"],
+                ["#config", "./src/config.js"],
+                ["#products", "./src/products.js"]
+            ]
+        }
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true,
+        "worker": true,
+        "serviceworker": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "globals": {}
+}
