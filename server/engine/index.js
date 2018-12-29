@@ -1,3 +1,4 @@
+//eslint-disable-next-line
 import manifest from "../../dist/client/manifest.json";
 
 const vendorCss = [manifest["vendors.css"], manifest["browser.css"]];

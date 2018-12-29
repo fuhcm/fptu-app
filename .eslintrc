@@ -69,5 +69,7 @@
             "jsx": true
         }
     },
-    "globals": {}
+    "globals": {
+        "APP_ENV": true
+    }
 }

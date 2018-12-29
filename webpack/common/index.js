@@ -9,10 +9,10 @@ const isDev = APP_ENV.NODE_ENV === "development";
 const commonPath = path.resolve(__dirname, "../../");
 
 module.exports.babelLoader = {
-    test: /\.(js|jsx)$/,
+    test   : /\.(js|jsx)$/,
     exclude: /node_modules/,
-    use: {
-        loader: "babel-loader",
+    use    : {
+        loader : "babel-loader",
         options: {
             presets: ["@babel/preset-env", "@babel/preset-react"],
             plugins: [
@@ -29,22 +29,22 @@ module.exports.babelLoader = {
 
 module.exports.fileLoader = {
     test: /\.(png|jpg|gif|ttf|eot|woff|woff2|tcc|svg|otf)$/i,
-    use: [
+    use : [
         {
-            loader: "url-loader",
+            loader : "url-loader",
             options: {
-                limit: 4000,
-                fallback: "file-loader",
-                quality: 85,
+                limit     : 4000,
+                fallback  : "file-loader",
+                quality   : 85,
                 publicPath: isDev ? "/" : "/client/",
             },
         },
         {
-            loader: "image-webpack-loader",
+            loader : "image-webpack-loader",
             options: {
                 mozjpeg: {
                     progressive: true,
-                    quality: 65,
+                    quality    : 65,
                 },
                 // optipng.enabled: false will disable optipng
                 optipng: {
@@ -52,7 +52,7 @@ module.exports.fileLoader = {
                 },
                 pngquant: {
                     quality: "65-90",
-                    speed: 4,
+                    speed  : 4,
                 },
                 gifsicle: {
                     interlaced: false,
@@ -69,7 +69,7 @@ module.exports.fileLoader = {
 module.exports.styleLoader = () => {
     return {
         test: /\.(s*)css$/,
-        use: [
+        use : [
             isDev ? "style-loader" : MiniCssExtractPlugin.loader,
             "css-loader",
             {
@@ -82,7 +82,7 @@ module.exports.styleLoader = () => {
 module.exports.nodeStyleLoader = () => {
     return {
         test: /\.(s*)css$/,
-        use: [
+        use : [
             "node-style-loader",
             "css-loader",
             {
@@ -94,34 +94,34 @@ module.exports.nodeStyleLoader = () => {
 
 module.exports.resolve = {
     extensions: [".js", ".jsx", ".json", ".css", ".scss"],
-    alias: {
+    alias     : {
         // No alias now
     },
 };
 
 module.exports.optimization = {
     splitChunks: {
-        chunks: "async",
-        minSize: 30000,
-        maxSize: 0,
+        chunks     : "async",
+        minSize    : 30000,
+        maxSize    : 0,
         cacheGroups: {
             styles: {
-                name: "styles",
-                test: /\.css$/,
-                chunks: "all",
+                name   : "styles",
+                test   : /\.css$/,
+                chunks : "all",
                 enforce: true,
             },
             commons: {
-                test: /[\\/]node_modules[\\/]/,
-                name: "vendors",
+                test  : /[\\/]node_modules[\\/]/,
+                name  : "vendors",
                 chunks: "all",
             },
         },
     },
     minimizer: [
         new UglifyJsPlugin({
-            cache: true,
-            parallel: true,
+            cache    : true,
+            parallel : true,
             sourceMap: true, // set to true if you want JS source maps
         }),
         new OptimizeCSSAssetsPlugin({}),

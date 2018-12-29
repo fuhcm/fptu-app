@@ -9,17 +9,17 @@ module.exports = require("../common/core")(
             browser: "./src/index.js",
         },
         output: {
-            path: path.resolve(__dirname, "../../", "public"),
+            path         : path.resolve(__dirname, "../../", "public"),
             chunkFilename: "[name].js",
-            filename: `[name].js`,
-            publicPath: "/",
+            filename     : `[name].js`,
+            publicPath   : "/",
         },
-        devtool: "source-map",
+        devtool  : "source-map",
         devServer: {
-            contentBase: path.join(__dirname, "../../public"),
-            port: APP_ENV.PORT,
+            contentBase       : path.join(__dirname, "../../public"),
+            port              : APP_ENV.PORT,
             historyApiFallback: true,
-            hot: true,
+            hot               : true,
         },
         plugins: [
             new htmlWebpackPlugin({

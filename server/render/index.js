@@ -8,6 +8,7 @@ import { getBundles } from "react-loadable/webpack";
 import Engine from "../engine";
 import App from "../../src/app/App";
 
+//eslint-disable-next-line
 const stats = require("../../dist/react-loadable.json");
 
 class Renderer {
