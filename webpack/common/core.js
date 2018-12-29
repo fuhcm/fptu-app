@@ -25,9 +25,12 @@ module.exports = options => ({
     target      : options.target || "web",
     externals   : options.externals || [],
     mode        : options.mode || "development",
-    devtool     : options.devtool || "",
+    devtool     : options.devtool || "nosources-source-map",
     optimization: options.target === "node" ? {} : optimization,
-    plugins     : (options.plugins || []).concat([
+    performance : {
+        hints: "warning",
+    },
+    plugins: (options.plugins || []).concat([
         new webpack.DefinePlugin({
             "process.env": {
                 NODE_ENV: JSON.stringify(

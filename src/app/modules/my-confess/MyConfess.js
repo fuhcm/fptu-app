@@ -181,12 +181,6 @@ từ chối:
                 </Helmet>
                 <div className="content-wrapper">
                     <h2>Danh sách confession tui đã gửi</h2>
-                    {/* <Row style={{ marginBottom: "10px" }}>
-                        Sender Token của tui là:{" "}
-                        <Tag color="cyan">
-                            {LocalStorageUtils.getSenderToken()}
-                        </Tag>
-                    </Row> */}
 
                     <Row style={{ marginBottom: "10px" }}>
                         <Alert
