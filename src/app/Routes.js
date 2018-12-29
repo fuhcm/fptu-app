@@ -79,22 +79,6 @@ const ToiDiCodeDao_Post = Loadable({
     webpack: () => [require.resolveWeak("../app/modules/toidicodedao/Post")],
 });
 
-const Review = Loadable({
-    loader: () =>
-        import(/* webpackChunkName: "review" */ "../app/modules/review/Review"),
-    loading: () => <Loading />,
-    modules: ["../app/modules/review/Review"],
-    webpack: () => [require.resolveWeak("../app/modules/review/Review")],
-});
-
-const ReviewDetails = Loadable({
-    loader: () =>
-        import(/* webpackChunkName: "review_details" */ "../app/modules/review/Details"),
-    loading: () => <Loading />,
-    modules: ["../app/modules/review/Details"],
-    webpack: () => [require.resolveWeak("../app/modules/review/Details")],
-});
-
 export default [
     {
         path     : "/",
@@ -150,15 +134,5 @@ export default [
         path     : "/toidicodedao/bai-viet/:id/:title",
         title    : "Toi Di Code Dao Post",
         component: ToiDiCodeDao_Post,
-    },
-    {
-        path     : "/pentakill",
-        title    : "Review",
-        component: Review,
-    },
-    {
-        path     : "/pentakill/:code",
-        title    : "Review Details",
-        component: ReviewDetails,
     },
 ];
