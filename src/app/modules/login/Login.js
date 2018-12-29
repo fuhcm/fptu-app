@@ -7,7 +7,7 @@ import { AUTH__LOGIN, AUTH__LOGIN_FACEBOOK } from "../../utils/ApiEndpoint";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import { Helmet } from "react-helmet";
+import Helmet from "react-helmet-async";
 
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
 
@@ -204,7 +204,7 @@ class LoginForm extends Component {
                         }}
                     >
                         <img
-                            src="https://media.licdn.com/dms/image/C5116AQHJEYOPh4eo5w/profile-displaybackgroundimage-shrink_350_1400/0?e=1550102400&v=beta&t=e1zHWfW8ZA-p3GlZA3-07FBi5ugFiVstLNeqLTA28r4"
+                            src="/assets/images/golang-react.jpg"
                             alt=""
                             style={{
                                 width: "100%",

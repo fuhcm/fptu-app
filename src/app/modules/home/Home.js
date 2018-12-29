@@ -4,7 +4,7 @@ import { getArticles } from "../../utils/Crawl";
 
 import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
 
-import { Helmet } from "react-helmet";
+import Helmet from "react-helmet-async";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -83,7 +83,7 @@ class Home extends Component {
                         }}
                     >
                         <img
-                            src="https://daihoc.fpt.edu.vn/media/2016/12/Logo-FU-01.png"
+                            src="/assets/images/logo-fu.png"
                             alt="FPT University"
                         />
                     </div>
@@ -112,7 +112,7 @@ class Home extends Component {
                         }}
                     >
                         <img
-                            src="https://media.licdn.com/dms/image/C5116AQHJEYOPh4eo5w/profile-displaybackgroundimage-shrink_350_1400/0?e=1550102400&v=beta&t=e1zHWfW8ZA-p3GlZA3-07FBi5ugFiVstLNeqLTA28r4"
+                            src="/assets/images/golang-react.jpg"
                             alt=""
                             style={{
                                 width: "100%",

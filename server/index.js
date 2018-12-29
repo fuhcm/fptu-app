@@ -1,47 +1,64 @@
-import express from "express";
 import Loadable from "react-loadable";
+import * as express from "express";
+import bodyParser from "body-parser";
+import compression from "compression";
+import Renderer from "./render";
 
-import serverRenderer from "./middleware/renderer";
+import morgan from "morgan";
 
-const PORT = 3000;
-const path = require("path");
+class BaseApp {
+    static PORT = 3000;
 
-// Initialize the application and create the routes
-const app = express();
-const router = express.Router();
+    constructor() {
+        this.port = APP_ENV.PORT || BaseApp.PORT;
+        this.app = express();
+        this.createConfigMiddleWare();
+        this.createRouter();
+        this.startService();
+    }
 
-// Print logs
-app.use(function(req, res, next) {
-    // Logs
-    console.log(JSON.stringify(req.headers["user-agent"]));
-    console.log(
-        JSON.stringify(
-            req.headers["x-forwarded-for"] || req.connection.remoteAddress
-        )
-    );
-    next();
-});
+    createConfigMiddleWare = () => {
+        this.app.use(compression());
+        this.app.use(bodyParser.json());
 
-// Root (/) should always serve our server rendered page
-router.use("^/$", serverRenderer);
+        this.app.use(morgan("combined"));
 
-// Other static resources should just be served as they are
-router.use(
-    express.static(path.resolve(__dirname, "..", "build"), { maxAge: "30d" })
-);
+        this.app.use(function(req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header(
+                "Access-Control-Allow-Headers",
+                "Origin, X-Requested-With, Content-Type, Accept"
+            );
 
-router.use("*", serverRenderer);
+            next();
+        });
 
-// Tell the app to use the above rules
-app.use(router);
+        this.app.use(
+            express.static("dist", {
+                maxAge: 86400,
+            })
+        );
 
-// Start the app
-Loadable.preloadAll().then(() => {
-    app.listen(PORT, error => {
-        if (error) {
-            return console.log("Something bad happened: ", error);
-        }
+        this.app.use(
+            "/assets",
+            express.static("dist/assets", {
+                maxAge: 86400,
+            })
+        );
+    };
 
-        console.log("App listening on " + PORT + "...");
-    });
-});
+    createRouter = () => {
+        new Renderer(this.app);
+    };
+
+    startService = () => {
+        Loadable.preloadAll().then(() => {
+            this.app.listen(this.port, () => {
+                //eslint-disable-next-line
+                console.log(`App listening on port ${this.port}!`);
+            });
+        });
+    };
+}
+
+new BaseApp();
