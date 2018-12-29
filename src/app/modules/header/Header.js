@@ -1,56 +1,186 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { Layout, Menu, Icon, Button, notification } from "antd";
+import SubMenu from "antd/lib/menu/SubMenu";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
-import { Menu, Icon } from 'antd';
+const { Header } = Layout;
 
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+class HeaderPage extends Component {
+    onLogout = e => {
+        e.preventDefault();
 
-class Header extends Component {
-    constructor(props) {
-        super(props);
+        LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.JWT);
+        LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.EMAIL);
+        const { history } = this.props;
+        history.push("/login");
+    };
 
-        this.state = {
-            current: 'mail',
-        }
+    openNotification = () => {
+        const key = `open${Date.now()}`;
+        const btn = (
+            <Button
+                type="primary"
+                size="small"
+                onClick={() => {
+                    const { history } = this.props;
+                    notification.close(key);
+                    history.push("/news");
+                }}
+            >
+                Ờm, để đọc thử xem
+            </Button>
+        );
 
-        this.handleClickMenu = this.handleClickMenu.bind(this);
-    }
-
-    handleClickMenu(e) {
-        this.setState({
-            current: e.key,
+        notification.open({
+            message    : "Dành cho các bạn SE",
+            description:
+                "Tự bổ sung kiến thức cho mình là cách giết thời gian khá tốt. Bạn có thể dễ dàng đọc được những thứ mới, thú vị trên trang news nhé, click vào nút ở dưới để nhảy sang trang đó thử đê",
+            btn,
+            key,
+            duration: 0,
+            icon    : <Icon type="coffee" style={{ color: "#108ee9" }} />,
         });
-    }
+    };
 
     render() {
+        const { history } = this.props;
+        if (
+            !LocalStorageUtils.isNotificationLoaded() &&
+            typeof window !== "undefined" &&
+            history.location.pathname === "/send"
+        ) {
+            this.openNotification();
+            LocalStorageUtils.setNotificationLoaded();
+        }
+
+        // Handle selected key
+        let currentKey = history.location.pathname;
+        if (currentKey === "/") {
+            currentKey = "/home";
+        } else if (currentKey === "/admin-cp") {
+            currentKey = "/login";
+        } else if (currentKey.includes("/post")) {
+            currentKey = "/news";
+        } else if (currentKey.includes("/toidicodedao")) {
+            currentKey = "/toidicodedao";
+        } else if (currentKey.includes("/pentakill")) {
+            currentKey = "/pentakill";
+        }
+
+        let Snow = () => <div />;
+        if (typeof window !== "undefined") {
+            Snow = require("react-snow-effect");
+        }
+
         return (
-            <Menu
-                onClick={this.handleClickMenu}
-                selectedKeys={[this.state.current]}
-                mode="horizontal"
-            >
-                <Menu.Item key="mail">
-                    <Icon type="mail" />Navigation One
-            </Menu.Item>
-                <Menu.Item key="app" disabled>
-                    <Icon type="appstore" />Navigation Two
-            </Menu.Item>
-                <SubMenu title={<span className="submenu-title-wrapper"><Icon type="setting" />Navigation Three - Submenu</span>}>
-                    <MenuItemGroup title="Item 1">
-                        <Menu.Item key="setting:1">Option 1</Menu.Item>
-                        <Menu.Item key="setting:2">Option 2</Menu.Item>
-                    </MenuItemGroup>
-                    <MenuItemGroup title="Item 2">
-                        <Menu.Item key="setting:3">Option 3</Menu.Item>
-                        <Menu.Item key="setting:4">Option 4</Menu.Item>
-                    </MenuItemGroup>
-                </SubMenu>
-                <Menu.Item key="alipay">
-                    <a href="https://ant.design" target="_blank" rel="noopener noreferrer">Navigation Four - Link</a>
-                </Menu.Item>
-            </Menu>
+            <Header>
+                <Menu
+                    theme="light"
+                    mode="horizontal"
+                    style={{ lineHeight: "64px" }}
+                    selectedKeys={[currentKey]}
+                >
+                    <Menu.Item key="/home">
+                        <Link to="/">
+                            <Icon type="home" />
+                            Trang chủ
+                        </Link>
+                    </Menu.Item>
+
+                    <SubMenu
+                        title={(
+                            <span>
+                                <Icon type="heart" />
+                                Confessions
+                            </span>
+)}
+                    >
+                        {!LocalStorageUtils.isAuthenticated() && (
+                            <Menu.Item key="/send">
+                                <Link to="/send">
+                                    <Icon type="mail" />
+                                    Gửi confess
+                                </Link>
+                            </Menu.Item>
+                        )}
+                        {!LocalStorageUtils.isAuthenticated() && (
+                            <Menu.Item key="/my-confess">
+                                <Link to="/my-confess">
+                                    <Icon type="folder" />
+                                    Confess của tui
+                                </Link>
+                            </Menu.Item>
+                        )}
+                        {!LocalStorageUtils.isAuthenticated() && (
+                            <Menu.Item key="/login">
+                                <Link to="/admin-cp">
+                                    <Icon type="github" />
+                                    Admin CP
+                                </Link>
+                            </Menu.Item>
+                        )}
+                        {LocalStorageUtils.isAuthenticated() && (
+                            <Menu.Item key="/admin-cp">
+                                <Link to="/admin-cp">
+                                    <Icon type="github" />
+                                    Admin CP (chào
+                                    {" "}
+                                    <strong>
+                                        {LocalStorageUtils.getNickName()}
+                                    </strong>
+                                    )
+                                </Link>
+                            </Menu.Item>
+                        )}
+                        {LocalStorageUtils.isAuthenticated() && (
+                            <Menu.Item key="/logout">
+                                <a
+                                    href="/logout"
+                                    onClick={e => this.onLogout(e)}
+                                >
+                                    <Icon type="delete" />
+                                    Thoát khỏi tài khoản
+                                </a>
+                            </Menu.Item>
+                        )}
+                    </SubMenu>
+
+                    <SubMenu
+                        title={(
+                            <span>
+                                <Icon type="coffee" />
+                                Dev Đọc
+                            </span>
+)}
+                    >
+                        <Menu.Item key="/news">
+                            <Link to="/news">
+                                <Icon type="medium" />
+                                Medium cho Dev
+                            </Link>
+                        </Menu.Item>
+
+                        <Menu.Item key="/toidicodedao">
+                            <Link to="/toidicodedao">
+                                <Icon type="laptop" />
+                                Tôi đi code dạo
+                            </Link>
+                        </Menu.Item>
+                    </SubMenu>
+
+                    {/* <Menu.Item key="/pentakill">
+                        <Link to="/pentakill">
+                            <Icon type="trophy" />
+                            How to Pentakill
+                        </Link>
+                    </Menu.Item> */}
+                </Menu>
+
+                <Snow />
+            </Header>
         );
     }
 }
 
-export default Header;
+export default withRouter(HeaderPage);

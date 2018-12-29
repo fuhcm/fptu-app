@@ -1,39 +1,36 @@
-import React, { Component } from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Redirect
-} from "react-router-dom";
+import "regenerator-runtime/runtime";
+import React, { Component } from "react";
+import { Route, Switch } from "react-router-dom";
 
-import Header from '../app/modules/header/Header';
-import Footer from '../app/modules/footer/Footer';
-import Routes from '../app/Routes';
+import { Layout } from "antd";
 
-import './App.css';
+import HeaderPage from "./modules/header/Header";
+import FooterPage from "./modules/footer/Footer";
+import Routes from "./Routes";
+import NotFound from "./modules/not-found/NotFound";
+
+import "./App.scss";
 
 class App extends Component {
     render() {
         return (
-            <Router>
-                <div className="wrapper">
-                    <Header />
-                    <Switch>
-                        {Routes.map((route, i) => {
-                            return (
-                                <Route
-                                    exact
-                                    path={route.path}
-                                    component={route.component}
-                                    key={i}
-                                />
-                            );
-                        })}
-                        <Redirect to="/home" />
-                    </Switch>
-                    <Footer />
-                </div>
-            </Router>
+            <Layout>
+                <HeaderPage />
+                <Switch>
+                    {Routes.map(route => {
+                        return (
+                            <Route
+                                exact
+                                path={route.path}
+                                component={route.component}
+                                key={route.path}
+                            />
+                        );
+                    })}
+                    <Route path="*" component={NotFound} />
+                </Switch>
+                <FooterPage />
+            </Layout>
         );
     }
 }

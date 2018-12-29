@@ -1,11 +1,63 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-class Footer extends Component {
+import { Layout } from "antd";
+
+const { Footer } = Layout;
+
+class FooterPage extends Component {
     render() {
         return (
-            <div></div>
+            <Footer style={{ textAlign: "center" }}>
+                <div>
+                    <strong>FPTU</strong>
+.
+                    <strong>Tech</strong>
+                    {' '}
+©2018 Developed
+                    by
+                    {" "}
+                    <strong>
+                        <a
+                            href="https://github.com/huynhminhtufu"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Huynh Minh Tu
+                        </a>
+                    </strong>
+                    . Built on top of Golang & ReactJS, hosted at GCP.
+                </div>
+
+                <div style={{ marginTop: "10px" }}>
+                    <img
+                        src="/assets/images/icons/golang.png"
+                        width="50px"
+                        alt="golang"
+                    />
+                    <img
+                        src="/assets/images/icons/react.png"
+                        width="50px"
+                        alt="reactjs"
+                    />
+                    <img
+                        src="/assets/images/icons/mysql.png"
+                        width="50px"
+                        alt="mysql"
+                    />
+                    <img
+                        src="/assets/images/icons/docker.png"
+                        width="50px"
+                        alt="docker"
+                    />
+                    <img
+                        src="/assets/images/icons/gcp.png"
+                        width="50px"
+                        alt="gcp"
+                    />
+                </div>
+            </Footer>
         );
     }
 }
 
-export default Footer;
+export default FooterPage;
