@@ -32,7 +32,7 @@ class Home extends PureComponent {
 
             return (
                 <a
-                    href={post.link}
+                    href={`${post.link}?ref=fptu.tech`}
                     target="_blank"
                     rel="noopener noreferrer"
                     key={post.guid}
