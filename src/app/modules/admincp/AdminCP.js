@@ -26,7 +26,7 @@ import {
 import LocalStorage from "../../utils/LocalStorage";
 import TextArea from "antd/lib/input/TextArea";
 import { config } from "../../../config";
-import { Helmet } from "react-helmet";
+import Helmet from "react-helmet-async";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 
 const { Content } = Layout;

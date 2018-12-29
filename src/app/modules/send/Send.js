@@ -16,7 +16,7 @@ import {
 import { post } from "../../utils/ApiCaller";
 import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
 import LocalStorage from "../../utils/LocalStorage";
-import { Helmet } from "react-helmet";
+import Helmet from "react-helmet-async";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -176,7 +176,7 @@ class Send extends Component {
                         }}
                     >
                         <img
-                            src="https://i.imgur.com/tbUpPtP.png"
+                            src="/assets/images/fptuhcm-confessions.png"
                             alt="FPTU HCM Confessions"
                             style={{ maxWidth: "200px" }}
                         />

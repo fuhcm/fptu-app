@@ -14,7 +14,7 @@ import {
 
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import Helmet from "react-helmet-async";
 import paramCase from "param-case";
 import { getArticles } from "../../utils/Crawl";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";

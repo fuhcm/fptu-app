@@ -25,27 +25,27 @@ class FooterPage extends Component {
 
                 <div style={{ marginTop: "10px" }}>
                     <img
-                        src="https://i.imgur.com/GsdNJA1.png"
+                        src="/assets/images/icons/golang.png"
                         width="50px"
                         alt="golang"
                     />
                     <img
-                        src="https://i.imgur.com/dFGn248.png"
+                        src="/assets/images/icons/react.png"
                         width="50px"
                         alt="reactjs"
                     />
                     <img
-                        src="https://i.imgur.com/b3EjHhg.png"
+                        src="/assets/images/icons/mysql.png"
                         width="50px"
                         alt="mysql"
                     />
                     <img
-                        src="https://i.imgur.com/9BqSCEg.png"
+                        src="/assets/images/icons/docker.png"
                         width="50px"
                         alt="docker"
                     />
                     <img
-                        src="https://i.imgur.com/BQOhJ4j.png"
+                        src="/assets/images/icons/gcp.png"
                         width="50px"
                         alt="gcp"
                     />

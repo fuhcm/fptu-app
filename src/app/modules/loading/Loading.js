@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Layout } from "antd";
+import { Layout, Skeleton } from "antd";
 
 const { Content } = Layout;
 
@@ -8,7 +8,11 @@ class Loading extends Component {
     render() {
         return (
             <Content className="content-container">
-                <div className="content-wrapper" />
+                <div className="content-wrapper">
+                    <Skeleton active />
+                    <Skeleton active />
+                    <Skeleton active />
+                </div>
             </Content>
         );
     }

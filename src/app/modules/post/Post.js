@@ -5,7 +5,7 @@ import "./Post.scss";
 import { Layout, Button, Icon, Skeleton, BackTop, Tag, message } from "antd";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
 import { Redirect, Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import Helmet from "react-helmet-async";
 import { getArticles } from "../../utils/Crawl";
 
 const { Content } = Layout;
@@ -95,7 +95,10 @@ class Post extends Component {
         return (
             <Content className="content-container">
                 <Helmet>
-                    <title>{(post && post.title) || "Loading"}</title>
+                    <title>
+                        {(post && post.title) ||
+                            "Medium for Devs - FPTU Tech Insider"}
+                    </title>
                 </Helmet>
                 <BackTop />
                 <div className="content-wrapper">

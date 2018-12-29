@@ -14,7 +14,7 @@ import {
 
 import moment from "moment";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import Helmet from "react-helmet-async";
 import paramCase from "param-case";
 import { getArticles } from "../../utils/Crawl";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
@@ -153,7 +153,7 @@ class Index extends Component {
             <Content className="content-container">
                 <Helmet>
                     <title>Tôi đi code dạo</title>
-                    <meta name="description" content="Từ coder đến developer" />
+                    <meta name="description" content="coder đến developer" />
                 </Helmet>
                 <BackTop />
                 <div className="content-wrapper">
@@ -164,7 +164,7 @@ class Index extends Component {
                         }}
                     >
                         <h2>
-                            <img src="https://i.imgur.com/uzF6Fok.png" alt="" />
+                            <img src="/assets/images/toidicodedao.png" alt="" />
                             {loading && (
                                 <Icon
                                     type="loading"

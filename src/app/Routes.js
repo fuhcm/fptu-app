@@ -11,77 +11,88 @@ const Home = Loadable({
     loader: () =>
         import(/* webpackChunkName: "home" */ "../app/modules/home/Home"),
     loading: () => <Loading />,
-    modules: ["home"],
+    modules: ["../app/modules/home/Home"],
+    webpack: () => [require.resolveWeak("../app/modules/home/Home")],
 });
 
 const Login = Loadable({
     loader: () =>
         import(/* webpackChunkName: "login" */ "../app/modules/login/Login"),
     loading: () => <Loading />,
-    modules: ["login"],
+    modules: ["../app/modules/login/Login"],
+    webpack: () => [require.resolveWeak("../app/modules/login/Login")],
 });
 
 const Send = Loadable({
     loader: () =>
         import(/* webpackChunkName: "send" */ "../app/modules/send/Send"),
     loading: () => <Loading />,
-    modules: ["send"],
+    modules: ["../app/modules/send/Send"],
+    webpack: () => [require.resolveWeak("../app/modules/send/Send")],
 });
 
 const AdminCP = Loadable({
     loader: () =>
         import(/* webpackChunkName: "admincp" */ "../app/modules/admincp/AdminCP"),
     loading: () => <Loading />,
-    modules: ["admincp"],
+    modules: ["../app/modules/admincp/AdminCP"],
+    webpack: () => [require.resolveWeak("../app/modules/admincp/AdminCP")],
 });
 
 const MyConfess = Loadable({
     loader: () =>
         import(/* webpackChunkName: "myconfess" */ "../app/modules/my-confess/MyConfess"),
     loading: () => <Loading />,
-    modules: ["myconfess"],
+    modules: ["../app/modules/my-confess/MyConfess"],
+    webpack: () => [require.resolveWeak("../app/modules/my-confess/MyConfess")],
 });
 
 const News = Loadable({
     loader: () =>
         import(/* webpackChunkName: "news" */ "../app/modules/news/News"),
     loading: () => <Loading />,
-    modules: ["news"],
+    modules: ["../app/modules/news/News"],
+    webpack: () => [require.resolveWeak("../app/modules/news/News")],
 });
 
 const Post = Loadable({
     loader: () =>
         import(/* webpackChunkName: "post" */ "../app/modules/post/Post"),
     loading: () => <Loading />,
-    modules: ["post"],
+    modules: ["../app/modules/post/Post"],
+    webpack: () => [require.resolveWeak("../app/modules/post/Post")],
 });
 
 const ToiDiCodeDao_Index = Loadable({
     loader: () =>
         import(/* webpackChunkName: "toidicodedao_index" */ "../app/modules/toidicodedao/Index"),
     loading: () => <Loading />,
-    modules: ["toidicodedao_index"],
+    modules: ["../app/modules/toidicodedao/Index"],
+    webpack: () => [require.resolveWeak("../app/modules/toidicodedao/Index")],
 });
 
 const ToiDiCodeDao_Post = Loadable({
     loader: () =>
         import(/* webpackChunkName: "toidicodedao_post" */ "../app/modules/toidicodedao/Post"),
     loading: () => <Loading />,
-    modules: ["toidicodedao_post"],
+    modules: ["../app/modules/toidicodedao/Post"],
+    webpack: () => [require.resolveWeak("../app/modules/toidicodedao/Post")],
 });
 
 const Review = Loadable({
     loader: () =>
         import(/* webpackChunkName: "review" */ "../app/modules/review/Review"),
     loading: () => <Loading />,
-    modules: ["review"],
+    modules: ["../app/modules/review/Review"],
+    webpack: () => [require.resolveWeak("../app/modules/review/Review")],
 });
 
 const ReviewDetails = Loadable({
     loader: () =>
         import(/* webpackChunkName: "review_details" */ "../app/modules/review/Details"),
     loading: () => <Loading />,
-    modules: ["review_details"],
+    modules: ["../app/modules/review/Details"],
+    webpack: () => [require.resolveWeak("../app/modules/review/Details")],
 });
 
 export default [

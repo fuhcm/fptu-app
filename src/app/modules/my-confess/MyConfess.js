@@ -10,7 +10,7 @@ import {
     GUEST__GET_OVERVIEW,
 } from "../../utils/ApiEndpoint";
 import LocalStorageUtils from "../../utils/LocalStorage";
-import { Helmet } from "react-helmet";
+import Helmet from "react-helmet-async";
 import { config } from "../../../config";
 
 const { Content } = Layout;
