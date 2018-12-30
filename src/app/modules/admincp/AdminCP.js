@@ -292,7 +292,7 @@ class AdminCP extends Component {
 
     handleOkRejectModal = e => {
         e.preventDefault();
-        const { rejectModal } = this.tate;
+        const { rejectModal } = this.state;
         const { id, reason } = rejectModal;
 
         this.handleReject(id, (reason && reason.trim()) || null);
