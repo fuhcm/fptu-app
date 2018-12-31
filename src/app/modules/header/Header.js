@@ -105,6 +105,20 @@ class HeaderPage extends PureComponent {
                                 </Link>
                             </Menu.Item>
                         )}
+                        <Menu.Item key="execption">
+                            <a
+                                href="https://tinyurl.com/noiquyFPTUHCMCFS"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <Icon type="exception" />
+                                Quy định
+                            </a>
+                        </Menu.Item>
+                        <Menu.Item key="instagram">
+                            <Icon type="instagram" />
+                            Instagram
+                        </Menu.Item>
                         {!LocalStorageUtils.isAuthenticated() && (
                             <Menu.Item key="/login">
                                 <Link to="/admin-cp">
@@ -117,8 +131,7 @@ class HeaderPage extends PureComponent {
                             <Menu.Item key="/admin-cp">
                                 <Link to="/admin-cp">
                                     <Icon type="github" />
-                                    Admin CP (chào
-                                    {" "}
+                                    Admin CP (
                                     <strong>
                                         {LocalStorageUtils.getNickName()}
                                     </strong>
@@ -161,6 +174,15 @@ class HeaderPage extends PureComponent {
                             </Link>
                         </Menu.Item>
                     </SubMenu>
+
+                    <Menu.Item key="app" disabled>
+                        <Icon type="key" />
+                        Thư viện Source
+                    </Menu.Item>
+                    <Menu.Item key="app" disabled>
+                        <Icon type="fire" />
+                        Diễn đàn ẩn danh
+                    </Menu.Item>
                 </Menu>
             </Header>
         );

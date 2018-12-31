@@ -25,12 +25,12 @@ class NotFound extends Component {
                     <Exception
                         type="404"
                         actions={(
-                            <Link to="/">
-                                <Button type="primary">Về trang chủ</Button>
+                            <Link to="/news">
+                                <Button type="primary">Đọc báo đê?</Button>
                             </Link>
 )}
                         title="404"
-                        desc="Đi chỗ khác đi, méo có trang này ok?"
+                        desc="Mô phật, thí chủ đi đâu mà lạc vào đây?"
                     />
                 </div>
             </Content>

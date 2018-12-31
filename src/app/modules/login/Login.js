@@ -4,6 +4,7 @@ import "./Login.scss";
 
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import Helmet from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
 import { get, post } from "../../utils/ApiCaller";
 import { AUTH__LOGIN, AUTH__LOGIN_FACEBOOK } from "../../utils/ApiEndpoint";
@@ -94,6 +95,7 @@ class LoginForm extends Component {
             LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.EMAIL, email);
             LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.NICKNAME, nickname);
             const { history } = this.props;
+            message.success(`Chào mừng bợn ${nickname} đã quay lại ahihi`);
             history.push("/admin-cp");
         } else {
             message.error("Thông tin đăng nhập không chính xác!");
@@ -220,7 +222,11 @@ class LoginForm extends Component {
                         <p style={{ fontSize: "1rem" }}>
                             Read more tech posts at
                             {" "}
-                            <strong>fptu.tech/news</strong>
+                            <strong>
+                                <Link to="/news" style={{ color: "#fff" }}>
+                                    fptu.tech/news
+                                </Link>
+                            </strong>
                         </p>
                     </div>
                 </div>

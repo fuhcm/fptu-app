@@ -546,7 +546,7 @@ cái
                             type="primary"
                             onClick={this.handleOkRejectModal}
                         >
-                            Từ cmn chối
+                            Từ chối
                         </Button>,
                     ]}
                 >

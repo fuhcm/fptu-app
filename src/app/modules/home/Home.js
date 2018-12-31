@@ -2,6 +2,8 @@ import React, { PureComponent } from "react";
 
 import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
 
+import { Link } from "react-router-dom";
+
 import Helmet from "react-helmet-async";
 import { getArticles } from "../../utils/Crawl";
 
@@ -123,7 +125,11 @@ class Home extends PureComponent {
                         <p style={{ fontSize: "1rem" }}>
                             Read more tech posts at
                             {" "}
-                            <strong>fptu.tech/news</strong>
+                            <strong>
+                                <Link to="/news" style={{ color: "#fff" }}>
+                                    fptu.tech/news
+                                </Link>
+                            </strong>
                         </p>
                     </div>
                 </div>
