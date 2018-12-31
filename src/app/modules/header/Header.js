@@ -175,11 +175,11 @@ class HeaderPage extends PureComponent {
                         </Menu.Item>
                     </SubMenu>
 
-                    <Menu.Item key="app" disabled>
+                    <Menu.Item key="source" disabled>
                         <Icon type="key" />
                         Thư viện Source
                     </Menu.Item>
-                    <Menu.Item key="app" disabled>
+                    <Menu.Item key="forum" disabled>
                         <Icon type="fire" />
                         Diễn đàn ẩn danh
                     </Menu.Item>
