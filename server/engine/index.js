@@ -12,7 +12,7 @@ export default ({ html, preState, helmet, bundles }) => {
 <html lang="en" ${helmet.htmlAttributes.toString()}>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="FPTU Technology Insider">
     <meta name="keywords" content="FPTU, FPTU University, FPTU Technology, FPTU HCM Confession">
     <meta name="author" content="Huynh Minh Tu [React - NodeJS + Golang]">
