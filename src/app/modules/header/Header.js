@@ -66,11 +66,6 @@ class HeaderPage extends PureComponent {
             currentKey = "/pentakill";
         }
 
-        let Snow = () => <div />;
-        if (typeof window !== "undefined") {
-            Snow = require("react-snow-effect");
-        }
-
         return (
             <Header>
                 <Menu
@@ -166,16 +161,7 @@ class HeaderPage extends PureComponent {
                             </Link>
                         </Menu.Item>
                     </SubMenu>
-
-                    {/* <Menu.Item key="/pentakill">
-                        <Link to="/pentakill">
-                            <Icon type="trophy" />
-                            How to Pentakill
-                        </Link>
-                    </Menu.Item> */}
                 </Menu>
-
-                <Snow />
             </Header>
         );
     }
