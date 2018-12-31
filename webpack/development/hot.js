@@ -19,6 +19,7 @@ module.exports = require("../common/core")({
         port              : APP_ENV.PORT,
         historyApiFallback: true,
         hot               : true,
+        compress          : false,
     },
     plugins: [
         new htmlWebpackPlugin({
