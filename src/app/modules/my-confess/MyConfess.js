@@ -145,8 +145,8 @@ class MyConfess extends Component {
             <div style={{ margin: ".5rem 0" }}>
                 <strong>
                     Lí do bị
-                    {approver}
-                    {' '}
+                    {" " + approver}
+                    {" "}
 từ chối:
                     {" "}
                 </strong>
