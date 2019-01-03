@@ -33,13 +33,13 @@ class HeaderPage extends PureComponent {
         );
 
         notification.open({
-            message    : "Dành cho các bạn SE",
+            message: "Dành cho các bạn SE",
             description:
                 "Tự bổ sung kiến thức cho mình là cách giết thời gian khá tốt. Bạn có thể dễ dàng đọc được những thứ mới, thú vị trên trang news nhé, click vào nút ở dưới để nhảy sang trang đó thử đê",
             btn,
             key,
             duration: 0,
-            icon    : <Icon type="coffee" style={{ color: "#108ee9" }} />,
+            icon: <Icon type="coffee" style={{ color: "#108ee9" }} />,
         });
     };
 
@@ -82,12 +82,12 @@ class HeaderPage extends PureComponent {
                     </Menu.Item>
 
                     <SubMenu
-                        title={(
+                        title={
                             <span>
                                 <Icon type="heart" />
                                 Confessions
                             </span>
-)}
+                        }
                     >
                         {!LocalStorageUtils.isAuthenticated() && (
                             <Menu.Item key="/send">
@@ -153,12 +153,12 @@ class HeaderPage extends PureComponent {
                     </SubMenu>
 
                     <SubMenu
-                        title={(
+                        title={
                             <span>
                                 <Icon type="coffee" />
                                 Dev Đọc
                             </span>
-)}
+                        }
                     >
                         <Menu.Item key="/news">
                             <Link to="/news">
