@@ -18,7 +18,7 @@ module.exports = (env, options) => ({
             babelLoader,
             fileLoader(env === "development"),
             options.target === "node"
-                ? nodeStyleLoader()
+                ? nodeStyleLoader
                 : styleLoader(env === "development"),
         ],
     },
