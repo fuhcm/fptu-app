@@ -2,7 +2,6 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { collectInitial } from "node-style-loader/collect";
 import Loadable from "react-loadable";
 import { getBundles } from "react-loadable/webpack";
 import Engine from "../engine";
@@ -31,7 +30,6 @@ class Renderer {
             </Loadable.Capture>
         );
 
-        const initialStyleTag = collectInitial();
         const preState = {};
         let bundles = getBundles(stats, modules);
 
@@ -39,7 +37,6 @@ class Renderer {
             Engine({
                 html,
                 preState,
-                initialStyleTag,
                 helmet: helmetContext.helmet,
                 bundles,
             })
