@@ -3,7 +3,10 @@ import * as express from "express";
 import bodyParser from "body-parser";
 import compression from "compression";
 import morgan from "morgan";
+import thunkMiddleware from "redux-thunk";
+import { applyMiddleware, compose, createStore } from "redux";
 import Renderer from "./render";
+import state from "../src/app/reducers";
 
 class ServerSideRendering {
     static PORT = 3000; // Default port for server
@@ -11,10 +14,19 @@ class ServerSideRendering {
     constructor() {
         this.port = APP_ENV.PORT || ServerSideRendering.PORT;
         this.app = express();
+        this.serverStore = {};
+        this.storeConfig();
         this.createConfigMiddleWare();
         this.createRouter();
         this.startService();
     }
+
+    storeConfig = () => {
+        const middlewares = [thunkMiddleware];
+        const enhancers = [applyMiddleware(...middlewares)];
+        const composedEnhancer = compose(...enhancers);
+        this.serverStore = createStore(state, {}, composedEnhancer);
+    };
 
     createConfigMiddleWare = () => {
         this.app.use(compression());
@@ -47,7 +59,7 @@ class ServerSideRendering {
     };
 
     createRouter = () => {
-        new Renderer(this.app);
+        new Renderer(this.app, this.serverStore);
     };
 
     startService = () => {

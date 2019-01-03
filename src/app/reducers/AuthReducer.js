@@ -1,5 +1,6 @@
 const initialState = {
-    logged: false,
+    logged : false,
+    isAdmin: false,
 };
 
 export default (state = initialState) => {

@@ -1,6 +1,7 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import { HelmetProvider } from "react-helmet-async";
 import Loadable from "react-loadable";
 import { getBundles } from "react-loadable/webpack";
@@ -11,26 +12,28 @@ import App from "../../src/app/App";
 const stats = require("../../dist/react-loadable.json");
 
 class Renderer {
-    constructor(app) {
-        app.get("*", this.renderApp());
+    constructor(app, store) {
+        app.get("*", this.renderApp(store));
     }
 
-    renderApp = () => (req, res) => {
+    renderApp = store => (req, res) => {
         let context = {};
         let helmetContext = {};
         let modules = [];
 
         const html = renderToString(
             <Loadable.Capture report={moduleName => modules.push(moduleName)}>
-                <StaticRouter location={req.url} context={context}>
-                    <HelmetProvider context={helmetContext}>
-                        <App />
-                    </HelmetProvider>
-                </StaticRouter>
+                <Provider store={store}>
+                    <StaticRouter location={req.url} context={context}>
+                        <HelmetProvider context={helmetContext}>
+                            <App />
+                        </HelmetProvider>
+                    </StaticRouter>
+                </Provider>
             </Loadable.Capture>
         );
 
-        const preState = {};
+        const preState = store.getState();
         let bundles = getBundles(stats, modules);
 
         res.send(
