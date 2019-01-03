@@ -5,11 +5,11 @@ import compression from "compression";
 import morgan from "morgan";
 import Renderer from "./render";
 
-class BaseApp {
-    static PORT = 3000;
+class ServerSideRendering {
+    static PORT = 3000; // Default port for server
 
     constructor() {
-        this.port = APP_ENV.PORT || BaseApp.PORT;
+        this.port = APP_ENV.PORT || ServerSideRendering.PORT;
         this.app = express();
         this.createConfigMiddleWare();
         this.createRouter();
@@ -60,4 +60,4 @@ class BaseApp {
     };
 }
 
-new BaseApp();
+new ServerSideRendering();

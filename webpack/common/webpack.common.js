@@ -80,17 +80,15 @@ module.exports.styleLoader = isDev => {
     };
 };
 
-module.exports.nodeStyleLoader = () => {
-    return {
-        test: /\.(s*)css$/,
-        use : [
-            "node-style-loader",
-            "css-loader",
-            {
-                loader: "sass-loader",
-            },
-        ],
-    };
+module.exports.nodeStyleLoader = {
+    test: /\.(s*)css$/,
+    use : [
+        "node-style-loader",
+        "css-loader",
+        {
+            loader: "sass-loader",
+        },
+    ],
 };
 
 module.exports.resolve = {

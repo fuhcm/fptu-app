@@ -13,10 +13,10 @@ const stats = require("../../dist/react-loadable.json");
 
 class Renderer {
     constructor(app) {
-        app.get("*", this.renderMocoApp());
+        app.get("*", this.renderApp());
     }
 
-    renderMocoApp = () => (req, res) => {
+    renderApp = () => (req, res) => {
         let context = {};
         let helmetContext = {};
         let modules = [];
