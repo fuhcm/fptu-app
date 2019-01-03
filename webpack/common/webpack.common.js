@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const APP_ENV = dotenv.config().error ? {} : dotenv.config().parsed;
-const isDev = APP_ENV.NODE_ENV === "development";
 const commonPath = path.resolve(__dirname, "../../");
 
 module.exports.babelLoader = {
@@ -27,46 +26,48 @@ module.exports.babelLoader = {
     },
 };
 
-module.exports.fileLoader = {
-    test: /\.(png|jpg|gif|ttf|eot|woff|woff2|tcc|svg|otf)$/i,
-    use : [
-        {
-            loader : "url-loader",
-            options: {
-                limit     : 4000,
-                fallback  : "file-loader",
-                quality   : 85,
-                publicPath: isDev ? "/" : "/client/",
-            },
-        },
-        {
-            loader : "image-webpack-loader",
-            options: {
-                mozjpeg: {
-                    progressive: true,
-                    quality    : 65,
-                },
-                // optipng.enabled: false will disable optipng
-                optipng: {
-                    enabled: false,
-                },
-                pngquant: {
-                    quality: "65-90",
-                    speed  : 4,
-                },
-                gifsicle: {
-                    interlaced: false,
-                },
-                // the webp option will enable WEBP
-                webp: {
-                    quality: 75,
+module.exports.fileLoader = isDev => {
+    return {
+        test: /\.(png|jpg|gif|ttf|eot|woff|woff2|tcc|svg|otf)$/i,
+        use : [
+            {
+                loader : "url-loader",
+                options: {
+                    limit     : 4000,
+                    fallback  : "file-loader",
+                    quality   : 85,
+                    publicPath: isDev ? "/" : "/client/",
                 },
             },
-        },
-    ],
+            {
+                loader : "image-webpack-loader",
+                options: {
+                    mozjpeg: {
+                        progressive: true,
+                        quality    : 65,
+                    },
+                    // optipng.enabled: false will disable optipng
+                    optipng: {
+                        enabled: false,
+                    },
+                    pngquant: {
+                        quality: "65-90",
+                        speed  : 4,
+                    },
+                    gifsicle: {
+                        interlaced: false,
+                    },
+                    // the webp option will enable WEBP
+                    webp: {
+                        quality: 75,
+                    },
+                },
+            },
+        ],
+    };
 };
 
-module.exports.styleLoader = () => {
+module.exports.styleLoader = isDev => {
     return {
         test: /\.(s*)css$/,
         use : [
@@ -128,6 +129,5 @@ module.exports.optimization = {
     ],
 };
 
-module.exports.commonPath = commonPath;
-module.exports.isDev = isDev;
 module.exports.APP_ENV = APP_ENV;
+module.exports.commonPath = commonPath;
