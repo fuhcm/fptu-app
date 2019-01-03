@@ -8,7 +8,7 @@ const {
     resolve,
     optimization,
     APP_ENV,
-} = require("../common");
+} = require("./webpack.common");
 
 module.exports = options => ({
     entry : options.entry,

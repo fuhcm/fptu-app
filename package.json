@@ -38,17 +38,16 @@
         "uuid": "^3.3.2"
     },
     "scripts": {
-        "dev": "webpack-dev-server --config webpack/development/hot.js",
+        "dev": "webpack-dev-server --config webpack/development/webpack.development.js",
         "sync-source": "rm -rf dist && cp -r public/ dist",
-        "build:client": "webpack --config webpack/production/client.js",
-        "build:server": "webpack --config webpack/production/server.js",
+        "build:client": "webpack --config webpack/production/webpack.client.js",
+        "build:server": "webpack --config webpack/production/webpack.server.js",
         "build": "npm run sync-source && npm run build:client && npm run build:server",
         "start": "node ./dist/server/server.js",
         "lint:code": "eslint 'src/**/*.{js,jsx,ts}'",
         "lint:style": "stylelint 'src/**/*.{scss,sass}'",
         "fix:code": "prettier --write 'src/**/*.{js,jsx,ts}' && eslint --fix 'src/**/*.{js,jsx,ts}'",
-        "fix:style": "prettier --write 'src/**/*.{scss,sass}' && stylelint --fix 'src/**/*.{scss,sass}'",
-        "count": "cloc --exclude-dir=$(tr '\n' ',' < .clocignore) ."
+        "fix:style": "prettier --write 'src/**/*.{scss,sass}' && stylelint --fix 'src/**/*.{scss,sass}'"
     },
     "devDependencies": {
         "@babel/core": "^7.1.2",
