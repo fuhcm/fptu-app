@@ -44,4 +44,5 @@ module.exports = (env, options) => ({
             APP_ENV: JSON.stringify(APP_ENV),
         }),
     ]),
+    stats: "errors-only",
 });
