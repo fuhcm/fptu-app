@@ -10,20 +10,7 @@ const commonPath = path.resolve(__dirname, "../../");
 module.exports.babelLoader = {
     test   : /\.(js|jsx)$/,
     exclude: /node_modules/,
-    use    : {
-        loader : "babel-loader",
-        options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
-            plugins: [
-                "@babel/proposal-class-properties",
-                "@babel/plugin-transform-runtime",
-                "@babel/plugin-proposal-object-rest-spread",
-                "@babel/plugin-transform-async-to-generator",
-                "@babel/plugin-syntax-dynamic-import",
-                "@babel/plugin-transform-react-jsx",
-            ],
-        },
-    },
+    loader : "babel-loader",
 };
 
 module.exports.fileLoader = isDev => {
