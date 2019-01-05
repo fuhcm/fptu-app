@@ -1,10 +1,8 @@
-const dotenv = require("dotenv");
 const path = require("path");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
-const APP_ENV = dotenv.config().error ? {} : dotenv.config().parsed;
 const commonPath = path.resolve(__dirname, "../../");
 
 module.exports.babelLoader = {
@@ -114,5 +112,4 @@ module.exports.optimization = {
     ],
 };
 
-module.exports.APP_ENV = APP_ENV;
 module.exports.commonPath = commonPath;

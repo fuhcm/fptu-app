@@ -8,8 +8,12 @@ import { getBundles } from "react-loadable/webpack";
 import Engine from "../engine";
 import App from "../../src/app/App";
 
-//eslint-disable-next-line
-const stats = require("../../dist/react-loadable.json");
+const stats =
+    ENVIRONMENT === "staging"
+        ? //eslint-disable-next-line
+          require("../../dist/staging/react-loadable.json")
+        : //eslint-disable-next-line
+          require("../../dist/production/react-loadable.json");
 
 class Renderer {
     constructor(app, store) {

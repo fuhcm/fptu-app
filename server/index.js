@@ -32,7 +32,13 @@ class ServerSideRendering {
         this.app.use(compression());
         this.app.use(bodyParser.json());
 
-        this.app.use(morgan("combined"));
+        this.app.use(
+            morgan("combined", {
+                skip: function(req, res) {
+                    return res.statusCode === 200 || res.statusCode === 304;
+                },
+            })
+        );
 
         this.app.use(function(req, res, next) {
             res.header("Access-Control-Allow-Origin", "*");
@@ -44,11 +50,19 @@ class ServerSideRendering {
             next();
         });
 
-        this.app.use(
-            express.static("dist", {
-                maxAge: 86400,
-            })
-        );
+        if (ENVIRONMENT === "staging") {
+            this.app.use(
+                express.static("dist/staging", {
+                    maxAge: 86400,
+                })
+            );
+        } else {
+            this.app.use(
+                express.static("dist/production", {
+                    maxAge: 86400,
+                })
+            );
+        }
 
         this.app.use(
             "/assets",
