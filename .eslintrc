@@ -70,6 +70,7 @@
         }
     },
     "globals": {
-        "APP_ENV": true
+        "APP_ENV": true,
+        "ENVIRONMENT": true
     }
 }

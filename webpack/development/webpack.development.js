@@ -1,10 +1,13 @@
 const path = require("path");
+const dotenv = require("dotenv");
 const webpack = require("webpack");
 const htmlWebpackPlugin = require("html-webpack-plugin");
-const { APP_ENV } = require("../common/webpack.common");
 
-module.exports = require("../common/webpack.core")("development", {
-    entry: {
+const APP_ENV = dotenv.config().error ? {} : dotenv.config().parsed;
+
+module.exports = require("../common/webpack.core")({
+    environment: "development",
+    entry      : {
         browser: "./src/index.js",
     },
     output: {
@@ -20,6 +23,7 @@ module.exports = require("../common/webpack.core")("development", {
         historyApiFallback: true,
         hot               : true,
         compress          : false,
+        quiet             : true,
     },
     plugins: [
         new htmlWebpackPlugin({
