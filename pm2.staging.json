@@ -1,0 +1,8 @@
+{
+    "apps": [
+        {
+            "name": "staging.fptu",
+            "script": "./dist/staging/server/server.js"
+        }
+    ]
+}

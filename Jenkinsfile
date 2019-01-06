@@ -6,5 +6,6 @@ ssh root@gosu.team <<EOF
     yarn
     yarn build
     pm2 reload www.fptu
+    pm2 reload staging.fptu
     exit
 EOF
