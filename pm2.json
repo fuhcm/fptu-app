@@ -1,8 +1,0 @@
-{
-    "apps": [
-        {
-            "name": "www.fptu",
-            "script": "./dist/production/server/server.js"
-        }
-    ]
-}
