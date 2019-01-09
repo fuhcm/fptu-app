@@ -9,7 +9,6 @@ const defaultSources = [
     "https://hackernoon.com",
     "https://medium.com/javascript-scene",
     "https://medium.com/dev-channel",
-    "https://medium.com/google-developers",
 ];
 
 export const getArticles = async (
