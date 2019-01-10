@@ -29,4 +29,4 @@ ENTRYPOINT ["npm","run"]
 # docker build -t fptu-fe .
 
 # This is docker run command:
-# docker run -d --name fptu-fe -p 3001:3000 fptu-fe:latest
+# docker run -d --name fptu-fe -p 3001:3000 fptu-fe:latest start:prod
