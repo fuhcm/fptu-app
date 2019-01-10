@@ -20,11 +20,13 @@ WORKDIR /root/src/app
 COPY --from=builder /root/src/app/package.json /root/src/app/package.json
 COPY --from=builder /root/src/app/dist /root/src/app/dist
 
+EXPOSE 3000
+
 # Set command
 ENTRYPOINT ["npm","run"]
 
 # This is docker build command: 
-# sudo docker build -t fptu-fe .
+# docker build -t fptu-fe .
 
 # This is docker run command:
-# sudo docker run -d --name fptu-fe -p 3001:3000 fptu-fe:latest
+# docker run -d --name fptu-fe -p 3001:3000 fptu-fe:latest
