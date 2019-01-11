@@ -24,6 +24,9 @@ export default ({ html, preState, helmet, bundles }) => {
     <link rel="apple-touch-icon" href="/assets/images/fptuhcm-confessions.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="/assets/manifest.json">
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="FPT University Tech Insider, How much does culture influence creative thinking?" />
+    <meta property="og:image" content="https://cdn-images-1.medium.com/max/1024/1*hMHI6laZkdZMdZNnSQg5AA.jpeg" />
     ${helmet.title.toString()}
     ${helmet.link.toString()}
     ${helmet.meta.toString()}
