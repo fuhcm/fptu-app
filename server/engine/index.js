@@ -22,7 +22,7 @@ export default ({ html, preState, helmet, bundles }) => {
     <meta name="author" content="Huynh Minh Tu [React - NodeJS + Golang]">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="/assets/images/fptuhcm-confessions.png">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="/assets/manifest.json">
     ${helmet.title.toString()}
     ${helmet.link.toString()}
