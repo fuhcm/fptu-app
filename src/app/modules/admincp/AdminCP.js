@@ -242,7 +242,12 @@ class AdminCP extends Component {
         <div className="confess-content">{content}</div>
     );
 
-    approvedConfess = (content, approver = "admin", cfs_id = "0") => (
+    approvedConfess = (
+        content,
+        approver = "admin",
+        cfs_id = "0",
+        approveTime
+    ) => (
         <div>
             <div className="confess-content">{content}</div>
             <div style={{ margin: ".5rem 0" }}>
@@ -263,11 +268,18 @@ class AdminCP extends Component {
 #
                     {approver}
                 </Tag>
+                <span>
+                    Duyệt lúc
+                    {" "}
+                    <strong>
+                        {moment(approveTime).format("HH:mm DD/MM/YYYY")}
+                    </strong>
+                </span>
             </div>
         </div>
     );
 
-    rejectedConfess = (content, approver = "admin") => (
+    rejectedConfess = (content, approver = "admin", reason) => (
         <div>
             <div className="confess-content">
                 <strike>{content}</strike>
@@ -277,6 +289,15 @@ class AdminCP extends Component {
 #
                     {approver}
                 </Tag>
+                <span
+                    style={{
+                        color     : "white",
+                        background: "red",
+                        padding   : "0.4rem",
+                    }}
+                >
+                    {reason || "Không có lí do luôn"}
+                </span>
             </div>
         </div>
     );
@@ -416,7 +437,7 @@ class AdminCP extends Component {
                     }}
                 >
                     <Button onClick={this.onLoadMore} hidden={!list}>
-                        tải thêm confess
+                        Tải thêm confess cũ
                     </Button>
                 </div>
             ) : null;
@@ -516,12 +537,14 @@ cái
                                         this.approvedConfess(
                                             item.content,
                                             item.approver,
-                                            item.cfs_id
+                                            item.cfs_id,
+                                            item.updated_at
                                         )}
                                     {item.status === 2 &&
                                         this.rejectedConfess(
                                             item.content,
-                                            item.approver
+                                            item.approver,
+                                            item.reason
                                         )}
                                 </Skeleton>
                             </List.Item>
