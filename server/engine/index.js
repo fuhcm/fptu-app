@@ -16,12 +16,13 @@ export default ({ html, preState, helmet, bundles }) => {
 <html lang="en" ${helmet.htmlAttributes.toString()}>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta name="description" content="FPTU Technology Insider">
     <meta name="keywords" content="FPTU, FPTU University, FPTU Technology, FPTU HCM Confession">
     <meta name="author" content="Huynh Minh Tu [React - NodeJS + Golang]">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" href="/assets/images/fptuhcm-confessions.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="/assets/manifest.json">
     ${helmet.title.toString()}
     ${helmet.link.toString()}
