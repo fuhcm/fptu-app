@@ -51,6 +51,10 @@ class Index extends Component {
                 )
             );
 
+            if (!posts) {
+                return;
+            }
+
             posts = this.filterNotLightningTalk(posts);
 
             this.setState({
@@ -63,6 +67,10 @@ class Index extends Component {
                 true,
                 "toidicodedao"
             ).then(posts => {
+                if (!posts) {
+                    return;
+                }
+                
                 posts = this.filterNotLightningTalk(posts);
 
                 this.setState({

@@ -14,6 +14,7 @@ import {
     message,
 } from "antd";
 import Helmet from "react-helmet-async";
+import { ReCaptcha } from "react-recaptcha-google";
 import { post } from "../../utils/ApiCaller";
 import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
 import LocalStorage from "../../utils/LocalStorage";
@@ -32,8 +33,27 @@ class Send extends Component {
             loading           : false,
             imageUrl          : "",
             step              : 0,
+            recaptchaToken    : null,
         };
     }
+
+    componentDidMount() {
+        if (this.captchaDemo) {
+            console.log("started, just a second...");
+            this.captchaDemo.reset();
+        }
+    }
+
+    onLoadRecaptcha = () => {
+        if (this.captchaDemo) {
+            this.captchaDemo.reset();
+        }
+    };
+    verifyCallback = recaptchaToken => {
+        this.setState({
+            recaptchaToken,
+        });
+    };
 
     handleSend = () => {
         const { contentTextarea } = this.state;
@@ -48,37 +68,44 @@ class Send extends Component {
 
         this.onSend(contentTextarea.trim()).then(res => {
             if (res.status === "ok") {
-                // Save in localStorage
+                message
+                    .loading("Đang gửi tới admin..", 2.5)
+                    .then(() => message.success("Đã gửi rồi đó", 2.5))
+                    .then(() =>
+                        this.setState({
+                            disabledSendButton: false,
+                            contentTextarea   : "",
+                            step              : 1,
+                        })
+                    )
+                    .then(() =>
+                        message.info(
+                            "Vui lòng chờ admin xét duyệt, tối đa chờ 2 ngày",
+                            2.5
+                        )
+                    );
             } else {
-                // Not save
-            }
-        });
+                message.error("Lỗi kết nối nên chưa gửi được");
 
-        message
-            .loading("Đang gửi tới admin..", 2.5)
-            .then(() => message.success("Đã gửi rồi đó", 2.5))
-            .then(() =>
                 this.setState({
                     disabledSendButton: false,
-                    contentTextarea   : "",
-                    step              : 1,
-                })
-            )
-            .then(() =>
-                message.info(
-                    "Vui lòng chờ admin xét duyệt, tối đa chờ 2 ngày",
-                    2.5
-                )
-            );
+                    contentTextarea   : contentTextarea,
+                    step              : 0,
+                });
+            }
+        });
     };
 
     onSend = content => {
         LocalStorage.generateSenderToken();
 
+        const { recaptchaToken } = this.state;
+
         return post(GUEST__POST_CONFESS, {
             content,
-            sender: LocalStorage.getSenderToken(),
-            status: 0,
+            sender : LocalStorage.getSenderToken(),
+            status : 0,
+            captcha: recaptchaToken,
         })
             .then(() => {
                 return { status: "ok", message: "" };
@@ -146,6 +173,7 @@ class Send extends Component {
             contentTextarea,
             imageUrl,
             step,
+            recaptchaToken,
         } = this.state;
 
         const { loading } = this.state;
@@ -238,20 +266,30 @@ class Send extends Component {
                                 uploadButton
                             )}
                         </Upload>
+                        <ReCaptcha
+                            ref={el => {
+                                this.captchaDemo = el;
+                            }}
+                            size="normal"
+                            data-theme="dark"
+                            render="explicit"
+                            sitekey="6LfM3YgUAAAAAKtd0Yg9dxxFL1dYhbGHUGPJanKL"
+                            onloadCallback={this.onLoadRecaptcha}
+                            verifyCallback={this.verifyCallback}
+                        />
                         <Button
                             type="primary"
                             onClick={this.handleSend}
-                            disabled={disabledSendButton}
+                            disabled={disabledSendButton || !recaptchaToken}
                             style={{ margin: ".5rem" }}
                         >
                             <Icon type="thunderbolt" />
                             Gửi ngay và luôn!
                         </Button>
+                        <Button onClick={this.handleUploadHelper} dashed>
+                            Chức năng upload ảnh đang bị lỗi, up ảnh sao?!
+                        </Button>
                     </div>
-
-                    <Button onClick={this.handleUploadHelper}>
-                        Chức năng upload ảnh đang bị lỗi, up ảnh sao?!
-                    </Button>
 
                     <Divider dashed />
                     <Row>

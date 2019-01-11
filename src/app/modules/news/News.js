@@ -140,13 +140,13 @@ class News extends Component {
                             <span style={{ color: "darkblue" }}>DEV</span>
                             {' '}
 Đọc
-                            {loading && (
+                            {(loading || !posts) && (
                             <Icon
                                 type="loading"
                                 style={{ marginLeft: "1rem" }}
                             />
                             )}
-                            {!loading && (
+                            {!loading && posts && (
                                 <span
                                     style={{
                                         marginLeft: "1rem",
@@ -173,7 +173,7 @@ hàng ngày
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>
                     )}
-                    {loading && (
+                    {(loading || !posts) && (
                         <div>
                             <Skeleton active />
                             <Skeleton active />

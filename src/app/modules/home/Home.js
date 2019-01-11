@@ -25,7 +25,17 @@ class Home extends PureComponent {
         });
     }
 
-    renderPosts = posts => {
+    renderPosts = (posts = []) => {
+        if (posts === "undefined" || posts.length === 0) {
+            return (
+                <div>
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                </div>
+            );
+        }
+
         return posts.map(post => {
             post.description = post.description
                 .replace(/<(.|\n)*?>/g, "")
@@ -71,6 +81,7 @@ class Home extends PureComponent {
 
     render() {
         const { loading, posts } = this.state;
+
         return (
             <Content className="content-container">
                 <Helmet>
@@ -91,14 +102,17 @@ class Home extends PureComponent {
                     <Divider style={{ fontWeight: "lighter" }}>
                         Trang chủ trường có gì hot?
                     </Divider>
-                    {posts && <Row gutter={16}>{this.renderPosts(posts)}</Row>}
-                    {loading && (
-                        <div>
-                            <Skeleton active />
-                            <Skeleton active />
-                            <Skeleton active />
-                        </div>
+                    {posts !== "undefined" && (
+                        <Row gutter={16}>{this.renderPosts(posts)}</Row>
                     )}
+                    {loading ||
+                        ((posts && posts.length) === 0 && (
+                            <div>
+                                <Skeleton active />
+                                <Skeleton active />
+                                <Skeleton active />
+                            </div>
+                        ))}
 
                     <Divider dashed />
 
