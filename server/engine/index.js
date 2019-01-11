@@ -21,7 +21,7 @@ export default ({ html, preState, helmet, bundles }) => {
     <meta name="keywords" content="FPTU, FPTU University, FPTU Technology, FPTU HCM Confession">
     <meta name="author" content="Huynh Minh Tu [React - NodeJS + Golang]">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="/assets/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/images/fptuhcm-confessions.png">
     <link rel="manifest" href="/assets/manifest.json">
     ${helmet.title.toString()}
     ${helmet.link.toString()}
