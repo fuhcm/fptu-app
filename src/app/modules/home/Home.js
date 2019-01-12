@@ -114,14 +114,13 @@ class Home extends Component {
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>
                     )}
-                    {loading ||
-                        ((posts && posts.length) === 0 && (
-                            <div>
-                                <Skeleton active />
-                                <Skeleton active />
-                                <Skeleton active />
-                            </div>
-                        ))}
+                    {(loading || !posts) && (
+                        <div>
+                            <Skeleton active />
+                            <Skeleton active />
+                            <Skeleton active />
+                        </div>
+                    )}
 
                     <Divider dashed />
 
