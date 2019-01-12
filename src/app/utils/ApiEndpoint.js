@@ -20,6 +20,7 @@ export const GUEST__POST_CONFESS = API_BASE_URL + "/confessions";
 export const GUEST__GET_MY_CONFESS = API_BASE_URL + "/myconfess";
 export const GUEST__GET_OVERVIEW = API_BASE_URL + "/confessions/overview";
 export const GUEST__GET_APPROVED = API_BASE_URL + "/confessions/approved";
+export const GUEST__GET_SEARCH = API_BASE_URL + "/confessions/search";
 
 // Crawl
 export const CRAWL__URL = BASE_URL + "/crawl";

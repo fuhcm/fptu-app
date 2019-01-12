@@ -2,27 +2,37 @@ import React, { Component } from "react";
 
 import moment from "moment";
 
-import { Layout, List, Button, Skeleton, Tag, Row, Alert, message } from "antd";
+import {
+    Layout,
+    List,
+    Button,
+    Skeleton,
+    Tag,
+    Input,
+    Divider,
+    message,
+} from "antd";
 import Helmet from "react-helmet-async";
 import { get } from "../../utils/ApiCaller";
 import {
     GUEST__GET_APPROVED,
-    GUEST__GET_OVERVIEW,
+    GUEST__GET_SEARCH,
 } from "../../utils/ApiEndpoint";
 import LocalStorageUtils from "../../utils/LocalStorage";
 
 const { Content } = Layout;
+const Search = Input.Search;
 
 const stepLoad = 10;
 
-class Search extends Component {
+class SearchPage extends Component {
     state = {
-        numLoad    : stepLoad,
-        initLoading: true,
-        loading    : false,
-        data       : [],
-        list       : [],
-        overview   : {},
+        numLoad     : stepLoad,
+        initLoading : true,
+        loading     : false,
+        data        : [],
+        list        : [],
+        isSearchMode: false,
     };
 
     componentDidMount() {
@@ -35,19 +45,11 @@ class Search extends Component {
                 list       : data,
             });
         });
-
-        this.getOverview(data => {
-            this.setState({
-                overview: data,
-            });
-        });
     }
 
     getData = async (numLoad, callback) => {
         await setTimeout(() => {
-            get(GUEST__GET_APPROVED + "?load=" + numLoad, {
-                token: LocalStorageUtils.getSenderToken(),
-            })
+            get(GUEST__GET_APPROVED + "?load=" + numLoad)
                 .then(res => {
                     callback(res.data);
                 })
@@ -63,10 +65,35 @@ class Search extends Component {
         }, 1000);
     };
 
-    getOverview = callback => {
-        get(GUEST__GET_OVERVIEW).then(res => {
-            callback(res.data);
+    handleSearch = async keyword => {
+        if (!keyword.trim()) {
+            return;
+        }
+
+        this.setState({
+            initLoading: true,
         });
+
+        await setTimeout(() => {
+            get(GUEST__GET_SEARCH + "?q=" + keyword)
+                .then(res => {
+                    this.setState({
+                        initLoading : false,
+                        data        : res.data,
+                        list        : res.data,
+                        isSearchMode: true,
+                    });
+                })
+                .catch(() => {
+                    message.error(
+                        "Kết nối tới máy chủ bị lỗi, vui lòng báo lại cho admin để xử lí"
+                    );
+
+                    this.setState({
+                        loading: false,
+                    });
+                });
+        }, 1000);
     };
 
     onLoadMore = () => {
@@ -156,9 +183,9 @@ từ chối:
     );
 
     render() {
-        const { initLoading, loading, list, overview } = this.state;
+        const { initLoading, loading, list, isSearchMode } = this.state;
         const loadMore =
-            !initLoading && !loading ? (
+            !initLoading && !loading && !isSearchMode ? (
                 <div
                     style={{
                         textAlign : "center",
@@ -180,6 +207,15 @@ từ chối:
                 </Helmet>
                 <div className="content-wrapper">
                     <h2>Thư viện confession</h2>
+
+                    <Search
+                        placeholder="Tìm confession cũ"
+                        enterButton="Tìm"
+                        size="large"
+                        onSearch={keyword => this.handleSearch(keyword)}
+                    />
+
+                    <Divider dashed />
 
                     <List
                         size="large"
@@ -224,4 +260,4 @@ từ chối:
     }
 }
 
-export default Search;
+export default SearchPage;
