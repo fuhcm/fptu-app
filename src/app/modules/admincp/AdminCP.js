@@ -47,7 +47,7 @@ class AdminCP extends Component {
         },
         scheduledTime: null,
         isPosting    : false,
-        approvalMode : false,
+        approvalMode : true,
     };
 
     componentDidMount() {
@@ -506,6 +506,7 @@ cái
                             checkedChildren="Chỉ chưa duyệt"
                             unCheckedChildren="Chỉ chưa duyệt"
                             onChange={() => this.handleApprovalMode()}
+                            defaultChecked
                         />
                     </div>
                     

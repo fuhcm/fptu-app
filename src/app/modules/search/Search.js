@@ -223,13 +223,13 @@ class SearchPage extends Component {
         return (
             <Content className="content-container">
                 <Helmet>
-                    <title>Confess của tui</title>
+                    <title>Thư viện confess</title>
                 </Helmet>
                 <div className="content-wrapper">
                     <h2>Thư viện confession</h2>
 
                     <Search
-                        placeholder="Tìm confession cũ"
+                        placeholder="Nhập từ khoá để tìm confession cũ"
                         enterButton="Tìm"
                         size="large"
                         onSearch={keyword => this.handleSearch(keyword)}
