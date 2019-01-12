@@ -65,7 +65,7 @@ class SearchPage extends Component {
                         loading: false,
                     });
                 });
-        }, 1000);
+        }, 200);
     };
 
     handleSearch = async keyword => {
@@ -97,7 +97,7 @@ class SearchPage extends Component {
                         loading: false,
                     });
                 });
-        }, 1000);
+        }, 500);
     };
 
     onLoadMore = () => {

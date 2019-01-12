@@ -85,7 +85,7 @@ class AdminCP extends Component {
                         history.push("/login");
                     }
                 });
-        }, 1000);
+        }, 100);
     };
 
     getOverview = callback => {

@@ -60,7 +60,7 @@ class MyConfess extends Component {
                         loading: false,
                     });
                 });
-        }, 1000);
+        }, 100);
     };
 
     getOverview = callback => {
