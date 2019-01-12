@@ -225,7 +225,7 @@ từ chối:
                         dataSource={list || []}
                         locale={{
                             emptyText:
-                                "Bạn ơi, bạn chưa gửi cái confess nào hết á!!",
+                                "Không có confession nào được tìm thấy với từ khoá này!!",
                         }}
                         renderItem={(item, index) => (
                             <List.Item key={index}>
