@@ -37,4 +37,8 @@ a {
     @media screen and (max-width: 1024px) {
         font-size: 1rem;
     }
+
+    p:last-child {
+        display: none;
+    }
 }
