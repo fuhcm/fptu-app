@@ -107,6 +107,12 @@ class HeaderPage extends PureComponent {
                                 </Link>
                             </Menu.Item>
                         )}
+                        <Menu.Item key="/search">
+                            <Link to="/search">
+                                <Icon type="book" />
+                                Thư viện confess
+                            </Link>
+                        </Menu.Item>
                         <Menu.Item key="execption">
                             <a
                                 href="https://tinyurl.com/noiquyFPTUHCMCFS"

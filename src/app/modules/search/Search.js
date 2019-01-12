@@ -4,9 +4,9 @@ import moment from "moment";
 
 import { Layout, List, Button, Skeleton, Tag, Row, Alert, message } from "antd";
 import Helmet from "react-helmet-async";
-import { get, post } from "../../utils/ApiCaller";
+import { get } from "../../utils/ApiCaller";
 import {
-    GUEST__GET_MY_CONFESS,
+    GUEST__GET_APPROVED,
     GUEST__GET_OVERVIEW,
 } from "../../utils/ApiEndpoint";
 import LocalStorageUtils from "../../utils/LocalStorage";
@@ -15,7 +15,7 @@ const { Content } = Layout;
 
 const stepLoad = 10;
 
-class MyConfess extends Component {
+class Search extends Component {
     state = {
         numLoad    : stepLoad,
         initLoading: true,
@@ -45,7 +45,7 @@ class MyConfess extends Component {
 
     getData = async (numLoad, callback) => {
         await setTimeout(() => {
-            post(GUEST__GET_MY_CONFESS + "?load=" + numLoad, {
+            get(GUEST__GET_APPROVED + "?load=" + numLoad, {
                 token: LocalStorageUtils.getSenderToken(),
             })
                 .then(res => {
@@ -145,7 +145,7 @@ class MyConfess extends Component {
                 <strong>
                     Lí do bị
                     {" " + approver}
-                    {" "}
+                    {' '}
 từ chối:
                     {" "}
                 </strong>
@@ -179,51 +179,7 @@ từ chối:
                     <title>Confess của tui</title>
                 </Helmet>
                 <div className="content-wrapper">
-                    <h2>Danh sách confession tui đã gửi</h2>
-
-                    <Row style={{ marginBottom: "10px" }}>
-                        <Alert
-                            message="Thống kê tổng quan"
-                            description={(
-                                <div>
-                                    <Row>
-                                        Lời nhắn đã nhận:
-                                        {" "}
-                                        <strong>{overview.total || "0"}</strong>
-                                        {" "}
-                                        cái
-                                    </Row>
-                                    <Row>
-                                        Đang chờ duyệt:
-                                        {" "}
-                                        <strong>
-                                            {overview.pending || "0"}
-                                        </strong>
-                                        {" "}
-                                        cái
-                                    </Row>
-                                    <Row>
-                                        Đã bị từ chối:
-                                        {" "}
-                                        <strong>
-                                            {overview.rejected || "0"}
-                                        </strong>
-                                        {" "}
-                                        cái (tỉ lệ:
-                                        {" "}
-                                        {Math.round(
-                                            (overview.rejected /
-                                                overview.total) *
-                                                100
-                                        ) || 0}
-                                        %)
-                                    </Row>
-                                </div>
-)}
-                            type="info"
-                            showIcon
-                        />
-                    </Row>
+                    <h2>Thư viện confession</h2>
 
                     <List
                         size="large"
@@ -268,4 +224,4 @@ từ chối:
     }
 }
 
-export default MyConfess;
+export default Search;

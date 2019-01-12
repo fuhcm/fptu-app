@@ -55,6 +55,14 @@ const MyConfess = Loadable({
     webpack: () => [require.resolveWeak("../app/modules/my-confess/MyConfess")],
 });
 
+const SearchConfess = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "searchconfess" */ "../app/modules/search/Search"),
+    loading: () => <Loading />,
+    modules: ["../app/modules/search/Search"],
+    webpack: () => [require.resolveWeak("../app/modules/search/Search")],
+});
+
 const Medium_Index = Loadable({
     loader: () =>
         import(/* webpackChunkName: "medium_index" */ "../app/modules/medium/Index"),
@@ -122,6 +130,11 @@ export default [
         path     : "/my-confess",
         title    : "My Confess",
         component: MyConfess,
+    },
+    {
+        path     : "/search",
+        title    : "Search Confess",
+        component: SearchConfess,
     },
     {
         path     : "/medium",
