@@ -12,12 +12,11 @@ import {
     Divider,
 } from "antd";
 
-import moment from "moment";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
 import paramCase from "param-case";
-import { getArticles } from "../../utils/Crawl";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
+import { getPure } from "../../utils/ApiCaller";
+import { CRAWL__URL } from "../../utils/ApiEndpoint";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -29,56 +28,12 @@ class Index extends Component {
     };
 
     componentDidMount() {
-        const newsExpire = parseInt(
-            LocalStorageUtils.getItem(
-                LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS_EXPIRE,
-                null
-            )
-        );
-        const now = parseInt(moment().unix());
-
-        if (
-            LocalStorageUtils.getItem(
-                LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS,
-                null
-            ) !== null &&
-            now - newsExpire <= 0
-        ) {
-            let posts = JSON.parse(
-                LocalStorageUtils.getItem(
-                    LOCAL_STORAGE_KEY.TOIDICODEDAO_NEWS,
-                    null
-                )
-            );
-
-            if (!posts) {
-                return;
-            }
-
-            posts = this.filterNotLightningTalk(posts);
-
+        getPure(CRAWL__URL + "/codedao").then(res => {
             this.setState({
-                posts,
                 loading: false,
+                posts  : res.data,
             });
-        } else {
-            getArticles(
-                ["https://toidicodedao.com", "https://codeaholicguy.com"],
-                true,
-                "toidicodedao"
-            ).then(posts => {
-                if (!posts) {
-                    return;
-                }
-                
-                posts = this.filterNotLightningTalk(posts);
-
-                this.setState({
-                    posts,
-                    loading: false,
-                });
-            });
-        }
+        });
     }
 
     filterNotLightningTalk(posts) {

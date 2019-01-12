@@ -12,52 +12,28 @@ import {
     Divider,
 } from "antd";
 
-import moment from "moment";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
 import paramCase from "param-case";
-import { getArticles } from "../../utils/Crawl";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
+import { getPure } from "../../utils/ApiCaller";
+import { CRAWL__URL } from "../../utils/ApiEndpoint";
 
 const { Content } = Layout;
 const { Meta } = Card;
 
-class News extends Component {
+class Index extends Component {
     state = {
         loading: true,
         posts  : [],
     };
 
     componentDidMount() {
-        const newsExpire = parseInt(
-            LocalStorageUtils.getItem(
-                LOCAL_STORAGE_KEY.MEDIUM_NEWS_EXPIRE,
-                null
-            )
-        );
-        const now = parseInt(moment().unix());
-
-        if (
-            LocalStorageUtils.getItem(LOCAL_STORAGE_KEY.MEDIUM_NEWS, null) !==
-                null &&
-            now - newsExpire <= 0
-        ) {
-            const posts = JSON.parse(
-                LocalStorageUtils.getItem(LOCAL_STORAGE_KEY.MEDIUM_NEWS, null)
-            );
-
+        getPure(CRAWL__URL + "/medium").then(res => {
             this.setState({
-                posts,
                 loading: false,
+                posts  : res.data,
             });
-        } else {
-            getArticles().then(posts => {
-                this.setState({
-                    posts,
-                    loading: false,
-                });
-            });
-        }
+        });
     }
 
     renderPosts = posts => {
@@ -86,7 +62,7 @@ class News extends Component {
 
             return (
                 <Link
-                    to={`/post/${guid}/${paramCase(post.title)}`}
+                    to={`/medium/${guid}/${paramCase(post.title)}`}
                     key={post.guid}
                 >
                     <Col lg={8} md={12}>
@@ -186,4 +162,4 @@ hàng ngày
     }
 }
 
-export default News;
+export default Index;

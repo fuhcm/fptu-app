@@ -15,6 +15,14 @@ const Home = Loadable({
     webpack: () => [require.resolveWeak("../app/modules/home/Home")],
 });
 
+const Home_Post = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "home_post" */ "../app/modules/home/Post"),
+    loading: () => <Loading />,
+    modules: ["../app/modules/home/Post"],
+    webpack: () => [require.resolveWeak("../app/modules/home/Post")],
+});
+
 const Login = Loadable({
     loader: () =>
         import(/* webpackChunkName: "login" */ "../app/modules/login/Login"),
@@ -47,20 +55,20 @@ const MyConfess = Loadable({
     webpack: () => [require.resolveWeak("../app/modules/my-confess/MyConfess")],
 });
 
-const News = Loadable({
+const Medium_Index = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "news" */ "../app/modules/news/News"),
+        import(/* webpackChunkName: "medium_index" */ "../app/modules/medium/Index"),
     loading: () => <Loading />,
-    modules: ["../app/modules/news/News"],
-    webpack: () => [require.resolveWeak("../app/modules/news/News")],
+    modules: ["../app/modules/medium/Index"],
+    webpack: () => [require.resolveWeak("../app/modules/medium/Index")],
 });
 
-const Post = Loadable({
+const Medium_Post = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "post" */ "../app/modules/post/Post"),
+        import(/* webpackChunkName: "medium_post" */ "../app/modules/medium/Post"),
     loading: () => <Loading />,
-    modules: ["../app/modules/post/Post"],
-    webpack: () => [require.resolveWeak("../app/modules/post/Post")],
+    modules: ["../app/modules/medium/Post"],
+    webpack: () => [require.resolveWeak("../app/modules/medium/Post")],
 });
 
 const ToiDiCodeDao_Index = Loadable({
@@ -86,6 +94,16 @@ export default [
         component: Home,
     },
     {
+        path     : "/fpt/:id",
+        title    : "Home Post",
+        component: Home_Post,
+    },
+    {
+        path     : "/fpt/:id/:title",
+        title    : "Home Post",
+        component: Home_Post,
+    },
+    {
         path     : "/login",
         title    : "Login",
         component: Login,
@@ -106,19 +124,19 @@ export default [
         component: MyConfess,
     },
     {
-        path     : "/news",
+        path     : "/medium",
         title    : "News",
-        component: News,
+        component: Medium_Index,
     },
     {
-        path     : "/post/:id",
+        path     : "/medium/:id",
         title    : "Post",
-        component: Post,
+        component: Medium_Post,
     },
     {
-        path     : "/post/:id/:title",
+        path     : "/medium/:id/:title",
         title    : "Post",
-        component: Post,
+        component: Medium_Post,
     },
     {
         path     : "/toidicodedao",

@@ -27,7 +27,7 @@ class Post extends Component {
             window.scrollTo(0, 0);
         }
 
-        getPure(CRAWL__URL + "/codedao/" + guid)
+        getPure(CRAWL__URL + "/fpt/" + guid)
             .then(res => {
                 this.setState({
                     loading: false,
@@ -57,13 +57,12 @@ class Post extends Component {
             <Content className="content-container">
                 <Helmet>
                     <title>
-                        {(post && post.title) ||
-                            "Medium for Devs - FPTU Tech Insider"}
+                        {(post && post.title) || "Trang chủ FPT có gì hot?"}
                     </title>
                 </Helmet>
                 <BackTop />
                 <div className="content-wrapper">
-                    <Link to="/toidicodedao">
+                    <Link to="/">
                         <Button
                             type="primary"
                             size="large"
