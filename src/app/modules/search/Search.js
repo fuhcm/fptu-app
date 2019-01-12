@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./Search.scss";
+
 import moment from "moment";
 
 import {
@@ -13,12 +15,12 @@ import {
     message,
 } from "antd";
 import Helmet from "react-helmet-async";
+import Highlighter from "react-highlight-words";
 import { get } from "../../utils/ApiCaller";
 import {
     GUEST__GET_APPROVED,
     GUEST__GET_SEARCH,
 } from "../../utils/ApiEndpoint";
-import LocalStorageUtils from "../../utils/LocalStorage";
 
 const { Content } = Layout;
 const Search = Input.Search;
@@ -27,12 +29,13 @@ const stepLoad = 10;
 
 class SearchPage extends Component {
     state = {
-        numLoad     : stepLoad,
-        initLoading : true,
-        loading     : false,
-        data        : [],
-        list        : [],
-        isSearchMode: false,
+        numLoad      : stepLoad,
+        initLoading  : true,
+        loading      : false,
+        data         : [],
+        list         : [],
+        isSearchMode : false,
+        searchKeyword: "",
     };
 
     componentDidMount() {
@@ -78,10 +81,11 @@ class SearchPage extends Component {
             get(GUEST__GET_SEARCH + "?q=" + keyword)
                 .then(res => {
                     this.setState({
-                        initLoading : false,
-                        data        : res.data,
-                        list        : res.data,
-                        isSearchMode: true,
+                        initLoading  : false,
+                        data         : res.data,
+                        list         : res.data,
+                        isSearchMode : true,
+                        searchKeyword: keyword,
                     });
                 })
                 .catch(() => {
@@ -123,18 +127,25 @@ class SearchPage extends Component {
         });
     };
 
-    pendingConfess = content => (
+    approvedConfess = (
+        content,
+        approver = "admin@fptu.cf",
+        cfs_id = "0",
+        isSearchMode = false,
+        searchKeyword = ""
+    ) => (
         <div>
-            <div className="confess-content">{content}</div>
-            <div style={{ margin: ".5rem 0" }}>
-                <Tag color="pink">#đang_đợi_duyệt</Tag>
+            <div className="confess-content">
+                {!isSearchMode && content}
+                {isSearchMode && (
+                    <Highlighter
+                        highlightClassName="highlight-text"
+                        searchWords={[searchKeyword]}
+                        autoEscape
+                        textToHighlight={content}
+                    />
+                )}
             </div>
-        </div>
-    );
-
-    approvedConfess = (content, approver = "admin@fptu.cf", cfs_id = "0") => (
-        <div>
-            <div className="confess-content">{content}</div>
             <div style={{ margin: ".5rem 0" }}>
                 <Tag color="green">
                     <a
@@ -157,33 +168,14 @@ class SearchPage extends Component {
         </div>
     );
 
-    rejectedConfess = (content, approver = "admin@fptu.cf", reason) => (
-        <div>
-            <div className="confess-content">
-                <strike>{content}</strike>
-            </div>
-            <div style={{ margin: ".5rem 0" }}>
-                <Tag color="red">
-#
-                    {approver}
-                </Tag>
-            </div>
-            <div style={{ margin: ".5rem 0" }}>
-                <strong>
-                    Lí do bị
-                    {" " + approver}
-                    {' '}
-từ chối:
-                    {" "}
-                </strong>
-                {" "}
-                {reason || "Hem có"}
-            </div>
-        </div>
-    );
-
     render() {
-        const { initLoading, loading, list, isSearchMode } = this.state;
+        const {
+            initLoading,
+            loading,
+            list,
+            isSearchMode,
+            searchKeyword,
+        } = this.state;
         const loadMore =
             !initLoading && !loading && !isSearchMode ? (
                 <div
@@ -235,21 +227,13 @@ từ chối:
                                             item.created_at
                                         ).format("HH:mm DD/MM/YYYY")}
                                     />
-                                    {(item.status === null ||
-                                        item.status === 0) &&
-                                        this.pendingConfess(item.content)}
-                                    {item.status === 1 &&
-                                        this.approvedConfess(
-                                            item.content,
-                                            item.approver,
-                                            item.cfs_id
-                                        )}
-                                    {item.status === 2 &&
-                                        this.rejectedConfess(
-                                            item.content,
-                                            item.approver,
-                                            item.reason
-                                        )}
+                                    {this.approvedConfess(
+                                        item.content,
+                                        item.approver,
+                                        item.cfs_id,
+                                        isSearchMode,
+                                        searchKeyword
+                                    )}
                                 </Skeleton>
                             </List.Item>
                         )}
