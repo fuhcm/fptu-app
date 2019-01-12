@@ -12,6 +12,7 @@ import {
     Alert,
     Row,
     Modal,
+    Switch,
     message,
 } from "antd";
 import TextArea from "antd/lib/input/TextArea";
@@ -46,6 +47,7 @@ class AdminCP extends Component {
         },
         scheduledTime: null,
         isPosting    : false,
+        approvalMode : false,
     };
 
     componentDidMount() {
@@ -403,6 +405,14 @@ class AdminCP extends Component {
         }
     };
 
+    handleApprovalMode () {
+        const {approvalMode} = this.state;
+
+        this.setState({
+            approvalMode: !approvalMode,
+        });
+    }
+
     findIndex(id) {
         const { list } = this.state;
 
@@ -425,6 +435,7 @@ class AdminCP extends Component {
             approveModal,
             // scheduledTime,
             isPosting,
+            approvalMode,
         } = this.state;
 
         const loadMore =
@@ -488,12 +499,23 @@ cái
                         showIcon
                     />
 
+                    <div style={{marginTop: "1rem", marginBottom: "1rem"}}>
+                        Chế độ xem: 
+                        {' '}
+                        <Switch
+                            checkedChildren="Chỉ chưa duyệt"
+                            unCheckedChildren="Chỉ chưa duyệt"
+                            onChange={() => this.handleApprovalMode()}
+                        />
+                    </div>
+                    
+
                     <List
                         size="large"
                         loading={initLoading}
                         itemLayout="vertical"
                         loadMore={loadMore}
-                        dataSource={list || []}
+                        dataSource={approvalMode ? list.filter(item => item.status === 0) : list || []}
                         locale={{ emptyText: "Méo có dữ liệu" }}
                         renderItem={(item, index) => (
                             <List.Item

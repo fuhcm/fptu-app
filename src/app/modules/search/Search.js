@@ -69,7 +69,13 @@ class SearchPage extends Component {
     };
 
     handleSearch = async keyword => {
-        if (!keyword.trim()) {
+        keyword = keyword.trim();
+        if (!keyword) {
+            return;
+        }
+
+        const { searchKeyword } = this.state;
+        if (keyword === searchKeyword) {
             return;
         }
 
