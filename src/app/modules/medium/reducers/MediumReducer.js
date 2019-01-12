@@ -1,3 +1,4 @@
+import moment from "moment";
 import {
     GET_MEDIUM_ARTICLE_SUCCESS,
     GET_MEDIUM_ARTICLE_FAILURE,
@@ -12,6 +13,11 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case GET_MEDIUM_ARTICLE_SUCCESS:
+            // Sort posts by pubDate
+            action.payload.sort((left, right) => {
+                return moment.utc(right.pubDate).diff(moment.utc(left.pubDate));
+            });
+
             return {
                 ...state,
                 loading: false,
