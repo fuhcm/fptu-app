@@ -23,16 +23,6 @@ class Home extends Component {
     }
 
     renderPosts = (posts = []) => {
-        if (posts === "undefined" || posts.length === 0) {
-            return (
-                <div>
-                    <Skeleton />
-                    <Skeleton />
-                    <Skeleton />
-                </div>
-            );
-        }
-
         return posts.map(post => {
             post.description = post.description
                 .replace(/<(.|\n)*?>/g, "")
@@ -121,7 +111,7 @@ class Home extends Component {
                     <Divider style={{ fontWeight: "lighter" }}>
                         Trang chủ trường có gì hot?
                     </Divider>
-                    {posts !== "undefined" && (
+                    {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>
                     )}
                     {loading ||
