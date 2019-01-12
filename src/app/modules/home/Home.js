@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
 
@@ -6,25 +6,20 @@ import { Link } from "react-router-dom";
 
 import Helmet from "react-helmet-async";
 import paramCase from "param-case";
-import { getPure } from "../../utils/ApiCaller";
-import { CRAWL__URL } from "../../utils/ApiEndpoint";
+import { connect } from "react-redux";
+import { getHomeArticles } from "./actions/HomeActions";
 
 const { Content } = Layout;
 const { Meta } = Card;
 
-class Home extends PureComponent {
-    state = {
-        loading: true,
-        posts  : [],
-    };
-
+class Home extends Component {
     componentDidMount() {
-        getPure(CRAWL__URL + "/fpt").then(res => {
-            this.setState({
-                loading: false,
-                posts  : res.data,
-            });
-        });
+        const { getHomeArticles, homeReducer } = this.props;
+        const { posts } = homeReducer;
+
+        if (!posts.length) {
+            getHomeArticles();
+        }
     }
 
     renderPosts = (posts = []) => {
@@ -103,7 +98,8 @@ class Home extends PureComponent {
     }
 
     render() {
-        const { loading, posts } = this.state;
+        const { homeReducer } = this.props;
+        const { loading, posts } = homeReducer;
 
         return (
             <Content className="content-container">
@@ -175,4 +171,17 @@ class Home extends PureComponent {
     }
 }
 
-export default Home;
+const mapStateToProps = ({ homeReducer }) => {
+    return {
+        homeReducer,
+    };
+};
+
+const mapDispatchToProps = {
+    getHomeArticles: getHomeArticles,
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Home);

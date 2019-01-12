@@ -15,25 +15,20 @@ import {
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
 import paramCase from "param-case";
-import { getPure } from "../../utils/ApiCaller";
-import { CRAWL__URL } from "../../utils/ApiEndpoint";
+import { connect } from "react-redux";
+import { getMediumArticles } from "./actions/MediumActions";
 
 const { Content } = Layout;
 const { Meta } = Card;
 
 class Index extends Component {
-    state = {
-        loading: true,
-        posts  : [],
-    };
-
     componentDidMount() {
-        getPure(CRAWL__URL + "/medium").then(res => {
-            this.setState({
-                loading: false,
-                posts  : res.data,
-            });
-        });
+        const { getMediumArticles, mediumReducer } = this.props;
+        const { posts } = mediumReducer;
+
+        if (!posts.length) {
+            getMediumArticles();
+        }
     }
 
     renderPosts = posts => {
@@ -96,7 +91,8 @@ class Index extends Component {
     };
 
     render() {
-        const { loading, posts } = this.state;
+        const { mediumReducer } = this.props;
+        const { loading, posts } = mediumReducer;
 
         return (
             <Content className="content-container">
@@ -162,4 +158,17 @@ hàng ngày
     }
 }
 
-export default Index;
+const mapStateToProps = ({ mediumReducer }) => {
+    return {
+        mediumReducer,
+    };
+};
+
+const mapDispatchToProps = {
+    getMediumArticles: getMediumArticles,
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Index);

@@ -15,25 +15,20 @@ import {
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
 import paramCase from "param-case";
-import { getPure } from "../../utils/ApiCaller";
-import { CRAWL__URL } from "../../utils/ApiEndpoint";
+import { connect } from "react-redux";
+import { getCodedaoArticles } from "./actions/CodeDaoActions";
 
 const { Content } = Layout;
 const { Meta } = Card;
 
 class Index extends Component {
-    state = {
-        loading: true,
-        posts  : [],
-    };
-
     componentDidMount() {
-        getPure(CRAWL__URL + "/codedao").then(res => {
-            this.setState({
-                loading: false,
-                posts  : res.data,
-            });
-        });
+        const { getCodedaoArticles, codedaoReducer } = this.props;
+        const { posts } = codedaoReducer;
+
+        if (!posts.length) {
+            getCodedaoArticles();
+        }
     }
 
     filterNotLightningTalk(posts) {
@@ -110,7 +105,8 @@ class Index extends Component {
     }
 
     render() {
-        const { loading, posts } = this.state;
+        const { codedaoReducer } = this.props;
+        const { loading, posts } = codedaoReducer;
 
         return (
             <Content className="content-container">
@@ -170,4 +166,17 @@ class Index extends Component {
     }
 }
 
-export default Index;
+const mapStateToProps = ({ codedaoReducer }) => {
+    return {
+        codedaoReducer,
+    };
+};
+
+const mapDispatchToProps = {
+    getCodedaoArticles: getCodedaoArticles,
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Index);
