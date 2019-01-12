@@ -27,7 +27,7 @@ class Post extends Component {
             window.scrollTo(0, 0);
         }
 
-        getPure(CRAWL__URL + "/codedao/" + guid)
+        getPure(CRAWL__URL + "/medium/" + guid)
             .then(res => {
                 this.setState({
                     loading: false,
@@ -63,15 +63,14 @@ class Post extends Component {
                 </Helmet>
                 <BackTop />
                 <div className="content-wrapper">
-                    <Link to="/toidicodedao">
+                    <Link to="/medium">
                         <Button
                             type="primary"
                             size="large"
                             style={{ marginBottom: "1rem" }}
                         >
                             <Icon type="caret-left" />
-                            {' '}
-Quay lại danh sách bài
+                            Quay lại danh sách bài
                         </Button>
                     </Link>
                     <div className="post-body">
@@ -81,25 +80,16 @@ Quay lại danh sách bài
                                 post.categories.map(item => {
                                     return (
                                         <Tag
-                                            color="green"
+                                            color="geekblue"
                                             key={item}
                                             style={{ marginBottom: "0.5rem" }}
                                         >
-                                            {item.charAt(0).toLowerCase() +
-                                                item.slice(1)}
+                                            #
+                                            {item}
                                         </Tag>
                                     );
                                 })}
                         </div>
-
-                        <img
-                            src={
-                                (post && post.thumbnail && post.thumbnail) || ""
-                            }
-                            alt=""
-                            hidden={loading}
-                        />
-
                         <div
                             className="post-content"
                             //eslint-disable-next-line

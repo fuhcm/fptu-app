@@ -5,7 +5,9 @@ import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
 import { Link } from "react-router-dom";
 
 import Helmet from "react-helmet-async";
-import { getArticles } from "../../utils/Crawl";
+import paramCase from "param-case";
+import { getPure } from "../../utils/ApiCaller";
+import { CRAWL__URL } from "../../utils/ApiEndpoint";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -17,10 +19,10 @@ class Home extends PureComponent {
     };
 
     componentDidMount() {
-        getArticles(["https://daihoc.fpt.edu.vn"], false).then(posts => {
+        getPure(CRAWL__URL + "/fpt").then(res => {
             this.setState({
                 loading: false,
-                posts,
+                posts  : res.data,
             });
         });
     }
@@ -42,13 +44,15 @@ class Home extends PureComponent {
                 .trim();
             post.description = post.description.substring(0, 250) + "...";
 
+            const patt = /p=(\d+)$/;
+            const guid = patt.exec(
+                post.guid.substring(0, post.guid.length - 1)
+            )[1];
+
+            const postTitle = paramCase(this.removeVnStr(post.title));
+
             return (
-                <a
-                    href={`${post.link}?ref=fptu.tech`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    key={post.guid}
-                >
+                <Link to={`/fpt/${guid}/${postTitle}`} key={post.guid}>
                     <Col lg={8} md={12}>
                         <Card
                             hoverable
@@ -74,10 +78,29 @@ class Home extends PureComponent {
                             />
                         </Card>
                     </Col>
-                </a>
+                </Link>
             );
         });
     };
+
+    removeVnStr(str) {
+        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+        str = str.replace(/đ/g, "d");
+        str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+        str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+        str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+        str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+        str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+        str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+        str = str.replace(/Đ/g, "D");
+
+        return str;
+    }
 
     render() {
         const { loading, posts } = this.state;
