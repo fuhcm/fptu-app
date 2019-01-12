@@ -148,8 +148,8 @@ class Home extends Component {
                             Read more tech posts at
                             {" "}
                             <strong>
-                                <Link to="/news" style={{ color: "#fff" }}>
-                                    fptu.tech/news
+                                <Link to="/medium" style={{ color: "#fff" }}>
+                                    fptu.tech/medium
                                 </Link>
                             </strong>
                         </p>
