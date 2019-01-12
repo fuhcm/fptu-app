@@ -209,6 +209,20 @@ class SearchPage extends Component {
 
                     <Divider dashed />
 
+                    {isSearchMode && (
+                        <div
+                            style={{ fontSize: "1.2rem", marginBottom: "1rem" }}
+                        >
+                            Có 
+                            {' '}
+                            {list ? list.length : 0}
+                            {' '}
+kết quả với từ khoá
+                            {" "}
+                            <strong>{searchKeyword}</strong>
+                        </div>
+                    )}
+
                     <List
                         size="large"
                         loading={initLoading}
