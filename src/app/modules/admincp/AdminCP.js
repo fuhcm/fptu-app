@@ -229,6 +229,7 @@ class AdminCP extends Component {
                 // Update UI
                 list[index].approver = LocalStorageUtils.getNickName();
                 list[index].status = 2;
+                list[index].reason = reason;
 
                 this.setState({ list });
                 message.success(`Confession này đã bị từ chối`);
