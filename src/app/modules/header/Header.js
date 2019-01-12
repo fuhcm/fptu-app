@@ -25,7 +25,7 @@ class HeaderPage extends PureComponent {
                 onClick={() => {
                     const { history } = this.props;
                     notification.close(key);
-                    history.push("/news");
+                    history.push("/medium");
                 }}
             >
                 Ờm, để đọc thử xem

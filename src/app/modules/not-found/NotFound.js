@@ -25,7 +25,7 @@ class NotFound extends Component {
                     <Exception
                         type="404"
                         actions={(
-                            <Link to="/news">
+                            <Link to="/medium">
                                 <Button type="primary">Đọc báo đê?</Button>
                             </Link>
 )}
