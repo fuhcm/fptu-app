@@ -39,7 +39,6 @@ class Send extends Component {
 
     componentDidMount() {
         if (this.captchaDemo) {
-            console.log("started, just a second...");
             this.captchaDemo.reset();
         }
     }
@@ -190,6 +189,10 @@ class Send extends Component {
                     <title>
                         Gửi Confesion - FPTU HCM Confession - FPTU Tech Insider
                     </title>
+                    <link
+                        rel="shortcut icon"
+                        href="/assets/images/fptuhcm-confessions.png"
+                    />
                 </Helmet>
                 <div className="content-wrapper">
                     <div

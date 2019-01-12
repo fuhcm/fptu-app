@@ -224,6 +224,10 @@ class SearchPage extends Component {
             <Content className="content-container">
                 <Helmet>
                     <title>Thư viện confess</title>
+                    <link
+                        rel="shortcut icon"
+                        href="/assets/images/fptuhcm-confessions.png"
+                    />
                 </Helmet>
                 <div className="content-wrapper">
                     <h2>Thư viện confession</h2>

@@ -97,7 +97,7 @@ class AdminCP extends Component {
     };
 
     onLoadMore = () => {
-        const { numLoad, data } = this.state;
+        const { numLoad, data, approvalMode } = this.state;
 
         this.setState({
             loading: true,
@@ -119,6 +119,10 @@ class AdminCP extends Component {
                     // In real scene, you can using public method of react-virtualized:
                     // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
                     window.dispatchEvent(new Event("resize"));
+
+                    if (approvalMode) {
+                        message.success("Vừa load thêm 10 cái confess nữa nhé");
+                    }
                 }
             );
         });
@@ -500,8 +504,6 @@ cái
                     />
 
                     <div style={{marginTop: "1rem", marginBottom: "1rem"}}>
-                        Chế độ xem: 
-                        {' '}
                         <Switch
                             checkedChildren="Chỉ chưa duyệt"
                             unCheckedChildren="Chỉ chưa duyệt"
