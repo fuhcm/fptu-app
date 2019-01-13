@@ -1,13 +1,11 @@
 import uuidv4 from "uuid/v4";
 
 export const LOCAL_STORAGE_KEY = {
-    JWT              : "cfapp_jwt",
-    EMAIL            : "cfapp_email",
-    NICKNAME         : "cfapp_nickname",
-    SENDER           : "cfapp_sendertoken",
-    NOTIFICATION     : "cfapp_notification_v1",
-    USER_ACCESS_TOKEN: "cfapp_user_access_token",
-    PAGE_ACCESS_TOKEN: "cfapp_page_acess_token",
+    JWT         : "cfapp_jwt",
+    EMAIL       : "cfapp_email",
+    NICKNAME    : "cfapp_nickname",
+    SENDER      : "cfapp_sendertoken",
+    NOTIFICATION: "cfapp_notification_v1",
 };
 
 class LocalStorageUtils {

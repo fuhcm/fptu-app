@@ -3,9 +3,8 @@ import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import Helmet from "react-helmet-async";
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
-import { get, post } from "../../utils/ApiCaller";
-import { AUTH__LOGIN, AUTH__LOGIN_FACEBOOK } from "../../utils/ApiEndpoint";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/browser/LocalStorage";
+import AuthenService from "../../utils/service/Authen";
+import LocalStorageUtils from "../../utils/browser/LocalStorage";
 
 const { Content } = Layout;
 const FormItem = Form.Item;
@@ -18,80 +17,48 @@ class LoginForm extends Component {
         }
     }
 
-    onLogin(email, password, cb) {
-        post(AUTH__LOGIN, {
-            email,
-            password,
-        })
-            .then(res => {
-                cb(res.data);
-            })
-            .catch(() => {
-                cb(null);
-            });
-    }
-
     handleSubmit = e => {
         e.preventDefault();
         const { form } = this.props;
 
         form.validateFields((err, values) => {
             if (!err) {
-                this.onLogin(values.email, values.password, data => {
-                    if (!data) {
-                        message.error("Thông tin đăng nhập không chính xác!");
-                    } else {
-                        this.handleLogin(
-                            data.token,
-                            values.email,
-                            data.nickname
-                        );
+                AuthenService.basicLogin(values.email, values.password).then(
+                    data => {
+                        if (!data) {
+                            message.error(
+                                "Thông tin đăng nhập không chính xác!"
+                            );
+                        } else {
+                            const { token, nickname } = data;
+
+                            this.handleRedirect(token, values.email, nickname);
+                        }
                     }
-                });
+                );
             }
         });
     };
 
     responseFacebook = data => {
-        LocalStorageUtils.setItem(
-            LOCAL_STORAGE_KEY.USER_ACCESS_TOKEN,
-            data.accessToken
-        );
-
-        post(AUTH__LOGIN_FACEBOOK, {
-            email: data.email,
-            token: data.accessToken,
-        })
-            .then(res => {
-                const { token, nickname } = res.data;
-
-                // Get page_access_token
-                get(
-                    `https://graph.facebook.com/v3.2/1745366302422769?fields=access_token&access_token=${
-                        data.accessToken
-                    }`
-                ).then(res => {
-                    LocalStorageUtils.setItem(
-                        LOCAL_STORAGE_KEY.PAGE_ACCESS_TOKEN,
-                        res.data.access_token
-                    );
-                });
-
-                this.handleLogin(token, data.email, nickname);
-            })
-            .catch(() => {
+        AuthenService.loginFacebook(data.email, data.accessToken).then(data => {
+            if (!data) {
                 message.error(
                     "Bạn phải cấp quyền đăng nhập bằng tài khoản Facebook tư cách là admin fanpage!"
                 );
-            });
+            } else {
+                const { token, nickname } = data;
+
+                this.handleRedirect(token, data.email, nickname);
+            }
+        });
     };
 
-    handleLogin(token, email, nickname) {
+    handleRedirect(token, email, nickname) {
         if (token) {
-            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.JWT, token);
-            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.EMAIL, email);
-            LocalStorageUtils.setItem(LOCAL_STORAGE_KEY.NICKNAME, nickname);
             const { history } = this.props;
+
+            AuthenService.saveToken(token, email, nickname);
             message.success(`Chào mừng bợn ${nickname} đã quay lại ahihi`);
             history.push("/admin-cp");
         } else {
@@ -201,6 +168,4 @@ class LoginForm extends Component {
     }
 }
 
-const Login = Form.create()(LoginForm);
-
-export default Login;
+export default Form.create()(LoginForm);
