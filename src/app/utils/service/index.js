@@ -1,5 +1,5 @@
-import * as endpoints from "./Endpoints";
-import caller from "./Caller";
+import * as endpoints from "./common/Endpoints";
+import caller from "./common/Caller";
 
 import localStorage, {
     LOCAL_STORAGE_KEY as keys,
