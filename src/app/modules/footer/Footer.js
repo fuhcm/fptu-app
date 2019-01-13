@@ -13,16 +13,16 @@ class FooterPage extends PureComponent {
 .
                     <strong>Tech</strong>
                     {' '}
-©2018 Developed
+©2019 Developed
                     by
                     {" "}
                     <strong>
                         <a
-                            href="https://github.com/huynhminhtufu"
+                            href="https://github.com/gosu-team"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            Huynh Minh Tu
+                            Huỳnh Minh Tú
                         </a>
                     </strong>
                     . Built on top of Golang & ReactJS, hosted at GCP.
