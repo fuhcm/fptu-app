@@ -2,22 +2,20 @@ import BaseHTTP from "./index";
 
 class AdminService extends BaseHTTP {
     getListConfession = async numLoad => {
-        await setTimeout(async () => {
-            try {
-                const { data } = await this.caller.get(
-                    this.endpoints.ADMINCP__GET_CONFESS + "?load=" + numLoad
-                );
+        try {
+            const { data } = await this.caller.get(
+                this.endpoints.ADMINCP__GET_CONFESS + "?load=" + numLoad
+            );
 
-                return data || [];
-            } catch (err) {
-                if (err.reponse.status === 401) {
-                    // Do logout
-                    this.localStorage.clear();
+            return data || [];
+        } catch (err) {
+            if (err.reponse.status === 401) {
+                // Do logout
+                this.localStorage.clear();
 
-                    return null;
-                }
+                return null;
             }
-        }, 100);
+        }
     };
 
     approveConfess = async id => {

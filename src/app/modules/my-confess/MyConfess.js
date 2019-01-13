@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import moment from "moment";
 
-import { Layout, List, Button, Skeleton, Tag, Row, Alert, message } from "antd";
+import { Layout, List, Button, Skeleton, Tag, Row, Alert } from "antd";
 import Helmet from "react-helmet-async";
 import MyConfessService from "../../utils/service/MyConfess";
 import OverviewService from "../../utils/service/Overview";
@@ -24,7 +24,7 @@ class MyConfess extends Component {
     componentDidMount() {
         const { numLoad } = this.state;
 
-        MyConfessService(numLoad).then(data => {
+        MyConfessService.getMyConfess(numLoad).then(data => {
             this.setState({
                 initLoading: false,
                 data,
@@ -32,7 +32,7 @@ class MyConfess extends Component {
             });
         });
 
-        OverviewService().then(data => {
+        OverviewService.getOverview().then(data => {
             this.setState({
                 overview: data,
             });

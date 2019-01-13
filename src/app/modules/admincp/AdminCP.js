@@ -46,22 +46,20 @@ class AdminCP extends Component {
     componentDidMount() {
         const { numLoad } = this.state;
 
-        AdminService()
-            .getListConfession(numLoad)
-            .then(data => {
-                if (data === null) {
-                    const { history } = this.props;
-                    history.push("/login");
-                }
+        AdminService.getListConfession(numLoad).then(data => {
+            if (data === null) {
+                const { history } = this.props;
+                history.push("/login");
+            }
 
-                this.setState({
-                    initLoading: false,
-                    data,
-                    list       : data,
-                });
+            this.setState({
+                initLoading: false,
+                data,
+                list       : data,
             });
+        });
 
-        OverviewService().then(data => {
+        OverviewService.getOverview().then(data => {
             this.setState({
                 overview: data,
             });
