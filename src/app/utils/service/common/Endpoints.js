@@ -13,7 +13,6 @@ export const ADMINCP__APPROVE_CONFESS =
     API_BASE_URL + "/admincp/confessions/approve";
 export const ADMINCP__REJECT_CONFESS =
     API_BASE_URL + "/admincp/confessions/reject";
-export const ADMINCP__GET_NEXT_ID = API_BASE_URL + "/next_confession_id";
 
 // Guest
 export const GUEST__POST_CONFESS = API_BASE_URL + "/confessions";

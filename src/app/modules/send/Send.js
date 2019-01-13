@@ -15,9 +15,7 @@ import {
 } from "antd";
 import Helmet from "react-helmet-async";
 import { ReCaptcha } from "react-recaptcha-google";
-import { post } from "../../utils/ApiCaller";
-import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
-import LocalStorage from "../../utils/LocalStorage";
+import SendService from "service/Send";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -55,7 +53,7 @@ class Send extends Component {
     };
 
     handleSend = () => {
-        const { contentTextarea } = this.state;
+        const { contentTextarea, recaptchaToken } = this.state;
 
         this.setState({ disabledSendButton: true });
 
@@ -65,53 +63,36 @@ class Send extends Component {
             return;
         }
 
-        this.onSend(contentTextarea.trim()).then(res => {
-            if (res.status === "ok") {
-                message
-                    .loading("Đang gửi tới admin..", 2.5)
-                    .then(() => message.success("Đã gửi rồi đó", 2.5))
-                    .then(() =>
-                        this.setState({
-                            disabledSendButton: false,
-                            contentTextarea   : "",
-                            step              : 1,
-                        })
-                    )
-                    .then(() =>
-                        message.info(
-                            "Vui lòng chờ admin xét duyệt, tối đa chờ 2 ngày",
-                            2.5
+        SendService.sendConfess(contentTextarea.trim(), recaptchaToken).then(
+            data => {
+                if (data) {
+                    message
+                        .loading("Đang gửi tới admin..", 2.5)
+                        .then(() => message.success("Đã gửi rồi đó", 2.5))
+                        .then(() =>
+                            this.setState({
+                                disabledSendButton: false,
+                                contentTextarea   : "",
+                                step              : 1,
+                            })
                         )
-                    );
-            } else {
-                message.error("Lỗi kết nối nên chưa gửi được");
+                        .then(() =>
+                            message.info(
+                                "Vui lòng chờ admin xét duyệt, tối đa chờ 2 ngày",
+                                2.5
+                            )
+                        );
+                } else {
+                    message.error("Lỗi kết nối nên chưa gửi được");
 
-                this.setState({
-                    disabledSendButton: false,
-                    contentTextarea   : contentTextarea,
-                    step              : 0,
-                });
+                    this.setState({
+                        disabledSendButton: false,
+                        contentTextarea   : contentTextarea,
+                        step              : 0,
+                    });
+                }
             }
-        });
-    };
-
-    onSend = content => {
-        LocalStorage.generateSenderToken();
-
-        const { recaptchaToken } = this.state;
-
-        return post(GUEST__POST_CONFESS, {
-            content,
-            sender : LocalStorage.getSenderToken(),
-            status : 0,
-            captcha: recaptchaToken,
-        })
-            .then(() => {
-                return { status: "ok", message: "" };
-            })
-            .catch(err => {
-                return { status: "error", message: err };
-            });
+        );
     };
 
     handleUploadHelper = () => {

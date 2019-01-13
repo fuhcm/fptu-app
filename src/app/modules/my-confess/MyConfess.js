@@ -2,14 +2,10 @@ import React, { Component } from "react";
 
 import moment from "moment";
 
-import { Layout, List, Button, Skeleton, Tag, Row, Alert, message } from "antd";
+import { Layout, List, Button, Skeleton, Tag, Row, Alert } from "antd";
 import Helmet from "react-helmet-async";
-import { get, post } from "../../utils/ApiCaller";
-import {
-    GUEST__GET_MY_CONFESS,
-    GUEST__GET_OVERVIEW,
-} from "../../utils/ApiEndpoint";
-import LocalStorageUtils from "../../utils/LocalStorage";
+import MyConfessService from "service/MyConfess";
+import OverviewService from "service/Overview";
 
 const { Content } = Layout;
 
@@ -28,7 +24,7 @@ class MyConfess extends Component {
     componentDidMount() {
         const { numLoad } = this.state;
 
-        this.getData(numLoad, data => {
+        MyConfessService.getMyConfess(numLoad).then(data => {
             this.setState({
                 initLoading: false,
                 data,
@@ -36,38 +32,12 @@ class MyConfess extends Component {
             });
         });
 
-        this.getOverview(data => {
+        OverviewService.getOverview().then(data => {
             this.setState({
                 overview: data,
             });
         });
     }
-
-    getData = async (numLoad, callback) => {
-        await setTimeout(() => {
-            post(GUEST__GET_MY_CONFESS + "?load=" + numLoad, {
-                token: LocalStorageUtils.getSenderToken(),
-            })
-                .then(res => {
-                    callback(res.data);
-                })
-                .catch(() => {
-                    message.error(
-                        "Kết nối tới máy chủ bị lỗi, vui lòng báo lại cho admin để xử lí"
-                    );
-
-                    this.setState({
-                        loading: false,
-                    });
-                });
-        }, 100);
-    };
-
-    getOverview = callback => {
-        get(GUEST__GET_OVERVIEW).then(res => {
-            callback(res.data);
-        });
-    };
 
     onLoadMore = () => {
         const { numLoad, data } = this.state;
@@ -78,7 +48,8 @@ class MyConfess extends Component {
                 [...new Array(stepLoad)].map(() => ({ loading: true }))
             ),
         });
-        this.getData(numLoad + stepLoad, data => {
+
+        MyConfessService(numLoad).then(data => {
             this.setState(
                 {
                     data,
@@ -87,9 +58,6 @@ class MyConfess extends Component {
                     numLoad: numLoad + stepLoad,
                 },
                 () => {
-                    // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-                    // In real scene, you can using public method of react-virtualized:
-                    // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
                     window.dispatchEvent(new Event("resize"));
                 }
             );
@@ -145,7 +113,7 @@ class MyConfess extends Component {
                 <strong>
                     Lí do bị
                     {" " + approver}
-                    {" "}
+                    {' '}
 từ chối:
                     {" "}
                 </strong>

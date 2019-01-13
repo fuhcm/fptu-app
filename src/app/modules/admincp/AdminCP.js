@@ -17,15 +17,9 @@ import {
 } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import Helmet from "react-helmet-async";
-import { get, put, post } from "../../utils/ApiCaller";
-import {
-    ADMINCP__GET_CONFESS,
-    ADMINCP__APPROVE_CONFESS,
-    ADMINCP__REJECT_CONFESS,
-    GUEST__GET_OVERVIEW,
-    ADMINCP__GET_NEXT_ID,
-} from "../../utils/ApiEndpoint";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
+import LocalStorageUtils from "browser/LocalStorage";
+import AdminService from "service/Admin";
+import OverviewService from "service/Overview";
 
 const { Content } = Layout;
 
@@ -45,15 +39,19 @@ class AdminCP extends Component {
         approveModal: {
             visible: false,
         },
-        scheduledTime: null,
-        isPosting    : false,
-        approvalMode : true,
+        isPosting   : false,
+        approvalMode: true,
     };
 
     componentDidMount() {
         const { numLoad } = this.state;
 
-        this.getData(numLoad, data => {
+        AdminService.getListConfession(numLoad).then(data => {
+            if (data === null) {
+                const { history } = this.props;
+                history.push("/login");
+            }
+
             this.setState({
                 initLoading: false,
                 data,
@@ -61,40 +59,12 @@ class AdminCP extends Component {
             });
         });
 
-        this.getOverview(data => {
+        OverviewService.getOverview().then(data => {
             this.setState({
                 overview: data,
             });
         });
     }
-
-    getData = async (numLoad, callback) => {
-        await setTimeout(() => {
-            get(ADMINCP__GET_CONFESS + "?load=" + numLoad)
-                .then(res => {
-                    callback(res.data);
-                })
-                .catch(err => {
-                    if (err.response.status === 401) {
-                        message.error(
-                            "Hết hạn đăng nhập, vui lòng đăng nhập lại, ahihi."
-                        );
-
-                        // Do logout
-                        LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.JWT);
-                        LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.EMAIL);
-                        const { history } = this.props;
-                        history.push("/login");
-                    }
-                });
-        }, 100);
-    };
-
-    getOverview = callback => {
-        get(GUEST__GET_OVERVIEW).then(res => {
-            callback(res.data);
-        });
-    };
 
     onLoadMore = () => {
         const { numLoad, data, approvalMode } = this.state;
@@ -106,7 +76,12 @@ class AdminCP extends Component {
             ),
         });
 
-        this.getData(numLoad + stepLoad, data => {
+        AdminService(numLoad + stepLoad).then(data => {
+            if (data === null) {
+                const { history } = this.props;
+                history.push("/login");
+            }
+
             this.setState(
                 {
                     data,
@@ -115,9 +90,6 @@ class AdminCP extends Component {
                     numLoad: numLoad + stepLoad,
                 },
                 () => {
-                    // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-                    // In real scene, you can using public method of react-virtualized:
-                    // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
                     window.dispatchEvent(new Event("resize"));
 
                     if (approvalMode) {
@@ -128,98 +100,28 @@ class AdminCP extends Component {
         });
     };
 
-    handleApprove = async (id, manual = false) => {
+    handleApprove = async id => {
         const { list } = this.state;
         const index = this.findIndex(id);
 
-        // Get Next ID
-        const idNextData = await get(ADMINCP__GET_NEXT_ID);
-        const nextID = idNextData.data.id;
-
-        // Call API post to page
-        const page_access_token = LocalStorageUtils.getItem(
-            LOCAL_STORAGE_KEY.PAGE_ACCESS_TOKEN,
-            ""
-        );
-
-        const postingConfess = list.find(el => el.id === id);
-
-        const postingContent = `#FPTUC_${nextID} [${moment(
-            postingConfess.created_at
-        ).format("HH:mm DD/MM/YYYY")}]
-"${postingConfess.content}"
------------------
--${LocalStorageUtils.getNickName()}-
-#FPTUCfs`;
-
-        if (!manual) {
-            let facebookPosted;
-            const { scheduledTime } = this.state;
-
-            // Set state is posting Facebook
-            this.setState({
-                isPosting: true,
-            });
-
-            try {
-                facebookPosted = await post(
-                    "https://graph.facebook.com/v3.2/1745366302422769/feed",
-                    {},
-                    {
-                        message               : postingContent,
-                        access_token          : page_access_token,
-                        published             : false,
-                        scheduled_publish_time: scheduledTime,
-                    }
-                );
-            } catch (error) {
-                if (!error.response) {
-                    message.error(
-                        "Thoát rồi đăng nhập lại admin đi vì Facebook Token đã hết hạn mất rùi :("
-                    );
-                } else {
-                    if (error.response.data.error.code === 100) {
-                        message.error(
-                            "Chọn ngày đăng tào lao quá, chọn lại đi"
-                        );
-                    } else {
-                        message.error("Lỗi gì đó éo biết!");
-                    }
-                }
-            }
-
-            // Set state is posting Facebook done
-            this.setState({
-                isPosting: false,
-            });
-
-            if (!facebookPosted) {
-                return;
-            }
-        }
-
-        // Call API update database
-        put(ADMINCP__APPROVE_CONFESS, { id })
-            .then(res => {
+        AdminService.approveConfess(id)
+            .then(data => {
                 // Update UI
                 list[index].approver = LocalStorageUtils.getNickName();
                 list[index].status = 1;
-                list[index].cfs_id = res.data.cfs_id;
+                list[index].cfs_id = data.cfs_id;
 
                 this.setState({ list });
                 message.success(
-                    `Confession đã được duyệt với ID là ${res.data.cfs_id}`
+                    `Confession đã được duyệt với ID là ${data.cfs_id}`
                 );
 
-                // Only show modal in manual mode
-                if (manual) {
-                    this.showApproveModal(
-                        res.data.cfs_id,
-                        moment(res.data.created_at).format("HH:mm DD/MM/YYYY"),
-                        res.data.content,
-                        LocalStorageUtils.getNickName()
-                    );
-                }
+                this.showApproveModal(
+                    data.cfs_id,
+                    moment(data.created_at).format("HH:mm DD/MM/YYYY"),
+                    data.content,
+                    LocalStorageUtils.getNickName()
+                );
             })
             .catch(() => {
                 message.error(`Đã xảy ra lỗi, chưa thể duyệt Confession này`);
@@ -230,7 +132,7 @@ class AdminCP extends Component {
         const { list } = this.state;
         const index = this.findIndex(id);
 
-        put(ADMINCP__REJECT_CONFESS, { id, reason })
+        AdminService.rejectConfess(id, reason)
             .then(() => {
                 // Update UI
                 list[index].approver = LocalStorageUtils.getNickName();
@@ -386,31 +288,8 @@ class AdminCP extends Component {
         });
     };
 
-    onOKDateTime = scheduledTime => {
-        const minMin = 30;
-        const minimumNextTime = moment().add(minMin, "minutes");
-
-        if (moment(scheduledTime).isAfter(minimumNextTime)) {
-            this.setState({
-                scheduledTime: moment(scheduledTime).unix(),
-            });
-
-            message.success(
-                `Đã đặt thời gian đăng là: ${moment(scheduledTime).format(
-                    "HH:mm DD/MM/YYYY"
-                )}`
-            );
-        } else {
-            message.success(
-                `Thời gian đặt phải tối thiểu là sau ít nhất ${minMin} phút kể từ bây giờ, tức là sau ${moment(
-                    minimumNextTime
-                ).format("HH:mm")}`
-            );
-        }
-    };
-
-    handleApprovalMode () {
-        const {approvalMode} = this.state;
+    handleApprovalMode() {
+        const { approvalMode } = this.state;
 
         this.setState({
             approvalMode: !approvalMode,
@@ -503,7 +382,7 @@ cái
                         showIcon
                     />
 
-                    <div style={{marginTop: "1rem", marginBottom: "1rem"}}>
+                    <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
                         <Switch
                             checkedChildren="Chỉ chưa duyệt"
                             unCheckedChildren="Chỉ chưa duyệt"
@@ -511,14 +390,17 @@ cái
                             defaultChecked
                         />
                     </div>
-                    
 
                     <List
                         size="large"
                         loading={initLoading}
                         itemLayout="vertical"
                         loadMore={loadMore}
-                        dataSource={approvalMode ? list.filter(item => item.status === 0) : list || []}
+                        dataSource={
+                            approvalMode
+                                ? list.filter(item => item.status === 0)
+                                : list || []
+                        }
                         locale={{ emptyText: "Méo có dữ liệu" }}
                         renderItem={(item, index) => (
                             <List.Item

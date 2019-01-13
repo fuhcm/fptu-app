@@ -45,13 +45,8 @@
                 "paths": ["src"]
             },
             "alias": [
-                ["#utils", "./src/utils"],
-                ["#modules", "./src/app/modules"],
-                ["#views", "./src/app/views"],
-                ["#i18n", "./src/i18n"],
-                ["#routes", "./src/routes.js"],
-                ["#config", "./src/config.js"],
-                ["#products", "./src/products.js"]
+                ["service", "./src/app/utils/service"],
+                ["browser", "./src/app/utils/browser/"]
             ]
         }
     },
