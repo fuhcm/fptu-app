@@ -64,8 +64,6 @@ class HeaderPage extends PureComponent {
             currentKey = "/medium";
         } else if (currentKey.includes("/toidicodedao")) {
             currentKey = "/toidicodedao";
-        } else if (currentKey.includes("/pentakill")) {
-            currentKey = "/pentakill";
         }
 
         return (
