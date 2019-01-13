@@ -16,7 +16,6 @@ import {
 } from "antd";
 import Helmet from "react-helmet-async";
 import Highlighter from "react-highlight-words";
-import SearchService from "service/Search";
 
 const { Content } = Layout;
 const Search = Input.Search;
@@ -37,7 +36,8 @@ class SearchPage extends Component {
     componentDidMount() {
         const { numLoad } = this.state;
 
-        SearchService.getPostedConfess(numLoad)
+        FPTUSDK.search
+            .getPostedConfess(numLoad)
             .then(data => {
                 this.setState({
                     initLoading: false,
@@ -71,7 +71,8 @@ class SearchPage extends Component {
             initLoading: true,
         });
 
-        SearchService.searchConfess(keyword)
+        FPTUSDK.search
+            .searchConfess(keyword)
             .then(data => {
                 this.setState({
                     initLoading  : false,
@@ -102,7 +103,8 @@ class SearchPage extends Component {
             ),
         });
 
-        SearchService.getPostedConfess(numLoad + stepLoad)
+        FPTUSDK.search
+            .getPostedConfess(numLoad + stepLoad)
             .then(data => {
                 this.setState(
                     {

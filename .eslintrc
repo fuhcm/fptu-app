@@ -66,6 +66,7 @@
     },
     "globals": {
         "APP_ENV": true,
-        "ENVIRONMENT": true
+        "ENVIRONMENT": true,
+        "FPTUSDK": true
     }
 }

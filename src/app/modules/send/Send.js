@@ -15,7 +15,6 @@ import {
 } from "antd";
 import Helmet from "react-helmet-async";
 import { ReCaptcha } from "react-recaptcha-google";
-import SendService from "service/Send";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -63,8 +62,9 @@ class Send extends Component {
             return;
         }
 
-        SendService.sendConfess(contentTextarea.trim(), recaptchaToken).then(
-            data => {
+        FPTUSDK.send
+            .sendConfess(contentTextarea.trim(), recaptchaToken)
+            .then(data => {
                 if (data) {
                     message
                         .loading("Đang gửi tới admin..", 2.5)
@@ -91,8 +91,7 @@ class Send extends Component {
                         step              : 0,
                     });
                 }
-            }
-        );
+            });
     };
 
     handleUploadHelper = () => {
