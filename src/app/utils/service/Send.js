@@ -1,14 +1,6 @@
 import BaseHTTP from "./index";
 
-import localStorage from "../browser/LocalStorage";
-
 class SendService extends BaseHTTP {
-    constructor() {
-        super();
-
-        this.localStorage = localStorage;
-    }
-
     sendConfes = async (content, captcha) => {
         this.localStorage.generateSenderToken();
 

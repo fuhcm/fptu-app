@@ -1,17 +1,6 @@
 import BaseHTTP from "./index";
 
-import localStorage, {
-    LOCAL_STORAGE_KEY as keys,
-} from "../browser/LocalStorage";
-
 class AuthenService extends BaseHTTP {
-    constructor() {
-        super();
-
-        this.localStorage = localStorage;
-        this.keys = keys;
-    }
-
     basicLogin = async (email, password) => {
         try {
             const { data } = await this.caller.post(
