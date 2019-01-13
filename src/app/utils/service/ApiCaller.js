@@ -1,6 +1,6 @@
 import axios from "axios";
 import objectAssign from "object-assign";
-import LocalStorage from "./LocalStorage";
+import LocalStorage from "./browser/LocalStorage";
 
 export const getHeaders = () => {
     return {

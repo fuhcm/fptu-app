@@ -5,7 +5,7 @@ import Helmet from "react-helmet-async";
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
 import { get, post } from "../../utils/ApiCaller";
 import { AUTH__LOGIN, AUTH__LOGIN_FACEBOOK } from "../../utils/ApiEndpoint";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/browser/LocalStorage";
 
 const { Content } = Layout;
 const FormItem = Form.Item;

@@ -17,7 +17,7 @@ import Helmet from "react-helmet-async";
 import { ReCaptcha } from "react-recaptcha-google";
 import { post } from "../../utils/ApiCaller";
 import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
-import LocalStorage from "../../utils/LocalStorage";
+import LocalStorage from "../../utils/browser/LocalStorage";
 
 const { Content } = Layout;
 const { TextArea } = Input;

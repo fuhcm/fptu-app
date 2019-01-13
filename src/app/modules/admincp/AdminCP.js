@@ -25,7 +25,7 @@ import {
     GUEST__GET_OVERVIEW,
     ADMINCP__GET_NEXT_ID,
 } from "../../utils/ApiEndpoint";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/browser/LocalStorage";
 
 const { Content } = Layout;
 

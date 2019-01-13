@@ -9,7 +9,7 @@ import {
     GUEST__GET_MY_CONFESS,
     GUEST__GET_OVERVIEW,
 } from "../../utils/ApiEndpoint";
-import LocalStorageUtils from "../../utils/LocalStorage";
+import LocalStorageUtils from "../../utils/browser/LocalStorage";
 
 const { Content } = Layout;
 

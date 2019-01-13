@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Layout, Menu, Icon, Button, notification } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/LocalStorage";
+import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "../../utils/browser/LocalStorage";
 
 const { Header } = Layout;
 
