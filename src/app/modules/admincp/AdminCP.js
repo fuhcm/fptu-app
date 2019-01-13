@@ -18,8 +18,6 @@ import {
 import TextArea from "antd/lib/input/TextArea";
 import Helmet from "react-helmet-async";
 import LocalStorageUtils from "browser/LocalStorage";
-import AdminService from "service/Admin";
-import OverviewService from "service/Overview";
 
 const { Content } = Layout;
 
@@ -46,7 +44,7 @@ class AdminCP extends Component {
     componentDidMount() {
         const { numLoad } = this.state;
 
-        AdminService.getListConfession(numLoad).then(data => {
+        FPTUSDK.admin.getListConfession(numLoad).then(data => {
             if (data === null) {
                 const { history } = this.props;
                 history.push("/login");
@@ -59,7 +57,7 @@ class AdminCP extends Component {
             });
         });
 
-        OverviewService.getOverview().then(data => {
+        FPTUSDK.overview.getOverview().then(data => {
             this.setState({
                 overview: data,
             });
@@ -76,7 +74,7 @@ class AdminCP extends Component {
             ),
         });
 
-        AdminService(numLoad + stepLoad).then(data => {
+        FPTUSDK.admin.getListConfession(numLoad + stepLoad).then(data => {
             if (data === null) {
                 const { history } = this.props;
                 history.push("/login");
@@ -104,7 +102,7 @@ class AdminCP extends Component {
         const { list } = this.state;
         const index = this.findIndex(id);
 
-        AdminService.approveConfess(id)
+        FPTUSDK.admin.approveConfess(id)
             .then(data => {
                 // Update UI
                 list[index].approver = LocalStorageUtils.getNickName();
@@ -132,7 +130,7 @@ class AdminCP extends Component {
         const { list } = this.state;
         const index = this.findIndex(id);
 
-        AdminService.rejectConfess(id, reason)
+        FPTUSDK.admin.rejectConfess(id, reason)
             .then(() => {
                 // Update UI
                 list[index].approver = LocalStorageUtils.getNickName();

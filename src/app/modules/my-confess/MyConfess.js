@@ -4,8 +4,6 @@ import moment from "moment";
 
 import { Layout, List, Button, Skeleton, Tag, Row, Alert } from "antd";
 import Helmet from "react-helmet-async";
-import MyConfessService from "service/MyConfess";
-import OverviewService from "service/Overview";
 
 const { Content } = Layout;
 
@@ -24,7 +22,7 @@ class MyConfess extends Component {
     componentDidMount() {
         const { numLoad } = this.state;
 
-        MyConfessService.getMyConfess(numLoad).then(data => {
+        FPTUSDK.myconfess.getMyConfess(numLoad).then(data => {
             this.setState({
                 initLoading: false,
                 data,
@@ -32,7 +30,7 @@ class MyConfess extends Component {
             });
         });
 
-        OverviewService.getOverview().then(data => {
+        FPTUSDK.overview.getOverview().then(data => {
             this.setState({
                 overview: data,
             });

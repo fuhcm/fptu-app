@@ -5,7 +5,6 @@ import "./Post.scss";
 import { Layout, Button, Icon, BackTop, Tag } from "antd";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
-import CrawlService from "service/Crawl";
 import Loading from "../loading/Loading";
 import NotFound from "../not-found/NotFound";
 
@@ -26,7 +25,8 @@ class Post extends Component {
             window.scrollTo(0, 0);
         }
 
-        CrawlService.getArticleDetails("medium", guid)
+        FPTUSDK.crawl
+            .getArticleDetails("medium", guid)
             .then(data => {
                 this.setState({
                     loading: false,

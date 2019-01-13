@@ -1,9 +1,9 @@
-import CrawlService from "service/Crawl";
 import { GET_HOME_ARTICLE_SUCCESS, GET_HOME_ARTICLE_FAILURE } from "../types";
 
 export const getHomeArticles = () => {
     return dispatch => {
-        return CrawlService.getArticles("fpt")
+        return FPTUSDK.crawl
+            .getArticles("fpt")
             .then(data => {
                 dispatch({
                     type   : GET_HOME_ARTICLE_SUCCESS,

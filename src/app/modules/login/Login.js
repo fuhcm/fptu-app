@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import Helmet from "react-helmet-async";
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
-import AuthenService from "service/Authen";
 import LocalStorageUtils from "browser/LocalStorage";
 
 const { Content } = Layout;
@@ -23,7 +22,7 @@ class LoginForm extends Component {
 
         form.validateFields((err, values) => {
             if (!err) {
-                AuthenService.basicLogin(values.email, values.password).then(
+                FPTUSDK.authen.basicLogin(values.email, values.password).then(
                     data => {
                         if (!data) {
                             message.error(
@@ -41,7 +40,7 @@ class LoginForm extends Component {
     };
 
     responseFacebook = data => {
-        AuthenService.loginFacebook(data.email, data.accessToken).then(data => {
+        FPTUSDK.authen.loginFacebook(data.email, data.accessToken).then(data => {
             if (!data) {
                 message.error(
                     "Bạn phải cấp quyền đăng nhập bằng tài khoản Facebook tư cách là admin fanpage!"
@@ -58,7 +57,7 @@ class LoginForm extends Component {
         if (token) {
             const { history } = this.props;
 
-            AuthenService.saveToken(token, email, nickname);
+            FPTUSDK.authen.saveToken(token, email, nickname);
             message.success(`Chào mừng bợn ${nickname} đã quay lại ahihi`);
             history.push("/admin-cp");
         } else {
