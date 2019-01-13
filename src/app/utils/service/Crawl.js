@@ -1,13 +1,13 @@
 import BaseHTTP from "./index";
 
-class OverviewService extends BaseHTTP {
-    getOverview = async () => {
+class CrawlService extends BaseHTTP {
+    getArticles = async name => {
         try {
             const { data } = await this.caller.get(
-                this.endpoints.GUEST__GET_OVERVIEW
+                this.endpoints.CRAWL__URL + "/" + name
             );
 
-            return data || {};
+            return data || [];
         } catch (err) {
             // Catch error
             return null;
@@ -15,4 +15,4 @@ class OverviewService extends BaseHTTP {
     };
 }
 
-export default new OverviewService();
+export default new CrawlService();

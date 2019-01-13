@@ -1,15 +1,14 @@
-import { getPure } from "../../../utils/ApiCaller";
-import { CRAWL__URL } from "../../../utils/ApiEndpoint";
-
 import { GET_HOME_ARTICLE_SUCCESS, GET_HOME_ARTICLE_FAILURE } from "../types";
+
+import CrawlService from "../../../utils/service/Crawl";
 
 export const getHomeArticles = () => {
     return dispatch => {
-        return getPure(CRAWL__URL + "/fpt")
-            .then(res => {
+        return CrawlService.getArticles("fpt")
+            .then(data => {
                 dispatch({
                     type   : GET_HOME_ARTICLE_SUCCESS,
-                    payload: res.data,
+                    payload: data,
                 });
             })
             .catch(err => {

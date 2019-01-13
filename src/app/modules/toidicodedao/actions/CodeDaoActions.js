@@ -1,18 +1,17 @@
-import { getPure } from "../../../utils/ApiCaller";
-import { CRAWL__URL } from "../../../utils/ApiEndpoint";
-
 import {
     GET_CODEDAO_ARTICLE_SUCCESS,
     GET_CODEDAO_ARTICLE_FAILURE,
 } from "../types";
 
+import CrawlService from "../../../utils/service/Crawl";
+
 export const getCodedaoArticles = () => {
     return dispatch => {
-        return getPure(CRAWL__URL + "/codedao")
-            .then(res => {
+        return CrawlService.getArticles("codedao")
+            .then(data => {
                 dispatch({
                     type   : GET_CODEDAO_ARTICLE_SUCCESS,
-                    payload: res.data,
+                    payload: data,
                 });
             })
             .catch(err => {

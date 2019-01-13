@@ -1,18 +1,17 @@
-import { getPure } from "../../../utils/ApiCaller";
-import { CRAWL__URL } from "../../../utils/ApiEndpoint";
-
 import {
     GET_MEDIUM_ARTICLE_SUCCESS,
     GET_MEDIUM_ARTICLE_FAILURE,
 } from "../types";
 
+import CrawlService from "../../../utils/service/Crawl";
+
 export const getMediumArticles = () => {
     return dispatch => {
-        return getPure(CRAWL__URL + "/medium")
-            .then(res => {
+        return CrawlService.getArticles("medium")
+            .then(data => {
                 dispatch({
                     type   : GET_MEDIUM_ARTICLE_SUCCESS,
-                    payload: res.data,
+                    payload: data,
                 });
             })
             .catch(err => {
