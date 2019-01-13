@@ -44,10 +44,7 @@
                 "extensions": [".js", ".jsx", ".json", ".ts", ".tsx"],
                 "paths": ["src"]
             },
-            "alias": [
-                ["service", "./src/app/utils/service"],
-                ["browser", "./src/app/utils/browser/"]
-            ]
+            "alias": [["browser", "./src/app/utils/browser/"]]
         }
     },
     "env": {
