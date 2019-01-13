@@ -16,11 +16,7 @@ import {
 } from "antd";
 import Helmet from "react-helmet-async";
 import Highlighter from "react-highlight-words";
-import { get } from "../../utils/ApiCaller";
-import {
-    GUEST__GET_APPROVED,
-    GUEST__GET_SEARCH,
-} from "../../utils/ApiEndpoint";
+import SearchService from "../../utils/service/Search";
 
 const { Content } = Layout;
 const Search = Input.Search;
@@ -41,32 +37,24 @@ class SearchPage extends Component {
     componentDidMount() {
         const { numLoad } = this.state;
 
-        this.getData(numLoad, data => {
-            this.setState({
-                initLoading: false,
-                data,
-                list       : data,
-            });
-        });
-    }
-
-    getData = async (numLoad, callback) => {
-        await setTimeout(() => {
-            get(GUEST__GET_APPROVED + "?load=" + numLoad)
-                .then(res => {
-                    callback(res.data);
-                })
-                .catch(() => {
-                    message.error(
-                        "Kết nối tới máy chủ bị lỗi, vui lòng báo lại cho admin để xử lí"
-                    );
-
-                    this.setState({
-                        loading: false,
-                    });
+        SearchService.getPostedConfess(numLoad)
+            .then(data => {
+                this.setState({
+                    initLoading: false,
+                    data,
+                    list       : data,
                 });
-        }, 200);
-    };
+            })
+            .catch(() => {
+                message.error(
+                    "Kết nối tới máy chủ bị lỗi, vui lòng báo lại cho admin để xử lí"
+                );
+
+                this.setState({
+                    loading: false,
+                });
+            });
+    }
 
     handleSearch = async keyword => {
         keyword = keyword.trim();
@@ -83,27 +71,25 @@ class SearchPage extends Component {
             initLoading: true,
         });
 
-        await setTimeout(() => {
-            get(GUEST__GET_SEARCH + "?q=" + keyword)
-                .then(res => {
-                    this.setState({
-                        initLoading  : false,
-                        data         : res.data,
-                        list         : res.data,
-                        isSearchMode : true,
-                        searchKeyword: keyword,
-                    });
-                })
-                .catch(() => {
-                    message.error(
-                        "Kết nối tới máy chủ bị lỗi, vui lòng báo lại cho admin để xử lí"
-                    );
-
-                    this.setState({
-                        loading: false,
-                    });
+        SearchService.searchConfess(keyword)
+            .then(data => {
+                this.setState({
+                    initLoading  : false,
+                    data         : data,
+                    list         : data,
+                    isSearchMode : true,
+                    searchKeyword: keyword,
                 });
-        }, 500);
+            })
+            .catch(() => {
+                message.error(
+                    "Kết nối tới máy chủ bị lỗi, vui lòng báo lại cho admin để xử lí"
+                );
+
+                this.setState({
+                    loading: false,
+                });
+            });
     };
 
     onLoadMore = () => {
@@ -115,22 +101,30 @@ class SearchPage extends Component {
                 [...new Array(stepLoad)].map(() => ({ loading: true }))
             ),
         });
-        this.getData(numLoad + stepLoad, data => {
-            this.setState(
-                {
-                    data,
-                    list   : data,
+
+        SearchService.getPostedConfess(numLoad + stepLoad)
+            .then(data => {
+                this.setState(
+                    {
+                        data,
+                        list   : data,
+                        loading: false,
+                        numLoad: numLoad + stepLoad,
+                    },
+                    () => {
+                        window.dispatchEvent(new Event("resize"));
+                    }
+                );
+            })
+            .catch(() => {
+                message.error(
+                    "Kết nối tới máy chủ bị lỗi, vui lòng báo lại cho admin để xử lí"
+                );
+
+                this.setState({
                     loading: false,
-                    numLoad: numLoad + stepLoad,
-                },
-                () => {
-                    // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-                    // In real scene, you can using public method of react-virtualized:
-                    // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-                    window.dispatchEvent(new Event("resize"));
-                }
-            );
-        });
+                });
+            });
     };
 
     approvedConfess = (
