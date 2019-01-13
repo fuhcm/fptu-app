@@ -15,9 +15,7 @@ import {
 } from "antd";
 import Helmet from "react-helmet-async";
 import { ReCaptcha } from "react-recaptcha-google";
-import { post } from "../../utils/ApiCaller";
-import { GUEST__POST_CONFESS } from "../../utils/ApiEndpoint";
-import LocalStorage from "../../utils/browser/LocalStorage";
+import SendService from "../../utils/service/Send";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -55,7 +53,7 @@ class Send extends Component {
     };
 
     handleSend = () => {
-        const { contentTextarea } = this.state;
+        const { contentTextarea, recaptchaToken } = this.state;
 
         this.setState({ disabledSendButton: true });
 
@@ -65,8 +63,8 @@ class Send extends Component {
             return;
         }
 
-        this.onSend(contentTextarea.trim()).then(res => {
-            if (res.status === "ok") {
+        SendService(contentTextarea.trim(), recaptchaToken).then(data => {
+            if (data) {
                 message
                     .loading("Đang gửi tới admin..", 2.5)
                     .then(() => message.success("Đã gửi rồi đó", 2.5))
@@ -93,25 +91,6 @@ class Send extends Component {
                 });
             }
         });
-    };
-
-    onSend = content => {
-        LocalStorage.generateSenderToken();
-
-        const { recaptchaToken } = this.state;
-
-        return post(GUEST__POST_CONFESS, {
-            content,
-            sender : LocalStorage.getSenderToken(),
-            status : 0,
-            captcha: recaptchaToken,
-        })
-            .then(() => {
-                return { status: "ok", message: "" };
-            })
-            .catch(err => {
-                return { status: "error", message: err };
-            });
     };
 
     handleUploadHelper = () => {
