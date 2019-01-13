@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import LocalStorageUtils from "../../utils/LocalStorage";
+import LocalStorageUtils from "../../LocalStorage";
 
 const withAuthRouteComponent = redirectUrl => Child =>
     class RequireAuthorizedComponent extends Component {

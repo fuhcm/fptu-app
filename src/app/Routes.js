@@ -1,7 +1,7 @@
 import React from "react";
 import Loadable from "react-loadable";
 
-import withAuthRouteComponent from "./shared/auth/withAuthRouteComponent";
+import withAuthRouteComponent from "./utils/shared/auth/withAuthRouteComponent";
 
 import Loading from "./modules/loading/Loading";
 
