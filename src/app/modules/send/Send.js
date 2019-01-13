@@ -63,34 +63,36 @@ class Send extends Component {
             return;
         }
 
-        SendService(contentTextarea.trim(), recaptchaToken).then(data => {
-            if (data) {
-                message
-                    .loading("Đang gửi tới admin..", 2.5)
-                    .then(() => message.success("Đã gửi rồi đó", 2.5))
-                    .then(() =>
-                        this.setState({
-                            disabledSendButton: false,
-                            contentTextarea   : "",
-                            step              : 1,
-                        })
-                    )
-                    .then(() =>
-                        message.info(
-                            "Vui lòng chờ admin xét duyệt, tối đa chờ 2 ngày",
-                            2.5
+        SendService.sendConfess(contentTextarea.trim(), recaptchaToken).then(
+            data => {
+                if (data) {
+                    message
+                        .loading("Đang gửi tới admin..", 2.5)
+                        .then(() => message.success("Đã gửi rồi đó", 2.5))
+                        .then(() =>
+                            this.setState({
+                                disabledSendButton: false,
+                                contentTextarea   : "",
+                                step              : 1,
+                            })
                         )
-                    );
-            } else {
-                message.error("Lỗi kết nối nên chưa gửi được");
+                        .then(() =>
+                            message.info(
+                                "Vui lòng chờ admin xét duyệt, tối đa chờ 2 ngày",
+                                2.5
+                            )
+                        );
+                } else {
+                    message.error("Lỗi kết nối nên chưa gửi được");
 
-                this.setState({
-                    disabledSendButton: false,
-                    contentTextarea   : contentTextarea,
-                    step              : 0,
-                });
+                    this.setState({
+                        disabledSendButton: false,
+                        contentTextarea   : contentTextarea,
+                        step              : 0,
+                    });
+                }
             }
-        });
+        );
     };
 
     handleUploadHelper = () => {
