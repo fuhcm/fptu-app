@@ -41,10 +41,11 @@
         "lint:code": "eslint 'src/**/*.{js,jsx,ts}'",
         "lint:style": "stylelint 'src/**/*.{scss,sass}'",
         "fix:code": "prettier --write 'src/**/*.{js,jsx,ts}' && eslint --fix 'src/**/*.{js,jsx,ts}'",
-        "fix:style": "prettier --write 'src/**/*.{scss,sass}' && stylelint --fix 'src/**/*.{scss,sass}'"
+        "fix:style": "prettier --write 'src/**/*.{scss,sass}' && stylelint --fix 'src/**/*.{scss,sass}'",
+        "test": "jest"
     },
     "devDependencies": {
-        "@babel/core": "^7.1.2",
+        "@babel/core": "^7.2.2",
         "@babel/helper-module-imports": "^7.0.0",
         "@babel/plugin-proposal-class-properties": "^7.1.0",
         "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
@@ -56,11 +57,14 @@
         "@babel/runtime": "7.0.0-beta.55",
         "babel-core": "^6.26.3",
         "babel-eslint": "^10.0.1",
+        "babel-jest": "^23.6.0",
         "babel-loader": "^8.0.4",
         "babel-plugin-import-inspector": "^2.0.0",
         "babel-runtime": "^6.26.0",
         "css-loader": "^2.1.0",
-        "enzyme-adapter-react-16": "^1.5.0",
+        "enzyme": "^3.8.0",
+        "enzyme-adapter-react-16": "^1.7.1",
+        "enzyme-to-json": "^3.3.5",
         "eslint": "^5.11.1",
         "eslint-config-airbnb": "^17.1.0",
         "eslint-config-prettier": "^3.1.0",
@@ -77,6 +81,7 @@
         "html-webpack-plugin": "^3.2.0",
         "image-webpack-loader": "^4.6.0",
         "isomorphic-style-loader": "^4.0.0",
+        "jest": "^23.6.0",
         "mini-css-extract-plugin": "^0.5.0",
         "node-sass": "^4.9.4",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -115,5 +120,10 @@
         "webpack-hot-middleware": "^2.24.3",
         "webpack-manifest-plugin": "^2.0.4",
         "webpack-node-externals": "^1.7.2"
+    },
+    "jest": {
+        "snapshotSerializers": [
+            "enzyme-to-json/serializer"
+        ]
     }
 }
