@@ -401,7 +401,7 @@ cái
                                 ? list.filter(item => item.status === 0)
                                 : list || []
                         }
-                        locale={{ emptyText: "Méo có dữ liệu" }}
+                        locale={{ emptyText: "Không có confess nào chưa được duyệt" }}
                         renderItem={(item, index) => (
                             <List.Item
                                 key={index}
@@ -461,7 +461,7 @@ cái
                 </div>
 
                 <Modal
-                    title="Lí do từ chối"
+                    title="Lí do không duyệt bài này"
                     visible={rejectModal.visible}
                     onOk={this.handleOkRejectModal}
                     onCancel={this.handleCancelRejectModal}
