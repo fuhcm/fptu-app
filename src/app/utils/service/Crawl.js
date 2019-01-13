@@ -13,6 +13,19 @@ class CrawlService extends BaseHTTP {
             return null;
         }
     };
+
+    getArticleDetails = async (name, guid) => {
+        try {
+            const { data } = await this.caller.get(
+                this.endpoints.CRAWL__URL + "/" + name + "/" + guid
+            );
+
+            return data || {};
+        } catch (err) {
+            // Catch error
+            return null;
+        }
+    };
 }
 
 export default new CrawlService();

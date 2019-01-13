@@ -5,8 +5,7 @@ import "./Post.scss";
 import { Layout, Button, Icon, BackTop, Tag } from "antd";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
-import { getPure } from "../../utils/ApiCaller";
-import { CRAWL__URL } from "../../utils/ApiEndpoint";
+import CrawlService from "../../utils/service/Crawl";
 import Loading from "../loading/Loading";
 import NotFound from "../not-found/NotFound";
 
@@ -27,19 +26,19 @@ class Post extends Component {
             window.scrollTo(0, 0);
         }
 
-        getPure(CRAWL__URL + "/fpt/" + guid)
-            .then(res => {
+        CrawlService.getArticleDetails("fpt", guid)
+            .then(data => {
                 this.setState({
                     loading: false,
-                    post   : res.data,
+                    post   : data,
                 });
             })
-            .catch(() =>
+            .catch(() => {
                 this.setState({
                     loading: false,
                     post   : null,
-                })
-            );
+                });
+            });
     }
 
     render() {
