@@ -8,7 +8,7 @@ class AuthenService extends BaseHTTP {
                 { email, password }
             );
 
-            return data;
+            return data || {};
         } catch (err) {
             // Catch error
             return null;
@@ -22,7 +22,7 @@ class AuthenService extends BaseHTTP {
                 { email, token }
             );
 
-            return data;
+            return data || {};
         } catch (err) {
             // Catch error
             return null;

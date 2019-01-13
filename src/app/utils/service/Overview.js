@@ -7,7 +7,7 @@ class OverviewService extends BaseHTTP {
                 this.endpoints.GUEST__GET_OVERVIEW
             );
 
-            return data;
+            return data || {};
         } catch (err) {
             // Catch error
             return null;
