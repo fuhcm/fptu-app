@@ -4,8 +4,8 @@ import moment from "moment";
 
 import { Layout, List, Button, Skeleton, Tag, Row, Alert } from "antd";
 import Helmet from "react-helmet-async";
-import MyConfessService from "../../utils/service/MyConfess";
-import OverviewService from "../../utils/service/Overview";
+import MyConfessService from "service/MyConfess";
+import OverviewService from "service/Overview";
 
 const { Content } = Layout;
 

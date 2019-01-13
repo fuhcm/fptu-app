@@ -15,7 +15,7 @@ import {
 } from "antd";
 import Helmet from "react-helmet-async";
 import { ReCaptcha } from "react-recaptcha-google";
-import SendService from "../../utils/service/Send";
+import SendService from "service/Send";
 
 const { Content } = Layout;
 const { TextArea } = Input;

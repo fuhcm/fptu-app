@@ -16,7 +16,7 @@ import {
 } from "antd";
 import Helmet from "react-helmet-async";
 import Highlighter from "react-highlight-words";
-import SearchService from "../../utils/service/Search";
+import SearchService from "service/Search";
 
 const { Content } = Layout;
 const Search = Input.Search;

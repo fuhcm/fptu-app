@@ -1,6 +1,6 @@
 import { GET_HOME_ARTICLE_SUCCESS, GET_HOME_ARTICLE_FAILURE } from "../types";
 
-import CrawlService from "../../../utils/service/Crawl";
+import CrawlService from "service/Crawl";
 
 export const getHomeArticles = () => {
     return dispatch => {

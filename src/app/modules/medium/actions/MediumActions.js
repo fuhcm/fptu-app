@@ -1,9 +1,9 @@
+import CrawlService from "service/Crawl";
 import {
     GET_MEDIUM_ARTICLE_SUCCESS,
     GET_MEDIUM_ARTICLE_FAILURE,
 } from "../types";
 
-import CrawlService from "../../../utils/service/Crawl";
 
 export const getMediumArticles = () => {
     return dispatch => {

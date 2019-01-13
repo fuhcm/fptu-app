@@ -3,8 +3,8 @@ import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import Helmet from "react-helmet-async";
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
-import AuthenService from "../../utils/service/Authen";
-import LocalStorageUtils from "../../utils/browser/LocalStorage";
+import AuthenService from "service/Authen";
+import LocalStorageUtils from "browser/LocalStorage";
 
 const { Content } = Layout;
 const FormItem = Form.Item;

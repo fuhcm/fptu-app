@@ -1,6 +1,6 @@
 import axios from "axios";
 import objectAssign from "object-assign";
-import LocalStorage from "../../browser/LocalStorage";
+import LocalStorage from "browser/LocalStorage";
 
 class Caller {
     getHeaders() {

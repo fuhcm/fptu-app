@@ -17,9 +17,9 @@ import {
 } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import Helmet from "react-helmet-async";
-import LocalStorageUtils from "../../utils/browser/LocalStorage";
-import AdminService from "../../utils/service/Admin";
-import OverviewService from "../../utils/service/Overview";
+import LocalStorageUtils from "browser/LocalStorage";
+import AdminService from "service/Admin";
+import OverviewService from "service/Overview";
 
 const { Content } = Layout;
 

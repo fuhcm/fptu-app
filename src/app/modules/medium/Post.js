@@ -5,7 +5,7 @@ import "./Post.scss";
 import { Layout, Button, Icon, BackTop, Tag } from "antd";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
-import CrawlService from "../../utils/service/Crawl";
+import CrawlService from "service/Crawl";
 import Loading from "../loading/Loading";
 import NotFound from "../not-found/NotFound";
 
