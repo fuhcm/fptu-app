@@ -9,7 +9,7 @@ ENV PATH /root/src/app/node_modules/.bin:$PATH
 COPY . .
 
 # Fetch dependencies, run script optimize images, build
-RUN npm ci
+RUN yarn
 RUN npm run build
 
 # Copy files to machine
