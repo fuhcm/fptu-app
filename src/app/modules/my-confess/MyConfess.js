@@ -48,7 +48,7 @@ class MyConfess extends Component {
             ),
         });
 
-        MyConfessService(numLoad).then(data => {
+        FPTUSDK.myconfess.getMyConfess(numLoad).then(data => {
             this.setState(
                 {
                     data,

@@ -11,11 +11,13 @@ export const askForPermissioToReceiveNotifications = async () => {
         const messaging = firebase.messaging();
         await messaging.requestPermission();
         const token = await messaging.getToken();
-        console.log("Token: ", token);
+
+        //eslint-disable-next-line
+        FPTUSDk.push.syncPush(token);
 
         return token;
     } catch (err) {
-        // Catch error
+        //eslint-disable-next-line
         console.log(err);
         return null;
     }
