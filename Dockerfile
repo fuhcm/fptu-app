@@ -1,4 +1,4 @@
-FROM node:8.12.0 as builder
+FROM node:10.15.0 as builder
 
 # Create working directory
 RUN mkdir -p /root/src/app
@@ -13,7 +13,7 @@ RUN yarn
 RUN npm run build
 
 # Copy files to machine
-FROM node:8.12.0-alpine
+FROM node:10.15.0-alpine
 
 WORKDIR /root/src/app
 
