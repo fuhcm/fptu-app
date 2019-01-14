@@ -17,6 +17,8 @@ dist
 # misc
 .DS_Store
 .env
+.env.staging
+.env.production
 
 npm-debug.log*
 yarn-debug.log*
