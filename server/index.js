@@ -70,6 +70,11 @@ class ServerSideRendering {
                 maxAge: 86400,
             })
         );
+
+        this.app.use(
+            "/firebase-messaging-sw.js",
+            express.static(__dirname + "/dist/firebase-messaging-sw.js")
+        );
     };
 
     createRouter = () => {

@@ -4,6 +4,7 @@ import moment from "moment";
 
 import { Layout, List, Button, Skeleton, Tag, Row, Alert } from "antd";
 import Helmet from "react-helmet-async";
+import { askForPermissioToReceiveNotifications } from "../../../firebase";
 
 const { Content } = Layout;
 
@@ -190,6 +191,15 @@ từ chối:
                             showIcon
                         />
                     </Row>
+
+                    <div>
+                        <Button
+                            type="primary"
+                            onClick={askForPermissioToReceiveNotifications}
+                        >
+                            Nhận thông báo đẩy khi được duyệt
+                        </Button>
+                    </div>
 
                     <List
                         size="large"

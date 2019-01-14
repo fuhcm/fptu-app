@@ -8,6 +8,7 @@
         "axios": "^0.18.0",
         "dotenv": "6.0.0",
         "express": "^4.16.2",
+        "firebase": "^5.7.3",
         "morgan": "^1.9.1",
         "node-style-loader": "^0.0.1-alpha",
         "react": "^16.5.2",
