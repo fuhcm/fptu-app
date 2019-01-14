@@ -13,7 +13,7 @@ export const askForPermissioToReceiveNotifications = async () => {
         const token = await messaging.getToken();
 
         //eslint-disable-next-line
-        FPTUSDk.push.syncPush(token);
+        await FPTUSDK.push.syncPush(token);
 
         return token;
     } catch (err) {
