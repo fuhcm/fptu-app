@@ -6,7 +6,7 @@ import Loadable from "react-loadable";
 import { HelmetProvider } from "react-helmet-async";
 import serverStyleCleanup from "node-style-loader/clientCleanup";
 import App from "./app/App";
-import { initializeFirebase } from "./firebase";
+import { initializeFirebase, initialServiceWorker } from "./firebase";
 
 import configureStore from "./store";
 
@@ -33,3 +33,4 @@ if (module.hot) {
 
 serverStyleCleanup();
 initializeFirebase();
+initialServiceWorker();
