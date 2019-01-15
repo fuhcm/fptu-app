@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./AdminCP.scss";
 
 import moment from "moment";
+import axios from "axios";
 
 import {
     Layout,
@@ -120,6 +121,26 @@ class AdminCP extends Component {
                     data.content,
                     LocalStorageUtils.getNickName()
                 );
+
+                if (list[index].push_id) {
+                    // Push
+                    const headers = {
+                        "Content-Type" : "application/json",
+                        "Authorization": "key=AAAARBubfwc:APA91bF18JVA5FjdP7CBOB34nVs21W7AMRZJdU3JGkYvogweo2h8BqYJ-hno2HeVsCIKu__kKaqkOYakpRydPBm4JuOnF0xFuzUENZzMLZ13JMVaaM7Zd55wRr8C4i_IErWagz8FiGaY",
+                    };
+
+                    const pushData = {
+                        "notification": {
+                            "title"       : "Confess đã được duyệt",
+                            "body"        : "Click vào đây để xem confession nào của bạn đã được duyệt nhé",
+                            "click_action": "http://fptu.tech/my-confess",
+                            "icon"        : "https://fptu.tech/assets/images/fptuhcm-confessions.png",
+                        },
+                        "to": list[index].push_id,
+                    };
+
+                    axios.post("https://fcm.googleapis.com/fcm/send", pushData, { headers });
+                }
             })
             .catch(() => {
                 message.error(`Đã xảy ra lỗi, chưa thể duyệt Confession này`);
@@ -139,6 +160,26 @@ class AdminCP extends Component {
 
                 this.setState({ list });
                 message.success(`Confession này đã bị từ chối`);
+
+                if (list[index].push_id) {
+                    // Push
+                    const headers = {
+                        "Content-Type" : "application/json",
+                        "Authorization": "key=AAAARBubfwc:APA91bF18JVA5FjdP7CBOB34nVs21W7AMRZJdU3JGkYvogweo2h8BqYJ-hno2HeVsCIKu__kKaqkOYakpRydPBm4JuOnF0xFuzUENZzMLZ13JMVaaM7Zd55wRr8C4i_IErWagz8FiGaY",
+                    };
+
+                    const pushData = {
+                        "notification": {
+                            "title"       : "Confess đã bị từ chối",
+                            "body"        : "Click vào đây để xem confession nào của bạn đã bị từ chối duyệt nhé",
+                            "click_action": "http://fptu.tech/my-confess",
+                            "icon"        : "https://fptu.tech/assets/images/fptuhcm-confessions.png",
+                        },
+                        "to": list[index].push_id,
+                    };
+
+                    axios.post("https://fcm.googleapis.com/fcm/send", pushData, { headers });
+                }
             })
             .catch(() => {
                 message.error(`Đã xảy ra lỗi, chưa thể từ chối Confession này`);
