@@ -38,6 +38,9 @@ class Send extends Component {
         if (this.captchaDemo) {
             this.captchaDemo.reset();
         }
+
+        // Init senderID
+        FPTUSDK.send.init();
     }
 
     onLoadRecaptcha = () => {
@@ -62,8 +65,9 @@ class Send extends Component {
             return;
         }
 
+        const pushID = FPTUSDK.push.getPushID();
         FPTUSDK.send
-            .sendConfess(contentTextarea.trim(), recaptchaToken)
+            .sendConfess(contentTextarea.trim(), recaptchaToken, pushID)
             .then(data => {
                 if (data) {
                     message
