@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import moment from "moment";
 
-import { Layout, List, Button, Skeleton, Tag, Row, Alert } from "antd";
+import { Layout, List, Button, Skeleton, Tag, Row, Alert, Icon } from "antd";
 import Helmet from "react-helmet-async";
 import { askForPermissioToReceiveNotifications } from "../../../firebase";
 
@@ -195,8 +195,10 @@ từ chối:
                     <div>
                         <Button
                             type="primary"
+                            size="large"
                             onClick={askForPermissioToReceiveNotifications}
                         >
+                            <Icon type="thunderbolt" />
                             Nhận thông báo đẩy khi được duyệt
                         </Button>
                     </div>
