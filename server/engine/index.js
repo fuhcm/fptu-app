@@ -53,7 +53,7 @@ export default ({ html, preState, helmet, bundles }) => {
     <!-- FPTU Tech Javascript SDK -->
     <script>
         window.APP_ENV = {
-            API_BASE_URL: "https://api.fptu.tech",
+            API_BASE_URL: "${APP_ENV.API_BASE_URL}",
         };
     </script>
     <script src="https://cdn.fptu.tech/sdk/fptu-sdk.js"></script>

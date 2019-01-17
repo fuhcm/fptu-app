@@ -156,7 +156,10 @@ từ chối:
                                     <Row>
                                         Lời nhắn đã nhận:
                                         {" "}
-                                        <strong>{overview.total || "0"}</strong>
+                                        <strong>
+                                            {(overview && overview.total) ||
+                                                "0"}
+                                        </strong>
                                         {" "}
                                         cái
                                     </Row>
@@ -164,7 +167,8 @@ từ chối:
                                         Đang chờ duyệt:
                                         {" "}
                                         <strong>
-                                            {overview.pending || "0"}
+                                            {(overview && overview.pending) ||
+                                                "0"}
                                         </strong>
                                         {" "}
                                         cái
@@ -173,15 +177,16 @@ từ chối:
                                         Đã bị từ chối:
                                         {" "}
                                         <strong>
-                                            {overview.rejected || "0"}
+                                            {(overview && overview.rejected) ||
+                                                "0"}
                                         </strong>
                                         {" "}
                                         cái (tỉ lệ:
                                         {" "}
                                         {Math.round(
-                                            (overview.rejected /
-                                                overview.total) *
-                                                100
+                                            (overview &&
+                                                overview.rejected /
+                                                    overview.total) * 100
                                         ) || 0}
                                         %)
                                     </Row>

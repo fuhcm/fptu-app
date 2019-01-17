@@ -17,7 +17,7 @@ class Home extends Component {
         const { getHomeArticles, homeReducer } = this.props;
         const { posts } = homeReducer;
 
-        if (!posts.length) {
+        if (posts && !posts.length) {
             getHomeArticles();
         }
     }
