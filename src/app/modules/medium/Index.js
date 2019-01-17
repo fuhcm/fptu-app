@@ -145,7 +145,7 @@ hàng ngày
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>
                     )}
-                    {(loading || !posts) && (
+                    {(loading || !posts || !posts.length) && (
                         <div>
                             <Skeleton active />
                             <Skeleton active />

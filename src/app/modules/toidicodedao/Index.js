@@ -153,7 +153,7 @@ class Index extends Component {
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>
                     )}
-                    {loading && (
+                    {(loading || !posts || !posts.length) && (
                         <div>
                             <Skeleton active />
                             <Skeleton active />
