@@ -44,7 +44,10 @@ class Home extends Component {
                             cover={(
                                 <img
                                     alt={post.title}
-                                    src={post.thumbnail}
+                                    src={post.thumbnail.replace(
+                                        /^http:\/\//i,
+                                        "https://"
+                                    )}
                                     style={{
                                         objectFit: "cover",
                                         height   : "15rem",
