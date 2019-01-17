@@ -124,39 +124,6 @@ class Home extends Component {
                             <Skeleton active />
                         </div>
                     )}
-
-                    <Divider dashed />
-
-                    <div
-                        style={{
-                            textAlign      : "center",
-                            marginTop      : "1rem",
-                            backgroundColor: "#194864",
-                            color          : "#fff",
-                            padding        : "1rem 1rem .2rem 1rem",
-                            borderRadius   : "1rem",
-                        }}
-                    >
-                        <img
-                            src="/assets/images/golang-react.jpg"
-                            alt=""
-                            style={{
-                                width       : "100%",
-                                maxWidth    : "720px",
-                                marginBottom: "1rem",
-                                borderRadius: ".5rem",
-                            }}
-                        />
-                        <p style={{ fontSize: "1rem" }}>
-                            Read more tech posts at
-                            {" "}
-                            <strong>
-                                <Link to="/medium" style={{ color: "#fff" }}>
-                                    fptu.tech/medium
-                                </Link>
-                            </strong>
-                        </p>
-                    </div>
                 </div>
             </Content>
         );
