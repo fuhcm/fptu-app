@@ -48,6 +48,12 @@ class FooterPage extends PureComponent {
                         title="ReacJS"
                     />
                     <img
+                        src="/assets/images/icons/typescript.png"
+                        width="50px"
+                        alt="typescript"
+                        title="TypeScript"
+                    />
+                    <img
                         src="/assets/images/icons/mysql.png"
                         width="50px"
                         alt="mysql"
@@ -82,12 +88,6 @@ class FooterPage extends PureComponent {
                         width="50px"
                         alt="elastic"
                         title="Elastic Search"
-                    />
-                    <img
-                        src="/assets/images/icons/grafana.png"
-                        width="50px"
-                        alt="grafana"
-                        title="Grafana"
                     />
                 </div>
             </Footer>
