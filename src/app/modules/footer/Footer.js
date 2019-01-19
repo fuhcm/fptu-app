@@ -66,10 +66,10 @@ class FooterPage extends Component {
                         title="Docker"
                     />
                     <img
-                        src="/assets/images/icons/gcp.png"
+                        src="/assets/images/icons/aws.png"
                         width="50px"
-                        alt="gcp"
-                        title="Google Cloud Platform"
+                        alt="aws"
+                        title="Amazon Web Service"
                     />
                     <img
                         src="/assets/images/icons/kubernetes.png"
