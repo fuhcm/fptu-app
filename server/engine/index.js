@@ -56,7 +56,7 @@ export default ({ html, preState, helmet, bundles }) => {
             API_BASE_URL: "${APP_ENV.API_BASE_URL}",
         };
     </script>
-    <script src="https://cdn.fptu.tech/sdk/fptu-sdk.js"></script>
+    <script src="https://sdk.fptu.tech/fptu-sdk.js"></script>
     ${scripts
         .map(script => {
             return `<script type="text/javascript" src="/client/${
