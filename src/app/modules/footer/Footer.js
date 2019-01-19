@@ -1,10 +1,10 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 import { Layout } from "antd";
 
 const { Footer } = Layout;
 
-class FooterPage extends PureComponent {
+class FooterPage extends Component {
     render() {
         return (
             <Footer style={{ textAlign: "center" }}>
