@@ -1,8 +1,3 @@
-img {
-    max-width: 100%;
-    margin-bottom: 1rem;
-}
-
 a {
     color: #000;
 }
@@ -40,5 +35,12 @@ a {
 
     p:last-child {
         display: none;
+    }
+
+    img {
+        width: unset;
+        height: unset;
+        max-width: 100%;
+        margin-bottom: 1rem;
     }
 }
