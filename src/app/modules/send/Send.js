@@ -8,13 +8,16 @@ import {
     Input,
     Divider,
     Alert,
-    Upload,
     Icon,
     Steps,
+    Progress,
     message,
 } from "antd";
 import Helmet from "react-helmet-async";
 import { ReCaptcha } from "react-recaptcha-google";
+
+import firebase from "firebase";
+import FileUploader from "react-firebase-file-uploader";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -27,8 +30,6 @@ class Send extends Component {
         this.state = {
             disabledSendButton: false,
             contentTextarea   : "",
-            loading           : false,
-            imageUrl          : "",
             step              : 0,
             recaptchaToken    : null,
         };
@@ -98,12 +99,6 @@ class Send extends Component {
             });
     };
 
-    handleUploadHelper = () => {
-        message.info(
-            "Dễ thôi mà, up đại lên google drive hoặc host up ảnh nào đó rồi dán link ảnh vào"
-        );
-    };
-
     handleChangeTextarea = e => {
         e.preventDefault();
 
@@ -112,60 +107,35 @@ class Send extends Component {
         });
     };
 
-    getBase64 = (img, callback) => {
-        const reader = new FileReader();
-        reader.addEventListener("load", () => callback(reader.result));
-        reader.readAsDataURL(img);
+    handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
+
+    handleProgress = progress => this.setState({ progress });
+
+    handleUploadError = error => {
+        this.setState({ isUploading: false });
+        console.error(error);
     };
 
-    beforeUpload = file => {
-        const isJPG = file.type === "image/jpeg";
-        if (!isJPG) {
-            message.error(
-                "Bạn chỉ có thể up ảnh JPG thôi, nếu ảnh định dạng khác thì bạn up lên host ảnh khác rồi dán link vào đây!"
-            );
-        }
-        const isLt2M = file.size / 1024 / 1024 < 2;
-        if (!isLt2M) {
-            message.error(
-                "Dung lượng ảnh bự vãi, bạn up lên host khác rồi dán link vào đây được không?"
-            );
-        }
-        return isJPG && isLt2M;
-    };
-
-    handleChange = info => {
-        if (info.file.status === "uploading") {
-            this.setState({ loading: true });
-            return;
-        }
-        if (info.file.status === "done") {
-            // Get this url from response in real world.
-            this.getBase64(info.file.originFileObj, imageUrl =>
-                this.setState({
-                    imageUrl,
-                    loading: false,
-                })
-            );
-        }
+    handleUploadSuccess = filename => {
+        this.setState({ avatar: filename, progress: 100, isUploading: false });
+        firebase
+            .storage()
+            .ref("fptu.tech")
+            .child(filename)
+            .getDownloadURL()
+            .then(url => this.setState({ avatarURL: url }));
     };
 
     render() {
         const {
             disabledSendButton,
             contentTextarea,
-            imageUrl,
             step,
             recaptchaToken,
+            isUploading,
+            progress,
+            avatarURL,
         } = this.state;
-
-        const { loading } = this.state;
-        const uploadButton = (
-            <div>
-                <Icon type={loading ? "loading" : "plus"} />
-                <div className="ant-upload-text">Thêm ảnh</div>
-            </div>
-        );
 
         return (
             <Content className="content-container">
@@ -227,32 +197,69 @@ class Send extends Component {
                             placeholder="Baby em trót thích anh rồi đấy này chàng trai đáng yêu... I need to tell you something..."
                             disabled={disabledSendButton}
                             style={{
-                                float       : "left",
-                                width       : "80%",
                                 marginRight : "2rem",
                                 marginBottom: "1rem",
                             }}
                         />
-                        <Upload
-                            name="avatar"
-                            listType="picture-card"
-                            className="avatar-uploader"
-                            showUploadList={false}
-                            action="//jsonplaceholder.typicode.com/posts"
-                            beforeUpload={this.beforeUpload}
-                            onChange={this.handleChange}
-                            disabled
-                        >
-                            {imageUrl ? (
-                                <img
-                                    src={imageUrl}
-                                    alt="avatar"
-                                    style={{ maxWidth: "100px" }}
-                                />
-                            ) : (
-                                uploadButton
+
+                        <div style={{ marginBottom: "1rem" }}>
+                            {isUploading && (
+                                <div style={{ marginBottom: "1rem" }}>
+                                    Đợi xíu, đang upload... 
+                                    {' '}
+                                    {progress}
+%
+                                </div>
                             )}
-                        </Upload>
+                            <div>
+                                {avatarURL && (
+                                    <img
+                                        src={avatarURL}
+                                        style={{
+                                            maxWidth    : "250px",
+                                            marginBottom: "0.5rem",
+                                        }}
+                                    />
+                                )}
+                            </div>
+                            {!avatarURL && (
+                                <div>
+                                    <span hidden={recaptchaToken}><Alert message="Tick vào reCAPTCHA để hiện khung Upload ảnh" type="warning" showIcon /></span>
+                                    {" "}
+                                    <label
+                                        htmlFor="avatar"
+                                        style={{
+                                            backgroundColor: "#1890ff",
+                                            color          : "white",
+                                            padding        : 10,
+                                            borderRadius   : 4,
+                                            pointer        : "cursor",
+                                        }}
+                                        hidden={!recaptchaToken}
+                                    >
+                                        <FileUploader
+                                            accept="image/*"
+                                            name="avatar"
+                                            randomizeFilename
+                                            storageRef={firebase
+                                                .storage()
+                                                .ref("fptu.tech")}
+                                            onUploadStart={
+                                                this.handleUploadStart
+                                            }
+                                            onUploadError={
+                                                this.handleUploadError
+                                            }
+                                            onUploadSuccess={
+                                                this.handleUploadSuccess
+                                            }
+                                            onProgress={this.handleProgress}
+                                        />
+                                    </label>
+                                </div>
+                            )}
+                        </div>
+
                         <ReCaptcha
                             ref={el => {
                                 this.captchaDemo = el;
@@ -264,6 +271,7 @@ class Send extends Component {
                             onloadCallback={this.onLoadRecaptcha}
                             verifyCallback={this.verifyCallback}
                         />
+
                         <Button
                             type="primary"
                             onClick={this.handleSend}
@@ -272,9 +280,6 @@ class Send extends Component {
                         >
                             <Icon type="thunderbolt" />
                             Gửi ngay và luôn!
-                        </Button>
-                        <Button onClick={this.handleUploadHelper} dashed>
-                            Chức năng upload ảnh đang bị lỗi, up ảnh sao?!
                         </Button>
                     </div>
 
