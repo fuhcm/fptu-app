@@ -131,6 +131,14 @@ class Send extends Component {
         }
     };
 
+    handleStorageRef = () => {
+        if (typeof window !== "undefined") {
+            return firebase.storage().ref("fptu.tech");
+        }
+
+        return null;
+    };
+
     render() {
         const {
             disabledSendButton,
@@ -252,9 +260,7 @@ class Send extends Component {
                                             accept="image/*"
                                             name="avatar"
                                             randomizeFilename
-                                            storageRef={firebase
-                                                .storage()
-                                                .ref("fptu.tech")}
+                                            storageRef={this.handleStorageRef()}
                                             onUploadStart={
                                                 this.handleUploadStart
                                             }
