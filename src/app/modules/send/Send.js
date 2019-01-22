@@ -10,7 +10,6 @@ import {
     Alert,
     Icon,
     Steps,
-    Progress,
     message,
 } from "antd";
 import Helmet from "react-helmet-async";
@@ -117,13 +116,19 @@ class Send extends Component {
     };
 
     handleUploadSuccess = filename => {
-        this.setState({ avatar: filename, progress: 100, isUploading: false });
-        firebase
-            .storage()
-            .ref("fptu.tech")
-            .child(filename)
-            .getDownloadURL()
-            .then(url => this.setState({ avatarURL: url }));
+        if (typeof window !== "undefined") {
+            this.setState({
+                avatar     : filename,
+                progress   : 100,
+                isUploading: false,
+            });
+            firebase
+                .storage()
+                .ref("fptu.tech")
+                .child(filename)
+                .getDownloadURL()
+                .then(url => this.setState({ avatarURL: url }));
+        }
     };
 
     render() {
@@ -224,7 +229,13 @@ class Send extends Component {
                             </div>
                             {!avatarURL && (
                                 <div>
-                                    <span hidden={recaptchaToken}><Alert message="Tick vào reCAPTCHA để hiện khung Upload ảnh" type="warning" showIcon /></span>
+                                    <span hidden={recaptchaToken}>
+                                        <Alert
+                                            message="Tick vào reCAPTCHA để hiện khung Upload ảnh"
+                                            type="warning"
+                                            showIcon
+                                        />
+                                    </span>
                                     {" "}
                                     <label
                                         htmlFor="avatar"
