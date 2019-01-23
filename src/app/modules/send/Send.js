@@ -15,7 +15,8 @@ import {
 import Helmet from "react-helmet-async";
 import { ReCaptcha } from "react-recaptcha-google";
 
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/storage";
 import FileUploader from "react-firebase-file-uploader";
 
 const { Content } = Layout;

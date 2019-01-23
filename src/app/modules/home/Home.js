@@ -36,6 +36,12 @@ class Home extends Component {
 
             const postTitle = paramCase(this.removeVnStr(post.title));
 
+            // If thumbnail is null or cannot crawl
+            if (!post.thumbnail) {
+                post.thumbnail =
+                    "https://daihoc.fpt.edu.vn/media/2018/04/photo-1-1523351120280767384318-373x273.jpg";
+            }
+
             return (
                 <Link to={`/fpt/${guid}/${postTitle}`} key={post.guid}>
                     <Col lg={8} md={12}>

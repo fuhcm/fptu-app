@@ -9,6 +9,13 @@ a {
     @media screen and (max-width: 1024px) {
         width: 100%;
     }
+
+    img {
+        width: unset;
+        height: unset;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
 }
 
 .post-title {
