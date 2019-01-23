@@ -45,16 +45,14 @@ class Renderer {
         let bundles = getBundles(stats, modules);
 
         if (req.originalUrl.includes("/fpt/") || req.originalUrl.includes("/medium/") || req.originalUrl.includes("/toidicodedao/")) {
-            let feedName = req.originalUrl.split("/")[1];
-            let articleID = req.originalUrl.split("/")[2];
-
-            if (feedName === "toidicodedao") { feedName = "codedao"; articleID = req.originalUrl.split("/")[3];  }
+            const feedName = req.originalUrl.split("/")[1] === "toidicodedao" ? "codedao" : req.originalUrl.split("/")[1];
+            const articleID = feedName === "codedao" ? req.originalUrl.split("/")[3] : req.originalUrl.split("/")[2];
 
             const { data } = await axios.get(
                 "https://api.fptu.tech/crawl/" + feedName + "/" + articleID
             );
 
-            const shortDesc = striptags(data.description).substring(0, 250) || "FPTU dot Tech" + "...";
+            const shortDesc = data.description ? striptags(data.description).trim().substring(0, 250) + "..." : "FPT University Tech Insider, How much does culture influence creative thinking?";
 
             helmetContext.helmet.title = {
                 toComponent: function() {
