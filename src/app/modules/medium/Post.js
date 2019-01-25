@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import "./Post.scss";
 
 import { Layout, Button, Icon, BackTop, Tag } from "antd";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Helmet from "react-helmet-async";
 import Loading from "../loading/Loading";
 import NotFound from "../not-found/NotFound";
@@ -41,6 +41,17 @@ class Post extends Component {
             });
     }
 
+    goBack = () => {
+        if (typeof window !== "undefined") {
+            if (window.history.length === 1) {
+                const { history } = this.props;
+                history.push("/medium");
+            } else {
+                window.history.back();
+            }
+        }
+    };
+
     render() {
         const { post, loading } = this.state;
 
@@ -62,16 +73,15 @@ class Post extends Component {
                 </Helmet>
                 <BackTop />
                 <div className="content-wrapper">
-                    <Link to="/medium">
-                        <Button
-                            type="primary"
-                            size="large"
-                            style={{ marginBottom: "1rem" }}
-                        >
-                            <Icon type="caret-left" />
-                            Quay lại danh sách bài
-                        </Button>
-                    </Link>
+                    <Button
+                        type="primary"
+                        size="large"
+                        style={{ marginBottom: "1rem" }}
+                        onClick={this.goBack}
+                    >
+                        <Icon type="caret-left" />
+                        Quay lại danh sách bài
+                    </Button>
                     <div className="post-body">
                         <h2 className="post-title">{post && post.title}</h2>
                         <div className="post-tags">
@@ -103,4 +113,4 @@ class Post extends Component {
     }
 }
 
-export default Post;
+export default withRouter(Post);
