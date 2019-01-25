@@ -11,8 +11,8 @@ body {
 
 .content-wrapper {
     background: #fff;
-    padding: 2rem;
     min-height: 50vh;
+    padding: 2rem;
 }
 
 @media screen and (max-width: 640px) {
@@ -22,5 +22,14 @@ body {
 
     .ant-layout-content {
         padding: 0;
+    }
+}
+
+.ant-list {
+    margin: 0 auto;
+    width: 860px;
+
+    @media screen and (max-width: 1024px) {
+        width: 100%;
     }
 }
