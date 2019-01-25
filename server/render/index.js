@@ -44,35 +44,53 @@ class Renderer {
         const preState = store.getState();
         let bundles = getBundles(stats, modules);
 
-        if (req.originalUrl.includes("/fpt/") || req.originalUrl.includes("/medium/") || req.originalUrl.includes("/toidicodedao/")) {
-            const feedName = req.originalUrl.split("/")[1] === "toidicodedao" ? "codedao" : req.originalUrl.split("/")[1];
-            const articleID = feedName === "codedao" ? req.originalUrl.split("/")[3] : req.originalUrl.split("/")[2];
+        if (
+            req.originalUrl.includes("/fpt/") ||
+            req.originalUrl.includes("/medium/") ||
+            req.originalUrl.includes("/toidicodedao/")
+        ) {
+            const feedName =
+                req.originalUrl.split("/")[1] === "toidicodedao"
+                    ? "codedao"
+                    : req.originalUrl.split("/")[1];
+            const articleID =
+                feedName === "codedao"
+                    ? req.originalUrl.split("/")[3]
+                    : req.originalUrl.split("/")[2];
 
-            const { data } = await axios.get(
-                "https://api.fptu.tech/crawl/" + feedName + "/" + articleID
-            );
+            try {
+                const { data } = await axios.get(
+                    "https://api.fptu.tech/crawl/" + feedName + "/" + articleID
+                );
 
-            const shortDesc = data.description ? striptags(data.description).trim().substring(0, 250) + "..." : "FPT University Tech Insider, How much does culture influence creative thinking?";
+                const shortDesc = data.description
+                    ? striptags(data.description)
+                          .trim()
+                          .substring(0, 250) + "..."
+                    : "FPT University Tech Insider, How much does culture influence creative thinking?";
 
-            helmetContext.helmet.title = {
-                toComponent: function() {
-                    return null;
-                },
-                toString: function() {
-                    return `<title data-rh="true">${data.title || "FPTU dot Tech"}</title>`;
-                },
-            };
+                helmetContext.helmet.title = {
+                    toComponent: function() {
+                        return null;
+                    },
+                    toString: function() {
+                        return `<title data-rh="true">${data.title ||
+                            "FPTU dot Tech"}</title>`;
+                    },
+                };
 
-            helmetContext.helmet.meta = {
-                toComponent: function() {
-                    return null;
-                },
-                toString: function() {
-                    return `<meta property="og:type" content="article" /><meta property="og:description" content="${shortDesc}" /><meta property="og:image" content="${
-                        data.thumbnail || "https://cdn-images-1.medium.com/max/1024/1*hMHI6laZkdZMdZNnSQg5AA.jpeg"
-                    }" />`;
-                },
-            };
+                helmetContext.helmet.meta = {
+                    toComponent: function() {
+                        return null;
+                    },
+                    toString: function() {
+                        return `<meta property="og:type" content="article" /><meta property="og:description" content="${shortDesc}" /><meta property="og:image" content="${data.thumbnail ||
+                            "https://cdn-images-1.medium.com/max/1024/1*hMHI6laZkdZMdZNnSQg5AA.jpeg"}" />`;
+                    },
+                };
+            } catch (err) {
+                // Log error
+            }
         }
 
         res.send(
