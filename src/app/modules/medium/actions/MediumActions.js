@@ -1,6 +1,7 @@
 import {
     GET_MEDIUM_ARTICLE_SUCCESS,
     GET_MEDIUM_ARTICLE_FAILURE,
+    LOAD_MORE_ARTICLE,
 } from "../types";
 
 export const getMediumArticles = () => {
@@ -19,5 +20,13 @@ export const getMediumArticles = () => {
                     payload: err,
                 });
             });
+    };
+};
+
+export const loadMoreArticle = () => {
+    return dispatch => {
+        dispatch({
+            type: LOAD_MORE_ARTICLE,
+        });
     };
 };

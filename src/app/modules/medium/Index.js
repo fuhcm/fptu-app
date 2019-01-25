@@ -4,6 +4,7 @@ import {
     Layout,
     Card,
     Row,
+    Button,
     Col,
     Skeleton,
     Icon,
@@ -16,7 +17,7 @@ import { Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
 import paramCase from "param-case";
 import { connect } from "react-redux";
-import { getMediumArticles } from "./actions/MediumActions";
+import { getMediumArticles, loadMoreArticle } from "./actions/MediumActions";
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -31,7 +32,9 @@ class Index extends Component {
         }
     }
 
-    renderPosts = posts => {
+    renderPosts = (posts, load = 9) => {
+        posts = posts.slice(0, load);
+
         return posts.map(post => {
             post.description = post.description
                 .replace(/<(.|\n)*?>/g, "")
@@ -91,8 +94,8 @@ class Index extends Component {
     };
 
     render() {
-        const { mediumReducer } = this.props;
-        const { loading, posts } = mediumReducer;
+        const { mediumReducer, loadMoreArticle } = this.props;
+        const { loading, posts, load } = mediumReducer;
 
         return (
             <Content className="content-container">
@@ -143,7 +146,22 @@ class Index extends Component {
 hàng ngày
                     </Divider>
                     {posts && !loading && (
-                        <Row gutter={16}>{this.renderPosts(posts)}</Row>
+                        <div>
+                            <Row gutter={16}>
+                                {this.renderPosts(posts, load)}
+                            </Row>
+                            <Row style={{ textAlign: "center" }}>
+                                <Button
+                                    type="primary"
+                                    size="large"
+                                    onClick={loadMoreArticle}
+                                    hidden={load >= posts.length}
+                                >
+                                    <Icon type="caret-down" />
+                                    Xem thêm bài cũ hơn
+                                </Button>
+                            </Row>
+                        </div>
                     )}
                     {(loading || !posts || !posts.length) && (
                         <div>
@@ -166,6 +184,7 @@ const mapStateToProps = ({ mediumReducer }) => {
 
 const mapDispatchToProps = {
     getMediumArticles: getMediumArticles,
+    loadMoreArticle  : loadMoreArticle,
 };
 
 export default connect(
