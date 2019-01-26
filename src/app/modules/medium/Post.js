@@ -50,6 +50,8 @@ class Post extends Component {
     }
 
     listGistNotResolved = post => {
+        if (!post) return [];
+
         const pattern = /<a[^>]*medium\.com\/media\/[^>]*>(.*?)<\/a>/g;
 
         return post.content.match(pattern);
