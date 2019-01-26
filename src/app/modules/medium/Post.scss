@@ -46,3 +46,11 @@ hr {
 p:last-child {
     display: none;
 }
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: 1px dashed blue;
+    resize: vertical;
+    overflow: auto;
+}

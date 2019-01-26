@@ -5,6 +5,8 @@ import "./Post.scss";
 import { Layout, Button, Icon, BackTop, Tag } from "antd";
 import { withRouter } from "react-router-dom";
 import Helmet from "react-helmet-async";
+import ReactEmbedGist from "react-embed-gist";
+import axios from "axios";
 import Loading from "../loading/Loading";
 import NotFound from "../not-found/NotFound";
 
@@ -28,10 +30,16 @@ class Post extends Component {
         FPTUSDK.crawl
             .getArticleDetails("medium", guid)
             .then(data => {
-                this.setState({
-                    loading: false,
-                    post   : data,
-                });
+                this.setState(
+                    {
+                        loading: false,
+                        post   : data,
+                    },
+                    () => {
+                        const arr = this.listGistNotResolved(data);
+                        this.resolveGist(arr, data);
+                    }
+                );
             })
             .catch(() => {
                 this.setState({
@@ -40,6 +48,34 @@ class Post extends Component {
                 });
             });
     }
+
+    listGistNotResolved = post => {
+        const pattern = /<a[^>]*medium\.com[^>]*>(.*?)<\/a>/g;
+
+        return post.content.match(pattern);
+    };
+
+    resolveGist = (arr, post) => {
+        if (!arr || !arr.length) return;
+
+        arr.forEach(async element => {
+            const href = element.match(/href="([^"]*)/)[1];
+
+            const { data } = await axios.get(
+                `http://localhost:3000/gist?url=${href}`
+            );
+
+            post.content = post.content.replace(
+                element,
+                `<iframe src="data:text/html;charset=utf-8, <script src=${data}.js></script>" width="100%" scrolling="yes" frameborder="0">
+                </iframe>`
+            );
+
+            this.setState({
+                post,
+            });
+        });
+    };
 
     goBack = () => {
         if (typeof window !== "undefined") {
