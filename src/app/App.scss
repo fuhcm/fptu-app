@@ -33,3 +33,12 @@ body {
         width: 100%;
     }
 }
+
+pre {
+    background: rgba(0, 0, 0, 0.05);
+    font-size: 14px;
+    padding: 20px;
+    white-space: pre-wrap;
+    font-family: Menlo,Monaco,"Courier New",Courier,monospace;
+    margin-top: 0;
+}
