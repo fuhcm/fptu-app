@@ -62,7 +62,7 @@ class Post extends Component {
             const href = element.match(/href="([^"]*)/)[1];
 
             const { data } = await axios.get(
-                `http://localhost:3000/gist?url=${href}`
+                `${APP_ENV.API_BASE_URL}/gist?url=${href}`
             );
 
             post.content = post.content.replace(
