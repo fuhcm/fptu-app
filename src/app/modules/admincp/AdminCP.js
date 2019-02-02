@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./AdminCP.scss";
 
 import moment from "moment";
 import axios from "axios";
@@ -19,10 +18,15 @@ import {
 import TextArea from "antd/lib/input/TextArea";
 import Helmet from "react-helmet-async";
 import LocalStorageUtils from "browser/LocalStorage";
+import styled from "styled-components";
 
 const { Content } = Layout;
 
 const stepLoad = 10;
+
+const ConfessContent = styled.div`
+    white-space: pre-line;
+`;
 
 class AdminCP extends Component {
     state = {
@@ -187,7 +191,7 @@ class AdminCP extends Component {
     };
 
     pendingConfess = content => (
-        <div className="confess-content">{content}</div>
+        <ConfessContent>{content}</ConfessContent>
     );
 
     approvedConfess = (
@@ -196,8 +200,8 @@ class AdminCP extends Component {
         cfs_id = "0",
         approveTime
     ) => (
-        <div>
-            <div className="confess-content">{content}</div>
+        <ConfessContent>
+            <ConfessContent>{content}</ConfessContent>
             <div style={{ margin: ".5rem 0" }}>
                 <Tag color="green">
                     <a
@@ -224,14 +228,14 @@ class AdminCP extends Component {
                     </strong>
                 </span>
             </div>
-        </div>
+        </ConfessContent>
     );
 
     rejectedConfess = (content, approver = "admin", reason) => (
         <div>
-            <div className="confess-content">
+            <ConfessContent>
                 <strike>{content}</strike>
-            </div>
+            </ConfessContent>
             <div style={{ margin: ".5rem 0" }}>
                 <Tag color="red">
 #
@@ -391,25 +395,25 @@ class AdminCP extends Component {
                                 <Row>
                                     Lời nhắn đã nhận:
                                     {" "}
-                                    <strong>{overview.total || "0"}</strong>
+                                    <strong>{overview && overview.total || "0"}</strong>
                                     {' '}
 cái
                                 </Row>
                                 <Row>
                                     Đang chờ duyệt:
                                     {" "}
-                                    <strong>{overview.pending || "0"}</strong>
+                                    <strong>{overview && overview.pending || "0"}</strong>
                                     {" "}
                                     cái
                                 </Row>
                                 <Row>
                                     Đã bị từ chối:
                                     {" "}
-                                    <strong>{overview.rejected || "0"}</strong>
+                                    <strong>{overview && overview.rejected || "0"}</strong>
                                     {" "}
                                     cái (tỉ lệ:
                                     {" "}
-                                    {Math.round(
+                                    {overview && Math.round(
                                         (overview.rejected / overview.total) *
                                             100
                                     ) || "0"}
