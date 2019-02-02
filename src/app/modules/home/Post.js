@@ -13,6 +13,13 @@ const PostBody = styled.div`
     width: 740px;
     margin: 0 auto;
 
+    img {
+        width: unset;
+        height: unset;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+
     @media screen and (max-width: 1024px) {
         width: 100%;
     }
@@ -46,13 +53,6 @@ const PostContent = styled.div`
 
     a {
         color: #000;
-    }
-
-    img {
-        width: unset;
-        height: unset;
-        max-width: 100%;
-        margin-bottom: 1rem;
     }
 `;
 

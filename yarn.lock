@@ -10041,13 +10041,6 @@ react-dom@^16.5.2:
     prop-types "^15.6.2"
     scheduler "^0.12.0"
 
-react-embed-gist@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/react-embed-gist/-/react-embed-gist-1.0.7.tgz#1ba3e337b5048fd847918ad913d8807e6fd4e624"
-  integrity sha512-Tej3z5DhxEtxsiCWUZZeRje6Barfx/c1QT1URuPqV0H6/T5vIfQLOM5rUNJ1FeSpKZQ7XovlcBQJ1ZzBGTEkfg==
-  dependencies:
-    react "^16.2.0"
-
 react-error-overlay@^5.1.0:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.1.2.tgz#888957b884d4b25b083a82ad550f7aad96585394"
@@ -10211,7 +10204,7 @@ react@^15.6.2:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-react@^16.2.0, react@^16.5.2:
+react@^16.5.2:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.7.0.tgz#b674ec396b0a5715873b350446f7ea0802ab6381"
   integrity sha512-StCz3QY8lxTb5cl2HJxjwLFOXPIFQp+p+hxQfc8WE0QiLfCtIlKj8/+5tjjKm8uSTlAW+fCPaavGFS06V9Ar3A==

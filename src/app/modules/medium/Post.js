@@ -1,16 +1,72 @@
 import React, { Component } from "react";
 
-import "./Post.scss";
-
 import { Layout, Button, Icon, BackTop, Tag } from "antd";
 import { withRouter } from "react-router-dom";
 import Helmet from "react-helmet-async";
-import ReactEmbedGist from "react-embed-gist";
+import styled from "styled-components";
 import axios from "axios";
 import Loading from "../loading/Loading";
 import NotFound from "../not-found/NotFound";
 
 const { Content } = Layout;
+
+const PostBody = styled.div`
+    width: 740px;
+    margin: 0 auto;
+
+    img {
+        width: unset;
+        height: unset;
+        max-width: 100%;
+    }
+
+    @media screen and (max-width: 1024px) {
+        width: 100%;
+    }
+`;
+
+const PostTitle = styled.h2`
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: Georgia;
+
+    @media screen and (max-width: 1024px) {
+        font-size: 1.5rem;
+    }
+`;
+
+const PostTag = styled.div`
+    margin-bottom: 1rem;
+`;
+
+const PostContent = styled.div`
+    font-size: 1.25rem;
+    font-family: Georgia;
+
+    @media screen and (max-width: 1024px) {
+        font-size: 1rem;
+    }
+
+    a {
+        color: #000;
+    }
+
+    hr {
+        display: none;
+    }
+
+    p:last-child {
+        display: none;
+    }
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        border: 1px dashed blue;
+        resize: vertical;
+        overflow: auto;
+    }
+`;
 
 class Post extends Component {
     state = {
@@ -120,9 +176,9 @@ class Post extends Component {
                         <Icon type="caret-left" />
                         Quay lại danh sách bài
                     </Button>
-                    <div className="post-body">
-                        <h2 className="post-title">{post && post.title}</h2>
-                        <div className="post-tags">
+                    <PostBody>
+                        <PostTitle>{post && post.title}</PostTitle>
+                        <PostTag>
                             {post &&
                                 post.categories.map(item => {
                                     return (
@@ -136,15 +192,14 @@ class Post extends Component {
                                         </Tag>
                                     );
                                 })}
-                        </div>
-                        <div
-                            className="post-content"
+                        </PostTag>
+                        <PostContent
                             //eslint-disable-next-line
                             dangerouslySetInnerHTML={{
                                 __html: post && post.content,
                             }}
                         />
-                    </div>
+                    </PostBody>
                 </div>
             </Content>
         );
