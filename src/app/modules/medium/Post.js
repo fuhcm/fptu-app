@@ -7,6 +7,7 @@ import styled from "styled-components";
 import axios from "axios";
 import Loading from "../loading/Loading";
 import NotFound from "../not-found/NotFound";
+import DisqusComponent from "../../utils/shared/disqus/DisqusComponent";
 
 const { Content } = Layout;
 
@@ -198,6 +199,11 @@ class Post extends Component {
                             dangerouslySetInnerHTML={{
                                 __html: post && post.content,
                             }}
+                        />
+
+                        <DisqusComponent
+                            guid={post && post.guid}
+                            title={post && post.title}
                         />
                     </PostBody>
                 </div>

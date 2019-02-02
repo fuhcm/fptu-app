@@ -6,6 +6,7 @@ import Helmet from "react-helmet-async";
 import styled from "styled-components";
 import Loading from "../loading/Loading";
 import NotFound from "../not-found/NotFound";
+import DisqusComponent from "../../utils/shared/disqus/DisqusComponent";
 
 const { Content } = Layout;
 
@@ -149,6 +150,11 @@ Quay lại danh sách bài
                             dangerouslySetInnerHTML={{
                                 __html: post && post.content,
                             }}
+                        />
+
+                        <DisqusComponent
+                            guid={post && post.guid}
+                            title={post && post.title}
                         />
                     </PostBody>
                 </div>
