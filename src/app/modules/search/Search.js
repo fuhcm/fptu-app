@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import "./Search.scss";
-
 import moment from "moment";
 
 import {
@@ -141,7 +139,7 @@ class SearchPage extends Component {
                 {!isSearchMode && content}
                 {isSearchMode && (
                     <Highlighter
-                        highlightClassName="highlight-text"
+                        highlightStyle={{ backgroundColor: "yellow" }}
                         searchWords={[
                             searchKeyword,
                             this.removeVnStr(searchKeyword),
