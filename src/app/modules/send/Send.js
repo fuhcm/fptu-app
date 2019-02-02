@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./Send.scss";
 
 import {
     Layout,
