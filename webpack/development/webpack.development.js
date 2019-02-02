@@ -2,6 +2,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const webpack = require("webpack");
 const htmlWebpackPlugin = require("html-webpack-plugin");
+const openBrowserPlugin = require("open-browser-webpack-plugin");
 
 const APP_ENV = dotenv.config().error ? {} : dotenv.config().parsed;
 
@@ -32,5 +33,8 @@ module.exports = require("../common/webpack.core")({
         }),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
+        new openBrowserPlugin({
+            url: "http://localhost:" + APP_ENV.PORT,
+        }),
     ],
 });
