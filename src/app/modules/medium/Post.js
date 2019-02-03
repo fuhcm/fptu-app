@@ -124,6 +124,21 @@ class Post extends Component {
                 `${APP_ENV.API_BASE_URL}/gist?url=${href}`
             );
 
+            if (!data.includes("gist")) {
+                if (data.includes("youtube")) {
+                    post.content = post.content.replace(
+                        element,
+                        `<p>Youtube Video, click <a href="${href}" target="_blank">here</a> to play</p>`
+                    );
+
+                    this.setState({
+                        post,
+                    });
+                }
+
+                return;
+            }
+
             post.content = post.content.replace(
                 element,
                 `<iframe src="data:text/html;charset=utf-8, <script src=${data}.js></script>" width="100%" scrolling="yes" frameborder="0">
