@@ -26,6 +26,8 @@ class FooterPage extends Component {
                         </a>
                     </strong>
                     . Built on top of Golang & ReactJS, hosted at AWS.
+                    {" "}
+                    <strong>Khai code đầu năm, ahihi</strong>
                 </div>
 
                 <div style={{ marginTop: "10px" }}>
