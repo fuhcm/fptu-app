@@ -18,11 +18,11 @@ class FooterPage extends Component {
                     {" "}
                     <strong>
                         <a
-                            href="https://github.com/gosu-team"
+                            href="https://mrhmt.com"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            Huỳnh Minh Tú
+                            PRC391 FUHCM Project
                         </a>
                     </strong>
                     . Built on top of Golang & ReactJS, hosted at AWS.
