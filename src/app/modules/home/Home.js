@@ -106,17 +106,6 @@ class Home extends Component {
                     <title>Trang chủ - FPTU Tech Insider</title>
                 </Helmet>
                 <div className="content-wrapper">
-                    <div
-                        style={{
-                            textAlign   : "center",
-                            marginBottom: "2rem",
-                        }}
-                    >
-                        <img
-                            src="/assets/images/logo-fu.png"
-                            alt="FPT University"
-                        />
-                    </div>
                     <Divider style={{ fontWeight: "lighter" }}>
                         Trang chủ trường có gì hot?
                     </Divider>
