@@ -180,15 +180,6 @@ class HeaderPage extends Component {
                             </Link>
                         </Menu.Item>
                     </SubMenu>
-
-                    <Menu.Item key="source" disabled>
-                        <Icon type="key" />
-                        Thư viện Source
-                    </Menu.Item>
-                    <Menu.Item key="forum" disabled>
-                        <Icon type="fire" />
-                        Diễn đàn ẩn danh
-                    </Menu.Item>
                 </Menu>
             </Header>
         );

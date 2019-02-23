@@ -22,10 +22,10 @@ class FooterPage extends Component {
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            PRC391 FUHCM Project
+                            FUHCM Students
                         </a>
                     </strong>
-                    . Built on top of Golang & ReactJS, hosted at AWS.
+                    . Built on top of Go & React, hosted at AWS.
                 </div>
 
                 <div style={{ marginTop: "10px" }}>
