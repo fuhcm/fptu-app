@@ -10,6 +10,7 @@ import {
     BackTop,
     Badge,
     Divider,
+    Alert,
 } from "antd";
 
 import { Link } from "react-router-dom";
@@ -23,12 +24,9 @@ const { Meta } = Card;
 
 class Index extends Component {
     componentDidMount() {
-        const { getCodedaoArticles, codedaoReducer } = this.props;
-        const { posts } = codedaoReducer;
+        const { getCodedaoArticles } = this.props;
 
-        if (!posts.length) {
-            getCodedaoArticles();
-        }
+        getCodedaoArticles();
     }
 
     filterNotLightningTalk(posts) {
@@ -106,7 +104,7 @@ class Index extends Component {
 
     render() {
         const { codedaoReducer } = this.props;
-        const { loading, posts } = codedaoReducer;
+        const { loading, posts, error } = codedaoReducer;
 
         return (
             <Content className="content-container">
@@ -150,10 +148,23 @@ class Index extends Component {
                     <Divider style={{ fontWeight: "lighter" }}>
                         Từ coder đến developer
                     </Divider>
+
+                    {error && (
+                        <div>
+                            <Alert
+                                message="Lỗi API Server"
+                                description="Có vấn đề gì đó nên API không lấy được bài mới nữa, bạn đọc tạm bài cũ nha, hoặc refresh trang lại thử"
+                                type="error"
+                                closable
+                            />
+                            <div style={{ marginBottom: "2rem" }} />
+                        </div>
+                    )}
+
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>
                     )}
-                    {(loading || !posts || !posts.length) && (
+                    {loading && !posts.length && (
                         <div>
                             <Skeleton active />
                             <Skeleton active />

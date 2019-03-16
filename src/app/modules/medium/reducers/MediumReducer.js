@@ -15,15 +15,25 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case GET_MEDIUM_ARTICLE_SUCCESS:
-            // Sort posts by pubDate
-            action.payload.sort((left, right) => {
-                return moment.utc(right.pubDate).diff(moment.utc(left.pubDate));
-            });
+            if (action.payload && action.payload.length) {
+                // Sort posts by pubDate
+                action.payload.sort((left, right) => {
+                    return moment
+                        .utc(right.pubDate)
+                        .diff(moment.utc(left.pubDate));
+                });
 
+                return {
+                    ...state,
+                    loading: false,
+                    posts  : action.payload,
+                    error  : null,
+                };
+            }
             return {
                 ...state,
                 loading: false,
-                posts  : action.payload,
+                error  : "Null list",
             };
         case GET_MEDIUM_ARTICLE_FAILURE:
             return {

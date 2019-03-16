@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Layout, Card, Row, Col, Skeleton, Divider } from "antd";
+import { Layout, Card, Row, Col, Skeleton, Divider, Alert } from "antd";
 
 import { Link } from "react-router-dom";
 
@@ -14,12 +14,9 @@ const { Meta } = Card;
 
 class Home extends Component {
     componentDidMount() {
-        const { getHomeArticles, homeReducer } = this.props;
-        const { posts } = homeReducer;
-
-        if (posts && !posts.length) {
-            getHomeArticles();
-        }
+        const { getHomeArticles } = this.props;
+        
+        getHomeArticles();
     }
 
     renderPosts = (posts = []) => {
@@ -98,7 +95,7 @@ class Home extends Component {
 
     render() {
         const { homeReducer } = this.props;
-        const { loading, posts } = homeReducer;
+        const { loading, posts, error } = homeReducer;
 
         return (
             <Content className="content-container">
@@ -109,10 +106,23 @@ class Home extends Component {
                     <Divider style={{ fontWeight: "lighter" }}>
                         Trang chủ trường có gì hot?
                     </Divider>
+
+                    {error && (
+                        <div>
+                            <Alert
+                                message="Lỗi API Server"
+                                description="Có vấn đề gì đó nên API không lấy được bài mới nữa, bạn đọc tạm bài cũ nha, hoặc refresh trang lại thử"
+                                type="error"
+                                closable
+                            />
+                            <div style={{ marginBottom: "2rem" }} />
+                        </div>
+                    )}
+
                     {posts && !loading && (
                         <Row gutter={16}>{this.renderPosts(posts)}</Row>
                     )}
-                    {(loading || !posts) && (
+                    {loading && !posts.length && (
                         <div>
                             <Skeleton active />
                             <Skeleton active />

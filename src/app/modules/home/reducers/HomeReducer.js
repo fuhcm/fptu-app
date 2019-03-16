@@ -9,10 +9,19 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case GET_HOME_ARTICLE_SUCCESS:
+            if (action.payload && action.payload.length) {
+                return {
+                    ...state,
+                    loading: false,
+                    posts  : action.payload,
+                    error  : null,
+                };
+            }
+
             return {
                 ...state,
                 loading: false,
-                posts  : action.payload,
+                error  : "Null list",
             };
         case GET_HOME_ARTICLE_FAILURE:
             return {

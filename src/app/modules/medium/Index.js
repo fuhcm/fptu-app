@@ -11,6 +11,7 @@ import {
     BackTop,
     Badge,
     Divider,
+    Alert,
 } from "antd";
 
 import { Link } from "react-router-dom";
@@ -24,12 +25,9 @@ const { Meta } = Card;
 
 class Index extends Component {
     componentDidMount() {
-        const { getMediumArticles, mediumReducer } = this.props;
-        const { posts } = mediumReducer;
+        const { getMediumArticles } = this.props;
 
-        if (!posts.length) {
-            getMediumArticles();
-        }
+        getMediumArticles();
     }
 
     renderPosts = (posts, load = 9) => {
@@ -95,7 +93,7 @@ class Index extends Component {
 
     render() {
         const { mediumReducer, loadMoreArticle } = this.props;
-        const { loading, posts, load } = mediumReducer;
+        const { loading, posts, load, error } = mediumReducer;
 
         return (
             <Content className="content-container">
@@ -145,6 +143,19 @@ class Index extends Component {
                         {' '}
 hàng ngày
                     </Divider>
+
+                    {error && (
+                        <div>
+                            <Alert
+                                message="Lỗi API Server"
+                                description="Có vấn đề gì đó nên API không lấy được bài mới nữa, bạn đọc tạm bài cũ nha, hoặc refresh trang lại thử"
+                                type="error"
+                                closable
+                            />
+                            <div style={{ marginBottom: "2rem" }} />
+                        </div>
+                    )}
+
                     {posts && !loading && (
                         <div>
                             <Row gutter={16}>
@@ -163,7 +174,7 @@ hàng ngày
                             </Row>
                         </div>
                     )}
-                    {(loading || !posts || !posts.length) && (
+                    {loading && !posts.length && (
                         <div>
                             <Skeleton active />
                             <Skeleton active />
