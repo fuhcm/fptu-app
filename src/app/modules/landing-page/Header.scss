@@ -1,0 +1,75 @@
+$header-height: 80px;
+
+#header {
+    background-color: #fff;
+    height: 64px;
+    position: relative;
+    z-index: 10;
+}
+
+#logo {
+    float: left;
+    height: 64px;
+    line-height: 64px;
+    overflow: hidden;
+    padding-left: 40px;
+    text-decoration: none;
+    img {
+        display: inline;
+        margin-right: 16px;
+        vertical-align: middle;
+        width: 32px;
+    }
+    span {
+        color: #3FA9FF;
+        font-size: 14px;
+        line-height: 28px;
+        outline: none;
+    }
+}
+
+.header-meta {
+    // @include clearfix();
+    padding-right: 40px;
+}
+
+#menu {
+    float: right;
+    height: 64px;
+    overflow: hidden;
+    .ant-menu {
+        line-height: 60px;
+    }
+    .ant-menu-horizontal {
+        border-bottom: none;
+        & > .ant-menu-item {
+            border-top: 2px solid transparent;
+            &:hover {
+                border-bottom: 2px solid transparent;
+                border-top: 2px solid #3FA9FF;
+            }
+        }
+        & > .ant-menu-item-selected {
+            border-bottom: 2px solid transparent;
+            border-top: 2px solid #3FA9FF;
+            a {
+                color: #3FA9FF;
+            }
+        }
+    }
+}
+
+#preview {
+    float: right;
+    margin-left: 32px;
+    padding-top: 17px;
+    button {
+        border-radius: 32px;
+    }
+}
+
+#preview-button {
+    .ant-btn {
+        color: #3FA9FF;
+    }
+}

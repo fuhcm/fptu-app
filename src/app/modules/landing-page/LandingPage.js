@@ -10,6 +10,7 @@ import { Button, Icon } from "antd";
 import { OverPack } from "rc-scroll-anim";
 
 import BannerSVGAnim from "./BannerSVG";
+import Header from "./Header";
 
 let isMobile;
 
@@ -47,6 +48,7 @@ class LandingPage extends Component {
                 <Helmet>
                     <title>FPTU Tech Insights</title>
                 </Helmet>
+                <Header />
                 <div className="banner-wrapper">
                     {isMobile && (
                         <TweenOne
