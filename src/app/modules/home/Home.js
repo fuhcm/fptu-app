@@ -127,9 +127,7 @@ class Home extends Component {
                         </div>
                     )}
 
-                    {posts && !loading && (
-                        <Row gutter={16}>{this.renderPosts(posts)}</Row>
-                    )}
+                    {posts && <Row gutter={16}>{this.renderPosts(posts)}</Row>}
                     {loading && !posts.length && (
                         <div>
                             <Skeleton active />
