@@ -6,7 +6,7 @@ import Loadable from "react-loadable";
 import { HelmetProvider } from "react-helmet-async";
 import serverStyleCleanup from "node-style-loader/clientCleanup";
 import { PersistGate } from "redux-persist/integration/react";
-import App from "./app/App";
+import Main from "./app/Main";
 import { initializeFirebase, initialServiceWorker } from "./firebase";
 
 import configureStore from "./store";
@@ -18,7 +18,7 @@ const AppBundle = (
         <PersistGate loading={null} persistor={persistor}>
             <BrowserRouter>
                 <HelmetProvider>
-                    <App />
+                    <Main />
                 </HelmetProvider>
             </BrowserRouter>
         </PersistGate>
@@ -26,7 +26,7 @@ const AppBundle = (
 );
 
 Loadable.preloadReady().then(() => {
-    ReactDOM.hydrate(AppBundle, document.getElementById("root"));
+    ReactDOM.render(AppBundle, document.getElementById("root"));
 });
 
 // Hot reload

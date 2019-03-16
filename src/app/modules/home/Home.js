@@ -100,7 +100,7 @@ class Home extends Component {
         return (
             <Content className="content-container">
                 <Helmet>
-                    <title>Trang chủ - FPTU Tech Insider</title>
+                    <title>Trang chủ - FPTU Tech Insights</title>
                 </Helmet>
                 <div className="content-wrapper">
                     <Divider

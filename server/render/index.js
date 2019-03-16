@@ -9,7 +9,7 @@ import { trigger } from "redial";
 import axios from "axios";
 import striptags from "striptags";
 import Engine from "../engine";
-import App from "../../src/app/App";
+import Main from "../../src/app/Main";
 
 const stats =
     ENVIRONMENT === "staging"
@@ -34,7 +34,7 @@ class Renderer {
                 <Provider store={store}>
                     <StaticRouter location={req.url} context={context}>
                         <HelmetProvider context={helmetContext}>
-                            <App />
+                            <Main />
                         </HelmetProvider>
                     </StaticRouter>
                 </Provider>
@@ -67,7 +67,7 @@ class Renderer {
                     ? striptags(data.description)
                           .trim()
                           .substring(0, 250) + "..."
-                    : "FPT University Tech Insider, How much does culture influence creative thinking?";
+                    : "FPT University Tech Insights, How much does culture influence creative thinking?";
 
                 helmetContext.helmet.title = {
                     toComponent: function() {

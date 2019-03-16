@@ -75,7 +75,7 @@ class HeaderPage extends Component {
                     selectedKeys={[currentKey]}
                 >
                     <Menu.Item key="/home">
-                        <Link to="/">
+                        <Link to="/home">
                             <Icon type="home" />
                             Trang chủ
                         </Link>

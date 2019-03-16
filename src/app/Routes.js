@@ -97,7 +97,7 @@ const ToiDiCodeDao_Post = Loadable({
 
 export default [
     {
-        path     : "/",
+        path     : "/home",
         title    : "Home",
         component: Home,
     },

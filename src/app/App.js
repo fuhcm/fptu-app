@@ -1,5 +1,5 @@
-import "regenerator-runtime/runtime";
 import React, { Component } from "react";
+import "./App.scss";
 import { Route, Switch, Link } from "react-router-dom";
 
 import { Layout } from "antd";
@@ -8,8 +8,6 @@ import HeaderPage from "./modules/header/Header";
 import FooterPage from "./modules/footer/Footer";
 import Routes from "./Routes";
 import NotFound from "./modules/not-found/NotFound";
-
-import "./App.scss";
 
 class App extends Component {
     render() {
