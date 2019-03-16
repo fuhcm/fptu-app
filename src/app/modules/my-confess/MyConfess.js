@@ -134,7 +134,7 @@ từ chối:
                         lineHeight: "32px",
                     }}
                 >
-                    <Button onClick={this.onLoadMore} hidden={!list}>
+                    <Button onClick={this.onLoadMore} hidden={!list.length}>
                         Cho xem thêm vài cài nữa đê
                     </Button>
                 </div>

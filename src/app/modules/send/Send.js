@@ -113,6 +113,8 @@ class Send extends Component {
     };
 
     handleUploadSuccess = filename => {
+        const { contentTextarea } = this.state;
+
         if (typeof window !== "undefined") {
             this.setState({
                 progress   : 100,
@@ -123,7 +125,16 @@ class Send extends Component {
                 .ref("fptu.tech")
                 .child(filename)
                 .getDownloadURL()
-                .then(url => this.setState({ avatarURL: url }));
+                .then(url =>
+                    this.setState({
+                        avatarURL      : url,
+                        contentTextarea:
+                            "Link ảnh của bài viết: [" +
+                            url +
+                            "]\n\n" +
+                            contentTextarea,
+                    })
+                );
         }
     };
 
