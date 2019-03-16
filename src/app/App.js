@@ -1,6 +1,6 @@
 import "regenerator-runtime/runtime";
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 
 import { Layout } from "antd";
 
@@ -20,19 +20,21 @@ class App extends Component {
     render() {
         return (
             <Layout>
-                <div
-                    style={{
-                        padding        : "2rem",
-                        backgroundColor: "#001528",
-                        textAlign      : "center",
-                    }}
-                >
-                    <img
-                        src="/assets/images/fpt-logo.png"
-                        alt="FPT University"
-                        style={{ width: "200px" }}
-                    />
-                </div>
+                <Link to="/">
+                    <div
+                        style={{
+                            padding        : "2rem",
+                            backgroundColor: "#001528",
+                            textAlign      : "center",
+                        }}
+                    >
+                        <img
+                            src="/assets/images/fpt-logo.png"
+                            alt="FPT University"
+                            style={{ width: "200px" }}
+                        />
+                    </div>
+                </Link>
 
                 <HeaderPage />
                 <Switch>
