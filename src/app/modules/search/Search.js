@@ -14,6 +14,7 @@ import {
 } from "antd";
 import Helmet from "react-helmet-async";
 import Highlighter from "react-highlight-words";
+import { debounce } from "debounce";
 
 const { Content } = Layout;
 const Search = Input.Search;
@@ -30,6 +31,10 @@ class SearchPage extends Component {
         isSearchMode : false,
         searchKeyword: "",
     };
+
+    handleFast = debounce(keyword => {
+        this.handleSearch(keyword);
+    }, 200);
 
     componentDidMount() {
         const { numLoad } = this.state;
@@ -230,6 +235,7 @@ class SearchPage extends Component {
                         placeholder="Nhập từ khoá để tìm confession cũ"
                         enterButton="Tìm"
                         size="large"
+                        onChange={e => this.handleFast(e.target.value)}
                         onSearch={keyword => this.handleSearch(keyword)}
                     />
 
