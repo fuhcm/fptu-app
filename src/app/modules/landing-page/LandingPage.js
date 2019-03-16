@@ -9,6 +9,8 @@ import TweenOne from "rc-tween-one";
 import { Button, Icon } from "antd";
 import { OverPack } from "rc-scroll-anim";
 
+import BannerSVGAnim from "./BannerSVG";
+
 let isMobile;
 
 enquireScreen(b => {
@@ -99,11 +101,7 @@ class LandingPage extends Component {
                             animation={{ opacity: 1 }}
                             className="banner-image-wrapper"
                         >
-                            <img
-                                alt="banner"
-                                src="/assets/images/index.png"
-                                width="100%"
-                            />
+                            <BannerSVGAnim />
                         </TweenOne>
                     )}
                 </div>
@@ -115,7 +113,9 @@ class LandingPage extends Component {
                         <h2>
                             Let’s 
                             {' '}
-                            <span>Join Us</span>
+                            <span>Join Us</span> 
+                            {' '}
+                            <Icon type="down" />
                         </h2>
                         <OverPack>
                             <QueueAnim
