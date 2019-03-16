@@ -1,7 +1,15 @@
-import { GET_HOME_ARTICLE_SUCCESS, GET_HOME_ARTICLE_FAILURE } from "../types";
+import {
+    GET_HOME_ARTICLE_LOADING,
+    GET_HOME_ARTICLE_SUCCESS,
+    GET_HOME_ARTICLE_FAILURE,
+} from "../types";
 
 export const getHomeArticles = () => {
     return dispatch => {
+        dispatch({
+            type: GET_HOME_ARTICLE_LOADING,
+        });
+
         return FPTUSDK.crawl
             .getArticles("fpt")
             .then(data => {

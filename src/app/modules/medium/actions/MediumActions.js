@@ -1,4 +1,5 @@
 import {
+    GET_MEDIUM_ARTICLE_LOADING,
     GET_MEDIUM_ARTICLE_SUCCESS,
     GET_MEDIUM_ARTICLE_FAILURE,
     LOAD_MORE_ARTICLE,
@@ -6,6 +7,10 @@ import {
 
 export const getMediumArticles = () => {
     return dispatch => {
+        dispatch({
+            type: GET_MEDIUM_ARTICLE_LOADING,
+        });
+
         return FPTUSDK.crawl
             .getArticles("medium")
             .then(data => {

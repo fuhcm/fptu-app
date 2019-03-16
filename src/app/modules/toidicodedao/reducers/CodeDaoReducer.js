@@ -1,5 +1,6 @@
 import moment from "moment";
 import {
+    GET_CODEDAO_ARTICLE_LOADING,
     GET_CODEDAO_ARTICLE_SUCCESS,
     GET_CODEDAO_ARTICLE_FAILURE,
 } from "../types";
@@ -12,6 +13,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case GET_CODEDAO_ARTICLE_LOADING:
+            return {
+                ...state,
+                loading: true,
+            };
         case GET_CODEDAO_ARTICLE_SUCCESS:
             if (action.payload && action.payload.length) {
                 // Sort posts by pubDate

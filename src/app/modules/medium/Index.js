@@ -113,13 +113,13 @@ class Index extends Component {
                             <span style={{ color: "darkblue" }}>DEV</span>
                             {' '}
 Đọc
-                            {(loading || !posts) && (
+                            {loading && (
                             <Icon
                                 type="loading"
                                 style={{ marginLeft: "1rem" }}
                             />
                             )}
-                            {!loading && posts && (
+                            {!loading && (
                                 <span
                                     style={{
                                         marginLeft: "1rem",
@@ -156,7 +156,7 @@ hàng ngày
                         </div>
                     )}
 
-                    {posts && !loading && (
+                    {posts && (
                         <div>
                             <Row gutter={16}>
                                 {this.renderPosts(posts, load)}
@@ -174,6 +174,7 @@ hàng ngày
                             </Row>
                         </div>
                     )}
+
                     {loading && !posts.length && (
                         <div>
                             <Skeleton active />

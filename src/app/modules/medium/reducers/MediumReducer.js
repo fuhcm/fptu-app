@@ -1,5 +1,6 @@
 import moment from "moment";
 import {
+    GET_MEDIUM_ARTICLE_LOADING,
     GET_MEDIUM_ARTICLE_SUCCESS,
     GET_MEDIUM_ARTICLE_FAILURE,
     LOAD_MORE_ARTICLE,
@@ -14,6 +15,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case GET_MEDIUM_ARTICLE_LOADING:
+            return {
+                ...state,
+                loading: true,
+            };
         case GET_MEDIUM_ARTICLE_SUCCESS:
             if (action.payload && action.payload.length) {
                 // Sort posts by pubDate

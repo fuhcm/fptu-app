@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Layout, Card, Row, Col, Skeleton, Divider, Alert } from "antd";
+import { Layout, Card, Row, Col, Skeleton, Divider, Alert, Icon } from "antd";
 
 import { Link } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const { Meta } = Card;
 class Home extends Component {
     componentDidMount() {
         const { getHomeArticles } = this.props;
-        
+
         getHomeArticles();
     }
 
@@ -103,8 +103,16 @@ class Home extends Component {
                     <title>Trang chủ - FPTU Tech Insider</title>
                 </Helmet>
                 <div className="content-wrapper">
-                    <Divider style={{ fontWeight: "lighter" }}>
+                    <Divider
+                        style={{ fontWeight: "lighter", fontSize: "1.5rem" }}
+                    >
                         Trang chủ trường có gì hot?
+                        {loading && (
+                            <Icon
+                                type="loading"
+                                style={{ marginLeft: "1rem" }}
+                            />
+                        )}
                     </Divider>
 
                     {error && (
