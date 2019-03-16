@@ -78,12 +78,6 @@ class FooterPage extends Component {
                         title="Jenkins"
                     />
                     <img
-                        src="/assets/images/icons/elastic.png"
-                        width="50px"
-                        alt="elastic"
-                        title="Elastic Search"
-                    />
-                    <img
                         src="/assets/images/icons/aws.png"
                         width="50px"
                         alt="aws"

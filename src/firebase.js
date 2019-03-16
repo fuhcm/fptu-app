@@ -14,7 +14,6 @@ export const askForPermissioToReceiveNotifications = async () => {
         await messaging.requestPermission();
         const token = await messaging.getToken();
 
-        //eslint-disable-next-line
         await FPTUSDK.push.syncPush(token);
 
         return token;

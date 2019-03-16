@@ -23,16 +23,12 @@ const { TextArea } = Input;
 const Step = Steps.Step;
 
 class Send extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            disabledSendButton: false,
-            contentTextarea   : "",
-            step              : 0,
-            recaptchaToken    : null,
-        };
-    }
+    state = {
+        disabledSendButton: false,
+        contentTextarea   : "",
+        step              : 0,
+        recaptchaToken    : null,
+    };
 
     componentDidMount() {
         if (this.captchaDemo) {
@@ -110,15 +106,15 @@ class Send extends Component {
 
     handleProgress = progress => this.setState({ progress });
 
-    handleUploadError = error => {
+    handleUploadError = () => {
         this.setState({ isUploading: false });
-        console.error(error);
+
+        // Need to handle error here - the props
     };
 
     handleUploadSuccess = filename => {
         if (typeof window !== "undefined") {
             this.setState({
-                avatar     : filename,
                 progress   : 100,
                 isUploading: false,
             });
@@ -232,6 +228,7 @@ class Send extends Component {
                                             maxWidth    : "250px",
                                             marginBottom: "0.5rem",
                                         }}
+                                        alt="Upload"
                                     />
                                 )}
                             </div>
