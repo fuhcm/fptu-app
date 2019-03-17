@@ -395,7 +395,7 @@ class AdminCP extends Component {
 
                     <Row gutter={16} style={{ marginBottom: "10px" }}>
                         <Card hoverable loading={!overview.total}>
-                            <Col span={8}>
+                            <Col lg={8} md={12}>
                                 <Statistic
                                     title="Đã nhận"
                                     value={(overview && overview.total) || "0"}
@@ -403,7 +403,7 @@ class AdminCP extends Component {
                                     suffix="cái"
                                 />
                             </Col>
-                            <Col span={8}>
+                            <Col lg={8} md={12}>
                                 <Statistic
                                     title="Đang chờ duyệt"
                                     value={
@@ -413,7 +413,7 @@ class AdminCP extends Component {
                                     suffix="cái"
                                 />
                             </Col>
-                            <Col span={8}>
+                            <Col lg={8} md={12}>
                                 <Statistic
                                     title="Tỉ lệ bị từ chối"
                                     value={
