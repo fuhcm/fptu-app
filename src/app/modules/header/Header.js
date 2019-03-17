@@ -1,12 +1,58 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Layout, Menu, Icon, Button, notification } from "antd";
+import { Layout, Menu, Icon, Button, notification, Drawer } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
 import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "browser/LocalStorage";
+import styled from "styled-components";
+import { enquireScreen } from "enquire-js";
+
+const MenuItemGroup = Menu.ItemGroup;
+
+const MobileStyle = styled.div`
+    background-color: white;
+
+    .nav-phone-icon {
+        cursor: pointer;
+        display: none;
+        height: 22px;
+        position: absolute;
+        left: 30px;
+        top: 25px;
+        width: 16px;
+        z-index: 1;
+    }
+
+    .nav-phone-icon {
+        display: block;
+    }
+
+    .nav-phone-icon::before {
+        background: #fff;
+        border-radius: 2px;
+        box-shadow: 0 6px 0 0 #fff, 0 12px 0 0 #fff;
+        content: "";
+        display: block;
+        height: 2px;
+        position: absolute;
+        width: 16px;
+    }
+`;
 
 const { Header } = Layout;
 
 class HeaderPage extends Component {
+    state = {
+        desktop: true,
+        mobileMenu: false,
+    };
+
+    componentDidMount() {
+        enquireScreen(b => {
+            this.setState({ desktop: b ? false : true });
+        });
+    }
+
     onLogout = e => {
         e.preventDefault();
 
@@ -33,18 +79,28 @@ class HeaderPage extends Component {
         );
 
         notification.open({
-            message    : "Dành cho các bạn SE",
+            message: "Dành cho các bạn SE",
             description:
                 "Tự bổ sung kiến thức cho mình là cách giết thời gian khá tốt. Bạn có thể dễ dàng đọc được những thứ mới, thú vị trên trang news nhé, click vào nút ở dưới để nhảy sang trang đó thử đê",
             btn,
             key,
             duration: 0,
-            icon    : <Icon type="coffee" style={{ color: "#108ee9" }} />,
+            icon: <Icon type="coffee" style={{ color: "#108ee9" }} />,
+        });
+    };
+
+    onToggleMobileMenu = () => {
+        const { mobileMenu } = this.state;
+
+        this.setState({
+            mobileMenu: !mobileMenu,
         });
     };
 
     render() {
         const { history } = this.props;
+        const { mobileMenu, desktop } = this.state;
+
         if (
             !LocalStorageUtils.isNotificationLoaded() &&
             typeof window !== "undefined" &&
@@ -67,121 +123,243 @@ class HeaderPage extends Component {
         }
 
         return (
-            <Header>
-                <Menu
-                    theme="light"
-                    mode="horizontal"
-                    style={{ lineHeight: "64px" }}
-                    selectedKeys={[currentKey]}
-                >
-                    <Menu.Item key="/home">
-                        <Link to="/home">
-                            <Icon type="home" />
-                            Trang chủ
-                        </Link>
-                    </Menu.Item>
+            <React.Fragment>
+                {!desktop && (
+                    <MobileStyle>
+                        <span
+                            className="nav-phone-icon"
+                            onClick={this.onToggleMobileMenu}
+                        />
 
-                    <SubMenu
-                        title={(
-                            <span>
-                                <Icon type="heart" />
-                                Confessions
-                            </span>
-)}
-                    >
-                        {!LocalStorageUtils.isAuthenticated() && (
-                            <Menu.Item key="/send">
-                                <Link to="/send">
-                                    <Icon type="mail" />
-                                    Gửi confess
-                                </Link>
-                            </Menu.Item>
-                        )}
-                        {!LocalStorageUtils.isAuthenticated() && (
-                            <Menu.Item key="/my-confess">
-                                <Link to="/my-confess">
-                                    <Icon type="folder" />
-                                    Confess của tui
-                                </Link>
-                            </Menu.Item>
-                        )}
-                        <Menu.Item key="/search">
-                            <Link to="/search">
-                                <Icon type="book" />
-                                Thư viện confess
-                            </Link>
-                        </Menu.Item>
-                        <Menu.Item key="execption">
-                            <a
-                                href="https://tinyurl.com/noiquyFPTUHCMCFS"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                        <Drawer
+                            title="FPTU dot Tech"
+                            placement="left"
+                            onClose={this.onToggleMobileMenu}
+                            visible={mobileMenu}
+                            closable={false}
+                        >
+                            <Menu
+                                mode="inline"
+                                style={{ width: "100%", border: 0 }}
+                                onClick={this.onToggleMobileMenu}
                             >
-                                <Icon type="exception" />
-                                Quy định
-                            </a>
-                        </Menu.Item>
-                        <Menu.Item key="instagram">
-                            <Icon type="instagram" />
-                            Instagram
-                        </Menu.Item>
-                        {!LocalStorageUtils.isAuthenticated() && (
-                            <Menu.Item key="/login">
-                                <Link to="/admin-cp">
-                                    <Icon type="github" />
-                                    Admin CP
-                                </Link>
-                            </Menu.Item>
-                        )}
-                        {LocalStorageUtils.isAuthenticated() && (
-                            <Menu.Item key="/admin-cp">
-                                <Link to="/admin-cp">
-                                    <Icon type="github" />
-                                    Admin CP (
-                                    <strong>
-                                        {LocalStorageUtils.getNickName()}
-                                    </strong>
-                                    )
-                                </Link>
-                            </Menu.Item>
-                        )}
-                        {LocalStorageUtils.isAuthenticated() && (
-                            <Menu.Item key="/logout">
-                                <a
-                                    href="/logout"
-                                    onClick={e => this.onLogout(e)}
+                                <Menu.Item key="/home">
+                                    <Link to="/home">
+                                        <Icon type="home" />
+                                        Trang chủ
+                                    </Link>
+                                </Menu.Item>
+
+                                <MenuItemGroup
+                                    key="confess-group"
+                                    title="Confessions"
                                 >
-                                    <Icon type="delete" />
-                                    Thoát khỏi tài khoản
-                                </a>
+                                    {!LocalStorageUtils.isAuthenticated() && (
+                                        <Menu.Item key="/send">
+                                            <Link to="/send">
+                                                <Icon type="mail" />
+                                                Gửi confess
+                                            </Link>
+                                        </Menu.Item>
+                                    )}
+                                    {!LocalStorageUtils.isAuthenticated() && (
+                                        <Menu.Item key="/my-confess">
+                                            <Link to="/my-confess">
+                                                <Icon type="folder" />
+                                                Confess của tui
+                                            </Link>
+                                        </Menu.Item>
+                                    )}
+                                    <Menu.Item key="/search">
+                                        <Link to="/search">
+                                            <Icon type="book" />
+                                            Thư viện confess
+                                        </Link>
+                                    </Menu.Item>
+                                    <Menu.Item key="execption">
+                                        <a
+                                            href="https://tinyurl.com/noiquyFPTUHCMCFS"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            <Icon type="exception" />
+                                            Quy định
+                                        </a>
+                                    </Menu.Item>
+                                    <Menu.Item key="instagram">
+                                        <Icon type="instagram" />
+                                        Instagram
+                                    </Menu.Item>
+                                    {!LocalStorageUtils.isAuthenticated() && (
+                                        <Menu.Item key="/login">
+                                            <Link to="/admin-cp">
+                                                <Icon type="github" />
+                                                Admin CP
+                                            </Link>
+                                        </Menu.Item>
+                                    )}
+                                    {LocalStorageUtils.isAuthenticated() && (
+                                        <Menu.Item key="/admin-cp">
+                                            <Link to="/admin-cp">
+                                                <Icon type="github" />
+                                                Admin CP (
+                                                <strong>
+                                                    {LocalStorageUtils.getNickName()}
+                                                </strong>
+                                                )
+                                            </Link>
+                                        </Menu.Item>
+                                    )}
+                                    {LocalStorageUtils.isAuthenticated() && (
+                                        <Menu.Item key="/logout">
+                                            <a
+                                                href="/logout"
+                                                onClick={e => this.onLogout(e)}
+                                            >
+                                                <Icon type="delete" />
+                                                Thoát khỏi tài khoản
+                                            </a>
+                                        </Menu.Item>
+                                    )}
+                                </MenuItemGroup>
+
+                                <MenuItemGroup key="dev-group" title="Dev Đọc">
+                                    <Menu.Item key="/medium">
+                                        <Link to="/medium">
+                                            <Icon type="medium" />
+                                            Medium cho Dev
+                                        </Link>
+                                    </Menu.Item>
+
+                                    <Menu.Item key="/toidicodedao">
+                                        <Link to="/toidicodedao">
+                                            <Icon type="laptop" />
+                                            Tôi đi code dạo
+                                        </Link>
+                                    </Menu.Item>
+                                </MenuItemGroup>
+                            </Menu>
+                        </Drawer>
+                    </MobileStyle>
+                )}
+                {desktop && (
+                    <Header>
+                        <Menu
+                            theme="light"
+                            mode="horizontal"
+                            style={{ lineHeight: "64px" }}
+                            selectedKeys={[currentKey]}
+                        >
+                            <Menu.Item key="/home">
+                                <Link to="/home">
+                                    <Icon type="home" />
+                                    Trang chủ
+                                </Link>
                             </Menu.Item>
-                        )}
-                    </SubMenu>
 
-                    <SubMenu
-                        title={(
-                            <span>
-                                <Icon type="coffee" />
-                                Dev Đọc
-                            </span>
-)}
-                    >
-                        <Menu.Item key="/medium">
-                            <Link to="/medium">
-                                <Icon type="medium" />
-                                Medium cho Dev
-                            </Link>
-                        </Menu.Item>
+                            <SubMenu
+                                title={
+                                    <span>
+                                        <Icon type="heart" />
+                                        Confessions
+                                    </span>
+                                }
+                            >
+                                {!LocalStorageUtils.isAuthenticated() && (
+                                    <Menu.Item key="/send">
+                                        <Link to="/send">
+                                            <Icon type="mail" />
+                                            Gửi confess
+                                        </Link>
+                                    </Menu.Item>
+                                )}
+                                {!LocalStorageUtils.isAuthenticated() && (
+                                    <Menu.Item key="/my-confess">
+                                        <Link to="/my-confess">
+                                            <Icon type="folder" />
+                                            Confess của tui
+                                        </Link>
+                                    </Menu.Item>
+                                )}
+                                <Menu.Item key="/search">
+                                    <Link to="/search">
+                                        <Icon type="book" />
+                                        Thư viện confess
+                                    </Link>
+                                </Menu.Item>
+                                <Menu.Item key="execption">
+                                    <a
+                                        href="https://tinyurl.com/noiquyFPTUHCMCFS"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Icon type="exception" />
+                                        Quy định
+                                    </a>
+                                </Menu.Item>
+                                <Menu.Item key="instagram">
+                                    <Icon type="instagram" />
+                                    Instagram
+                                </Menu.Item>
+                                {!LocalStorageUtils.isAuthenticated() && (
+                                    <Menu.Item key="/login">
+                                        <Link to="/admin-cp">
+                                            <Icon type="github" />
+                                            Admin CP
+                                        </Link>
+                                    </Menu.Item>
+                                )}
+                                {LocalStorageUtils.isAuthenticated() && (
+                                    <Menu.Item key="/admin-cp">
+                                        <Link to="/admin-cp">
+                                            <Icon type="github" />
+                                            Admin CP (
+                                            <strong>
+                                                {LocalStorageUtils.getNickName()}
+                                            </strong>
+                                            )
+                                        </Link>
+                                    </Menu.Item>
+                                )}
+                                {LocalStorageUtils.isAuthenticated() && (
+                                    <Menu.Item key="/logout">
+                                        <a
+                                            href="/logout"
+                                            onClick={e => this.onLogout(e)}
+                                        >
+                                            <Icon type="delete" />
+                                            Thoát khỏi tài khoản
+                                        </a>
+                                    </Menu.Item>
+                                )}
+                            </SubMenu>
 
-                        <Menu.Item key="/toidicodedao">
-                            <Link to="/toidicodedao">
-                                <Icon type="laptop" />
-                                Tôi đi code dạo
-                            </Link>
-                        </Menu.Item>
-                    </SubMenu>
-                </Menu>
-            </Header>
+                            <SubMenu
+                                title={
+                                    <span>
+                                        <Icon type="coffee" />
+                                        Dev Đọc
+                                    </span>
+                                }
+                            >
+                                <Menu.Item key="/medium">
+                                    <Link to="/medium">
+                                        <Icon type="medium" />
+                                        Medium cho Dev
+                                    </Link>
+                                </Menu.Item>
+
+                                <Menu.Item key="/toidicodedao">
+                                    <Link to="/toidicodedao">
+                                        <Icon type="laptop" />
+                                        Tôi đi code dạo
+                                    </Link>
+                                </Menu.Item>
+                            </SubMenu>
+                        </Menu>
+                    </Header>
+                )}
+            </React.Fragment>
         );
     }
 }

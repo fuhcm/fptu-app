@@ -157,7 +157,7 @@ từ chối:
                     <title>Confess của tui</title>
                 </Helmet>
                 <div className="content-wrapper">
-                    <h2>Danh sách confession tui đã gửi</h2>
+                    <h2>Confess của tui</h2>
 
                     <Row gutter={16} style={{ marginBottom: "10px" }}>
                         <Card hoverable loading={!overview.total}>
