@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { Component } from "react";
+import "./Header.scss";
 import { Link, withRouter } from "react-router-dom";
 import { Layout, Menu, Icon, Button, notification, Drawer } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
@@ -10,14 +11,12 @@ import { enquireScreen } from "enquire-js";
 const MenuItemGroup = Menu.ItemGroup;
 
 const MobileStyle = styled.div`
-    background-color: white;
-
     .nav-phone-icon {
         cursor: pointer;
         display: none;
         height: 22px;
         position: absolute;
-        left: 30px;
+        left: 20px;
         top: 25px;
         width: 16px;
         z-index: 1;
@@ -35,7 +34,7 @@ const MobileStyle = styled.div`
         display: block;
         height: 2px;
         position: absolute;
-        width: 16px;
+        width: 20px;
     }
 `;
 
@@ -132,13 +131,13 @@ class HeaderPage extends Component {
                         />
 
                         <Drawer
-                            title="FPTU dot Tech"
                             placement="left"
                             onClose={this.onToggleMobileMenu}
                             visible={mobileMenu}
                             closable={false}
                         >
                             <Menu
+                                theme="dark"
                                 mode="inline"
                                 style={{ width: "100%", border: 0 }}
                                 onClick={this.onToggleMobileMenu}
