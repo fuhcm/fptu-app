@@ -102,11 +102,11 @@ class LandingPage extends Component {
                             animation={{ opacity: 1 }}
                             className="banner-image-wrapper"
                         >
-                                <img
-                                    alt="banner"
-                                    src="/assets/images/index.png"
-                                    width="100%"
-                                />
+                            <img
+                                alt="banner"
+                                src="/assets/images/index.png"
+                                width="100%"
+                            />
                         </TweenOne>
                     )}
                 </div>
@@ -145,7 +145,7 @@ class LandingPage extends Component {
                                             </div>
                                             <div>$ cd fptu-fe</div>
                                             <div>$ npm install</div>
-                                            <div>$ npm start</div>
+                                            <div>$ npm run dev</div>
                                         </div>
                                     )}
                                     {!mode && (

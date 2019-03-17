@@ -17,6 +17,10 @@ class Header extends React.Component {
         });
     }
 
+    onMenuVisibleChange = visible => {
+        this.setState({ menuVisible: visible });
+    };
+
     render() {
         const { menuMode, menuVisible } = this.state;
 
@@ -66,8 +70,7 @@ class Header extends React.Component {
                     >
                         <Icon
                             className="nav-phone-icon"
-                            type="menu"
-                            onClick={this.handleShowMenu}
+                            // onClick={this.handleShowMenu}
                         />
                     </Popover>
                 ) : null}
