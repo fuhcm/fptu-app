@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.scss";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 
 import { Layout } from "antd";
 
@@ -20,11 +20,13 @@ class App extends Component {
                         textAlign      : "center",
                     }}
                 >
-                    <img
-                        src="/assets/images/fpt-logo.png"
-                        alt="FPT University"
-                        style={{ width: "200px" }}
-                    />
+                    <Link to="/">
+                        <img
+                            src="/assets/images/fpt-logo.png"
+                            alt="FPT University"
+                            style={{ width: "200px" }}
+                        />
+                    </Link>
                 </div>
                 <HeaderPage />
                 <Switch>
