@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import Loadable from "react-loadable";
+import { loadReCaptcha } from "react-recaptcha-google";
 import Loading from "./modules/loading/Loading";
 import App from "./App";
 
@@ -15,6 +16,11 @@ const LandingPage = Loadable({
 });
 
 class Main extends Component {
+    componentDidMount() {
+        // Load captcha
+        loadReCaptcha();
+    }
+
     render() {
         return (
             <React.Fragment>

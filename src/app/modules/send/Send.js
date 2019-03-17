@@ -12,7 +12,7 @@ import {
     message,
 } from "antd";
 import Helmet from "react-helmet-async";
-import { loadReCaptcha, ReCaptcha } from "react-recaptcha-google";
+import { ReCaptcha } from "react-recaptcha-google";
 
 import firebase from "firebase/app";
 import "firebase/storage";
@@ -31,9 +31,6 @@ class Send extends Component {
     };
 
     componentDidMount() {
-        // Load captcha
-        loadReCaptcha();
-
         if (this.captchaDemo) {
             this.captchaDemo.reset();
         }
