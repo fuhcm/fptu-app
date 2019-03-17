@@ -96,7 +96,9 @@ class AdminCP extends Component {
                     window.dispatchEvent(new Event("resize"));
 
                     if (approvalMode) {
-                        message.success("Vừa load thêm 10 cái confess nữa nhé");
+                        this.setState({
+                            approvalMode: false,
+                        });
                     }
                 }
             );
@@ -430,6 +432,7 @@ cái
                             checkedChildren="Chỉ chưa duyệt"
                             unCheckedChildren="Chỉ chưa duyệt"
                             onChange={() => this.handleApprovalMode()}
+                            checked={approvalMode}
                             defaultChecked
                         />
                     </div>

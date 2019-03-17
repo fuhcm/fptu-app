@@ -145,10 +145,8 @@ class SearchPage extends Component {
                 {isSearchMode && (
                     <Highlighter
                         highlightStyle={{ backgroundColor: "yellow" }}
-                        searchWords={[
-                            searchKeyword,
-                            this.removeVnStr(searchKeyword),
-                        ]}
+                        searchWords={[searchKeyword]}
+                        sanitize={this.removeVnStr}
                         autoEscape
                         textToHighlight={content}
                     />
