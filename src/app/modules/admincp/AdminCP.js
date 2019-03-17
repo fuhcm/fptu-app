@@ -9,11 +9,14 @@ import {
     Button,
     Skeleton,
     Tag,
-    Alert,
     Row,
     Modal,
     Switch,
     message,
+    Col,
+    Card,
+    Icon,
+    Statistic,
 } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import Helmet from "react-helmet-async";
@@ -390,42 +393,42 @@ class AdminCP extends Component {
                 <div className="content-wrapper">
                     <h2>Quản lí confession cho admin</h2>
 
-                    <Alert
-                        message="Thống kê tổng quan"
-                        description={(
-                            <div>
-                                <Row>
-                                    Lời nhắn đã nhận:
-                                    {" "}
-                                    <strong>{overview && overview.total || "0"}</strong>
-                                    {' '}
-cái
-                                </Row>
-                                <Row>
-                                    Đang chờ duyệt:
-                                    {" "}
-                                    <strong>{overview && overview.pending || "0"}</strong>
-                                    {" "}
-                                    cái
-                                </Row>
-                                <Row>
-                                    Đã bị từ chối:
-                                    {" "}
-                                    <strong>{overview && overview.rejected || "0"}</strong>
-                                    {" "}
-                                    cái (tỉ lệ:
-                                    {" "}
-                                    {overview && Math.round(
-                                        (overview.rejected / overview.total) *
-                                            100
-                                    ) || "0"}
-                                    %)
-                                </Row>
-                            </div>
-)}
-                        type="info"
-                        showIcon
-                    />
+                    <Row gutter={16} style={{ marginBottom: "10px" }}>
+                        <Card hoverable loading={!overview.total}>
+                            <Col span={8}>
+                                <Statistic
+                                    title="Đã nhận"
+                                    value={(overview && overview.total) || "0"}
+                                    prefix={<Icon type="message" />}
+                                    suffix="cái"
+                                />
+                            </Col>
+                            <Col span={8}>
+                                <Statistic
+                                    title="Đang chờ duyệt"
+                                    value={
+                                        (overview && overview.pending) || "0"
+                                    }
+                                    prefix={<Icon type="coffee" />}
+                                    suffix="cái"
+                                />
+                            </Col>
+                            <Col span={8}>
+                                <Statistic
+                                    title="Tỉ lệ bị từ chối"
+                                    value={
+                                        Math.round(
+                                            (overview &&
+                                                overview.rejected /
+                                                    overview.total) * 100
+                                        ) || 0
+                                    }
+                                    prefix={<Icon type="fire" />}
+                                    suffix="%"
+                                />
+                            </Col>
+                        </Card>
+                    </Row>
 
                     <div style={{ marginTop: "1rem", marginBottom: "1rem" }}>
                         <Switch

@@ -2,7 +2,18 @@ import React, { Component } from "react";
 
 import moment from "moment";
 
-import { Layout, List, Button, Skeleton, Tag, Row, Alert, Icon } from "antd";
+import {
+    Layout,
+    List,
+    Button,
+    Skeleton,
+    Tag,
+    Row,
+    Icon,
+    Statistic,
+    Col,
+    Card,
+} from "antd";
 import Helmet from "react-helmet-async";
 import { askForPermissioToReceiveNotifications } from "../../../firebase";
 
@@ -148,53 +159,41 @@ từ chối:
                 <div className="content-wrapper">
                     <h2>Danh sách confession tui đã gửi</h2>
 
-                    <Row style={{ marginBottom: "10px" }}>
-                        <Alert
-                            message="Thống kê tổng quan"
-                            description={(
-                                <div>
-                                    <Row>
-                                        Lời nhắn đã nhận:
-                                        {" "}
-                                        <strong>
-                                            {(overview && overview.total) ||
-                                                "0"}
-                                        </strong>
-                                        {" "}
-                                        cái
-                                    </Row>
-                                    <Row>
-                                        Đang chờ duyệt:
-                                        {" "}
-                                        <strong>
-                                            {(overview && overview.pending) ||
-                                                "0"}
-                                        </strong>
-                                        {" "}
-                                        cái
-                                    </Row>
-                                    <Row>
-                                        Đã bị từ chối:
-                                        {" "}
-                                        <strong>
-                                            {(overview && overview.rejected) ||
-                                                "0"}
-                                        </strong>
-                                        {" "}
-                                        cái (tỉ lệ:
-                                        {" "}
-                                        {Math.round(
+                    <Row gutter={16} style={{ marginBottom: "10px" }}>
+                        <Card hoverable loading={!overview.total}>
+                            <Col span={8}>
+                                <Statistic
+                                    title="Đã nhận"
+                                    value={(overview && overview.total) || "0"}
+                                    prefix={<Icon type="message" />}
+                                    suffix="cái"
+                                />
+                            </Col>
+                            <Col span={8}>
+                                <Statistic
+                                    title="Đang chờ duyệt"
+                                    value={
+                                        (overview && overview.pending) || "0"
+                                    }
+                                    prefix={<Icon type="coffee" />}
+                                    suffix="cái"
+                                />
+                            </Col>
+                            <Col span={8}>
+                                <Statistic
+                                    title="Tỉ lệ bị từ chối"
+                                    value={
+                                        Math.round(
                                             (overview &&
                                                 overview.rejected /
                                                     overview.total) * 100
-                                        ) || 0}
-                                        %)
-                                    </Row>
-                                </div>
-)}
-                            type="info"
-                            showIcon
-                        />
+                                        ) || 0
+                                    }
+                                    prefix={<Icon type="fire" />}
+                                    suffix="%"
+                                />
+                            </Col>
+                        </Card>
                     </Row>
 
                     <div>

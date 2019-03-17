@@ -11,6 +11,11 @@ import {
     Input,
     Divider,
     message,
+    Row,
+    Col,
+    Statistic,
+    Icon,
+    Card,
 } from "antd";
 import Helmet from "react-helmet-async";
 import Highlighter from "react-highlight-words";
@@ -30,6 +35,7 @@ class SearchPage extends Component {
         list         : [],
         isSearchMode : false,
         searchKeyword: "",
+        overview     : {},
     };
 
     handleFast = debounce(keyword => {
@@ -38,6 +44,12 @@ class SearchPage extends Component {
 
     componentDidMount() {
         const { numLoad } = this.state;
+
+        FPTUSDK.overview.getOverview().then(data => {
+            this.setState({
+                overview: data,
+            });
+        });
 
         FPTUSDK.search
             .getPostedConfess(numLoad)
@@ -200,6 +212,7 @@ class SearchPage extends Component {
             list,
             isSearchMode,
             searchKeyword,
+            overview,
         } = this.state;
         const loadMore =
             !initLoading && !loading && !isSearchMode ? (
@@ -228,6 +241,43 @@ class SearchPage extends Component {
                 </Helmet>
                 <div className="content-wrapper">
                     <h2>Thư viện confession</h2>
+
+                    <Row gutter={16} style={{ marginBottom: "10px" }}>
+                        <Card hoverable loading={!overview.total}>
+                            <Col span={8}>
+                                <Statistic
+                                    title="Đã nhận"
+                                    value={(overview && overview.total) || "0"}
+                                    prefix={<Icon type="message" />}
+                                    suffix="cái"
+                                />
+                            </Col>
+                            <Col span={8}>
+                                <Statistic
+                                    title="Đang chờ duyệt"
+                                    value={
+                                        (overview && overview.pending) || "0"
+                                    }
+                                    prefix={<Icon type="coffee" />}
+                                    suffix="cái"
+                                />
+                            </Col>
+                            <Col span={8}>
+                                <Statistic
+                                    title="Tỉ lệ bị từ chối"
+                                    value={
+                                        Math.round(
+                                            (overview &&
+                                                overview.rejected /
+                                                    overview.total) * 100
+                                        ) || 0
+                                    }
+                                    prefix={<Icon type="fire" />}
+                                    suffix="%"
+                                />
+                            </Col>
+                        </Card>
+                    </Row>
 
                     <Search
                         placeholder="Nhập từ khoá để tìm confession cũ"

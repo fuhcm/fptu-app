@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "ant-design-pro": "^1.4.4",
-        "antd": "^3.9.3",
+        "antd": "3.15.1",
         "axios": "^0.18.0",
         "debounce": "^1.2.0",
         "disqus-react": "^1.0.5",
