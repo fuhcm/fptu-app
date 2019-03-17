@@ -9,7 +9,6 @@ import TweenOne from "rc-tween-one";
 import { Button, Icon } from "antd";
 import { OverPack } from "rc-scroll-anim";
 
-import BannerSVGAnim from "./BannerSVG";
 import Header from "./Header";
 
 let isMobile;
@@ -103,7 +102,11 @@ class LandingPage extends Component {
                             animation={{ opacity: 1 }}
                             className="banner-image-wrapper"
                         >
-                            <BannerSVGAnim />
+                                <img
+                                    alt="banner"
+                                    src="/assets/images/index.png"
+                                    width="100%"
+                                />
                         </TweenOne>
                     )}
                 </div>
