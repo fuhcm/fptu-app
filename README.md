@@ -6,14 +6,14 @@ tools such as [Webpack](http://webpack.github.io/) and [Babel](http://babeljs.io
 
 ## Environment
 
-Assuming you have a working NodeJS environment and Yarn installed.
+Assuming you have a working NodeJS environment.
 
 ## Installation
 
 Fetch all dependencies of `npm`:
 
 ```
-$ yarn
+$ npm ci
 ```
 
 Generate & modify environment configuration file, make sure `NODE_ENV` is `development` or `production`.
@@ -28,7 +28,7 @@ $ vim .env
 Develop with hot reload
 
 ```
-$ yarn dev
+$ npm run dev
 ```
 
 ## Production
@@ -36,13 +36,13 @@ $ yarn dev
 Run build
 
 ```
-$ yarn build
+$ npm run build
 ```
 
 Start express server:
 
 ```
-$ yarn start
+$ npm run start
 ```
 
 ## Docker build

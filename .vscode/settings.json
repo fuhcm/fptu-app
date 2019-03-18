@@ -17,6 +17,7 @@
     },
     "eslint.packageManager": "yarn",
     "files.exclude": {
+        ".cache": true,
         "node_modules/": true,
         "**/._*": true,
         "**/*.css": true
