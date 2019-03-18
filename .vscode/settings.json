@@ -21,5 +21,6 @@
         "**/._*": true,
         "**/*.css": true
     },
-    "git.autofetch": true
+    "git.autofetch": true,
+    "git.ignoreLimitWarning": true
 }
