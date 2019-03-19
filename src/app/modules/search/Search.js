@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import moment from "moment";
 
@@ -26,7 +26,7 @@ const Search = Input.Search;
 
 const stepLoad = 10;
 
-class SearchPage extends Component {
+class SearchPage extends PureComponent {
     state = {
         numLoad      : stepLoad,
         initLoading  : true,
