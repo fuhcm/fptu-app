@@ -8,8 +8,7 @@ import Loading from "./modules/loading/Loading";
 const withAuth = withAuthRouteComponent("/login");
 
 const Home = Loadable({
-    loader: () =>
-        import(/* webpackChunkName: "home" */ "../app/modules/home/Home"),
+    loader : () => import(/* webpackChunkName: "home" */ "./modules/home/Home"),
     loading: () => <Loading />,
     modules: ["../app/modules/home/Home"],
     webpack: () => [require.resolveWeak("../app/modules/home/Home")],
@@ -17,7 +16,7 @@ const Home = Loadable({
 
 const Home_Post = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "home_post" */ "../app/modules/home/Post"),
+        import(/* webpackChunkName: "home_post" */ "./modules/home/Post"),
     loading: () => <Loading />,
     modules: ["../app/modules/home/Post"],
     webpack: () => [require.resolveWeak("../app/modules/home/Post")],
@@ -25,15 +24,14 @@ const Home_Post = Loadable({
 
 const Login = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "login" */ "../app/modules/login/Login"),
+        import(/* webpackChunkName: "login" */ "./modules/login/Login"),
     loading: () => <Loading />,
     modules: ["../app/modules/login/Login"],
     webpack: () => [require.resolveWeak("../app/modules/login/Login")],
 });
 
 const Send = Loadable({
-    loader: () =>
-        import(/* webpackChunkName: "send" */ "../app/modules/send/Send"),
+    loader : () => import(/* webpackChunkName: "send" */ "./modules/send/Send"),
     loading: () => <Loading />,
     modules: ["../app/modules/send/Send"],
     webpack: () => [require.resolveWeak("../app/modules/send/Send")],
@@ -41,7 +39,7 @@ const Send = Loadable({
 
 const AdminCP = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "admincp" */ "../app/modules/admincp/AdminCP"),
+        import(/* webpackChunkName: "admincp" */ "./modules/admincp/AdminCP"),
     loading: () => <Loading />,
     modules: ["../app/modules/admincp/AdminCP"],
     webpack: () => [require.resolveWeak("../app/modules/admincp/AdminCP")],
@@ -49,7 +47,7 @@ const AdminCP = Loadable({
 
 const MyConfess = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "myconfess" */ "../app/modules/my-confess/MyConfess"),
+        import(/* webpackChunkName: "myconfess" */ "./modules/my-confess/MyConfess"),
     loading: () => <Loading />,
     modules: ["../app/modules/my-confess/MyConfess"],
     webpack: () => [require.resolveWeak("../app/modules/my-confess/MyConfess")],
@@ -57,7 +55,7 @@ const MyConfess = Loadable({
 
 const SearchConfess = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "searchconfess" */ "../app/modules/search/Search"),
+        import(/* webpackChunkName: "searchconfess" */ "./modules/search/Search"),
     loading: () => <Loading />,
     modules: ["../app/modules/search/Search"],
     webpack: () => [require.resolveWeak("../app/modules/search/Search")],
@@ -65,7 +63,7 @@ const SearchConfess = Loadable({
 
 const Medium_Index = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "medium_index" */ "../app/modules/medium/Index"),
+        import(/* webpackChunkName: "medium_index" */ "./modules/medium/Index"),
     loading: () => <Loading />,
     modules: ["../app/modules/medium/Index"],
     webpack: () => [require.resolveWeak("../app/modules/medium/Index")],
@@ -73,7 +71,7 @@ const Medium_Index = Loadable({
 
 const Medium_Post = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "medium_post" */ "../app/modules/medium/Post"),
+        import(/* webpackChunkName: "medium_post" */ "./modules/medium/Post"),
     loading: () => <Loading />,
     modules: ["../app/modules/medium/Post"],
     webpack: () => [require.resolveWeak("../app/modules/medium/Post")],
@@ -81,7 +79,7 @@ const Medium_Post = Loadable({
 
 const ToiDiCodeDao_Index = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "toidicodedao_index" */ "../app/modules/toidicodedao/Index"),
+        import(/* webpackChunkName: "toidicodedao_index" */ "./modules/toidicodedao/Index"),
     loading: () => <Loading />,
     modules: ["../app/modules/toidicodedao/Index"],
     webpack: () => [require.resolveWeak("../app/modules/toidicodedao/Index")],
@@ -89,7 +87,7 @@ const ToiDiCodeDao_Index = Loadable({
 
 const ToiDiCodeDao_Post = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "toidicodedao_post" */ "../app/modules/toidicodedao/Post"),
+        import(/* webpackChunkName: "toidicodedao_post" */ "./modules/toidicodedao/Post"),
     loading: () => <Loading />,
     modules: ["../app/modules/toidicodedao/Post"],
     webpack: () => [require.resolveWeak("../app/modules/toidicodedao/Post")],

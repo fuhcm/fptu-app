@@ -50,19 +50,11 @@ class ServerSideRendering {
             next();
         });
 
-        if (ENVIRONMENT === "staging") {
-            this.app.use(
-                express.static("dist/staging", {
-                    maxAge: 86400,
-                })
-            );
-        } else {
-            this.app.use(
-                express.static("dist/production", {
-                    maxAge: 86400,
-                })
-            );
-        }
+        this.app.use(
+            express.static("dist", {
+                maxAge: 86400,
+            })
+        );
 
         this.app.use(
             "/assets",

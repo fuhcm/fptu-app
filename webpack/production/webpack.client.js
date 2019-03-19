@@ -4,27 +4,24 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const { commonPath } = require("../common/webpack.common");
 
-module.exports = env => {
-    const distPath =
-        env.name === "staging" ? "dist/staging" : "dist/production";
-
+module.exports = () => {
     return require("../common/webpack.core")({
-        environment: env.name === "staging" ? "staging" : "production",
+        environment: "production",
         entry      : {
             browser: "./src/index.js",
         },
         output: {
-            path         : path.resolve(__dirname, "../../", distPath + "/client"),
+            path         : path.resolve(__dirname, "../../", "dist/client"),
             chunkFilename: "[name].[chunkhash].js",
             filename     : `[name].[chunkhash].js`,
             publicPath   : "/client/",
         },
         target : "web",
-        mode   : env.name === "staging" ? "development" : "production",
-        devtool: env.name === "staging" ? "source-map" : "",
+        mode   : "production",
+        devtool: null,
         plugins: [
             new ReactLoadablePlugin({
-                filename: commonPath + "/" + distPath + "/react-loadable.json",
+                filename: commonPath + "/dist/react-loadable.json",
             }),
             new MiniCssExtractPlugin({
                 filename: "[name].[chunkhash].css",

@@ -11,12 +11,8 @@ import striptags from "striptags";
 import Engine from "../engine";
 import Main from "../../src/app/Main";
 
-const stats =
-    ENVIRONMENT === "staging"
-        ? //eslint-disable-next-line
-          require("../../dist/staging/react-loadable.json")
-        : //eslint-disable-next-line
-          require("../../dist/production/react-loadable.json");
+//eslint-disable-next-line
+const stats = require("../../dist/react-loadable.json");
 
 class Renderer {
     constructor(app, store) {

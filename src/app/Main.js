@@ -7,7 +7,7 @@ import App from "./App";
 
 const LandingPage = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "landingPage" */ "../app/modules/landing-page/LandingPage"),
+        import(/* webpackChunkName: "landingPage" */ "./modules/landing-page/LandingPage"),
     loading: () => <Loading />,
     modules: ["../app/modules/landing-page/LandingPage"],
     webpack: () => [

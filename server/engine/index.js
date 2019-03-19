@@ -1,9 +1,5 @@
-const manifest =
-    ENVIRONMENT === "staging"
-        ? //eslint-disable-next-line
-          require("../../dist/staging/client/manifest.json")
-        : //eslint-disable-next-line
-          require("../../dist/production/client/manifest.json");
+//eslint-disable-next-line
+const manifest = require("../../dist/client/manifest.json");
 
 const vendorCss = [manifest["vendors.css"], manifest["browser.css"]];
 const vendorJs = [manifest["vendors.js"], manifest["browser.js"]];

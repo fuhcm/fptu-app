@@ -17,18 +17,12 @@ process.noDeprecation = true;
 
 module.exports = options => {
     // Select correct env file
-    let envParse;
-    if (options.environment === "staging") {
-        envParse = dotenv.config({
-            path: path.resolve(process.cwd(), ".env.staging"),
-        });
-    } else if (options.environment === "production") {
-        envParse = dotenv.config({
-            path: path.resolve(process.cwd(), ".env.production"),
-        });
-    } else {
-        envParse = dotenv.config();
-    }
+    const envParse =
+        options.environment === "production"
+            ? dotenv.config({
+                  path: path.resolve(process.cwd(), ".env.production"),
+              })
+            : dotenv.config();
 
     const APP_ENV = envParse.error ? {} : envParse.parsed;
 

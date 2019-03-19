@@ -1,14 +1,11 @@
 const path = require("path");
 
-module.exports = env => {
-    const distPath =
-        env.name === "staging" ? "dist/staging" : "dist/production";
-
+module.exports = () => {
     return require("../common/webpack.core")({
-        environment: env.name === "staging" ? "staging" : "production",
+        environment: "production",
         entry      : { server: "./server/index.js" },
         output     : {
-            path    : path.resolve(__dirname, "../../", distPath + "/server"),
+            path    : path.resolve(__dirname, "../../", "dist/server"),
             filename: `[name].js`,
         },
         mode  : "production",
