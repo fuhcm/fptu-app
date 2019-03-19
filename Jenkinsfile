@@ -4,11 +4,8 @@ ssh root@gosu.team <<EOF
     git checkout .
     git pull
     sudo docker build -t fptu-fe .
-    docker stop fptu-fe-staging
-    docker rm fptu-fe-staging
-    docker stop fptu-fe-production
-    docker rm fptu-fe-production
-    docker run -d --name fptu-fe-staging -p 3001:3001 fptu-fe:latest start:stag
-    docker run -d --name fptu-fe-production -p 3000:3000 fptu-fe:latest start:prod
+    docker stop fptu-fe
+    docker rm fptu-fe
+    docker run -d --name fptu-fe -p 3000:3000 fptu-fe:latest
     exit
 EOF

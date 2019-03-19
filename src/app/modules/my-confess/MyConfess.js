@@ -15,7 +15,6 @@ import {
     Card,
 } from "antd";
 import Helmet from "react-helmet-async";
-import { askForPermissioToReceiveNotifications } from "../../../firebase";
 
 const { Content } = Layout;
 
@@ -133,6 +132,16 @@ từ chối:
         </div>
     );
 
+    askPermission = () => {
+        if (typeof window !== "undefined") {
+            const {
+                askForPermissionToReceiveNotifications,
+            } = require("../../../firebase");
+
+            askForPermissionToReceiveNotifications();
+        }
+    };
+
     render() {
         const { initLoading, loading, list, overview } = this.state;
         const loadMore =
@@ -200,7 +209,7 @@ từ chối:
                         <Button
                             type="primary"
                             size="large"
-                            onClick={askForPermissioToReceiveNotifications}
+                            onClick={this.askPermission}
                         >
                             <Icon type="thunderbolt" />
                             Nhận thông báo đẩy khi được duyệt

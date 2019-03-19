@@ -17,16 +17,15 @@ FROM node:10.15.0-alpine
 
 WORKDIR /root/src/app
 
-COPY --from=builder /root/src/app/package.json /root/src/app/package.json
 COPY --from=builder /root/src/app/dist /root/src/app/dist
 
 EXPOSE 3000
 
 # Set command
-ENTRYPOINT ["npm","run"]
+ENTRYPOINT ["node","./dist/server/server.js"]
 
 # This is docker build command: 
 # docker build -t fptu-fe .
 
 # This is docker run command:
-# docker run -d --name fptu-fe -p 3001:3000 fptu-fe:latest start:prod
+# docker run -d --name fptu-fe -p 3001:3000 fptu-fe:latest
