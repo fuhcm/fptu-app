@@ -24,11 +24,8 @@ import { debounce } from "debounce";
 const { Content } = Layout;
 const Search = Input.Search;
 
-const stepLoad = 10;
-
 class SearchPage extends PureComponent {
     state = {
-        numLoad      : stepLoad,
         initLoading  : true,
         loading      : false,
         data         : [],
@@ -43,8 +40,6 @@ class SearchPage extends PureComponent {
     }, 200);
 
     componentDidMount() {
-        const { numLoad } = this.state;
-
         FPTUSDK.overview.getOverview().then(data => {
             this.setState({
                 overview: data,
@@ -52,7 +47,7 @@ class SearchPage extends PureComponent {
         });
 
         FPTUSDK.search
-            .getPostedConfess(numLoad)
+            .getPostedConfess(0)
             .then(data => {
                 this.setState({
                     initLoading: false,
@@ -109,24 +104,24 @@ class SearchPage extends PureComponent {
     };
 
     onLoadMore = () => {
-        const { numLoad, data } = this.state;
+        const { list } = this.state;
 
         this.setState({
             loading: true,
-            list   : data.concat(
-                [...new Array(stepLoad)].map(() => ({ loading: true }))
+            list   : list.concat(
+                [...new Array(10)].map(() => ({ loading: true }))
             ),
         });
 
+        const latestID = list[list.length - 1].id || 0;
+
         FPTUSDK.search
-            .getPostedConfess(numLoad + stepLoad)
+            .getPostedConfess(latestID)
             .then(data => {
                 this.setState(
                     {
-                        data,
-                        list   : data,
+                        list   : list.concat(data),
                         loading: false,
-                        numLoad: numLoad + stepLoad,
                     },
                     () => {
                         window.dispatchEvent(new Event("resize"));
