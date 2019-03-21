@@ -4,6 +4,9 @@ importScripts(
 );
 
 if (workbox) {
+    // Force development builds
+    workbox.setConfig({ debug: true });
+
     workbox.routing.registerRoute("/", new workbox.strategies.NetworkFirst());
     workbox.routing.registerRoute(
         "/send",
