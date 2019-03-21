@@ -4,12 +4,9 @@ importScripts(
 );
 
 if (workbox) {
+    workbox.routing.registerRoute("/", new workbox.strategies.NetworkFirst());
     workbox.routing.registerRoute(
-        /\.(?:js|css|html|png|jpg)$/,
-        new workbox.strategies.NetworkFirst()
-    );
-    workbox.routing.registerRoute(
-        "https://fptu.tech",
+        "/send",
         new workbox.strategies.NetworkFirst()
     );
 } else {
