@@ -5,7 +5,7 @@ importScripts(
 if (workbox) {
     workbox.routing.registerRoute(
         /\.(?:js|css|html|png|jpg)$/,
-        workbox.strategies.NetworkFirst()
+        new workbox.strategies.NetworkFirst()
     );
 } else {
     console.log(`Boo! Workbox didn't load 😬`);
