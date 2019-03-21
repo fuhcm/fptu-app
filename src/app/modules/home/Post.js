@@ -108,7 +108,7 @@ class Post extends Component {
                 </Helmet>
                 <BackTop />
                 <div className="content-wrapper">
-                    <Link to="/">
+                    <Link to="/home">
                         <Button
                             type="primary"
                             size="large"
