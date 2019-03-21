@@ -394,7 +394,7 @@ class AdminCP extends Component {
                     <h2>Quản lí confession cho admin</h2>
 
                     <Row gutter={16} style={{ marginBottom: "10px" }}>
-                        <Card hoverable loading={!overview.total}>
+                        <Card hoverable loading={overview && !overview.total}>
                             <Col lg={8} md={12}>
                                 <Statistic
                                     title="Đã nhận"
@@ -446,7 +446,7 @@ class AdminCP extends Component {
                         itemLayout="vertical"
                         loadMore={loadMore}
                         dataSource={
-                            approvalMode
+                            (approvalMode && list)
                                 ? list.filter(item => item.status === 0)
                                 : list || []
                         }

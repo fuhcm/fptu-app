@@ -154,7 +154,10 @@ từ chối:
                         lineHeight: "32px",
                     }}
                 >
-                    <Button onClick={this.onLoadMore} hidden={!list.length}>
+                    <Button
+                        onClick={this.onLoadMore}
+                        hidden={list && !list.length}
+                    >
                         Cho xem thêm vài cài nữa đê
                     </Button>
                 </div>
@@ -169,7 +172,7 @@ từ chối:
                     <h2>Confess của tui</h2>
 
                     <Row gutter={16} style={{ marginBottom: "10px" }}>
-                        <Card hoverable loading={!overview.total}>
+                        <Card hoverable loading={overview && overview.total}>
                             <Col lg={8} md={12}>
                                 <Statistic
                                     title="Đã nhận"
