@@ -62,6 +62,13 @@ export default ({ html, preState, helmet, bundles }) => {
             return `<script type="text/javascript" src="${style}"></script>`;
         })
         .join("\n")}
+    <script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/assets/sw.js");
+        });
+    }
+    </script>
     <script
         async
         src="https://www.googletagmanager.com/gtag/js?id=UA-123979019-2"
