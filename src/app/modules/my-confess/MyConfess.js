@@ -172,7 +172,7 @@ từ chối:
                     <h2>Confess của tui</h2>
 
                     <Row gutter={16} style={{ marginBottom: "10px" }}>
-                        <Card hoverable loading={overview && overview.total}>
+                        <Card hoverable loading={overview && !overview.total}>
                             <Col lg={8} md={12}>
                                 <Statistic
                                     title="Đã nhận"
