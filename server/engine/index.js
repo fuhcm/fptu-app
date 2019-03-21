@@ -65,7 +65,7 @@ export default ({ html, preState, helmet, bundles }) => {
     <script>
     if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-            navigator.serviceWorker.register("/assets/sw.js");
+            navigator.serviceWorker.register("/sw.js");
         });
     }
     </script>
