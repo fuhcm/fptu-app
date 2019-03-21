@@ -50,14 +50,14 @@ class ServerSideRendering {
             next();
         });
 
-        // For service worker
-        this.app.use("/sw.js", express.static("dist/sw.js"));
-
         this.app.use(
             express.static("dist", {
                 maxAge: 86400,
             })
         );
+
+        // For service worker
+        this.app.use("/sw.js", express.static("dist/sw.js", { maxAge: 86400 }));
 
         this.app.use(
             "/assets",
