@@ -207,8 +207,9 @@ từ chối:
 
                     <div>
                         <Button
-                            type="primary"
+                            type="dashed"
                             size="large"
+                            shape="round"
                             onClick={this.askPermission}
                         >
                             <Icon type="thunderbolt" />

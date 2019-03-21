@@ -146,6 +146,16 @@ class Send extends Component {
         return null;
     };
 
+    askPermission = () => {
+        if (typeof window !== "undefined") {
+            const {
+                askForPermissionToReceiveNotifications,
+            } = require("../../../firebase");
+
+            askForPermissionToReceiveNotifications();
+        }
+    };
+
     render() {
         const {
             disabledSendButton,
@@ -191,7 +201,33 @@ class Send extends Component {
                         </p>
                     </div>
                     <h2>Gửi Confession</h2>
-                    <p>
+
+                    <div hidden={step === 0} style={{ marginBottom: "1rem" }}>
+                        <Button
+                            type="dashed"
+                            size="large"
+                            shape="round"
+                            onClick={this.askPermission}
+                        >
+                            <Icon type="thunderbolt" />
+                            Nhận thông báo đẩy khi được duyệt
+                        </Button>
+                    </div>
+
+                    <p hidden={step === 0}>
+                        Confession của bạn đã được gửi tới admin. Bạn có thể xem
+                        các confess đã gửi bằng cách bấm vào nút
+                        {" "}
+                        <strong>Confess của tui</strong>
+                        {' '}
+trên thanh menu. Nhấn
+                        vào nút
+                        <strong> Nhận thông báo đẩy</strong>
+, chúng mình sẽ gửi
+                        thông báo cho bạn trên trình duyệt ngay khi confess của
+                        bạn được duyệt.
+                    </p>
+                    <p hidden={step === 1}>
                         Bạn đang buồn vì chuyện thất tình? Bạn thấy mình không
                         đủ bản lĩnh để chắp nối tình yêu? Bạn thấy mình liêu
                         xiêu trong vấn đề tình cảm hoặc mối quan hệ của bạn bị
