@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 import { HelmetProvider } from "react-helmet-async";
 import Loadable from "react-loadable";
 import { getBundles } from "react-loadable/webpack";
-import { trigger } from "redial";
 import axios from "axios";
 import striptags from "striptags";
 import Engine from "../engine";
@@ -20,7 +19,6 @@ class Renderer {
     }
 
     renderApp = store => async (req, res) => {
-        trigger();
         let context = {};
         let helmetContext = {};
         let modules = [];
