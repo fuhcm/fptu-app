@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import Loadable from "react-loadable";
 import { loadReCaptcha } from "react-recaptcha-google";
 import Loading from "./modules/loading/Loading";
@@ -28,6 +28,19 @@ class Main extends Component {
                     <Route path="/" exact component={LandingPage} />
                     <Route path="/*" component={App} />
                 </Switch>
+
+                <Link to="/medium">
+                    <img
+                        alt="Gopher Icon"
+                        src="/assets/images/gopher.svg"
+                        style={{
+                            maxWidth: "70px",
+                            position: "fixed",
+                            bottom  : "10px",
+                            right   : "10px",
+                        }}
+                    />
+                </Link>
             </React.Fragment>
         );
     }
