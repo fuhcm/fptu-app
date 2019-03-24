@@ -144,7 +144,7 @@ class LandingPage extends Component {
                                                 git@github.com/gosu-team/fptu-fe.git
                                             </div>
                                             <div>$ cd fptu-fe</div>
-                                            <div>$ npm install</div>
+                                            <div>$ npm ci</div>
                                             <div>$ npm run dev</div>
                                         </div>
                                     )}
@@ -158,7 +158,6 @@ class LandingPage extends Component {
                                                 git@github.com/gosu-team/fptu-api.git
                                             </div>
                                             <div>$ cd fptu-api</div>
-                                            <div>$ go get -u</div>
                                             <div>
                                                 $ go run ./cmd/app/main.go
                                             </div>
@@ -198,7 +197,7 @@ then
                                     >
                                         <Button type="primary">
                                             <Icon type="github" />
-                                            Our Github Organization
+                                            Github Organization
                                         </Button>
                                     </a>
                                 </div>
