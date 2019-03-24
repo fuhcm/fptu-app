@@ -197,7 +197,7 @@ then
                                     >
                                         <Button type="primary">
                                             <Icon type="github" />
-                                            Github Organization
+                                            Our Github Organization
                                         </Button>
                                     </a>
                                 </div>
