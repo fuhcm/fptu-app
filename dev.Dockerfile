@@ -13,7 +13,7 @@ EXPOSE 3000
 ENTRYPOINT ["npm","run","dev"]
 
 # This is docker build command: 
-# docker build -f Dockerfile.develop -t fptu-fe-dev .
+# docker build -f dev.Dockerfile -t fptu-fe-dev .
 
 # This is docker run command:
 # docker run -it -p 3001:3001 -v /Users/tuhuynh/Desktop/Gosu/fptu-fe/src:/root/src/app/src fptu-fe-dev:latest
