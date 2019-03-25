@@ -12,11 +12,11 @@ Assuming you have a working NodeJS environment.
 
 Build develop image:
 
-`docker build -f dev.Dockerfile -t fptu-fe-dev .`
+`docker-compose build`
 
 Run with develop container:
 
-`docker run -it -p 3001:3001 -v src:/root/src/app/src fptu-fe-dev:latest`
+`docker-compose up`
 
 ## Production
 

@@ -1,7 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
 const dotenv = require("dotenv");
-const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const {
     nodeStyleLoader,
     babelLoader,
@@ -10,7 +9,6 @@ const {
     resolve,
     optimization,
 } = require("./webpack.common");
-const { getLog } = require("./webpack.log");
 
 // Ignore all deprecations and hope that nothing will silently break in the future.
 process.noDeprecation = true;
@@ -62,12 +60,6 @@ module.exports = options => {
                 },
                 APP_ENV    : JSON.stringify(APP_ENV),
                 ENVIRONMENT: JSON.stringify(options.environment),
-            }),
-            new FriendlyErrorsWebpackPlugin({
-                compilationSuccessInfo: getLog(
-                    options.environment,
-                    options.target
-                ),
             }),
         ]),
         stats      : "none",

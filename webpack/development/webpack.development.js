@@ -23,9 +23,7 @@ module.exports = require("../common/webpack.core")({
         historyApiFallback: true,
         hot               : true,
         compress          : false,
-        quiet             : true,
         host              : "0.0.0.0",
-        open              : true,
     },
     plugins: [
         new htmlWebpackPlugin({
