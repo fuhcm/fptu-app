@@ -8,58 +8,25 @@ tools such as [Webpack](http://webpack.github.io/) and [Babel](http://babeljs.io
 
 Assuming you have a working NodeJS environment.
 
-## Installation
-
-Fetch all dependencies of `npm`:
-
-```
-$ npm ci
-```
-
-Generate & modify environment configuration file, make sure `NODE_ENV` is `development` or `production`.
-
-```
-$ mv .env.example .env
-$ vim .env
-```
-
 ## Development
 
-Develop with hot reload
+Build develop image:
 
-```
-$ npm run dev
-```
+`docker build -f dev.Dockerfile -t fptu-fe-dev .`
+
+Run with develop container:
+
+`docker run -it -p 3001:3001 -v src:/root/src/app/src fptu-fe-dev:latest`
 
 ## Production
 
-Run build
+Build production image:
 
-```
-$ npm run build
-```
+`docker build -t fptu-fe .`
 
-Start express server:
+Run production container:
 
-```
-$ npm run start
-```
-
-## Docker build
-
-First, you need a docker environment installed.
-
-Build image:
-
-```
-$ docker build -t fptu-fe .
-```
-
-Run image:
-
-```
-$ docker run -dit -p 3000:3000 fptu-fe:latest
-```
+`docker run -d --name fptu-fe -p 3001:3000 fptu-fe:latest`
 
 ## License
 
