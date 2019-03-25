@@ -144,8 +144,8 @@ class LandingPage extends Component {
                                                 git@github.com/gosu-team/fptu-fe.git
                                             </div>
                                             <div>$ cd fptu-fe</div>
-                                            <div>$ npm ci</div>
-                                            <div>$ npm run dev</div>
+                                            <div>$ docker-compose build</div>
+                                            <div>$ docker-compose up</div>
                                         </div>
                                     )}
                                     {!mode && (
@@ -158,9 +158,8 @@ class LandingPage extends Component {
                                                 git@github.com/gosu-team/fptu-api.git
                                             </div>
                                             <div>$ cd fptu-api</div>
-                                            <div>
-                                                $ go run ./cmd/app/main.go
-                                            </div>
+                                            <div>$ docker-compose build</div>
+                                            <div>$ docker-compose up</div>
                                         </div>
                                     )}
                                 </div>
