@@ -22,7 +22,7 @@ class FooterPage extends Component {
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            FUHCM Students
+                            Huynh Minh Tu
                         </a>
                     </strong>
                     . Built on top of Go & React, hosted at AWS.
