@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Post.scss";
 
 import { Layout, Button, Icon, BackTop, Tag } from "antd";
 import { withRouter } from "react-router-dom";
