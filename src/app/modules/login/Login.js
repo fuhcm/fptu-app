@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import Helmet from "react-helmet-async";
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
 import LocalStorageUtils from "browser/LocalStorage";
+import GoogleLogin from "react-google-login";
 
 const { Content } = Layout;
 const FormItem = Form.Item;
@@ -22,8 +22,9 @@ class LoginForm extends Component {
 
         form.validateFields((err, values) => {
             if (!err) {
-                FPTUSDK.authen.basicLogin(values.email, values.password).then(
-                    data => {
+                FPTUSDK.authen
+                    .basicLogin(values.email, values.password)
+                    .then(data => {
                         if (!data) {
                             message.error(
                                 "Thông tin đăng nhập không chính xác!"
@@ -33,22 +34,7 @@ class LoginForm extends Component {
 
                             this.handleRedirect(token, values.email, nickname);
                         }
-                    }
-                );
-            }
-        });
-    };
-
-    responseFacebook = data => {
-        FPTUSDK.authen.loginFacebook(data.email, data.accessToken).then(data => {
-            if (!data) {
-                message.error(
-                    "Bạn phải cấp quyền đăng nhập bằng tài khoản Facebook tư cách là admin fanpage!"
-                );
-            } else {
-                const { token, nickname } = data;
-
-                this.handleRedirect(token, data.email, nickname);
+                    });
             }
         });
     };
@@ -64,6 +50,23 @@ class LoginForm extends Component {
             message.error("Thông tin đăng nhập không chính xác!");
         }
     }
+
+    responseGoogle = data => {
+        FPTUSDK.authen
+            .loginFacebook(data.profileObj.email, data.access_token)
+            .then(data => {
+                if (!data) {
+                    message.error("Đăng nhập không thành công!");
+                } else {
+                    const { token, nickname } = data;
+
+                    this.handleRedirect(token, data.email, nickname);
+                }
+            })
+            .catch(() => {
+                message.error("Tài khoản của bạn chưa được cấp phép truy cập!");
+            });
+    };
 
     render() {
         const { form } = this.props;
@@ -141,24 +144,25 @@ class LoginForm extends Component {
                             )}
                         </FormItem>
 
-                        <FacebookLogin
-                            appId="505017836663886"
-                            autoLoad={false}
-                            fields="name,email,picture"
-                            scope="pages_show_list,manage_pages,publish_pages"
-                            onClick={this.componentClicked}
-                            callback={this.responseFacebook}
+                        <GoogleLogin
+                            clientId="292520951559-5fqe0olanvlto3bd06bt4u36dqsclnni.apps.googleusercontent.com"
                             render={renderProps => (
                                 <Button
-                                    type="primary"
+                                    type="default"
                                     size="large"
                                     className="login-form-button"
                                     onClick={renderProps.onClick}
+                                    style={{
+                                        marginTop: "0.5rem",
+                                    }}
                                 >
-                                    <Icon type="facebook" />
-                                    Đăng nhập bằng Facebook
+                                    <Icon type="google" />
+                                    Đăng nhập bằng Google
                                 </Button>
                             )}
+                            buttonText="Login with Google "
+                            onSuccess={this.responseGoogle}
+                            onFailure={this.responseGoogle}
                         />
                     </Form>
                 </div>
