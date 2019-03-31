@@ -144,7 +144,6 @@ class LandingPage extends Component {
                                                 git@github.com/gosu-team/fptu-fe.git
                                             </div>
                                             <div>$ cd fptu-fe</div>
-                                            <div>$ docker-compose build</div>
                                             <div>$ docker-compose up</div>
                                         </div>
                                     )}
@@ -158,7 +157,6 @@ class LandingPage extends Component {
                                                 git@github.com/gosu-team/fptu-api.git
                                             </div>
                                             <div>$ cd fptu-api</div>
-                                            <div>$ docker-compose build</div>
                                             <div>$ docker-compose up</div>
                                         </div>
                                     )}
