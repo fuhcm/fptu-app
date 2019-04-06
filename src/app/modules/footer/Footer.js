@@ -66,22 +66,16 @@ class FooterPage extends Component {
                         title="Docker"
                     />
                     <img
-                        src="/assets/images/icons/kubernetes.png"
-                        width="50px"
-                        alt="kubernetes"
-                        title="Kubernetes"
-                    />
-                    <img
                         src="/assets/images/icons/jenkins.png"
                         width="50px"
                         alt="jenkins"
                         title="Jenkins"
                     />
                     <img
-                        src="/assets/images/icons/aws.png"
-                        width="50px"
-                        alt="aws"
-                        title="Amazon Web Service"
+                        src="/assets/images/icons/eks.png"
+                        width="150px"
+                        alt="eks"
+                        title="Amazon Elastic Container Service for Kubernetes"
                     />
                 </div>
             </Footer>
