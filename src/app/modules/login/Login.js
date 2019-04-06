@@ -37,8 +37,10 @@ class LoginForm extends Component {
     };
 
     responseGoogle = data => {
+        console.log(data);
+
         FPTUSDK.authen
-            .loginFacebook(data.profileObj.email, data.access_token)
+            .loginFacebook(data.profileObj.email, data.accessToken)
             .then(data => {
                 if (!data) {
                     message.error("Đăng nhập không thành công!");
