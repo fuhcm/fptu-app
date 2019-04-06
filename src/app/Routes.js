@@ -93,6 +93,21 @@ const ToiDiCodeDao_Post = Loadable({
     webpack: () => [require.resolveWeak("../app/modules/toidicodedao/Post")],
 });
 
+const Read = Loadable({
+    loader : () => import(/* webpackChunkName: "read" */ "./modules/cloud/Read"),
+    loading: () => <Loading />,
+    modules: ["../app/modules/cloud/Read"],
+    webpack: () => [require.resolveWeak("../app/modules/cloud/Read")],
+});
+
+const Write = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "write" */ "./modules/cloud/Write"),
+    loading: () => <Loading />,
+    modules: ["../app/modules/cloud/Write"],
+    webpack: () => [require.resolveWeak("../app/modules/cloud/Write")],
+});
+
 export default [
     {
         path     : "/home",
@@ -163,5 +178,15 @@ export default [
         path     : "/toidicodedao/bai-viet/:id/:title",
         title    : "Toi Di Code Dao Post",
         component: ToiDiCodeDao_Post,
+    },
+    {
+        path     : "/cloud",
+        title    : "Read",
+        component: Read,
+    },
+    {
+        path     : "/cloud/write",
+        title    : "Write",
+        component: Write,
     },
 ];
