@@ -25,9 +25,9 @@ class LoginForm extends Component {
                 FPTUSDK.authen
                     .basicLogin(values.email, values.password)
                     .then(data => {
-                            const { token, nickname } = data;
+                        const { token, nickname } = data;
 
-                            this.handleRedirect(token, values.email, nickname);
+                        this.handleRedirect(token, values.email, nickname);
                     })
                     .catch(() => {
                         message.error("Thông tin đăng nhập không chính xác!");

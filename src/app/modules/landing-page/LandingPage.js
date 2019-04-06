@@ -116,10 +116,9 @@ class LandingPage extends Component {
                             <div className="title-line" />
                         </div>
                         <h2>
-                            Let’s 
+                            <span>Code For Fun</span>
                             {' '}
-                            <span>Join Us</span> 
-                            {' '}
+Project
                             <Icon type="down" />
                         </h2>
                         <OverPack>
@@ -194,7 +193,7 @@ then
                                     >
                                         <Button type="primary">
                                             <Icon type="github" />
-                                            Our Github Organization
+                                            Join Github Organization
                                         </Button>
                                     </a>
                                 </div>
