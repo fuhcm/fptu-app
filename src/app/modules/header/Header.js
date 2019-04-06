@@ -175,20 +175,6 @@ class HeaderPage extends Component {
                                             Thư viện confess
                                         </Link>
                                     </Menu.Item>
-                                    <Menu.Item key="execption">
-                                        <a
-                                            href="https://tinyurl.com/noiquyFPTUHCMCFS"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            <Icon type="exception" />
-                                            Quy định
-                                        </a>
-                                    </Menu.Item>
-                                    <Menu.Item key="instagram">
-                                        <Icon type="instagram" />
-                                        Instagram
-                                    </Menu.Item>
                                     {!LocalStorageUtils.isAuthenticated() && (
                                         <Menu.Item key="/login">
                                             <Link to="/admin-cp">
@@ -216,7 +202,7 @@ class HeaderPage extends Component {
                                                 onClick={e => this.onLogout(e)}
                                             >
                                                 <Icon type="delete" />
-                                                Thoát khỏi tài khoản
+                                                Thoát
                                             </a>
                                         </Menu.Item>
                                     )}
@@ -352,6 +338,28 @@ class HeaderPage extends Component {
                                     <Link to="/toidicodedao">
                                         <Icon type="laptop" />
                                         Tôi đi code dạo
+                                    </Link>
+                                </Menu.Item>
+                            </SubMenu>
+
+                            <SubMenu
+                                title={
+                                    <span>
+                                        <Icon type="cloud" />
+                                        FU Cloud
+                                    </span>
+                                }
+                            >
+                                <Menu.Item key="/cloud">
+                                    <Link to="/cloud">
+                                        <Icon type="database" />
+                                        Kho tài liệu
+                                    </Link>
+                                </Menu.Item>
+                                <Menu.Item key="/cloud/write">
+                                    <Link to="/cloud/write">
+                                        <Icon type="file" />
+                                        Đóng góp tài liệu
                                     </Link>
                                 </Menu.Item>
                             </SubMenu>
