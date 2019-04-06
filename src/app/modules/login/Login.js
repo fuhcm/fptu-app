@@ -25,31 +25,16 @@ class LoginForm extends Component {
                 FPTUSDK.authen
                     .basicLogin(values.email, values.password)
                     .then(data => {
-                        if (!data) {
-                            message.error(
-                                "Thông tin đăng nhập không chính xác!"
-                            );
-                        } else {
                             const { token, nickname } = data;
 
                             this.handleRedirect(token, values.email, nickname);
-                        }
+                    })
+                    .catch(() => {
+                        message.error("Thông tin đăng nhập không chính xác!");
                     });
             }
         });
     };
-
-    handleRedirect(token, email, nickname) {
-        if (token) {
-            const { history } = this.props;
-
-            FPTUSDK.authen.saveToken(token, email, nickname);
-            message.success(`Chào mừng bợn ${nickname} đã quay lại ahihi`);
-            history.push("/admin-cp");
-        } else {
-            message.error("Thông tin đăng nhập không chính xác!");
-        }
-    }
 
     responseGoogle = data => {
         FPTUSDK.authen
@@ -67,6 +52,18 @@ class LoginForm extends Component {
                 message.error("Tài khoản của bạn chưa được cấp phép truy cập!");
             });
     };
+
+    handleRedirect(token, email, nickname) {
+        if (token) {
+            const { history } = this.props;
+
+            FPTUSDK.authen.saveToken(token, email, nickname);
+            message.success(`Chào mừng bợn ${nickname} đã quay lại ahihi`);
+            history.push("/admin-cp");
+        } else {
+            message.error("Thông tin đăng nhập không chính xác!");
+        }
+    }
 
     render() {
         const { form } = this.props;
