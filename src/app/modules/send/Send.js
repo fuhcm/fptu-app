@@ -17,6 +17,7 @@ import { ReCaptcha } from "react-recaptcha-google";
 import firebase from "firebase/app";
 import "firebase/storage";
 import FileUploader from "react-firebase-file-uploader";
+import axios from "axios";
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -82,8 +83,22 @@ class Send extends Component {
                                 2.5
                             )
                         );
+
+                    axios.post(
+                        "https://hooks.slack.com/services/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",
+                        {
+                            text: `Có confess mới gửi :smiley:, đang chờ được duyệt. Nội dung confess đó là: ${contentTextarea}`,
+                        }
+                    );
                 } else {
                     message.error("Lỗi kết nối nên chưa gửi được");
+
+                    axios.post(
+                        "https://hooks.slack.com/services/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",
+                        {
+                            text: `Có lỗi hệ thống nên chưa gửi được confess! :smiley: Nội dung confess đó là: ${contentTextarea}`,
+                        }
+                    );
 
                     this.setState({
                         disabledSendButton: false,
