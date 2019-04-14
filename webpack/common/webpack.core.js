@@ -36,6 +36,13 @@ module.exports = options => {
                 options.target === "node"
                     ? nodeStyleLoader
                     : styleLoader(options.environment === "development"),
+                {
+                    loader : "webpack-ant-icon-loader",
+                    enforce: "pre",
+                    include: [
+                        path.resolve("node_modules/@ant-design/icons/lib/dist"),
+                    ],
+                },
             ],
             exprContextCritical: false,
         },
