@@ -17,6 +17,7 @@ import {
     Card,
     Icon,
     Statistic,
+    Popconfirm,
 } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import Helmet from "react-helmet-async";
@@ -112,7 +113,8 @@ class AdminCP extends Component {
         const { list } = this.state;
         const index = this.findIndex(id);
 
-        FPTUSDK.admin.approveConfess(id)
+        FPTUSDK.admin
+            .approveConfess(id)
             .then(data => {
                 // Update UI
                 list[index].approver = LocalStorageUtils.getNickName();
@@ -134,21 +136,28 @@ class AdminCP extends Component {
                 if (list[index].push_id) {
                     // Push
                     const headers = {
-                        "Content-Type" : "application/json",
-                        "Authorization": "key=AAAARBubfwc:APA91bF18JVA5FjdP7CBOB34nVs21W7AMRZJdU3JGkYvogweo2h8BqYJ-hno2HeVsCIKu__kKaqkOYakpRydPBm4JuOnF0xFuzUENZzMLZ13JMVaaM7Zd55wRr8C4i_IErWagz8FiGaY",
+                        "Content-Type": "application/json",
+                        Authorization :
+                            "key=AAAARBubfwc:APA91bF18JVA5FjdP7CBOB34nVs21W7AMRZJdU3JGkYvogweo2h8BqYJ-hno2HeVsCIKu__kKaqkOYakpRydPBm4JuOnF0xFuzUENZzMLZ13JMVaaM7Zd55wRr8C4i_IErWagz8FiGaY",
                     };
 
                     const pushData = {
-                        "notification": {
-                            "title"       : "Confess đã được duyệt",
-                            "body"        : "Click vào đây để xem confession nào của bạn đã được duyệt nhé",
-                            "click_action": "http://fptu.tech/my-confess",
-                            "icon"        : "https://fptu.tech/assets/images/fptuhcm-confessions.png",
+                        notification: {
+                            title: "Confess đã được duyệt",
+                            body :
+                                "Click vào đây để xem confession nào của bạn đã được duyệt nhé",
+                            click_action: "http://fptu.tech/my-confess",
+                            icon        :
+                                "https://fptu.tech/assets/images/fptuhcm-confessions.png",
                         },
-                        "to": list[index].push_id,
+                        to: list[index].push_id,
                     };
 
-                    axios.post("https://fcm.googleapis.com/fcm/send", pushData, { headers });
+                    axios.post(
+                        "https://fcm.googleapis.com/fcm/send",
+                        pushData,
+                        { headers }
+                    );
                 }
             })
             .catch(() => {
@@ -160,7 +169,8 @@ class AdminCP extends Component {
         const { list } = this.state;
         const index = this.findIndex(id);
 
-        FPTUSDK.admin.rejectConfess(id, reason)
+        FPTUSDK.admin
+            .rejectConfess(id, reason)
             .then(() => {
                 // Update UI
                 list[index].approver = LocalStorageUtils.getNickName();
@@ -173,21 +183,28 @@ class AdminCP extends Component {
                 if (list[index].push_id) {
                     // Push
                     const headers = {
-                        "Content-Type" : "application/json",
-                        "Authorization": "key=AAAARBubfwc:APA91bF18JVA5FjdP7CBOB34nVs21W7AMRZJdU3JGkYvogweo2h8BqYJ-hno2HeVsCIKu__kKaqkOYakpRydPBm4JuOnF0xFuzUENZzMLZ13JMVaaM7Zd55wRr8C4i_IErWagz8FiGaY",
+                        "Content-Type": "application/json",
+                        Authorization :
+                            "key=AAAARBubfwc:APA91bF18JVA5FjdP7CBOB34nVs21W7AMRZJdU3JGkYvogweo2h8BqYJ-hno2HeVsCIKu__kKaqkOYakpRydPBm4JuOnF0xFuzUENZzMLZ13JMVaaM7Zd55wRr8C4i_IErWagz8FiGaY",
                     };
 
                     const pushData = {
-                        "notification": {
-                            "title"       : "Confess đã bị từ chối",
-                            "body"        : "Click vào đây để xem confession nào của bạn đã bị từ chối duyệt nhé",
-                            "click_action": "http://fptu.tech/my-confess",
-                            "icon"        : "https://fptu.tech/assets/images/fptuhcm-confessions.png",
+                        notification: {
+                            title: "Confess đã bị từ chối",
+                            body :
+                                "Click vào đây để xem confession nào của bạn đã bị từ chối duyệt nhé",
+                            click_action: "http://fptu.tech/my-confess",
+                            icon        :
+                                "https://fptu.tech/assets/images/fptuhcm-confessions.png",
                         },
-                        "to": list[index].push_id,
+                        to: list[index].push_id,
                     };
 
-                    axios.post("https://fcm.googleapis.com/fcm/send", pushData, { headers });
+                    axios.post(
+                        "https://fcm.googleapis.com/fcm/send",
+                        pushData,
+                        { headers }
+                    );
                 }
             })
             .catch(() => {
@@ -195,9 +212,7 @@ class AdminCP extends Component {
             });
     };
 
-    pendingConfess = content => (
-        <ConfessContent>{content}</ConfessContent>
-    );
+    pendingConfess = content => <ConfessContent>{content}</ConfessContent>;
 
     approvedConfess = (
         content,
@@ -446,29 +461,46 @@ class AdminCP extends Component {
                         itemLayout="vertical"
                         loadMore={loadMore}
                         dataSource={
-                            (approvalMode && list)
+                            approvalMode && list
                                 ? list.filter(item => item.status === 0)
                                 : list || []
                         }
-                        locale={{ emptyText: "Không có confess nào chưa được duyệt" }}
+                        locale={{
+                            emptyText: "Không có confess nào chưa được duyệt",
+                        }}
                         renderItem={(item, index) => (
                             <List.Item
                                 key={index}
                                 actions={
                                     (item.status === 0 ||
                                         item.status === null) && [
-                                            <Button
-                                                type="primary"
-                                                disabled={item.loading || isPosting}
-                                                onClick={() => {
+                                            <Popconfirm
+                                                title="Bạn có chắc là duyệt cái này?"
+                                                okText="Có chứ"
+                                                cancelText="Không"
+                                                onConfirm={() => {
                                                 this.handleApprove(
                                                     item.id,
                                                     true
                                                 );
                                             }}
+                                                icon={(
+                                                    <Icon
+                                                        type="question-circle-o"
+                                                        style={{ color: "red" }}
+                                                    />
+)}
                                             >
-                                            duyệt
-                                            </Button>,
+                                                <a
+                                                    href="!#"
+                                                    className="ant-btn ant-btn-primary"
+                                                    disabled={
+                                                    item.loading || isPosting
+                                                }
+                                                >
+                                                duyệt
+                                                </a>
+                                            </Popconfirm>,
                                             <Button
                                                 type="danger"
                                                 disabled={item.loading}
