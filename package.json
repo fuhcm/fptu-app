@@ -40,7 +40,7 @@
         "uuid": "^3.3.2"
     },
     "scripts": {
-        "dev": "webpack-dev-server --config webpack/development/webpack.development.js",
+        "serve": "webpack-dev-server --config webpack/development/webpack.development.js",
         "sync-source": "rm -rf dist && cp -r public/ dist",
         "prod:client": "webpack --config webpack/production/webpack.client.js",
         "prod:server": "webpack --config webpack/production/webpack.server.js",

@@ -10,7 +10,7 @@ RUN npm ci
 
 EXPOSE 3000
 
-ENTRYPOINT ["npm","run","dev"]
+ENTRYPOINT ["npm","run","serve"]
 
 # This is docker build command: 
 # docker build -f dev.Dockerfile -t fptu-fe-dev .
