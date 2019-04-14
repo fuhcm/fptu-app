@@ -87,7 +87,7 @@ class Send extends Component {
                     axios.post(
                         "https://hooks.slack.com/services/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",
                         {
-                            text: `Có confess mới gửi :smiley:, đang chờ được duyệt. Nội dung confess đó là: ${contentTextarea}`,
+                            text: `${contentTextarea}`,
                         },
                         {
                             headers: {
