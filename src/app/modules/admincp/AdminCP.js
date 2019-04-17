@@ -218,7 +218,8 @@ class AdminCP extends Component {
         content,
         approver = "admin",
         cfs_id = "0",
-        approveTime
+        approveTime,
+        pushId
     ) => (
         <ConfessContent>
             <ConfessContent>{content}</ConfessContent>
@@ -240,6 +241,9 @@ class AdminCP extends Component {
 #
                     {approver}
                 </Tag>
+                <Tag color="pink" hidden={!pushId}>
+                    #PushEnabled
+                </Tag>
                 <span>
                     Duyệt lúc
                     {" "}
@@ -251,7 +255,7 @@ class AdminCP extends Component {
         </ConfessContent>
     );
 
-    rejectedConfess = (content, approver = "admin", reason) => (
+    rejectedConfess = (content, approver = "admin", reason, pushId) => (
         <div>
             <ConfessContent>
                 <strike>{content}</strike>
@@ -260,6 +264,9 @@ class AdminCP extends Component {
                 <Tag color="red">
 #
                     {approver}
+                </Tag>
+                <Tag color="pink" hidden={!pushId}>
+                    #PushEnabled
                 </Tag>
                 <span
                     style={{
@@ -527,13 +534,15 @@ class AdminCP extends Component {
                                             item.content,
                                             item.approver,
                                             item.cfs_id,
-                                            item.updated_at
+                                            item.updated_at,
+                                            item.push_id
                                         )}
                                     {item.status === 2 &&
                                         this.rejectedConfess(
                                             item.content,
                                             item.approver,
-                                            item.reason
+                                            item.reason,
+                                            item.push_id
                                         )}
                                 </Skeleton>
                             </List.Item>
