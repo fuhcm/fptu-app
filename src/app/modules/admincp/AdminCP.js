@@ -24,6 +24,12 @@ import Helmet from "react-helmet-async";
 import LocalStorageUtils from "browser/LocalStorage";
 import styled from "styled-components";
 
+import TimeAgo from "react-timeago";
+import viStrings from "react-timeago/lib/language-strings/vi";
+import buildFormatter from "react-timeago/lib/formatters/buildFormatter";
+
+const formatter = buildFormatter(viStrings);
+
 const { Content } = Layout;
 
 const stepLoad = 10;
@@ -245,10 +251,10 @@ class AdminCP extends Component {
                     #PushEnabled
                 </Tag>
                 <span>
-                    Duyệt lúc
+                    Duyệt
                     {" "}
                     <strong>
-                        {moment(approveTime).format("HH:mm DD/MM/YYYY")}
+                        <TimeAgo date={approveTime} formatter={formatter} />
                     </strong>
                 </span>
             </div>
@@ -522,9 +528,19 @@ class AdminCP extends Component {
                             >
                                 <Skeleton title loading={item.loading} active>
                                     <List.Item.Meta
-                                        description={moment(
-                                            item.created_at
-                                        ).format("HH:mm DD/MM/YYYY")}
+                                        // description={moment(
+                                        //     item.created_at
+                                        // ).format("HH:mm DD/MM/YYYY")}
+                                        description={(
+                                            <span>
+                                                Được gởi
+                                                {" "}
+                                                <TimeAgo
+                                                    date={item.created_at}
+                                                    formatter={formatter}
+                                                />
+                                            </span>
+)}
                                     />
                                     {(item.status === null ||
                                         item.status === 0) &&

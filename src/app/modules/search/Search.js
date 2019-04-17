@@ -21,6 +21,12 @@ import Helmet from "react-helmet-async";
 import Highlighter from "react-highlight-words";
 import { debounce } from "debounce";
 
+import TimeAgo from "react-timeago";
+import viStrings from "react-timeago/lib/language-strings/vi";
+import buildFormatter from "react-timeago/lib/formatters/buildFormatter";
+
+const formatter = buildFormatter(viStrings);
+
 const { Content } = Layout;
 const Search = Input.Search;
 
@@ -312,9 +318,16 @@ kết quả với từ khoá
                             <List.Item key={index}>
                                 <Skeleton title loading={item.loading} active>
                                     <List.Item.Meta
-                                        description={moment(
-                                            item.created_at
-                                        ).format("HH:mm DD/MM/YYYY")}
+                                        description={(
+                                            <span>
+                                                Được gởi
+                                                {" "}
+                                                <TimeAgo
+                                                    date={item.created_at}
+                                                    formatter={formatter}
+                                                />
+                                            </span>
+)}
                                     />
                                     {this.approvedConfess(
                                         item.content,
