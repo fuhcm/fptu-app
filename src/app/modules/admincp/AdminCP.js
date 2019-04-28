@@ -56,7 +56,7 @@ class AdminCP extends Component {
         },
         isPosting   : false,
         approvalMode: true,
-        userStat: []
+        userStat    : [],
     };
 
     componentDidMount() {
@@ -85,13 +85,13 @@ class AdminCP extends Component {
             const userStat = data.map(e => {
                 return {
                     x: e.nickname,
-                    y: e.resolved
+                    y: e.resolved,
                 };
             });
 
             this.setState({
-                userStat
-            })
+                userStat,
+            });
         });
     }
 
@@ -442,11 +442,11 @@ class AdminCP extends Component {
                         <ChartCard
                             loading={overview && !overview.total}
                             title="Hoạt động của các admins"
-                            action={
-                            <Tooltip title="Số bài mà các admin đã duyệt/từ chối">
-                                <Icon type="exclamation-circle-o" />
-                            </Tooltip>
-                            }
+                            action={(
+                                <Tooltip title="Số bài mà các admin đã duyệt/từ chối">
+                                    <Icon type="exclamation-circle-o" />
+                                </Tooltip>
+)}
                             total={(overview && overview.total) || "0"}
                             contentHeight={46}
                         >
