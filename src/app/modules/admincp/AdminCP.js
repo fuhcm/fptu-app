@@ -430,6 +430,28 @@ class AdminCP extends Component {
                 </div>
             ) : null;
 
+        const ChartWrapper = (overview, userStat) => {
+            if (typeof window !== "undefined") {
+                return (
+                    <ChartCard
+                        loading={overview && !overview.total}
+                        title="Hoạt động của các admins"
+                        action={(
+                            <Tooltip title="Số bài mà các admin đã duyệt/từ chối">
+                                <Icon type="exclamation-circle-o" />
+                            </Tooltip>
+)}
+                        total={(overview && overview.total) || "0"}
+                        contentHeight={46}
+                    >
+                        <MiniBar height={46} data={userStat} />
+                    </ChartCard>
+                );
+            } else {
+                return <div />;
+            }
+        };
+
         return (
             <Content className="content-container">
                 <Helmet>
@@ -439,19 +461,7 @@ class AdminCP extends Component {
                     <h2>Quản lí confession cho admin</h2>
 
                     <div style={{ maxWidth: "700px", marginBottom: "1rem" }}>
-                        <ChartCard
-                            loading={overview && !overview.total}
-                            title="Hoạt động của các admins"
-                            action={(
-                                <Tooltip title="Số bài mà các admin đã duyệt/từ chối">
-                                    <Icon type="exclamation-circle-o" />
-                                </Tooltip>
-)}
-                            total={(overview && overview.total) || "0"}
-                            contentHeight={46}
-                        >
-                            <MiniBar height={46} data={userStat} />
-                        </ChartCard>
+                        {ChartWrapper(overview, userStat)}
                     </div>
 
                     <Row gutter={16} style={{ marginBottom: "10px" }}>
