@@ -20,7 +20,6 @@ import {
     Popconfirm,
     Tooltip,
 } from "antd";
-import { ChartCard, MiniBar } from "ant-design-pro/lib/Charts";
 import TextArea from "antd/lib/input/TextArea";
 import Helmet from "react-helmet-async";
 import LocalStorageUtils from "browser/LocalStorage";
@@ -432,6 +431,8 @@ class AdminCP extends Component {
 
         const ChartWrapper = (overview, userStat) => {
             if (typeof window !== "undefined") {
+                const {ChartCard, MiniBar} = require("ant-design-pro/lib/Charts");
+                
                 return (
                     <ChartCard
                         loading={overview && !overview.total}
