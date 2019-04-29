@@ -431,8 +431,11 @@ class AdminCP extends Component {
 
         const ChartWrapper = (overview, userStat) => {
             if (typeof window !== "undefined") {
-                const {ChartCard, MiniBar} = require("ant-design-pro/lib/Charts");
-                
+                const {
+                    ChartCard,
+                    MiniBar,
+                } = require("ant-design-pro/lib/Charts");
+
                 return (
                     <ChartCard
                         loading={overview && !overview.total}
