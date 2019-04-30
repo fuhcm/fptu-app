@@ -43,10 +43,12 @@
     "scripts": {
         "serve": "webpack-dev-server --config webpack/development/webpack.development.js",
         "sync-source": "rm -rf dist && cp -r public/ dist",
+        "prod:csr": "webpack --config webpack/production/webpack.csr.js",
         "prod:client": "webpack --config webpack/production/webpack.client.js",
         "prod:server": "webpack --config webpack/production/webpack.server.js",
         "build:prod": "npm run prod:client && npm run prod:server",
         "build": "npm run sync-source && npm run build:prod",
+        "build:csr": "npm run sync-source && npm run prod:csr",
         "start": "node ./dist/server/server.js",
         "lint:code": "eslint 'src/**/*.{js,jsx,ts}'",
         "lint:style": "stylelint 'src/**/*.{scss,sass}'",
