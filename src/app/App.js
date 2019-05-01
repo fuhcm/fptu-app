@@ -16,15 +16,15 @@ class App extends Component {
                 <div
                     style={{
                         padding        : "2rem",
-                        backgroundColor: "#001528",
+                        backgroundColor: "#000",
                         textAlign      : "center",
                     }}
                 >
                     <Link to="/">
                         <img
                             src="/assets/images/fpt-logo.png"
-                            alt="FPT University"
-                            style={{ width: "200px" }}
+                            alt="FPTu.TECH"
+                            style={{ width: "300px" }}
                         />
                     </Link>
                 </div>
