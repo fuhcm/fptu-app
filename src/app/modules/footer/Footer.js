@@ -45,7 +45,7 @@ class FooterPage extends Component {
                         src="/assets/images/icons/nodejs.png"
                         width="50px"
                         alt="nodejs"
-                        title="NodeJS"
+                        title="Node.js"
                         style={{
                             padding: "0px 5px",
                         }}
@@ -53,8 +53,8 @@ class FooterPage extends Component {
                     <img
                         src="/assets/images/icons/react.png"
                         width="50px"
-                        alt="reactjs"
-                        title="ReacJS"
+                        alt="react"
+                        title="React"
                     />
                     <img
                         src="/assets/images/icons/mysql.png"
