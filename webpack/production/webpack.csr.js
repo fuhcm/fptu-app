@@ -29,7 +29,6 @@ module.exports = () => {
             new htmlWebpackPlugin({
                 filename: "../index.html",
                 template: "src/index.html",
-                minify  : true,
             }),
         ],
     });

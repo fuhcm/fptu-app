@@ -18,7 +18,6 @@ import {
     Icon,
     Statistic,
     Popconfirm,
-    Tooltip,
 } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import Helmet from "react-helmet-async";
@@ -55,7 +54,6 @@ class AdminCP extends Component {
         },
         isPosting   : false,
         approvalMode: true,
-        userStat    : [],
     };
 
     componentDidMount() {
@@ -77,19 +75,6 @@ class AdminCP extends Component {
         FPTUSDK.overview.getOverview().then(data => {
             this.setState({
                 overview: data,
-            });
-        });
-
-        FPTUSDK.user.getUsers().then(data => {
-            const userStat = data.map(e => {
-                return {
-                    x: e.nickname,
-                    y: e.resolved,
-                };
-            });
-
-            this.setState({
-                userStat,
             });
         });
     }
@@ -410,7 +395,6 @@ class AdminCP extends Component {
             // scheduledTime,
             isPosting,
             approvalMode,
-            userStat,
         } = this.state;
 
         const loadMore =
@@ -429,33 +413,6 @@ class AdminCP extends Component {
                 </div>
             ) : null;
 
-        const ChartWrapper = (overview, userStat) => {
-            if (typeof window !== "undefined") {
-                const {
-                    ChartCard,
-                    MiniBar,
-                } = require("ant-design-pro/lib/Charts");
-
-                return (
-                    <ChartCard
-                        loading={overview && !overview.total}
-                        title="Hoạt động của các admins"
-                        action={(
-                            <Tooltip title="Số bài mà các admin đã duyệt/từ chối">
-                                <Icon type="exclamation-circle-o" />
-                            </Tooltip>
-)}
-                        total={(overview && overview.total) || "0"}
-                        contentHeight={46}
-                    >
-                        <MiniBar height={46} data={userStat} />
-                    </ChartCard>
-                );
-            } else {
-                return <div />;
-            }
-        };
-
         return (
             <Content className="content-container">
                 <Helmet>
@@ -463,10 +420,6 @@ class AdminCP extends Component {
                 </Helmet>
                 <div className="content-wrapper">
                     <h2>Quản lí confession cho admin</h2>
-
-                    <div style={{ maxWidth: "700px", marginBottom: "1rem" }}>
-                        {ChartWrapper(overview, userStat)}
-                    </div>
 
                     <Row gutter={16} style={{ marginBottom: "10px" }}>
                         <Card hoverable loading={overview && !overview.total}>
