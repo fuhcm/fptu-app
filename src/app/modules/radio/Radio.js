@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import "./Radio.scss";
+
 import { Layout, List, Button, Icon } from "antd";
 
 import Helmet from "react-helmet-async";
