@@ -11,7 +11,42 @@ Array.prototype.randomElement = function() {
     return this[Math.floor(Math.random() * this.length)];
 };
 
+const listRadios = [
+    {
+        id   : "2sIC1sh-yc0",
+        title: "MIN - ĐỪNG YÊU NỮA, EM MỆT RỒI | OFFICIAL MUSIC VIDEO",
+    },
+    {
+        id   : "iE52-XXnQqs",
+        title: "AMEE x B RAY - ANH NHÀ Ở ĐÂU THẾ | Official Music Video",
+    },
+    {
+        id   : "95ahbau-rJk",
+        title: "Ex's Hate Me - B Ray x Masew (Ft AMEE) | Official MV",
+    },
+    {
+        id   : "KREnGJE0vXQ",
+        title: "Duyên - Huỳnh Tú ft Khói ft Magazine | Official Music Video",
+    },
+    {
+        id   : "f-ozNHov4DM",
+        title: "Crush on you 🌸 Xin. | Lyric Video",
+    },
+    {
+        id   : "VmbK1EKvm9Y",
+        title: "OFFICIAL MV | Lena & CrazyFrogs // Ôi tình yêu thật điêu.",
+    },
+];
+
 class Radio extends Component {
+    state = {
+        currentVideo: listRadios.randomElement(),
+    };
+    playNextVideo = () => {
+        this.setState({
+            currentVideo: listRadios.randomElement(),
+        });
+    };
     render() {
         const opts = {
             height    : "585",
@@ -22,35 +57,7 @@ class Radio extends Component {
             },
         };
 
-        const listRadios = [
-            {
-                id   : "2sIC1sh-yc0",
-                title: "MIN - ĐỪNG YÊU NỮA, EM MỆT RỒI | OFFICIAL MUSIC VIDEO",
-            },
-            {
-                id   : "iE52-XXnQqs",
-                title:
-                    "AMEE x B RAY - ANH NHÀ Ở ĐÂU THẾ | Official Music Video",
-            },
-            {
-                id   : "95ahbau-rJk",
-                title: "Ex's Hate Me - B Ray x Masew (Ft AMEE) | Official MV",
-            },
-            {
-                id   : "KREnGJE0vXQ",
-                title:
-                    "Duyên - Huỳnh Tú ft Khói ft Magazine | Official Music Video",
-            },
-            {
-                id   : "f-ozNHov4DM",
-                title: "Crush on you 🌸 Xin. | Lyric Video",
-            },
-            {
-                id   : "VmbK1EKvm9Y",
-                title:
-                    "OFFICIAL MV | Lena & CrazyFrogs // Ôi tình yêu thật điêu.",
-            },
-        ];
+        const { currentVideo } = this.state;
 
         return (
             <Content className="content-container">
@@ -60,9 +67,9 @@ class Radio extends Component {
                 <div className="content-wrapper">
                     <div style={{ textAlign: "center" }}>
                         <YouTube
-                            videoId={listRadios.randomElement().id}
+                            videoId={currentVideo.id}
                             opts={opts}
-                            onReady={this._onReady}
+                            onEnd={this.playNextVideo}
                         />
                     </div>
                 </div>
