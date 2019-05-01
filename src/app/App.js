@@ -13,9 +13,6 @@ class App extends Component {
     render() {
         const { location } = this.props;
         const isRadio = location.pathname === "/radio" ? true : false;
-        const logoPath = isRadio
-            ? "/assets/images/fptuhcm-confessions.png"
-            : "/assets/images/fpt-logo.png";
 
         return (
             <Layout>
@@ -26,13 +23,24 @@ class App extends Component {
                         textAlign      : "center",
                     }}
                 >
-                    <Link to="/">
-                        <img
-                            src={logoPath}
-                            alt="FPTu.TECH"
-                            style={{ width: isRadio ? "100px" : "300px" }}
-                        />
-                    </Link>
+                    {!isRadio && (
+                        <Link to="/">
+                            <img
+                                src="/assets/images/fpt-logo.png"
+                                alt="FPTu.TECH"
+                                style={{ width: isRadio ? "100px" : "300px" }}
+                            />
+                        </Link>
+                    )}
+                    {isRadio && (
+                        <Link to="/">
+                            <img
+                                src="/assets/images/fptuhcm-confessions.png"
+                                alt="FPTu.TECH"
+                                style={{ width: isRadio ? "100px" : "300px" }}
+                            />
+                        </Link>
+                    )}
                 </div>
                 <HeaderPage />
                 <Switch>
