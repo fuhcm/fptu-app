@@ -161,6 +161,12 @@ class HeaderPage extends Component {
                                             </Link>
                                         </Menu.Item>
                                     )}
+                                    <Menu.Item key="/radio">
+                                        <Link to="/radio">
+                                            <Icon type="customer-service" />
+                                            Radio
+                                        </Link>
+                                    </Menu.Item>
                                     {!LocalStorageUtils.isAuthenticated() && (
                                         <Menu.Item key="/my-confess">
                                             <Link to="/my-confess">
@@ -342,7 +348,14 @@ class HeaderPage extends Component {
                                 </Menu.Item>
                             </SubMenu>
 
-                            <SubMenu
+                            <Menu.Item key="/radio">
+                                <Link to="/radio">
+                                    <Icon type="customer-service" />
+                                    Radio
+                                </Link>
+                            </Menu.Item>
+
+                            {/* <SubMenu
                                 title={
                                     <span>
                                         <Icon type="cloud" />
@@ -362,7 +375,7 @@ class HeaderPage extends Component {
                                         Đóng góp tài liệu
                                     </Link>
                                 </Menu.Item>
-                            </SubMenu>
+                            </SubMenu> */}
                         </Menu>
                     </Header>
                 )}

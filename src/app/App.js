@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.scss";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch, Link, withRouter } from "react-router-dom";
 
 import { Layout } from "antd";
 
@@ -11,6 +11,12 @@ import NotFound from "./modules/not-found/NotFound";
 
 class App extends Component {
     render() {
+        const { location } = this.props;
+        const isRadio = location.pathname === "/radio" ? true : false;
+        const logoPath = isRadio
+            ? "/assets/images/fptuhcm-confessions.png"
+            : "/assets/images/fpt-logo.png";
+
         return (
             <Layout>
                 <div
@@ -22,9 +28,9 @@ class App extends Component {
                 >
                     <Link to="/">
                         <img
-                            src="/assets/images/fpt-logo.png"
+                            src={logoPath}
                             alt="FPTu.TECH"
-                            style={{ width: "300px" }}
+                            style={{ width: isRadio ? "100px" : "300px" }}
                         />
                     </Link>
                 </div>
@@ -48,4 +54,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default withRouter(App);

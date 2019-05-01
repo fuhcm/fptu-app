@@ -108,6 +108,14 @@ const Write = Loadable({
     webpack: () => [require.resolveWeak("../app/modules/cloud/Write")],
 });
 
+const Radio = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "radio" */ "./modules/radio/Radio"),
+    loading: () => <Loading />,
+    modules: ["../app/modules/radio/Radio"],
+    webpack: () => [require.resolveWeak("../app/modules/radio/Radio")],
+});
+
 export default [
     {
         path     : "/home",
@@ -188,5 +196,10 @@ export default [
         path     : "/cloud/write",
         title    : "Write",
         component: Write,
+    },
+    {
+        path     : "/radio",
+        title    : "Radio",
+        component: Radio,
     },
 ];
