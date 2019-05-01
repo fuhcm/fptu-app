@@ -9,6 +9,10 @@ const { Content } = Layout;
 const FormItem = Form.Item;
 
 class LoginForm extends Component {
+    state = {
+        loading: false,
+    };
+
     componentDidMount() {
         if (LocalStorageUtils.isAuthenticated()) {
             const { history } = this.props;
@@ -22,14 +26,19 @@ class LoginForm extends Component {
 
         form.validateFields((err, values) => {
             if (!err) {
+                this.setState({ loading: true });
+
                 FPTUSDK.authen
                     .basicLogin(values.email, values.password)
                     .then(data => {
                         const { token, nickname } = data;
 
+                        this.setState({ loading: false });
                         this.handleRedirect(token, values.email, nickname);
                     })
                     .catch(() => {
+                        this.setState({ loading: false });
+
                         message.error("Thông tin đăng nhập không chính xác!");
                     });
             }
@@ -37,6 +46,8 @@ class LoginForm extends Component {
     };
 
     responseGoogle = data => {
+        this.setState({ loading: true });
+
         FPTUSDK.authen
             .loginFacebook(data.profileObj.email, data.accessToken)
             .then(data => {
@@ -50,6 +61,9 @@ class LoginForm extends Component {
             })
             .catch(() => {
                 message.error("Tài khoản của bạn chưa được cấp phép truy cập!");
+            })
+            .finally(() => {
+                this.setState({ loading: false });
             });
     };
 
@@ -68,6 +82,7 @@ class LoginForm extends Component {
     render() {
         const { form } = this.props;
         const { getFieldDecorator } = form;
+        const { loading } = this.state;
 
         return (
             <Content className="content-container">
@@ -98,6 +113,7 @@ class LoginForm extends Component {
                                         />
 )}
                                     placeholder="Email"
+                                    disabled={loading}
                                 />
                             )}
                         </FormItem>
@@ -119,6 +135,7 @@ class LoginForm extends Component {
 )}
                                     type="password"
                                     placeholder="Mật khẩu"
+                                    disabled={loading}
                                 />
                             )}
                         </FormItem>
@@ -127,8 +144,9 @@ class LoginForm extends Component {
                                 type="primary"
                                 htmlType="submit"
                                 className="login-form-button"
+                                loading={loading}
                             >
-                                <Icon type="github" />
+                                <Icon type="github" hidden={loading} />
                                 Đăng nhập
                             </Button>
                             {getFieldDecorator("remember", {
