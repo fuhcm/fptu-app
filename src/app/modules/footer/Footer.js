@@ -25,7 +25,7 @@ class FooterPage extends Component {
                             Huynh Minh Tu
                         </a>
                     </strong>
-                    . Built on top of Go & React, hosted at AWS.
+                    . Built on top of Go & React, hosted at Heroku & Netlify.
                 </div>
 
                 <div style={{ marginTop: "10px" }}>
@@ -36,10 +36,19 @@ class FooterPage extends Component {
                         title="Golang"
                     />
                     <img
+                        src="/assets/images/icons/typescript.png"
+                        width="50px"
+                        alt="typescript"
+                        title="TypeScript"
+                    />
+                    <img
                         src="/assets/images/icons/nodejs.png"
                         width="50px"
                         alt="nodejs"
                         title="NodeJS"
+                        style={{
+                            padding: "0px 5px",
+                        }}
                     />
                     <img
                         src="/assets/images/icons/react.png"
@@ -48,16 +57,13 @@ class FooterPage extends Component {
                         title="ReacJS"
                     />
                     <img
-                        src="/assets/images/icons/typescript.png"
-                        width="50px"
-                        alt="typescript"
-                        title="TypeScript"
-                    />
-                    <img
                         src="/assets/images/icons/mysql.png"
                         width="50px"
                         alt="mysql"
                         title="MySQL"
+                        style={{
+                            padding: "0px 5px",
+                        }}
                     />
                     <img
                         src="/assets/images/icons/docker.png"
@@ -65,7 +71,7 @@ class FooterPage extends Component {
                         alt="docker"
                         title="Docker"
                     />
-                    <img
+                    {/* <img
                         src="/assets/images/icons/jenkins.png"
                         width="50px"
                         alt="jenkins"
@@ -76,6 +82,18 @@ class FooterPage extends Component {
                         width="150px"
                         alt="eks"
                         title="Amazon Elastic Container Service for Kubernetes"
+                    /> */}
+                    <img
+                        src="/assets/images/icons/heroku.png"
+                        width="50px"
+                        alt="heroku"
+                        title="Heroku"
+                    />
+                    <img
+                        src="/assets/images/icons/netlify.png"
+                        width="50px"
+                        alt="netlify"
+                        title="Netlify"
                     />
                 </div>
             </Footer>
