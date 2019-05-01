@@ -26,7 +26,11 @@ const AppBundle = (
 );
 
 Loadable.preloadReady().then(() => {
-    document.getElementById("loading-bg").remove();
+    const loadingDOM = document.getElementById("loading-bg");
+    if (loadingDOM) {
+        loadingDOM.remove();
+    }
+
     ReactDOM.render(AppBundle, document.getElementById("root"));
 });
 

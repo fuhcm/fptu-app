@@ -7,8 +7,11 @@
   }
   .loading-logo{
     position: absolute;
-    left: calc(50% - 45px);
+    left: calc(50% - 100px);
     top: 40%;
+  }
+  .loading-logo img {
+    width: 200px;
   }
   .loading {
     position: absolute;
