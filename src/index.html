@@ -8,6 +8,19 @@
         />
         <link rel="shortcut icon" href="/assets/favicon.ico" />
         <link rel="stylesheet" type="text/css" href="/loader.css" />
+        <meta name="description" content="FPTU Technology Insights" />
+        <meta
+            name="keywords"
+            content="FPTU, FPTU University, FPTU Technology, FPTU HCM Confession"
+        />
+        <meta name="author" content="Huynh Minh Tu [React - NodeJS + Golang]" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link
+            rel="apple-touch-icon"
+            href="/assets/images/fptuhcm-confessions.png"
+        />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="manifest" href="/assets/manifest.json" />
         <title>FPTU.Tech</title>
     </head>
 
@@ -37,6 +50,14 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/fptu-sdk@1.0.2/dist/fptu-sdk.js"></script>
 
+    <!-- Service Worker -->
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("/sw.js");
+            });
+        }
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
         async
