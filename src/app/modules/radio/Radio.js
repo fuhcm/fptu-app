@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Layout } from "antd";
+import { Layout, List, Button, Icon } from "antd";
 
 import Helmet from "react-helmet-async";
 import YouTube from "react-youtube";
@@ -36,7 +36,25 @@ const listRadios = [
         id   : "VmbK1EKvm9Y",
         title: "OFFICIAL MV | Lena & CrazyFrogs // Ôi tình yêu thật điêu.",
     },
+    {
+        id   : "aGUQsb31TEw",
+        title: "BIGDADDY x EMILY - Mượn Rượu Tỏ Tình (Official M/V)",
+    },
+    {
+        id   : "HXkh7EOqcQ4",
+        title: "THẰNG ĐIÊN | JUSTATEE x PHƯƠNG LY | OFFICIAL MV",
+    },
+    {
+        id   : "VCYJckDc_fw",
+        title: "CÒN YÊU, ĐÂU AI RỜI ĐI - ĐỨC PHÚC | OFFICIAL MV",
+    },
 ];
+
+listRadios.sort((a, b) => {
+    if (a.title < b.title) return -1;
+    if (a.title > b.title) return 1;
+    return 0;
+});
 
 class Radio extends Component {
     state = {
@@ -46,6 +64,14 @@ class Radio extends Component {
         this.setState({
             currentVideo: listRadios.randomElement(),
         });
+    };
+    playVideo = id => {
+        const index = listRadios.findIndex(e => e.id === id);
+        if (index !== -1) {
+            this.setState({
+                currentVideo: listRadios[index],
+            });
+        }
     };
     render() {
         const opts = {
@@ -71,6 +97,31 @@ class Radio extends Component {
                             opts={opts}
                             onEnd={this.playNextVideo}
                         />
+
+                        <List
+                            style={{ marginTop: "1rem", marginBottom: "1rem" }}
+                            // bordered
+                            dataSource={listRadios}
+                            renderItem={item => (
+                                <List.Item
+                                    style={{
+                                        cursor: "pointer",
+                                        color :
+                                            item.id === currentVideo.id
+                                                ? "blue"
+                                                : "black",
+                                    }}
+                                    onClick={() => this.playVideo(item.id)}
+                                >
+                                    {item.title}
+                                </List.Item>
+                            )}
+                        />
+
+                        <Button type="primary" size="large">
+                            <Icon type="upload" />
+                            Gửi thêm bài hát
+                        </Button>
                     </div>
                 </div>
             </Content>
