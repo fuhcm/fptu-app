@@ -34,13 +34,15 @@ class Header extends React.Component {
                 <Menu.Item key="home">
                     <Link to="/">Trang chính</Link>
                 </Menu.Item>
-                <Menu.Item key="docs">
+                <Menu.Item key="search">
                     <Link to="/search">
                         <span>Thư viện Confessions</span>
                     </Link>
                 </Menu.Item>
-                <Menu.Item key="components">
-                    <Link to="/login">AdminCP</Link>
+                <Menu.Item key="radio">
+                    <Link to="/radio">
+                        <span>Radio</span>
+                    </Link>
                 </Menu.Item>
                 {menuMode === "inline" && (
                     <Menu.Item key="preview">
