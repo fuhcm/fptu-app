@@ -152,7 +152,11 @@ class Send extends Component {
                 askForPermissionToReceiveNotifications,
             } = require("../../../firebase");
 
-            askForPermissionToReceiveNotifications();
+            askForPermissionToReceiveNotifications().then(() => {
+                message.success(
+                    "Được rồi, bạn sẽ nhận được notification khi confession được duyệt nhé!"
+                );
+            });
         }
     };
 
