@@ -58,7 +58,10 @@ class Index extends Component {
 
             return (
                 <Link
-                    to={`/medium/${guid}/${paramCase(post.title)}`}
+                    to={{
+                        pathname : `/medium/${guid}/${paramCase(post.title)}`,
+                        postTitle: post.title,
+                    }}
                     key={post.guid}
                 >
                     <Col lg={8} md={12}>

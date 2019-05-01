@@ -47,7 +47,10 @@ class Index extends Component {
 
             return (
                 <Link
-                    to={`/toidicodedao/bai-viet/${guid}/${postTitle}`}
+                    to={{
+                        pathname : `/toidicodedao/bai-viet/${guid}/${postTitle}`,
+                        postTitle: post.title,
+                    }}
                     key={post.guid}
                 >
                     <Col lg={8} md={12}>

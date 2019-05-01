@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import "./Post.scss";
 
-import { Layout, Button, Icon, BackTop, Tag } from "antd";
+import { Layout, Button, Icon, BackTop, Tag, Skeleton } from "antd";
 import { withRouter } from "react-router-dom";
 import Helmet from "react-helmet-async";
 import styled from "styled-components";
 import axios from "axios";
-import Loading from "../loading/Loading";
 import NotFound from "../not-found/NotFound";
 import DisqusComponent from "../../utils/shared/disqus/DisqusComponent";
 
@@ -71,10 +70,16 @@ const PostContent = styled.div`
 `;
 
 class Post extends Component {
-    state = {
-        loading: true,
-        post   : {},
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            loading: true,
+            post   : {
+                title: props.location.postTitle,
+            },
+        };
+    }
 
     componentDidMount() {
         const { match } = this.props;
@@ -166,10 +171,6 @@ class Post extends Component {
     render() {
         const { post, loading } = this.state;
 
-        if (loading) {
-            return <Loading />;
-        }
-
         if (!post) {
             return <NotFound />;
         }
@@ -195,8 +196,15 @@ class Post extends Component {
                     </Button>
                     <PostBody>
                         <PostTitle>{post && post.title}</PostTitle>
+                        <div hidden={!loading}>
+                            <Skeleton active />
+                            <Skeleton active />
+                            <Skeleton active />
+                        </div>
                         <PostTag>
                             {post &&
+                                post.categories &&
+                                post.categories.length &&
                                 post.categories.map(item => {
                                     return (
                                         <Tag

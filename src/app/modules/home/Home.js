@@ -40,7 +40,13 @@ class Home extends Component {
             }
 
             return (
-                <Link to={`/fpt/${guid}/${postTitle}`} key={post.guid}>
+                <Link
+                    to={{
+                        pathname : `/fpt/${guid}/${postTitle}`,
+                        postTitle: post.title,
+                    }}
+                    key={post.guid}
+                >
                     <Col lg={8} md={12}>
                         <Card
                             hoverable
