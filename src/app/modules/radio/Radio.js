@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./Radio.scss";
 
-import { Layout, List, Button, Icon } from "antd";
+import { Layout, List, Spin, Tag } from "antd";
 
 import Helmet from "react-helmet-async";
 import YouTube from "react-youtube";
@@ -65,7 +65,22 @@ listRadios.sort((a, b) => {
 class Radio extends Component {
     state = {
         currentVideo: listRadios.randomElement(),
+        online      : Math.floor(Math.random() * 11),
     };
+    componentDidMount() {
+        setInterval(
+            function() {
+                if (Math.random() >= 0.5) return;
+                const { online } = this.state;
+                const bool = online <= 1 ? true : Math.random() >= 0.5;
+
+                this.setState(prevState => ({
+                    online: bool ? prevState.online + 1 : prevState.online - 1,
+                }));
+            }.bind(this),
+            2000
+        );
+    }
     playNextVideo = () => {
         this.setState({
             currentVideo: listRadios.randomElement(),
@@ -89,7 +104,7 @@ class Radio extends Component {
             },
         };
 
-        const { currentVideo } = this.state;
+        const { currentVideo, online } = this.state;
 
         return (
             <Content className="content-container">
@@ -107,6 +122,16 @@ class Radio extends Component {
                             opts={opts}
                             onEnd={this.playNextVideo}
                         />
+
+                        <h2 style={{ marginTop: "1rem" }}>
+                            Có 
+                            {' '}
+                            <strong>{online}</strong>
+                            {' '}
+người đang nghe Radio
+                            với bạn
+                            {" "}
+                        </h2>
 
                         <List
                             style={{ marginTop: "1rem", marginBottom: "1rem" }}
@@ -127,15 +152,24 @@ class Radio extends Component {
                                     }}
                                     onClick={() => this.playVideo(item.id)}
                                 >
+                                    {item.id === currentVideo.id && (
+                                        <Spin
+                                            size="small"
+                                            style={{ marginRight: "0.5rem" }}
+                                        />
+                                    )}
+                                    {" "}
                                     {item.title}
+                                    {" "}
+                                    {item.id === "2sIC1sh-yc0" && (
+                                        <Tag color="red">Top #1 Trending</Tag>
+                                    )}
+                                    {item.id === "f-ozNHov4DM" && (
+                                        <Tag color="blue">Top #1 Indie</Tag>
+                                    )}
                                 </List.Item>
                             )}
                         />
-
-                        <Button type="primary" size="large">
-                            <Icon type="upload" />
-                            Gửi thêm bài hát
-                        </Button>
                     </div>
                 </div>
             </Content>
