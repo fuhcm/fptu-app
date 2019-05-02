@@ -19,7 +19,7 @@ class App extends Component {
                 <div
                     style={{
                         padding        : "2rem",
-                        backgroundColor: "#000",
+                        backgroundColor: isRadio ? "#FAEBCA" : "#000",
                         textAlign      : "center",
                     }}
                 >
@@ -28,7 +28,7 @@ class App extends Component {
                             <img
                                 src="/assets/images/fpt-logo.png"
                                 alt="FPTu.TECH"
-                                style={{ width: isRadio ? "150px" : "300px" }}
+                                style={{ width: "300px" }}
                             />
                         </Link>
                     )}
@@ -37,7 +37,7 @@ class App extends Component {
                             <img
                                 src="/assets/images/logo-radio.png"
                                 alt="FPTu.TECH"
-                                style={{ width: isRadio ? "150px" : "300px" }}
+                                style={{ width: "150px" }}
                             />
                         </Link>
                     )}

@@ -113,7 +113,10 @@ class Radio extends Component {
         const { currentVideo, online, hideList } = this.state;
 
         return (
-            <Content className="content-container">
+            <Content
+                className="content-container"
+                style={{ background: "#FAEBCA" }}
+            >
                 <Helmet>
                     <link
                         rel="stylesheet"

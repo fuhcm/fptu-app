@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 
+import { withRouter } from "react-router-dom";
+
 import { Layout } from "antd";
 
 const { Footer } = Layout;
 
 class FooterPage extends Component {
     render() {
+        const isRadio = location.pathname === "/radio" ? true : false;
+
         return (
-            <Footer style={{ textAlign: "center" }}>
+            <Footer
+                style={{
+                    textAlign : "center",
+                    background: isRadio ? "#FAEBCA" : "unset",
+                }}
+            >
                 <div>
                     <strong>FPTU</strong>
 .
@@ -101,4 +110,4 @@ class FooterPage extends Component {
     }
 }
 
-export default FooterPage;
+export default withRouter(FooterPage);
