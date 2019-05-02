@@ -24,6 +24,8 @@ iframe {
     padding: 1rem;
     background-color: rgba(255, 255, 255, 0.85);
     border-radius: 1rem;
+    max-height: 300px;
+    overflow-y: scroll !important;
 }
 
 .ant-list-split .ant-list-item {

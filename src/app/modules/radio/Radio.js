@@ -66,7 +66,7 @@ class Radio extends Component {
     state = {
         currentVideo: listRadios.randomElement(),
         online      : Math.floor(Math.random() * 11),
-        hideList    : true,
+        hideList    : false,
     };
     componentDidMount() {
         setInterval(
@@ -139,6 +139,7 @@ người đang nghe Radio
                             {" "}
                         </h2>
                         <Switch
+                            defaultChecked
                             checkedChildren="Hiện radio list"
                             unCheckedChildren="Ẩn radio list"
                             onChange={this.toggleList}
