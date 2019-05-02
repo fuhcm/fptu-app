@@ -35,8 +35,8 @@ const listRadios = [
         title: "Crush on you 🌸 Xin. | Lyric Video",
     },
     {
-        id   : "VmbK1EKvm9Y",
-        title: "OFFICIAL MV | Lena & CrazyFrogs // Ôi tình yêu thật điêu.",
+        id   : "3fi7uwBU-CE",
+        title: "Chi Pu | ANH ƠI Ở LẠI - Official M/V (Chuyện Cám Tấm) (치푸)",
     },
     {
         id   : "aGUQsb31TEw",
@@ -49,6 +49,10 @@ const listRadios = [
     {
         id   : "VCYJckDc_fw",
         title: "CÒN YÊU, ĐÂU AI RỜI ĐI - ĐỨC PHÚC | OFFICIAL MV",
+    },
+    {
+        id   : "GwCUbhE0TY0",
+        title: "MỘT BƯỚC YÊU VẠN DẶM ĐAU | MR. SIRO | OFFICIAL MV",
     },
 ];
 
@@ -90,9 +94,13 @@ class Radio extends Component {
         return (
             <Content className="content-container">
                 <Helmet>
+                    <link
+                        rel="stylesheet"
+                        href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400&amp;subset=vietnamese"
+                    />
                     <title>Radio - FPTU HCM Confessions</title>
                 </Helmet>
-                <div className="content-wrapper">
+                <div className="content-wrapper radio-wrapper">
                     <div style={{ textAlign: "center" }}>
                         <YouTube
                             videoId={currentVideo.id}
@@ -106,12 +114,16 @@ class Radio extends Component {
                             dataSource={listRadios}
                             renderItem={item => (
                                 <List.Item
+                                    className={
+                                        item.id === currentVideo.id
+                                            ? "selected-row"
+                                            : ""
+                                    }
                                     style={{
-                                        cursor: "pointer",
-                                        color :
+                                        cursor:
                                             item.id === currentVideo.id
-                                                ? "blue"
-                                                : "black",
+                                                ? "unset"
+                                                : "pointer",
                                     }}
                                     onClick={() => this.playVideo(item.id)}
                                 >

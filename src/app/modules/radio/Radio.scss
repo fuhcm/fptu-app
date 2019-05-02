@@ -5,3 +5,18 @@ iframe {
         height: 250px;
     }
 }
+
+.radio-wrapper {
+    background-color: pink;
+    font-family: Montserrat, sans-serif;
+}
+
+.selected-row {
+    color: darkblue;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.ant-list-split .ant-list-item {
+    border-bottom: none;
+}

@@ -174,15 +174,18 @@ class Send extends Component {
         return (
             <Content className="content-container">
                 <Helmet>
+                    <link
+                        rel="stylesheet"
+                        href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400&amp;subset=vietnamese"
+                    />
                     <title>
                         Gửi Confesion - FPTU HCM Confession - FPTU Tech Insights
                     </title>
-                    <link
-                        rel="shortcut icon"
-                        href="/assets/images/fptuhcm-confessions.png"
-                    />
                 </Helmet>
-                <div className="content-wrapper">
+                <div
+                    className="content-wrapper"
+                    style={{ fontFamily: "Montserrat, sans-serif" }}
+                >
                     <div
                         style={{
                             textAlign      : "center",
@@ -254,7 +257,7 @@ trên thanh menu. Nhấn
                             value={contentTextarea}
                             onChange={e => this.handleChangeTextarea(e)}
                             rows={4}
-                            placeholder="Baby em trót thích anh rồi đấy này chàng trai đáng yêu... I need to tell you something..."
+                            placeholder="I need to tell you something..."
                             disabled={disabledSendButton}
                             style={{
                                 marginRight : "2rem",
