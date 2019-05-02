@@ -7,7 +7,10 @@ iframe {
 }
 
 .radio-wrapper {
-    background-color: pink;
+    background: url("/assets/images/radio-background.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: #FAEBCA;
     font-family: Montserrat, sans-serif;
 }
 
@@ -15,6 +18,10 @@ iframe {
     color: darkblue;
     font-weight: bold;
     font-size: 1rem;
+}
+
+.list-radio-inside {
+    background-color: rgba(255, 255, 255, 0.85);
 }
 
 .ant-list-split .ant-list-item {

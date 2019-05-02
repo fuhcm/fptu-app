@@ -28,16 +28,16 @@ class App extends Component {
                             <img
                                 src="/assets/images/fpt-logo.png"
                                 alt="FPTu.TECH"
-                                style={{ width: isRadio ? "100px" : "300px" }}
+                                style={{ width: isRadio ? "150px" : "300px" }}
                             />
                         </Link>
                     )}
                     {isRadio && (
                         <Link to="/">
                             <img
-                                src="/assets/images/fptuhcm-confessions.png"
+                                src="/assets/images/logo-radio.png"
                                 alt="FPTu.TECH"
-                                style={{ width: isRadio ? "100px" : "300px" }}
+                                style={{ width: isRadio ? "150px" : "300px" }}
                             />
                         </Link>
                     )}

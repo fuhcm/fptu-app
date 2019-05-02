@@ -96,8 +96,8 @@ class Radio extends Component {
     };
     render() {
         const opts = {
-            height    : "585",
-            width     : "960",
+            height    : "560",
+            width     : "860",
             playerVars: {
                 // https://developers.google.com/youtube/player_parameters
                 autoplay: 1,
@@ -132,44 +132,53 @@ người đang nghe Radio
                             với bạn
                             {" "}
                         </h2>
-
-                        <List
-                            style={{ marginTop: "1rem", marginBottom: "1rem" }}
-                            // bordered
-                            dataSource={listRadios}
-                            renderItem={item => (
-                                <List.Item
-                                    className={
-                                        item.id === currentVideo.id
-                                            ? "selected-row"
-                                            : ""
-                                    }
-                                    style={{
-                                        cursor:
+                        <div className="list-radio-wrapper">
+                            <List
+                                style={{
+                                    marginTop   : "1rem",
+                                    marginBottom: "1rem",
+                                }}
+                                // bordered
+                                className="list-radio-inside"
+                                dataSource={listRadios}
+                                renderItem={item => (
+                                    <List.Item
+                                        className={
                                             item.id === currentVideo.id
-                                                ? "unset"
-                                                : "pointer",
-                                    }}
-                                    onClick={() => this.playVideo(item.id)}
-                                >
-                                    {item.id === currentVideo.id && (
-                                        <Spin
-                                            size="small"
-                                            style={{ marginRight: "0.5rem" }}
-                                        />
-                                    )}
-                                    {" "}
-                                    {item.title}
-                                    {" "}
-                                    {item.id === "2sIC1sh-yc0" && (
-                                        <Tag color="red">Top #1 Trending</Tag>
-                                    )}
-                                    {item.id === "f-ozNHov4DM" && (
-                                        <Tag color="blue">Top #1 Indie</Tag>
-                                    )}
-                                </List.Item>
-                            )}
-                        />
+                                                ? "selected-row"
+                                                : ""
+                                        }
+                                        style={{
+                                            cursor:
+                                                item.id === currentVideo.id
+                                                    ? "unset"
+                                                    : "pointer",
+                                        }}
+                                        onClick={() => this.playVideo(item.id)}
+                                    >
+                                        {item.id === currentVideo.id && (
+                                            <Spin
+                                                size="small"
+                                                style={{
+                                                    marginRight: "0.5rem",
+                                                }}
+                                            />
+                                        )}
+                                        {" "}
+                                        {item.title}
+                                        {" "}
+                                        {item.id === "2sIC1sh-yc0" && (
+                                            <Tag color="red">
+                                                Top #1 Trending
+                                            </Tag>
+                                        )}
+                                        {item.id === "f-ozNHov4DM" && (
+                                            <Tag color="blue">Top #1 Indie</Tag>
+                                        )}
+                                    </List.Item>
+                                )}
+                            />
+                        </div>
                     </div>
                 </div>
             </Content>
