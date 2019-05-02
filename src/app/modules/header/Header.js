@@ -121,6 +121,9 @@ class HeaderPage extends Component {
             currentKey = "/toidicodedao";
         }
 
+        // is Radio
+        const isRadio = location.pathname === "/radio" ? true : false;
+
         return (
             <React.Fragment>
                 {!desktop && (
@@ -233,7 +236,7 @@ class HeaderPage extends Component {
                         </Drawer>
                     </MobileStyle>
                 )}
-                {desktop && (
+                {desktop && !isRadio && (
                     <Header>
                         <Menu
                             theme="light"
