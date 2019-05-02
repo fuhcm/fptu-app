@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./Radio.scss";
 
-import { Layout, List, Spin, Tag } from "antd";
+import { Layout, List, Spin, Tag, Switch } from "antd";
 
 import Helmet from "react-helmet-async";
 import YouTube from "react-youtube";
@@ -66,6 +66,7 @@ class Radio extends Component {
     state = {
         currentVideo: listRadios.randomElement(),
         online      : Math.floor(Math.random() * 11),
+        hideList    : true,
     };
     componentDidMount() {
         setInterval(
@@ -94,6 +95,11 @@ class Radio extends Component {
             });
         }
     };
+    toggleList = () => {
+        this.setState(prevState => ({
+            hideList: !prevState.hideList,
+        }));
+    };
     render() {
         const opts = {
             height    : "560",
@@ -104,7 +110,7 @@ class Radio extends Component {
             },
         };
 
-        const { currentVideo, online } = this.state;
+        const { currentVideo, online, hideList } = this.state;
 
         return (
             <Content className="content-container">
@@ -132,7 +138,12 @@ người đang nghe Radio
                             với bạn
                             {" "}
                         </h2>
-                        <div className="list-radio-wrapper">
+                        <Switch
+                            checkedChildren="Hiện radio list"
+                            unCheckedChildren="Ẩn radio list"
+                            onChange={this.toggleList}
+                        />
+                        <div className="list-radio-wrapper" hidden={hideList}>
                             <List
                                 style={{
                                     marginTop   : "1rem",
