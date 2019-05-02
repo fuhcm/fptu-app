@@ -126,7 +126,7 @@ class HeaderPage extends Component {
 
         return (
             <React.Fragment>
-                {!desktop && (
+                {!desktop && !isRadio && (
                     <MobileStyle>
                         <span
                             className="nav-phone-icon"
