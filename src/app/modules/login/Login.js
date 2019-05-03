@@ -46,6 +46,8 @@ class LoginForm extends Component {
     };
 
     responseGoogle = data => {
+        if (!data) return;
+
         this.setState({ loading: true });
 
         FPTUSDK.authen
