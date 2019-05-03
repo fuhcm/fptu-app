@@ -56,7 +56,7 @@ class FooterPage extends Component {
                         alt="nodejs"
                         title="Node.js"
                         style={{
-                            padding: "0px 5px",
+                            margin: "0px 5px",
                         }}
                     />
                     <img
@@ -71,7 +71,7 @@ class FooterPage extends Component {
                         alt="mysql"
                         title="MySQL"
                         style={{
-                            padding: "0px 5px",
+                            margin: "0px 5px",
                         }}
                     />
                     <img
