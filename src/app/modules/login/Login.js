@@ -46,7 +46,7 @@ class LoginForm extends Component {
     };
 
     responseGoogle = data => {
-        if (!data) return;
+        if (!data || !data.profileObj.email || !data.accessToken) return;
 
         this.setState({ loading: true });
 
