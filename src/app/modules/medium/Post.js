@@ -29,7 +29,6 @@ const PostBody = styled.div`
 const PostTitle = styled.h2`
     font-size: 2.5rem;
     font-weight: bold;
-    font-family: Georgia;
 
     @media screen and (max-width: 1024px) {
         font-size: 1.5rem;
@@ -42,7 +41,7 @@ const PostTag = styled.div`
 
 const PostContent = styled.div`
     font-size: 1.25rem;
-    font-family: Georgia;
+    font-weight: 100;
 
     @media screen and (max-width: 1024px) {
         font-size: 1rem;

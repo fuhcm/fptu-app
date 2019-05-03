@@ -174,18 +174,11 @@ class Send extends Component {
         return (
             <Content className="content-container">
                 <Helmet>
-                    <link
-                        rel="stylesheet"
-                        href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400&amp;subset=vietnamese"
-                    />
                     <title>
                         Gửi Confesion - FPTU HCM Confession - FPTU Tech Insights
                     </title>
                 </Helmet>
-                <div
-                    className="content-wrapper"
-                    style={{ fontFamily: "Montserrat, sans-serif" }}
-                >
+                <div className="content-wrapper">
                     <div
                         style={{
                             textAlign      : "center",

@@ -73,14 +73,16 @@ class LandingPage extends Component {
                                 style={{ transform: "translateX(-64px)" }}
                             />
                         </div>
-                        {/* <h1 key="h1">FPTU TECH</h1> */}
                         <img
                             src="/assets/images/fpt-logo.png"
                             alt="FPTu.tech"
                             style={{ maxWidth: "300px" }}
                         />
-                        <p key="content">
-                            FPT University of Technology Insights
+                        <p key="content" style={{ marginTop: "20px" }}>
+                            <strong>FPT University</strong>
+                            {' '}
+of Technology
+                            Insights
                         </p>
                         <div key="button" className="button-wrapper">
                             <Link to="/send">
