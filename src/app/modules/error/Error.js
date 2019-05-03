@@ -18,7 +18,7 @@ class Error extends Component {
         return (
             <Content className="content-container">
                 <Helmet>
-                    <title>404 - FPTU Tech Insights</title>
+                    <title>500 - FPTU Tech Insights</title>
                 </Helmet>
                 <div
                     style={{
