@@ -8,10 +8,24 @@ import HeaderPage from "./modules/header/Header";
 import FooterPage from "./modules/footer/Footer";
 import Routes from "./Routes";
 import NotFound from "./modules/not-found/NotFound";
+import Error from "./modules/error/Error";
 
 class App extends Component {
+    state = {
+        hasError : false,
+        errorText: null,
+    };
+
+    static getDerivedStateFromError(error) {
+        return {
+            hasError : true,
+            errorText: error.toString(),
+        };
+    }
+
     render() {
         const { location } = this.props;
+        const { hasError, errorText } = this.state;
         const isRadio = location.pathname === "/radio" ? true : false;
 
         return (
@@ -43,19 +57,22 @@ class App extends Component {
                     )}
                 </div>
                 <HeaderPage />
-                <Switch>
-                    {Routes.map(route => {
-                        return (
-                            <Route
-                                exact
-                                path={route.path}
-                                component={route.component}
-                                key={route.path}
-                            />
-                        );
-                    })}
-                    <Route path="*" component={NotFound} />
-                </Switch>
+                {hasError && <Error error={errorText} />}
+                {!hasError && (
+                    <Switch>
+                        {Routes.map(route => {
+                            return (
+                                <Route
+                                    exact
+                                    path={route.path}
+                                    component={route.component}
+                                    key={route.path}
+                                />
+                            );
+                        })}
+                        <Route path="*" component={NotFound} />
+                    </Switch>
+                )}
                 <FooterPage />
             </Layout>
         );
