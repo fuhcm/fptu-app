@@ -236,8 +236,14 @@ class HeaderPage extends Component {
                         </Drawer>
                     </MobileStyle>
                 )}
-                {desktop && !isRadio && (
-                    <Header>
+                {desktop && (
+                    <Header
+                        style={{
+                            background: isRadio
+                                ? "rgb(250, 235, 202)"
+                                : "unset",
+                        }}
+                    >
                         <Menu
                             theme="light"
                             mode="horizontal"
