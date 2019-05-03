@@ -95,7 +95,7 @@ class LoginForm extends Component {
                     <Form
                         onSubmit={this.handleSubmit}
                         className="login-form"
-                        style={{ maxWidth: 360, margin: "auto" }}
+                        style={{ maxWidth: 480, margin: "auto" }}
                     >
                         <h2>Đăng nhập dành cho admin</h2>
                         <FormItem>
