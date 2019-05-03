@@ -15,6 +15,11 @@ class Error extends Component {
     render() {
         const { error } = this.props;
 
+        const msg =
+            error === "TypeError: grecaptcha.render is not a function"
+                ? "Lỗi load captcha, bạn reload lại trang là được nhé!"
+                : `Đệt, lỗi "${error}"`;
+
         return (
             <Content className="content-container">
                 <Helmet>
@@ -37,7 +42,7 @@ class Error extends Component {
                             </Link>
 )}
                         title="500"
-                        desc={`Đệt, lỗi: "${error}"`}
+                        desc={msg}
                     />
                 </div>
             </Content>
