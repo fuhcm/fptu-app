@@ -37,6 +37,10 @@ if (workbox) {
         new workbox.strategies.NetworkFirst()
     );
     workbox.routing.registerRoute(
+        "/radio",
+        new workbox.strategies.NetworkFirst()
+    );
+    workbox.routing.registerRoute(
         new RegExp(".+\\.js$"),
         new workbox.strategies.NetworkFirst()
     );
@@ -46,19 +50,23 @@ if (workbox) {
     );
     workbox.routing.registerRoute(
         new RegExp(".+\\.jpg$"),
-        new workbox.strategies.NetworkFirst()
+        new workbox.strategies.CacheFirst()
     );
     workbox.routing.registerRoute(
         new RegExp(".+\\.png$"),
-        new workbox.strategies.NetworkFirst()
+        new workbox.strategies.CacheFirst()
     );
     workbox.routing.registerRoute(
         new RegExp(".+\\.ico$"),
-        new workbox.strategies.NetworkFirst()
+        new workbox.strategies.CacheFirst()
     );
     workbox.routing.registerRoute(
         new RegExp(".+\\.json$"),
         new workbox.strategies.NetworkFirst()
+    );
+    workbox.routing.registerRoute(
+        new RegExp(".+\\.woff2$"),
+        new workbox.strategies.CacheFirst()
     );
 } else {
     console.log(`Boo! Workbox didn't load 😬`);
