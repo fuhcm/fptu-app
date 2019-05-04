@@ -6,27 +6,23 @@ tools such as [Webpack](http://webpack.github.io/) and [Babel](http://babeljs.io
 
 ## Environment
 
-Assuming you have a working NodeJS environment.
+Assuming you have a working `DockerCE`.
 
 ## Development
 
-Build develop image:
-
-`docker-compose build`
-
 Run with develop container:
 
-`docker-compose up`
+`$ docker-compose up`
 
 ## Production
 
 Build production image:
 
-`docker build -t fptu-fe .`
+`$ docker build -t fptu-fe .`
 
 Run production container:
 
-`docker run -d --name fptu-fe -p 3001:3000 fptu-fe:latest`
+`$ docker run -d --name fptu-fe -p 3001:3000 fptu-fe:latest`
 
 ## License
 
@@ -34,7 +30,5 @@ Copyright © 2018-present Gosu Team. This source code is licensed under the MIT
 license found in the [LICENSE.txt](https://github.com/gosu-team/fptu-fe/blob/master/LICENSE.txt)
 file. The documentation to the project is licensed under the
 [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/) license.
-
----
 
 Made with ♥ by Tu Huynh ([fb.com/mr.huynhminhtu](https://fb.com/mr.huynhminhtu))
