@@ -33,4 +33,4 @@ license found in the [LICENSE.txt](https://github.com/gosu-team/fptu-fe/blob/mas
 file. The documentation to the project is licensed under the
 [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/) license.
 
-Made with ♥ by Huynh Minh Tu ([mrhmt.com](mrhmt.com))
+Made with ♥ by Huynh Minh Tu ([https://mrhmt.com](mrhmt.com))
