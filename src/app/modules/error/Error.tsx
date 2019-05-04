@@ -8,14 +8,19 @@ import Helmet from "react-helmet-async";
 
 const { Content } = Layout;
 
-class Error extends Component {
-    report = () => {
+type Props = {
+    error: string;
+};
+
+class Error extends Component<Props> {
+    report = (): void => {
         message.info("Đã báo công an!");
     };
+
     render() {
         const { error } = this.props;
 
-        const msg =
+        const msg: string =
             error === "TypeError: grecaptcha.render is not a function"
                 ? "Lỗi load captcha, bạn reload lại trang là được nhé!"
                 : `Đệt, lỗi "${error}"`;

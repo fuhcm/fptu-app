@@ -6,9 +6,18 @@ import { Layout } from "antd";
 
 const { Footer } = Layout;
 
-class FooterPage extends Component {
+type Props = {
+    location: Location;
+};
+
+type Location = {
+    pathname: String;
+};
+
+class FooterPage extends Component<Props> {
     render() {
-        const isRadio = location.pathname === "/radio" ? true : false;
+        const { location } = this.props;
+        const isRadio: boolean = location.pathname === "/radio" ? true : false;
 
         return (
             <Footer
@@ -80,18 +89,6 @@ class FooterPage extends Component {
                         alt="docker"
                         title="Docker"
                     />
-                    {/* <img
-                        src="/assets/images/icons/jenkins.png"
-                        width="50px"
-                        alt="jenkins"
-                        title="Jenkins"
-                    />
-                    <img
-                        src="/assets/images/icons/eks.png"
-                        width="150px"
-                        alt="eks"
-                        title="Amazon Elastic Container Service for Kubernetes"
-                    /> */}
                     <img
                         src="/assets/images/icons/heroku.png"
                         width="50px"
