@@ -4,6 +4,8 @@
 [Express](http://expressjs.com/) and [React](https://facebook.github.io/react/), containing modern web development
 tools such as [Webpack](http://webpack.github.io/) and [Babel](http://babeljs.io/).
 
+The webpack configuration now support both Babel and TypeScript, so you can have both `.js` and `.ts` files in the source code.
+
 ## Environment
 
 Assuming you have a working `DockerCE`.
@@ -26,9 +28,9 @@ Run production container:
 
 ## License
 
-Copyright © 2018-present Gosu Team. This source code is licensed under the MIT
+Copyright © 2018-present **Huynh Minh Tu**. This source code is licensed under the MIT
 license found in the [LICENSE.txt](https://github.com/gosu-team/fptu-fe/blob/master/LICENSE.txt)
 file. The documentation to the project is licensed under the
 [CC BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/) license.
 
-Made with ♥ by Tu Huynh ([fb.com/mr.huynhminhtu](https://fb.com/mr.huynhminhtu))
+Made with ♥ by Huynh Minh Tu ([mrhmt.com](mrhmt.com))
