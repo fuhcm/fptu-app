@@ -4,7 +4,7 @@ import { loadReCaptcha } from "react-recaptcha-google";
 import App from "./App";
 import LandingPage from "./modules/landing-page/LandingPage";
 
-class Main extends Component {
+class Main extends Component<{}> {
     componentDidMount() {
         // Load captcha
         loadReCaptcha();

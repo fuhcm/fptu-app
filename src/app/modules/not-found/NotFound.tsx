@@ -8,7 +8,7 @@ import Helmet from "react-helmet-async";
 
 const { Content } = Layout;
 
-class NotFound extends Component {
+class NotFound extends Component<{}> {
     render() {
         return (
             <Content className="content-container">

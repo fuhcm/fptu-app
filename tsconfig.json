@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "ES2015",
+        "declaration": true,
+        "jsx": "react",
+        "esModuleInterop": true,
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "lib": ["es6", "dom"],
+        "strict": true,
+        "removeComments": true,
+        "skipLibCheck": true,
+        "moduleResolution": "node",
+        "noImplicitAny": false,
+        "sourceMap": false
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "**/*.test.ts"]
+}

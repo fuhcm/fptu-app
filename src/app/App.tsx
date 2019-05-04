@@ -10,13 +10,26 @@ import Routes from "./Routes";
 import NotFound from "./modules/not-found/NotFound";
 import Error from "./modules/error/Error";
 
-class App extends Component {
+type Props = {
+    location: Location;
+};
+
+type State = {
+    hasError: boolean;
+    errorText: string;
+};
+
+type Location = {
+    pathname: string;
+};
+
+class App extends Component<Props, State> {
     state = {
         hasError : false,
-        errorText: null,
+        errorText: "",
     };
 
-    static getDerivedStateFromError(error) {
+    static getDerivedStateFromError(error): State {
         return {
             hasError : true,
             errorText: error.toString(),

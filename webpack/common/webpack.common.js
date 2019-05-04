@@ -5,17 +5,16 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const commonPath = path.resolve(__dirname, "../../");
 
-module.exports.babelLoader = [
-    {
-        test   : /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader : "babel-loader",
-    },
-    {
-        test  : /\.(ts|tsx)?$/,
-        loader: "ts-loader",
-    },
-];
+module.exports.babelLoader = {
+    test   : /\.(js|jsx)$/,
+    exclude: /node_modules/,
+    loader : "babel-loader",
+};
+
+module.exports.typeLoader = {
+    test  : /\.(ts|tsx)?$/,
+    loader: "ts-loader",
+};
 
 module.exports.fileLoader = isDev => {
     return {

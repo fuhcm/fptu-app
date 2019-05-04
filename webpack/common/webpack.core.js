@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const {
     nodeStyleLoader,
     babelLoader,
+    typeLoader,
     fileLoader,
     styleLoader,
     resolve,
@@ -30,6 +31,7 @@ module.exports = options => {
         module: {
             rules: [
                 babelLoader,
+                typeLoader,
                 options.target === "node"
                     ? {}
                     : fileLoader(options.environment === "development"),
