@@ -363,28 +363,6 @@ class HeaderPage extends Component {
                                     Radio
                                 </Link>
                             </Menu.Item>
-
-                            {/* <SubMenu
-                                title={
-                                    <span>
-                                        <Icon type="cloud" />
-                                        FU Cloud
-                                    </span>
-                                }
-                            >
-                                <Menu.Item key="/cloud">
-                                    <Link to="/cloud">
-                                        <Icon type="database" />
-                                        Kho tài liệu
-                                    </Link>
-                                </Menu.Item>
-                                <Menu.Item key="/cloud/write">
-                                    <Link to="/cloud/write">
-                                        <Icon type="file" />
-                                        Đóng góp tài liệu
-                                    </Link>
-                                </Menu.Item>
-                            </SubMenu> */}
                         </Menu>
                     </Header>
                 )}
