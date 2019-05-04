@@ -4,7 +4,7 @@ import { Layout, Skeleton } from "antd";
 
 const { Content } = Layout;
 
-class Loading extends Component {
+class Loading extends Component<{}> {
     render() {
         return (
             <Content className="content-container">
