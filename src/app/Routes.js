@@ -101,6 +101,14 @@ const Radio = Loadable({
     webpack: () => [require.resolveWeak("../app/modules/radio/Radio")],
 });
 
+const QRScan = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "qrscan" */ "./modules/qrscan/QRScan"),
+    loading: () => <Loading />,
+    modules: ["../app/modules/qrscan/QRScan"],
+    webpack: () => [require.resolveWeak("../app/modules/qrscan/QRScan")],
+});
+
 export default [
     {
         path     : "/home",
@@ -176,5 +184,10 @@ export default [
         path     : "/radio",
         title    : "Radio",
         component: Radio,
+    },
+    {
+        path     : "/qrscan",
+        title    : "QRScan",
+        component: QRScan,
     },
 ];
