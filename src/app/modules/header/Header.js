@@ -232,6 +232,12 @@ class HeaderPage extends Component {
                                         </Link>
                                     </Menu.Item>
                                 </MenuItemGroup>
+                                <Menu.Item key="/qrscan">
+                                    <Link to="/qrscan">
+                                        <Icon type="camera" />
+                                        QR Scan
+                                    </Link>
+                                </Menu.Item>
                             </Menu>
                         </Drawer>
                     </MobileStyle>
