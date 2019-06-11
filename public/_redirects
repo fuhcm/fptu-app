@@ -1,1 +1,10 @@
 /*    /index.html   200
+
+# These rules will change if you change your site’s custom domains or HTTPS settings
+
+# Redirect domain aliases to primary domain
+https://fptu.tech/* https://fuhcm.com/:splat 301!
+https://www.fuhcm.com/* https://fuhcm.com/:splat 301!
+
+# Optional: Redirect default Netlify subdomain to primary domain
+https://fptu.netlify.com/* https://fuhcm.com/:splat 301!
