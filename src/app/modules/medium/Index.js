@@ -40,7 +40,13 @@ class Index extends Component {
             post.description = post.description.substring(0, 250) + "...";
 
             const patt = /https:\/\/medium.com\/p\/(.*)/;
-            const guid = patt.exec(post.guid)[1];
+
+            let guid = 0;
+            try {
+                guid = patt.exec(post.guid)[1];
+            } catch (e) {
+                guid = post.guid;
+            }
 
             // Solve Medium image null
             if (!post.thumbnail.includes("https://cdn")) {
