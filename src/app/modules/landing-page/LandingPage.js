@@ -81,8 +81,7 @@ class LandingPage extends Component {
                         <p key="content" style={{ marginTop: "20px" }}>
                             <strong>FPT University</strong>
                             {' '}
-of Technology
-                            Insights
+HCM
                         </p>
                         <div key="button" className="button-wrapper">
                             <Link to="/send">
