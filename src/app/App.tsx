@@ -54,7 +54,7 @@ class App extends Component<Props, State> {
                         <Link to="/">
                             <img
                                 src="/assets/images/fpt-logo.png"
-                                alt="FPTu.TECH"
+                                alt="FUHCM.com"
                                 style={{ width: "300px" }}
                             />
                         </Link>
@@ -63,7 +63,7 @@ class App extends Component<Props, State> {
                         <Link to="/">
                             <img
                                 src="/assets/images/logo-radio.png"
-                                alt="FPTu.TECH"
+                                alt="FUHCM.com"
                                 style={{ width: "150px" }}
                             />
                         </Link>

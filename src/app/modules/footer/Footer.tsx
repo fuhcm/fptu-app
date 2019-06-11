@@ -27,9 +27,9 @@ class FooterPage extends Component<Props> {
                 }}
             >
                 <div>
-                    <strong>FPTU</strong>
+                    <strong>FUHCM</strong>
 .
-                    <strong>Tech</strong>
+                    <strong>com</strong>
                     {' '}
 ©2019 Developed
                     by

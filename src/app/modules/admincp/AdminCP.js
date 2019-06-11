@@ -152,9 +152,9 @@ class AdminCP extends Component {
                             title: "Confess đã được duyệt",
                             body :
                                 "Click vào đây để xem confession nào của bạn đã được duyệt nhé",
-                            click_action: "http://fptu.tech/my-confess",
+                            click_action: "http://fuhcm.com/my-confess",
                             icon        :
-                                "https://fptu.tech/assets/images/fptuhcm-confessions.png",
+                                "https://fuhcm.com/assets/images/fptuhcm-confessions.png",
                         },
                         to: list[index].push_id,
                     };
@@ -199,9 +199,9 @@ class AdminCP extends Component {
                             title: "Confess đã bị từ chối",
                             body :
                                 "Click vào đây để xem confession nào của bạn đã bị từ chối duyệt nhé",
-                            click_action: "http://fptu.tech/my-confess",
+                            click_action: "http://fuhcm.com/my-confess",
                             icon        :
-                                "https://fptu.tech/assets/images/fptuhcm-confessions.png",
+                                "https://fuhcm.com/assets/images/fptuhcm-confessions.png",
                         },
                         to: list[index].push_id,
                     };
