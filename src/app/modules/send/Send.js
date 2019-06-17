@@ -61,6 +61,12 @@ class Send extends Component {
             return;
         }
 
+        if (contentTextarea.toLowerCase().includes("unihouse")) {
+            message.error("Hệ thống đang tạm lỗi, quay lại sau!");
+            this.setState({ disabledSendButton: false, contentTextarea: "" });
+            return;
+        }
+
         const pushID = FPTUSDK.push.getPushID();
         FPTUSDK.send
             .sendConfess(contentTextarea.trim(), recaptchaToken, pushID)
