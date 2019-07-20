@@ -179,7 +179,7 @@ class Post extends Component {
                 <Helmet>
                     <title>
                         {(post && post.title) ||
-                            "Medium for Devs - FPTU Tech Insights"}
+                            "Medium for Devs - FUHCM.com"}
                     </title>
                 </Helmet>
                 <BackTop />

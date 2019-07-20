@@ -13,7 +13,7 @@ class NotFound extends Component<{}> {
         return (
             <Content className="content-container">
                 <Helmet>
-                    <title>404 - FPTU Tech Insights</title>
+                    <title>404 - FUHCM.com</title>
                 </Helmet>
                 <div
                     style={{

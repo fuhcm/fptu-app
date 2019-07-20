@@ -89,7 +89,7 @@ class LoginForm extends Component {
         return (
             <Content className="content-container">
                 <Helmet>
-                    <title>Đăng nhập - FPTU Tech Insights</title>
+                    <title>Đăng nhập - FUHCM.com</title>
                 </Helmet>
                 <div className="content-wrapper">
                     <Form

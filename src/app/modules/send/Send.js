@@ -181,7 +181,7 @@ class Send extends Component {
             <Content className="content-container">
                 <Helmet>
                     <title>
-                        Gửi Confesion - FPTU HCM Confession - FPTU Tech Insights
+                        Gửi Confesion - FPTU HCM Confession - FUHCM.com
                     </title>
                 </Helmet>
                 <div className="content-wrapper">

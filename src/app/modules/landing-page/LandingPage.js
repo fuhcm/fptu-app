@@ -45,7 +45,7 @@ class LandingPage extends Component {
         return (
             <React.Fragment>
                 <Helmet>
-                    <title>FPTU Tech Insights</title>
+                    <title>FUHCM.com</title>
                 </Helmet>
                 <Header />
                 <div className="banner-wrapper">
@@ -81,7 +81,8 @@ class LandingPage extends Component {
                         <p key="content" style={{ marginTop: "20px" }}>
                             <strong>FPT University</strong>
                             {' '}
-HCM
+HCM - Official
+                            Community
                         </p>
                         <div key="button" className="button-wrapper">
                             <Link to="/send">
@@ -122,9 +123,9 @@ HCM
                             <div className="title-line" />
                         </div>
                         <h2>
-                            <span>Code For Fun</span>
+                            We are looking for 
                             {' '}
-Project
+                            <span>Community Developers</span>
                             <Icon type="down" />
                         </h2>
                         <OverPack>
@@ -135,8 +136,9 @@ Project
                                 className="page2-content"
                             >
                                 <p key="p" className="page-content">
-                                    The more commit you donate to the repos, the
-                                    more knowledge you will get
+                                    We are looking for developers to maintain
+                                    and develop this community's non-profit app
+                                    in the future
                                 </p>
                                 <div key="code1" className="home-code">
                                     {mode && (
@@ -199,7 +201,7 @@ then
                                     >
                                         <Button type="primary">
                                             <Icon type="github" />
-                                            Join Github Organization
+                                            Become a Contributor
                                         </Button>
                                     </a>
                                 </div>

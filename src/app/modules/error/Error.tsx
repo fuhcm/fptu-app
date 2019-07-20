@@ -28,7 +28,7 @@ class Error extends Component<Props> {
         return (
             <Content className="content-container">
                 <Helmet>
-                    <title>500 - FPTU Tech Insights</title>
+                    <title>500 - FUHCM.com</title>
                 </Helmet>
                 <div
                     style={{

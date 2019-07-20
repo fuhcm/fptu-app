@@ -27,9 +27,7 @@ class Home extends Component {
             post.description = post.description.substring(0, 250) + "...";
 
             const patt = /p=(\d+)$/;
-            const guid = patt.exec(
-                post.guid.substring(0, post.guid.length - 1)
-            )[1];
+            const guid = patt.exec(post.guid.substring(0, post.guid.length))[1];
 
             const postTitle = paramCase(this.removeVnStr(post.title));
 
@@ -106,13 +104,13 @@ class Home extends Component {
         return (
             <Content className="content-container">
                 <Helmet>
-                    <title>Trang chủ - FPTU Tech Insights</title>
+                    <title>Trang chủ - FUHCM.com</title>
                 </Helmet>
                 <div className="content-wrapper">
                     <Divider
                         style={{ fontWeight: "lighter", fontSize: "1.5rem" }}
                     >
-                        Trang chủ trường có gì hot?
+                        Trang chủ trường có gì mới?
                         {loading && (
                             <Icon
                                 type="loading"

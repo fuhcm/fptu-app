@@ -118,10 +118,6 @@ class Radio extends Component {
                 style={{ background: "#FAEBCA" }}
             >
                 <Helmet>
-                    <link
-                        rel="stylesheet"
-                        href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400&amp;subset=vietnamese"
-                    />
                     <title>Radio - FPTU HCM Confessions</title>
                 </Helmet>
                 <div className="content-wrapper radio-wrapper">
