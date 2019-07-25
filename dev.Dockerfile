@@ -6,11 +6,11 @@ ENV PATH /root/src/app/node_modules/.bin:$PATH
 
 COPY . .
 
-RUN npm ci
+RUN yarn
 
 EXPOSE 3000
 
-ENTRYPOINT ["npm","run","serve"]
+ENTRYPOINT ["yarn","serve"]
 
 # This is docker build command: 
 # docker build -f dev.Dockerfile -t fptu-fe-dev .

@@ -1,4 +1,4 @@
-FROM node:10.15.3-alpine as builder
+FROM node:10.15.3 as builder
 
 RUN mkdir -p /root/src/app
 WORKDIR /root/src/app
@@ -6,8 +6,8 @@ ENV PATH /root/src/app/node_modules/.bin:$PATH
 
 COPY . .
 
-RUN npm ci
-RUN npm run build
+RUN yarn
+RUN yarn build
 
 FROM node:10.15.3-alpine
 
