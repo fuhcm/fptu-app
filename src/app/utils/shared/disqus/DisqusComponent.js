@@ -6,7 +6,7 @@ class DisqusComponent extends Component {
         if (typeof window !== "undefined") {
             const { guid, title } = this.props;
 
-            const disqusConfig: IDisqusConfig = {
+            const disqusConfig = {
                 url        : window.location.href,
                 indentifier: guid,
                 title      : title,
