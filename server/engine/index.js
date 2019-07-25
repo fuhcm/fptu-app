@@ -12,7 +12,10 @@ export default ({ html, preState, helmet, bundles }) => {
 <html lang="en" ${helmet.htmlAttributes.toString()}>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, minimum-scale=1, user-scalable=0"
+    />
     <meta name="description" content="FPTU HCM">
     <meta name="keywords" content="FPTU, FPTU University, FPTU Technology, FPTU HCM Confession">
     <meta name="author" content="Huynh Minh Tu [React - NodeJS + Golang]">
@@ -20,6 +23,11 @@ export default ({ html, preState, helmet, bundles }) => {
     <link rel="apple-touch-icon" href="/assets/images/fptuhcm-confessions.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="/assets/manifest.json">
+    <meta property="og:type" content="article" /><meta property="og:description" content="FPT University HCM - Official Community"/><meta property="og:image" content="https://i.imgur.com/edylBR6.jpg"/>
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400&amp;subset=vietnamese"
+    />
     ${helmet.title.toString()}
     ${helmet.link.toString()}
     ${helmet.meta.toString()}
@@ -49,12 +57,10 @@ export default ({ html, preState, helmet, bundles }) => {
             API_BASE_URL: "${APP_ENV.API_BASE_URL}",
         };
     </script>
-    <script src="https://sdk.fptu.tech/fptu-sdk.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fptu-sdk@1.0.2/dist/fptu-sdk.js"></script>
     ${scripts
         .map(script => {
-            return `<script type="text/javascript" src="/client/${
-                script.file
-            }"></script>`;
+            return `<script type="text/javascript" src="/client/${script.file}"></script>`;
         })
         .join("\n")}
     ${vendorJs

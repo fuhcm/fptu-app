@@ -97,6 +97,10 @@ class HeaderPage extends Component {
     };
 
     render() {
+        if (typeof window === "undefined") {
+            return <div />;
+        }
+
         const { history } = this.props;
         const { mobileMenu, desktop } = this.state;
 

@@ -19,8 +19,8 @@ enquireScreen(b => {
 
 class LandingPage extends Component {
     state = {
-        isMobile,
-        mode: true,
+        isMobile: typeof window === "undefined" ? false : isMobile,
+        mode    : true,
     };
 
     componentDidMount() {

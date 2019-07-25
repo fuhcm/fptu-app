@@ -47,7 +47,9 @@ const AdminCP = Loadable({
 
 const MyConfess = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "myconfess" */ "./modules/my-confess/MyConfess"),
+        import(
+            /* webpackChunkName: "myconfess" */ "./modules/my-confess/MyConfess"
+        ),
     loading: () => <Loading />,
     modules: ["../app/modules/my-confess/MyConfess"],
     webpack: () => [require.resolveWeak("../app/modules/my-confess/MyConfess")],
@@ -55,7 +57,9 @@ const MyConfess = Loadable({
 
 const SearchConfess = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "searchconfess" */ "./modules/search/Search"),
+        import(
+            /* webpackChunkName: "searchconfess" */ "./modules/search/Search"
+        ),
     loading: () => <Loading />,
     modules: ["../app/modules/search/Search"],
     webpack: () => [require.resolveWeak("../app/modules/search/Search")],
@@ -79,7 +83,9 @@ const Medium_Post = Loadable({
 
 const ToiDiCodeDao_Index = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "toidicodedao_index" */ "./modules/toidicodedao/Index"),
+        import(
+            /* webpackChunkName: "toidicodedao_index" */ "./modules/toidicodedao/Index"
+        ),
     loading: () => <Loading />,
     modules: ["../app/modules/toidicodedao/Index"],
     webpack: () => [require.resolveWeak("../app/modules/toidicodedao/Index")],
@@ -87,7 +93,9 @@ const ToiDiCodeDao_Index = Loadable({
 
 const ToiDiCodeDao_Post = Loadable({
     loader: () =>
-        import(/* webpackChunkName: "toidicodedao_post" */ "./modules/toidicodedao/Post"),
+        import(
+            /* webpackChunkName: "toidicodedao_post" */ "./modules/toidicodedao/Post"
+        ),
     loading: () => <Loading />,
     modules: ["../app/modules/toidicodedao/Post"],
     webpack: () => [require.resolveWeak("../app/modules/toidicodedao/Post")],
@@ -99,14 +107,6 @@ const Radio = Loadable({
     loading: () => <Loading />,
     modules: ["../app/modules/radio/Radio"],
     webpack: () => [require.resolveWeak("../app/modules/radio/Radio")],
-});
-
-const QRScan = Loadable({
-    loader: () =>
-        import(/* webpackChunkName: "qrscan" */ "./modules/qrscan/QRScan"),
-    loading: () => <Loading />,
-    modules: ["../app/modules/qrscan/QRScan"],
-    webpack: () => [require.resolveWeak("../app/modules/qrscan/QRScan")],
 });
 
 export default [
@@ -184,10 +184,5 @@ export default [
         path     : "/radio",
         title    : "Radio",
         component: Radio,
-    },
-    {
-        path     : "/qrscan",
-        title    : "QRScan",
-        component: QRScan,
     },
 ];

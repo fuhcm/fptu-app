@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "target": "ES2015",
-        "declaration": true,
+        "declaration": false,
         "jsx": "react",
         "esModuleInterop": true,
         "rootDir": "./src",
