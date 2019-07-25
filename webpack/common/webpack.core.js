@@ -11,9 +11,6 @@ const {
     optimization,
 } = require("./webpack.common");
 
-// Ignore all deprecations and hope that nothing will silently break in the future.
-process.noDeprecation = true;
-
 module.exports = options => {
     // Select correct env file
     const envParse =
@@ -64,9 +61,5 @@ module.exports = options => {
                 ENVIRONMENT: JSON.stringify(options.environment),
             }),
         ]),
-        stats      : "none",
-        performance: {
-            hints: false,
-        },
     };
 };
