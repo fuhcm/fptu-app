@@ -23,7 +23,6 @@ export default ({ html, preState, helmet, bundles }) => {
     <link rel="apple-touch-icon" href="/assets/images/fptuhcm-confessions.png">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="manifest" href="/assets/manifest.json">
-    <meta property="og:type" content="article" /><meta property="og:description" content="FPT University HCM - Official Community"/><meta property="og:image" content="https://i.imgur.com/edylBR6.jpg"/>
     <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400&amp;subset=vietnamese"
