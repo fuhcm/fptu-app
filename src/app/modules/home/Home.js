@@ -110,7 +110,7 @@ class Home extends Component {
                     <Divider
                         style={{ fontWeight: "lighter", fontSize: "1.5rem" }}
                     >
-                        Trang chủ trường có gì mới?
+                        FPTU HCM
                         {loading && (
                             <Icon
                                 type="loading"
