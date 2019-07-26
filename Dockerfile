@@ -6,8 +6,8 @@ ENV PATH /root/src/app/node_modules/.bin:$PATH
 
 COPY . .
 
-RUN yarn
-RUN yarn build
+RUN npm install
+RUN npm run build
 
 FROM node:10.15.3-alpine
 
@@ -20,7 +20,7 @@ EXPOSE 3000
 ENTRYPOINT ["node","./dist/server/server.js"]
 
 # This is docker build command: 
-# docker build -t fptu-fe .
+# docker build -t fptu-app .
 
 # This is docker run command:
-# docker run -d --name fptu-fe -p 3001:3000 fptu-fe:latest
+# docker run -d --name fptu-app -p 3001:3000 fptu-app:latest

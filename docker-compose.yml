@@ -8,8 +8,8 @@ services:
             - 3001
         ports:
             - 3001:3001
-        image: fptu-fe-dev
-        container_name: fptu-fe-dev
+        image: fptu-app-dev
+        container_name: fptu-app-dev
         volumes:
             - ./public:/root/src/app/public
             - ./src:/root/src/app/src

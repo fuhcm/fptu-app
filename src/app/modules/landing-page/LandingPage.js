@@ -148,9 +148,9 @@ HCM - Official
                                                 {' '}
                                                 <span>git clone</span>
                                                 {" "}
-                                                git@github.com/gosu-team/fptu-fe.git
+                                                git@github.com/gosu-team/fptu-app.git
                                             </div>
-                                            <div>$ cd fptu-fe</div>
+                                            <div>$ cd fptu-app</div>
                                             <div>$ docker-compose up</div>
                                         </div>
                                     )}
