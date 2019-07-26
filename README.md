@@ -1,6 +1,6 @@
 ## FPTU Tech Insights — "[isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/)" web app &nbsp; <a href="https://github.com/gosu-team/fptu-fe/stargazers"><img src="https://img.shields.io/github/stars/gosu-team/fptu-fe.svg?style=social&label=Star&maxAge=3600" height="20"></a>
 
-[FPTU-FE](https://fptu.tech) is an isomorphic web app built on top of [Node.js](https://nodejs.org/),
+[FPTU-FE](https://fuhcm.com) is an isomorphic web app built on top of [Node.js](https://nodejs.org/),
 [Express](http://expressjs.com/) and [React](https://facebook.github.io/react/), containing modern web development
 tools such as [Webpack](http://webpack.github.io/) and [Babel](http://babeljs.io/).
 

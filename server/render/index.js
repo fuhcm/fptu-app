@@ -54,7 +54,7 @@ class Renderer {
 
             try {
                 const { data } = await axios.get(
-                    "https://api.fptu.tech/crawl/" + feedName + "/" + articleID
+                    "https://api.fuhcm.com/crawl/" + feedName + "/" + articleID
                 );
 
                 const shortDesc = data.description
