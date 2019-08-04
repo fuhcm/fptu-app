@@ -39,6 +39,15 @@ class Header extends React.Component {
                         <span>Thư viện Confessions</span>
                     </Link>
                 </Menu.Item>
+                <Menu.Item key="blockchain">
+                    <a
+                        href="https://library.fptu.tech"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span>Blockchain FU Library</span>
+                    </a>
+                </Menu.Item>
                 <Menu.Item key="radio">
                     <Link to="/radio">
                         <span>Radio</span>

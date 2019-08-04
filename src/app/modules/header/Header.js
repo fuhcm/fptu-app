@@ -373,6 +373,17 @@ class HeaderPage extends Component {
                                     Radio
                                 </Link>
                             </Menu.Item>
+
+                            <Menu.Item key="/blockchain">
+                                <a
+                                    href="https://library.fptu.tech"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <Icon type="dollar" />
+                                    Thư viện Blockchain
+                                </a>
+                            </Menu.Item>
                         </Menu>
                     </Header>
                 )}

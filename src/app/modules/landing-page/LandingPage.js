@@ -91,17 +91,23 @@ HCM - Official
                                     Confession
                                 </Button>
                             </Link>
-                            <Link to="/medium">
+                            <a
+                                href="https://library.fptu.tech"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 <Button
                                     size="large"
-                                    style={{ margin: "0 16px" }}
+                                    style={{
+                                        margin: "0 16px",
+                                    }}
                                     type="primary"
                                     ghost
                                 >
-                                    <Icon type="coffee" />
-                                    Dev Đọc
+                                    <Icon type="dollar" />
+                                    Thư viện FU
                                 </Button>
-                            </Link>
+                            </a>
                         </div>
                     </QueueAnim>
                     {!isMobile && (
