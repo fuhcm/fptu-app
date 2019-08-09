@@ -45,21 +45,24 @@ module.exports = options => {
         mode        : options.mode || "development",
         devtool     : options.devtool || "",
         optimization: options.target === "node" ? {} : optimization,
-        plugins     : (options.plugins || []).concat([
-            new webpack.DefinePlugin({
-                "process.env": {
-                    NODE_ENV: JSON.stringify(
-                        APP_ENV.NODE_ENV !== "development"
-                            ? "production"
-                            : "development"
-                    ),
-                    BROWSER: JSON.stringify(
-                        options.target === "node" ? false : true
-                    ),
-                },
-                APP_ENV    : JSON.stringify(APP_ENV),
-                ENVIRONMENT: JSON.stringify(options.environment),
-            }),
-        ]),
+        plugins     :
+            options.target === "node"
+                ? options.plugins || []
+                : (options.plugins || []).concat([
+                      new webpack.DefinePlugin({
+                          "process.env": {
+                              NODE_ENV: JSON.stringify(
+                                  APP_ENV.NODE_ENV !== "development"
+                                      ? "production"
+                                      : "development"
+                              ),
+                              BROWSER: JSON.stringify(
+                                  options.target === "node" ? false : true
+                              ),
+                          },
+                          APP_ENV    : JSON.stringify(APP_ENV),
+                          ENVIRONMENT: JSON.stringify(options.environment),
+                      }),
+                  ]),
     };
 };

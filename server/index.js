@@ -12,7 +12,7 @@ class ServerSideRendering {
     static PORT = 3000; // Default port for server
 
     constructor() {
-        this.port = process.env.PORT || APP_ENV.PORT || ServerSideRendering.PORT;
+        this.port = process.env.PORT || ServerSideRendering.PORT;
         this.app = express();
         this.serverStore = {};
         this.storeConfig();
