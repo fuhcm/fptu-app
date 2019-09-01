@@ -65,6 +65,8 @@ class AdminCP extends Component {
                 history.push("/login");
             }
 
+            data = data.filter(e => !e.content.includes("Huỳnh Minh Tú"));
+
             this.setState({
                 initLoading: false,
                 data,

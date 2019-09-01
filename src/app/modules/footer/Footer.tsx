@@ -43,7 +43,7 @@ class FooterPage extends Component<Props> {
                             Huynh Minh Tu
                         </a>
                     </strong>
-                    . Built on top of Go & React, hosted at Google Cloud Platform.
+                    . Built on top of Go & React, hosted at Heroku.
                 </div>
             </Footer>
         );
