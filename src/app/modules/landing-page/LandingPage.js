@@ -91,23 +91,6 @@ HCM - Official
                                     Confession
                                 </Button>
                             </Link>
-                            <a
-                                href="https://library.fptu.tech"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Button
-                                    size="large"
-                                    style={{
-                                        margin: "0 16px",
-                                    }}
-                                    type="primary"
-                                    ghost
-                                >
-                                    <Icon type="dollar" />
-                                    Thư viện FU
-                                </Button>
-                            </a>
                         </div>
                     </QueueAnim>
                     {!isMobile && (
