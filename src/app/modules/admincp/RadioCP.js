@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Layout, Skeleton } from "antd";
+import { Layout, Skeleton, Button } from "antd";
 
 const { Content } = Layout;
 
@@ -24,9 +24,11 @@ class Loading extends Component {
     }
     doUpdate = arr => {
         this.setState({ radios: arr });
-
         this.setState({ synced: false });
-        const str = JSON.stringify(arr);
+    };
+    doSync = () => {
+        const { radios } = this.state;
+        const str = JSON.stringify(radios);
         FPTUSDK.radio.setRadios(str).finally(() => {
             this.setState({ synced: true });
         });
@@ -78,9 +80,15 @@ class Loading extends Component {
                         <div style={{ marginBottom: "1rem" }}>
                             Trạng thái:
                             {" "}
-                            <strong>
-                                {synced ? "Đã đồng bộ" : "Đang đồng bộ..."}
-                            </strong>
+                            <strong>{synced ? "Đã lưu" : "Chưa lưu"}</strong>
+                            <Button
+                                style={{ marginLeft: "1rem" }}
+                                type="primary"
+                                onClick={this.doSync}
+                                disabled={synced}
+                            >
+                                Lưu thay đổi
+                            </Button>
                         </div>
                         <ArrayEditor
                             type={schema}
