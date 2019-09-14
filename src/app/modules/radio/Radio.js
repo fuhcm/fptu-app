@@ -31,16 +31,18 @@ const listRadios = [
         title: "Duyên - Huỳnh Tú ft Khói ft Magazine | Official Music Video",
     },
     {
-        id   : "f-ozNHov4DM",
-        title: "Crush on you 🌸 Xin. | Lyric Video",
+        id   : "tvlC-60aI9g",
+        title: "Quá Lâu - Vinh Khuat",
     },
     {
-        id   : "3fi7uwBU-CE",
-        title: "Chi Pu | ANH ƠI Ở LẠI - Official M/V (Chuyện Cám Tấm) (치푸)",
+        id   : "AiD1a2fFFLw",
+        title:
+            "KHÔNG SAO MÀ EM ĐÂY RỒI | SUNI HẠ LINH ft. Lou Hoàng | Official M/V",
     },
     {
-        id   : "aGUQsb31TEw",
-        title: "BIGDADDY x EMILY - Mượn Rượu Tỏ Tình (Official M/V)",
+        id   : "U4P3djsPU94",
+        title:
+            "CHO ANH XIN THÊM 1 PHÚT | TRỊNH THĂNG BÌNH ft LIZ KIM CƯƠNG | OFFICIAL MV",
     },
     {
         id   : "HXkh7EOqcQ4",
@@ -51,8 +53,8 @@ const listRadios = [
         title: "CÒN YÊU, ĐÂU AI RỜI ĐI - ĐỨC PHÚC | OFFICIAL MV",
     },
     {
-        id   : "GwCUbhE0TY0",
-        title: "MỘT BƯỚC YÊU VẠN DẶM ĐAU | MR. SIRO | OFFICIAL MV",
+        id   : "ZwDxaM5VBJM",
+        title: "AMEE - ĐEN ĐÁ KHÔNG ĐƯỜNG | Official Music Video",
     },
 ];
 
@@ -183,7 +185,7 @@ người đang nghe Radio
                                                 Top #1 Trending
                                             </Tag>
                                         )}
-                                        {item.id === "f-ozNHov4DM" && (
+                                        {item.id === "tvlC-60aI9g" && (
                                             <Tag color="blue">Top #1 Indie</Tag>
                                         )}
                                     </List.Item>
