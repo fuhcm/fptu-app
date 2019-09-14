@@ -42,6 +42,8 @@ class FooterPage extends Component<Props> {
                         >
                             Huynh Minh Tu
                         </a>
+                        {" "}
+                        (Not responsible for the content posted on the fanpage)
                     </strong>
                     . Built on top of Go & React, hosted at Heroku.
                 </div>

@@ -221,7 +221,7 @@ từ chối:
                             onClick={this.askPermission}
                         >
                             <Icon type="thunderbolt" />
-                            Nhận thông báo đẩy khi được duyệt
+                            Nhận thông báo đẩy
                         </Button>
                     </div>
 
