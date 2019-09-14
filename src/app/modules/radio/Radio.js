@@ -163,14 +163,12 @@ người đang nghe Radio
                                         {" "}
                                         {item.title}
                                         {" "}
-                                        {item.top &&
-                                            item.top === "trending" && (
-                                                <Tag color="red">
-                                                    Top #1 Trending
-                                                </Tag>
-                                            )}
-                                        {item.top && item.top === "indie" && (
-                                            <Tag color="blue">Top #1 Indie</Tag>
+                                        {item.top && (
+                                            <Tag color="blue">
+                                                Top #1 
+                                                {' '}
+                                                {item.top.toUpperCase()}
+                                            </Tag>
                                         )}
                                     </List.Item>
                                 )}
