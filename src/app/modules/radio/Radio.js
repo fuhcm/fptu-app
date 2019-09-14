@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./Radio.scss";
 
-import { Layout, List, Spin, Tag, Switch } from "antd";
+import { Layout, List, Spin, Tag, Skeleton, Switch } from "antd";
 
 import Helmet from "react-helmet-async";
 import YouTube from "react-youtube";
@@ -13,64 +13,33 @@ Array.prototype.randomElement = function() {
     return this[Math.floor(Math.random() * this.length)];
 };
 
-const listRadios = [
-    {
-        id   : "2sIC1sh-yc0",
-        title: "MIN - ĐỪNG YÊU NỮA, EM MỆT RỒI | OFFICIAL MUSIC VIDEO",
-    },
-    {
-        id   : "iE52-XXnQqs",
-        title: "AMEE x B RAY - ANH NHÀ Ở ĐÂU THẾ | Official Music Video",
-    },
-    {
-        id   : "95ahbau-rJk",
-        title: "Ex's Hate Me - B Ray x Masew (Ft AMEE) | Official MV",
-    },
-    {
-        id   : "KREnGJE0vXQ",
-        title: "Duyên - Huỳnh Tú ft Khói ft Magazine | Official Music Video",
-    },
-    {
-        id   : "tvlC-60aI9g",
-        title: "Quá Lâu - Vinh Khuat",
-    },
-    {
-        id   : "AiD1a2fFFLw",
-        title:
-            "KHÔNG SAO MÀ EM ĐÂY RỒI | SUNI HẠ LINH ft. Lou Hoàng | Official M/V",
-    },
-    {
-        id   : "U4P3djsPU94",
-        title:
-            "CHO ANH XIN THÊM 1 PHÚT | TRỊNH THĂNG BÌNH ft LIZ KIM CƯƠNG | OFFICIAL MV",
-    },
-    {
-        id   : "HXkh7EOqcQ4",
-        title: "THẰNG ĐIÊN | JUSTATEE x PHƯƠNG LY | OFFICIAL MV",
-    },
-    {
-        id   : "VCYJckDc_fw",
-        title: "CÒN YÊU, ĐÂU AI RỜI ĐI - ĐỨC PHÚC | OFFICIAL MV",
-    },
-    {
-        id   : "ZwDxaM5VBJM",
-        title: "AMEE - ĐEN ĐÁ KHÔNG ĐƯỜNG | Official Music Video",
-    },
-];
-
-listRadios.sort((a, b) => {
-    if (a.title < b.title) return -1;
-    if (a.title > b.title) return 1;
-    return 0;
-});
-
 class Radio extends Component {
     state = {
-        currentVideo: listRadios.randomElement(),
+        currentVideo: null,
         online      : Math.floor(Math.random() * 11),
         hideList    : false,
+        radios      : [],
+        loading     : true,
     };
-    componentDidMount() {
+    async componentDidMount() {
+        try {
+            const { radios: radiosStr } = await FPTUSDK.radio.getRadios();
+            const radios = JSON.parse(radiosStr);
+
+            radios.sort((a, b) => {
+                if (a.title < b.title) return -1;
+                if (a.title > b.title) return 1;
+                return 0;
+            });
+            this.setState({
+                radios,
+                currentVideo: radios.randomElement(),
+                loading     : false,
+            });
+        } catch (err) {
+            throw err;
+        }
+
         setInterval(
             function() {
                 if (Math.random() >= 0.5) return;
@@ -85,15 +54,17 @@ class Radio extends Component {
         );
     }
     playNextVideo = () => {
+        const { radios } = this.state;
         this.setState({
-            currentVideo: listRadios.randomElement(),
+            currentVideo: radios.randomElement(),
         });
     };
     playVideo = id => {
-        const index = listRadios.findIndex(e => e.id === id);
+        const { radios } = this.state;
+        const index = radios.findIndex(e => e.id === id);
         if (index !== -1) {
             this.setState({
-                currentVideo: listRadios[index],
+                currentVideo: radios[index],
             });
         }
     };
@@ -112,7 +83,19 @@ class Radio extends Component {
             },
         };
 
-        const { currentVideo, online, hideList } = this.state;
+        const { radios, currentVideo, online, hideList, loading } = this.state;
+
+        if (loading) {
+            return (
+                <Content className="content-container">
+                    <div className="content-wrapper">
+                        <Skeleton active />
+                        <Skeleton active />
+                        <Skeleton active />
+                    </div>
+                </Content>
+            );
+        }
 
         return (
             <Content
@@ -153,7 +136,7 @@ người đang nghe Radio
                                 }}
                                 // bordered
                                 className="list-radio-inside"
-                                dataSource={listRadios}
+                                dataSource={radios}
                                 renderItem={item => (
                                     <List.Item
                                         className={
@@ -180,12 +163,13 @@ người đang nghe Radio
                                         {" "}
                                         {item.title}
                                         {" "}
-                                        {item.id === "2sIC1sh-yc0" && (
-                                            <Tag color="red">
-                                                Top #1 Trending
-                                            </Tag>
-                                        )}
-                                        {item.id === "tvlC-60aI9g" && (
+                                        {item.top &&
+                                            item.top === "trending" && (
+                                                <Tag color="red">
+                                                    Top #1 Trending
+                                                </Tag>
+                                            )}
+                                        {item.top && item.top === "indie" && (
                                             <Tag color="blue">Top #1 Indie</Tag>
                                         )}
                                     </List.Item>
