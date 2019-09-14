@@ -2,16 +2,6 @@ import React, { Component } from "react";
 
 import { Layout, Skeleton } from "antd";
 
-import { SchemaTypes, ArrayEditor } from "object-editor-react";
-
-const schema = {
-    id: SchemaTypes.string({ required: true }),
-
-    title: SchemaTypes.string({ required: true }),
-
-    top: SchemaTypes.string({ required: false }),
-};
-
 const { Content } = Layout;
 
 class Loading extends Component {
@@ -71,13 +61,34 @@ class Loading extends Component {
     render() {
         const { radios, loading, synced } = this.state;
 
-        if (loading) {
+        if (typeof window !== "undefined" && !loading) {
+            const { SchemaTypes, ArrayEditor } = require("object-editor-react");
+
+            const schema = {
+                id: SchemaTypes.string({ required: true }),
+
+                title: SchemaTypes.string({ required: true }),
+
+                top: SchemaTypes.string({ required: false }),
+            };
+
             return (
                 <Content className="content-container">
                     <div className="content-wrapper">
-                        <Skeleton active />
-                        <Skeleton active />
-                        <Skeleton active />
+                        <div style={{ marginBottom: "1rem" }}>
+                            Trạng thái:
+                            {" "}
+                            <strong>
+                                {synced ? "Đã đồng bộ" : "Đang đồng bộ..."}
+                            </strong>
+                        </div>
+                        <ArrayEditor
+                            type={schema}
+                            object={radios}
+                            onUpdateElement={this.handleUpdate}
+                            onRemoveElements={this.handleRemove}
+                            onAddElement={this.handleAdd}
+                        />
                     </div>
                 </Content>
             );
@@ -86,20 +97,9 @@ class Loading extends Component {
         return (
             <Content className="content-container">
                 <div className="content-wrapper">
-                    <div style={{ marginBottom: "1rem" }}>
-                        Trạng thái:
-                        {" "}
-                        <strong>
-                            {synced ? "Đã đồng bộ" : "Đang đồng bộ..."}
-                        </strong>
-                    </div>
-                    <ArrayEditor
-                        type={schema}
-                        object={radios}
-                        onUpdateElement={this.handleUpdate}
-                        onRemoveElements={this.handleRemove}
-                        onAddElement={this.handleAdd}
-                    />
+                    <Skeleton active />
+                    <Skeleton active />
+                    <Skeleton active />
                 </div>
             </Content>
         );
