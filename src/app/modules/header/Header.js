@@ -332,6 +332,14 @@ class HeaderPage extends Component {
                                     </Menu.Item>
                                 )}
                                 {LocalStorageUtils.isAuthenticated() && (
+                                    <Menu.Item key="/radio-cp">
+                                        <Link to="/radio-cp">
+                                            <Icon type="customer-service" />
+                                            Quản lí Radio
+                                        </Link>
+                                    </Menu.Item>
+                                )}
+                                {LocalStorageUtils.isAuthenticated() && (
                                     <Menu.Item key="/logout">
                                         <a
                                             href="/logout"
