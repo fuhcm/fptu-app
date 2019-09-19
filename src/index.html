@@ -28,6 +28,10 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <link rel="manifest" href="/assets/manifest.json" />
         <title>FUHCM.com</title>
+        <script
+            type="text/javascript"
+            src="https://identity.netlify.com/v1/netlify-identity-widget.js"
+        ></script>
     </head>
 
     <body>
@@ -74,4 +78,11 @@
 
         gtag("config", "UA-123979019-2");
     </script>
+
+    <div data-netlify-identity-menu></div>
+
+    <!-- Add a simpler button:
+  Simple button that will open the modal.
+-->
+    <div data-netlify-identity-button>Login with Netlify Identity</div>
 </html>

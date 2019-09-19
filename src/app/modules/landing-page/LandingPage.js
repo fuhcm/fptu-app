@@ -137,7 +137,7 @@ HCM - Official
                                                 {' '}
                                                 <span>git clone</span>
                                                 {" "}
-                                                git@github.com/gosu-team/fptu-app.git
+                                                git@github.com/fuhcm/fptu-app.git
                                             </div>
                                             <div>$ cd fptu-app</div>
                                             <div>$ docker-compose up</div>
@@ -150,7 +150,7 @@ HCM - Official
                                                 {' '}
                                                 <span>git clone</span>
                                                 {" "}
-                                                git@github.com/gosu-team/fptu-api.git
+                                                git@github.com/fuhcm/fptu-api.git
                                             </div>
                                             <div>$ cd fptu-api</div>
                                             <div>$ docker-compose up</div>
@@ -184,7 +184,7 @@ then
                                 </p>
                                 <div key="button" style={{ marginTop: 88 }}>
                                     <a
-                                        href="https://github.com/gosu-team/"
+                                        href="https://github.com/fuhcm"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
