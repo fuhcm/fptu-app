@@ -97,7 +97,7 @@ class LoginForm extends Component {
                         className="login-form"
                         style={{ maxWidth: 480, margin: "auto" }}
                     >
-                        <h2>Đăng nhập dành cho admin</h2>
+                        <h2>Đăng nhập</h2>
                         <FormItem>
                             {getFieldDecorator("email", {
                                 rules: [
@@ -148,7 +148,7 @@ class LoginForm extends Component {
                                 className="login-form-button"
                                 loading={loading}
                             >
-                                <Icon type="github" hidden={loading} />
+                                <Icon type="login" hidden={loading} />
                                 Đăng nhập
                             </Button>
                             {getFieldDecorator("remember", {

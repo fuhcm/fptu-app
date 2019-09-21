@@ -297,20 +297,6 @@ class HeaderPage extends Component {
                                         Thư viện confess
                                     </Link>
                                 </Menu.Item>
-                                <Menu.Item key="execption">
-                                    <a
-                                        href="https://tinyurl.com/noiquyFPTUHCMCFS"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <Icon type="exception" />
-                                        Quy định
-                                    </a>
-                                </Menu.Item>
-                                <Menu.Item key="instagram">
-                                    <Icon type="instagram" />
-                                    Instagram
-                                </Menu.Item>
                                 {!LocalStorageUtils.isAuthenticated() && (
                                     <Menu.Item key="/login">
                                         <Link to="/admin-cp">
