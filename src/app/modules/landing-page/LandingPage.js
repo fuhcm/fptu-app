@@ -150,9 +150,9 @@ HCM - Official
                                                 {' '}
                                                 <span>git clone</span>
                                                 {" "}
-                                                git@github.com/fuhcm/fptu-api.git
+                                                git@github.com/fuhcm/fptu-go.git
                                             </div>
-                                            <div>$ cd fptu-api</div>
+                                            <div>$ cd fptu-go</div>
                                             <div>$ docker-compose up</div>
                                         </div>
                                     )}
