@@ -3,6 +3,7 @@
     "parser": "babel-eslint",
     "plugins": ["react"],
     "rules": {
+        "import/no-unresolved": "off",
         "react/jsx-filename-extension": [
             "error",
             {
