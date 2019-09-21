@@ -162,7 +162,7 @@ class LoginForm extends Component {
                         </FormItem>
 
                         <GoogleLogin
-                            clientId="292520951559-5fqe0olanvlto3bd06bt4u36dqsclnni.apps.googleusercontent.com"
+                            clientId="834798810236-ok8culnaru4ml7fanhjni43lr5i709jj.apps.googleusercontent.com"
                             render={renderProps => (
                                 <Button
                                     type="default"

@@ -3,8 +3,8 @@ import "firebase/messaging";
 
 export const initializeFirebase = () => {
     firebase.initializeApp({
-        storageBucket    : "boiler-plate-1371f.appspot.com",
-        messagingSenderId: "292520951559",
+        storageBucket    : "fuhcm-253612.appspot.com",
+        messagingSenderId: "834798810236",
     });
 };
 

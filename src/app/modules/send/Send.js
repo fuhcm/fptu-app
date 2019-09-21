@@ -128,7 +128,7 @@ class Send extends Component {
             });
             firebase
                 .storage()
-                .ref("fptu.tech")
+                .ref("fuhcm.com")
                 .child(filename)
                 .getDownloadURL()
                 .then(url =>
@@ -146,7 +146,7 @@ class Send extends Component {
 
     handleStorageRef = () => {
         if (typeof window !== "undefined") {
-            return firebase.storage().ref("fptu.tech");
+            return firebase.storage().ref("fuhcm.com");
         }
 
         return null;

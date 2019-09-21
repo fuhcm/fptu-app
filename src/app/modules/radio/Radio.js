@@ -87,7 +87,10 @@ class Radio extends Component {
 
         if (loading) {
             return (
-                <Content className="content-container">
+                <Content
+                    className="content-container"
+                    style={{ background: "#FAEBCA" }}
+                >
                     <div className="content-wrapper">
                         <Skeleton active />
                         <Skeleton active />
