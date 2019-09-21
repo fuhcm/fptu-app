@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { withRouter } from "react-router-dom";
 
-import { Layout } from "antd";
+import { Layout, Tooltip } from "antd";
 
 const { Footer } = Layout;
 
@@ -34,17 +34,17 @@ class FooterPage extends Component<Props> {
 ©2019 Developed
                     by
                     {" "}
-                    <strong>
-                        <a
-                            href="https://mrhmt.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Huynh Minh Tu
-                        </a>
-                        {" "}
-                        (Not responsible for the content posted on the fanpage)
-                    </strong>
+                    <Tooltip title="I am not responsible for the content (or approval) posted on the fanpage">
+                        <strong>
+                            <a
+                                href="https://mrhmt.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Huynh Minh Tu
+                            </a>
+                        </strong>
+                    </Tooltip>
                     . Built on top of Go & React, hosted at Heroku.
                 </div>
             </Footer>
