@@ -1,81 +1,67 @@
 <!DOCTYPE html>
 <html lang="vi_VN">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="yandex-verification" content="d074650253fe9c00" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, minimum-scale=1, user-scalable=0"
-        />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400&amp;subset=vietnamese"
-        />
-        <link rel="shortcut icon" href="/assets/favicon.ico" />
-        <link rel="stylesheet" type="text/css" href="/loader.css" />
-        <meta name="description" content="FPTU HCM" />
-        <meta
-            name="keywords"
-            content="FPTU, FPTU University, FPTU Technology, FPTU HCM Confession"
-        />
-        <meta property="og:type" content="article" />
-        <meta name="author" content="Huynh Minh Tu [React - NodeJS + Golang]" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <link
-            rel="apple-touch-icon"
-            href="/assets/images/fptuhcm-confessions.png"
-        />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <link rel="manifest" href="/assets/manifest.json" />
-        <title>FUHCM.com</title>
-        <script
-            type="text/javascript"
-            src="https://identity.netlify.com/v1/netlify-identity-widget.js"
-        ></script>
-    </head>
 
-    <body>
-        <div id="loading-bg">
-            <div class="loading-logo">
-                <img src="/loading-logo.png" alt="Logo" />
-            </div>
-            <div class="loading">
-                <div class="effect-1 effects"></div>
-                <div class="effect-2 effects"></div>
-                <div class="effect-3 effects"></div>
-            </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="yandex-verification" content="d074650253fe9c00" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, minimum-scale=1, user-scalable=0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400&amp;subset=vietnamese" />
+    <link rel="shortcut icon" href="/assets/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/loader.css" />
+    <meta name="description" content="FPTU HCM" />
+    <meta name="keywords" content="FPTU, FPTU University, FPTU Technology, FPTU HCM Confession" />
+    <meta property="og:type" content="article" />
+    <meta name="author" content="Huynh Minh Tu [React - NodeJS + Golang]" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="/assets/images/fptuhcm-confessions.png" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="manifest" href="/assets/manifest.json" />
+    <title>FUHCM.com</title>
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+
+<body>
+    <div id="loading-bg">
+        <div class="loading-logo">
+            <img src="/loading-logo.png" alt="Logo" />
         </div>
-        <div id="root"></div>
-    </body>
+        <div class="loading">
+            <div class="effect-1 effects"></div>
+            <div class="effect-2 effects"></div>
+            <div class="effect-3 effects"></div>
+        </div>
+    </div>
+    <div id="root"></div>
+</body>
 
-    <!-- FPTU Tech Javascript SDK -->
-    <script>
-        window.APP_ENV = {
-            API_BASE_URL: "${APP_ENV.API_BASE_URL}",
-        };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/fptu-sdk@1.0.3/dist/fptu-sdk.js"></script>
+<!-- FPTU Tech Javascript SDK -->
+<script>
+    window.APP_ENV = {
+        API_BASE_URL: "${APP_ENV.API_BASE_URL}",
+    };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/fptu-sdk@latest/dist/fptu-sdk.js"></script>
 
-    <!-- Service Worker -->
-    <script>
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", () => {
-                navigator.serviceWorker.register("/sw.js");
-            });
-        }
-    </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=UA-123979019-2"
-    ></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag("js", new Date());
+<!-- Service Worker -->
+<script>
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/sw.js");
+        });
+    }
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123979019-2"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-        gtag("config", "UA-123979019-2");
-    </script>
+    gtag("config", "UA-123979019-2");
+</script>
+
 </html>
