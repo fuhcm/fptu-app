@@ -91,6 +91,17 @@ HCM - Official
                                     Confession
                                 </Button>
                             </Link>
+
+                            <Link to="/home">
+                                <Button
+                                    size="large"
+                                    type="dashed"
+                                    style={{ marginLeft: "1rem" }}
+                                >
+                                    <Icon type="home" />
+                                    Trang chủ
+                                </Button>
+                            </Link>
                         </div>
                     </QueueAnim>
                     {!isMobile && (
