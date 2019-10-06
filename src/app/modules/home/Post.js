@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+import * as contentful from "contentful";
+import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+
 import { Layout, Button, Icon, BackTop, Tag, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
@@ -67,7 +70,7 @@ class Post extends Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const { match } = this.props;
         const guid = match.params.id;
 
@@ -76,20 +79,54 @@ class Post extends Component {
             window.scrollTo(0, 0);
         }
 
-        FPTUSDK.crawl
-            .getArticleDetails("fpt", guid)
-            .then(data => {
+        if (!guid.includes("content")) {
+            FPTUSDK.crawl
+                .getArticleDetails("fpt", guid)
+                .then(data => {
+                    this.setState({
+                        loading: false,
+                        post   : data,
+                    });
+                })
+                .catch(() => {
+                    this.setState({
+                        loading: false,
+                        post   : null,
+                    });
+                });
+        } else {
+            try {
+                const client = contentful.createClient({
+                    space      : "421w0fsh4dri",
+                    accessToken: "7HOOTT94pK3MmaosD5X6_ypZiw1tfRIDg1XTmI-BDJY",
+                });
+
+                const entryId = guid.slice(8);
+
+                const entry = await client.getEntry(entryId);
+                const post = {
+                    title      : entry.fields.title,
+                    author     : "FUHCM.com",
+                    categories : entry.fields.tags,
+                    content    : documentToHtmlString(entry.fields.body),
+                    description: entry.fields.description,
+                    guid       : null,
+                    link       : null,
+                    pubDate    : null,
+                    thumbnail  : entry.fields.thumbnail.fields.file.url,
+                };
+
                 this.setState({
                     loading: false,
-                    post   : data,
+                    post,
                 });
-            })
-            .catch(() => {
+            } catch (err) {
                 this.setState({
                     loading: false,
                     post   : null,
                 });
-            });
+            }
+        }
     }
 
     render() {

@@ -27,7 +27,10 @@ class Home extends Component {
             post.description = post.description.substring(0, 250) + "...";
 
             const patt = /p=(\d+)$/;
-            const guid = patt.exec(post.guid.substring(0, post.guid.length))[1];
+            const guid =
+                post.type === "contentful"
+                    ? "content-" + post.guid
+                    : patt.exec(post.guid.substring(0, post.guid.length))[1];
 
             const postTitle = paramCase(this.removeVnStr(post.title));
 
