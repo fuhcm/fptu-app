@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./LandingPage.scss";
 import { enquireScreen } from "enquire-js";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Helmet from "react-helmet-async";
 
 import QueueAnim from "rc-queue-anim";
@@ -28,6 +28,11 @@ class LandingPage extends Component {
             this.setState({
                 isMobile: !!b,
             });
+        });
+
+        setTimeout(3000, () => {
+            const { history } = this.props;
+            history.push("/home");
         });
     }
 
@@ -214,4 +219,4 @@ then
     }
 }
 
-export default LandingPage;
+export default withRouter(LandingPage);
