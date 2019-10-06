@@ -60,7 +60,7 @@ module.exports.nodeStyleLoader = {
 module.exports.resolve = {
     extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".scss"],
     alias     : {
-        browser: commonPath + "/src/app/utils/browser/",
+        "@utils": commonPath + "/src/app/utils/",
     },
 };
 

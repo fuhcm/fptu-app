@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import Helmet from "react-helmet-async";
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
-import LocalStorageUtils from "browser/LocalStorage";
+import LocalStorageUtils from "@utils/browser/LocalStorage";
 import GoogleLogin from "react-google-login";
 
 const { Content } = Layout;

@@ -21,7 +21,7 @@ import {
 } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import Helmet from "react-helmet-async";
-import LocalStorageUtils from "browser/LocalStorage";
+import LocalStorageUtils from "@utils/browser/LocalStorage";
 import styled from "styled-components";
 
 import TimeAgo from "react-timeago";

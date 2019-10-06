@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
-import * as contentful from "contentful";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { getEntry } from "@utils/contentful";
 
 import { Layout, Button, Icon, BackTop, Tag, Skeleton } from "antd";
 import { Link } from "react-router-dom";
@@ -96,31 +95,14 @@ class Post extends Component {
                 });
         } else {
             try {
-                const client = contentful.createClient({
-                    space      : "421w0fsh4dri",
-                    accessToken: "7HOOTT94pK3MmaosD5X6_ypZiw1tfRIDg1XTmI-BDJY",
-                });
-
-                const entryId = guid.slice(8);
-
-                const entry = await client.getEntry(entryId);
-                const post = {
-                    title      : entry.fields.title,
-                    author     : "FUHCM.com",
-                    categories : entry.fields.tags,
-                    content    : documentToHtmlString(entry.fields.body),
-                    description: entry.fields.description,
-                    guid       : null,
-                    link       : null,
-                    pubDate    : null,
-                    thumbnail  : entry.fields.thumbnail.fields.file.url,
-                };
+                const post = await getEntry(guid);
 
                 this.setState({
                     loading: false,
                     post,
                 });
             } catch (err) {
+                console.log(err);
                 this.setState({
                     loading: false,
                     post   : null,

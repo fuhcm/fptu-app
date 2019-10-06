@@ -1,5 +1,4 @@
-import * as contentful from "contentful";
-import { documentToHtmlString } from "@contentful/rich-text-html-renderer";
+import { getAllEntries } from "@utils/contentful";
 
 import {
     GET_HOME_ARTICLE_LOADING,
@@ -15,23 +14,7 @@ export const getHomeArticles = () => {
 
         try {
             const sdkData = await FPTUSDK.crawl.getArticles("fpt");
-
-            const client = contentful.createClient({
-                space      : "421w0fsh4dri",
-                accessToken: "7HOOTT94pK3MmaosD5X6_ypZiw1tfRIDg1XTmI-BDJY",
-            });
-
-            const contentfulDataRaw = await client.getEntries();
-            const contentfulData = await contentfulDataRaw.items.map(e => {
-                return {
-                    title      : e.fields.title,
-                    thumbnail  : e.fields.thumbnail.fields.file.url,
-                    pubDate    : e.fields.pub_date,
-                    description: e.fields.description,
-                    guid       : e.sys.id,
-                    type       : "contentful",
-                };
-            });
+            const contentfulData = await getAllEntries();
 
             dispatch({
                 type   : GET_HOME_ARTICLE_SUCCESS,

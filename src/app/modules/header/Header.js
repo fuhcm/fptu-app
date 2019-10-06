@@ -4,7 +4,9 @@ import "./Header.scss";
 import { Link, withRouter } from "react-router-dom";
 import { Layout, Menu, Icon, Button, notification, Drawer } from "antd";
 import SubMenu from "antd/lib/menu/SubMenu";
-import LocalStorageUtils, { LOCAL_STORAGE_KEY } from "browser/LocalStorage";
+import LocalStorageUtils, {
+    LOCAL_STORAGE_KEY,
+} from "@utils/browser/LocalStorage";
 import styled from "styled-components";
 import { enquireScreen } from "enquire-js";
 
