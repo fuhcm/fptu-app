@@ -98,12 +98,13 @@ class Renderer {
 }
 
 async function getData(feedName, articleID) {
-    if (feedName === "fpt" && articleID.includes("content")) {
+    if (articleID.includes("content")) {
         const client = contentful.createClient({
             space      : "421w0fsh4dri",
             accessToken: "7HOOTT94pK3MmaosD5X6_ypZiw1tfRIDg1XTmI-BDJY",
         });
-        const entry = await client.getEntry(articleID);
+
+        const entry = await client.getEntry(articleID.slice(8));
 
         return {
             title      : entry.fields.title,
