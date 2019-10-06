@@ -185,27 +185,6 @@ class Send extends Component {
                     </title>
                 </Helmet>
                 <div className="content-wrapper">
-                    <div
-                        style={{
-                            textAlign      : "center",
-                            marginBottom   : "2rem",
-                            backgroundColor: "#000",
-                            color          : "#fff",
-                            borderRadius   : "10px",
-                            padding        : "1rem",
-                        }}
-                    >
-                        <img
-                            src="/assets/images/fptuhcm-confessions.png"
-                            alt="FPTU HCM Confessions"
-                            style={{ maxWidth: "200px" }}
-                        />
-                        <p style={{ fontSize: "1rem" }}>
-                            Fanpage at
-                            {" "}
-                            <strong>fb.com/FPTUHCMConfessions</strong>
-                        </p>
-                    </div>
                     <h2>Gửi Confession</h2>
 
                     <div hidden={step === 0} style={{ marginBottom: "1rem" }}>
