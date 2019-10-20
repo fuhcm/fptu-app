@@ -45,7 +45,7 @@ class FooterPage extends Component<Props> {
                             </a>
                         </strong>
                     </Tooltip>
-                    . Built on top of Go & React, hosted at Heroku.
+                    . Built on top of JavaScript, hosted at Heroku.
                 </div>
             </Footer>
         );

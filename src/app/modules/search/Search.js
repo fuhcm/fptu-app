@@ -39,6 +39,7 @@ class SearchPage extends PureComponent {
         isSearchMode : false,
         searchKeyword: "",
         overview     : {},
+        skip         : 0,
     };
 
     handleFast = debounce(keyword => {
@@ -110,7 +111,11 @@ class SearchPage extends PureComponent {
     };
 
     onLoadMore = () => {
-        const { list } = this.state;
+        const { list, skip } = this.state;
+
+        this.setState({
+            skip: skip + 10,
+        });
 
         this.setState({
             loading: true,
@@ -119,10 +124,8 @@ class SearchPage extends PureComponent {
             ),
         });
 
-        const latestID = list[list.length - 1].id || 0;
-
         FPTUSDK.search
-            .getPostedConfess(latestID)
+            .getPostedConfess(skip + 10 || 0)
             .then(data => {
                 this.setState(
                     {
@@ -148,7 +151,7 @@ class SearchPage extends PureComponent {
     approvedConfess = (
         content,
         approver = "admin@fptu.cf",
-        cfs_id = "0",
+        cfsID = "0",
         isSearchMode = false,
         searchKeyword = ""
     ) => (
@@ -168,15 +171,13 @@ class SearchPage extends PureComponent {
             <div style={{ margin: ".5rem 0" }}>
                 <Tag color="green">
                     <a
-                        href={`https://www.facebook.com/hashtag/${
-                            APP_ENV.FB_TAGNAME
-                        }_${cfs_id}`}
+                        href={`https://www.facebook.com/hashtag/${APP_ENV.FB_TAGNAME}_${cfsID}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         #
                         {APP_ENV.FB_TAGNAME}
-                        {cfs_id}
+                        {cfsID}
                     </a>
                 </Tag>
                 <Tag color="blue">
@@ -323,7 +324,7 @@ kết quả với từ khoá
                                                 Được gởi
                                                 {" "}
                                                 <TimeAgo
-                                                    date={item.created_at}
+                                                    date={item.createdAt}
                                                     formatter={formatter}
                                                 />
                                             </span>
@@ -332,7 +333,7 @@ kết quả với từ khoá
                                     {this.approvedConfess(
                                         item.content,
                                         item.approver,
-                                        item.cfs_id,
+                                        item.cfsID,
                                         isSearchMode,
                                         searchKeyword
                                     )}

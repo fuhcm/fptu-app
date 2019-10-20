@@ -127,16 +127,16 @@ class AdminCP extends Component {
                 // Update UI
                 list[index].approver = LocalStorageUtils.getNickName();
                 list[index].status = 1;
-                list[index].cfs_id = data.cfs_id;
+                list[index].cfsID = data.cfsID;
 
                 this.setState({ list });
                 message.success(
-                    `Confession đã được duyệt với ID là ${data.cfs_id}`
+                    `Confession đã được duyệt với ID là ${data.cfsID}`
                 );
 
                 this.showApproveModal(
-                    data.cfs_id,
-                    moment(data.created_at).format("HH:mm DD/MM/YYYY"),
+                    data.cfsID,
+                    moment(data.createdAt).format("HH:mm DD/MM/YYYY"),
                     data.content,
                     LocalStorageUtils.getNickName()
                 );
@@ -225,9 +225,9 @@ class AdminCP extends Component {
     approvedConfess = (
         content,
         approver = "admin",
-        cfs_id = "0",
+        cfsID = "0",
         approveTime,
-        pushId
+        pushID
     ) => (
         <ConfessContent>
             <ConfessContent>{content}</ConfessContent>
@@ -236,20 +236,20 @@ class AdminCP extends Component {
                     <a
                         href={`https://www.facebook.com/hashtag/${
                             APP_ENV.FB_TAGNAME
-                        }_${cfs_id}`}
+                        }_${cfsID}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         #
                         {APP_ENV.FB_TAGNAME}
-                        {cfs_id}
+                        {cfsID}
                     </a>
                 </Tag>
                 <Tag color="blue">
 #
                     {approver}
                 </Tag>
-                <Tag color="pink" hidden={!pushId}>
+                <Tag color="pink" hidden={!pushID}>
                     #PushEnabled
                 </Tag>
                 <span>
@@ -263,7 +263,7 @@ class AdminCP extends Component {
         </ConfessContent>
     );
 
-    rejectedConfess = (content, approver = "admin", reason, pushId) => (
+    rejectedConfess = (content, approver = "admin", reason, pushID) => (
         <div>
             <ConfessContent>
                 <strike>{content}</strike>
@@ -273,7 +273,7 @@ class AdminCP extends Component {
 #
                     {approver}
                 </Tag>
-                <Tag color="pink" hidden={!pushId}>
+                <Tag color="pink" hidden={!pushID}>
                     #PushEnabled
                 </Tag>
                 <span
@@ -334,11 +334,11 @@ class AdminCP extends Component {
         });
     };
 
-    showApproveModal = (cfs_id, time, content, admin) => {
+    showApproveModal = (cfsID, time, content, admin) => {
         this.setState({
             approveModal: {
                 visible: true,
-                cfs_id,
+                cfsID,
                 time,
                 content,
                 admin,
@@ -378,7 +378,7 @@ class AdminCP extends Component {
         const { list } = this.state;
 
         for (var i = 0; i < list.length; i += 1) {
-            if (list[i].id === id) {
+            if (list[i]._id === id) {
                 return i;
             }
         }
@@ -495,7 +495,7 @@ class AdminCP extends Component {
                                                 cancelText="Không"
                                                 onConfirm={() => {
                                                 this.handleApprove(
-                                                    item.id,
+                                                    item._id,
                                                     true
                                                 );
                                             }}
@@ -520,7 +520,7 @@ class AdminCP extends Component {
                                                 type="danger"
                                                 disabled={item.loading}
                                                 onClick={() => {
-                                                this.showModal(item.id);
+                                                this.showModal(item._id);
                                             }}
                                             >
                                             từ chối
@@ -531,14 +531,14 @@ class AdminCP extends Component {
                                 <Skeleton title loading={item.loading} active>
                                     <List.Item.Meta
                                         // description={moment(
-                                        //     item.created_at
+                                        //     item.createdAt
                                         // ).format("HH:mm DD/MM/YYYY")}
                                         description={(
                                             <span>
                                                 Được gởi
                                                 {" "}
                                                 <TimeAgo
-                                                    date={item.created_at}
+                                                    date={item.createdAt}
                                                     formatter={formatter}
                                                 />
                                             </span>
@@ -551,8 +551,8 @@ class AdminCP extends Component {
                                         this.approvedConfess(
                                             item.content,
                                             item.approver,
-                                            item.cfs_id,
-                                            item.updated_at,
+                                            item.cfsID,
+                                            item.updatedAt,
                                             item.push_id
                                         )}
                                     {item.status === 2 &&
@@ -614,7 +614,7 @@ class AdminCP extends Component {
                 >
                     <div>
                         #FPTUC_
-                        {approveModal.cfs_id}
+                        {approveModal.cfsID}
                         {' '}
 [
                         {approveModal.time}

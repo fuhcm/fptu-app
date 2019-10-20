@@ -51,7 +51,7 @@ class LoginForm extends Component {
         this.setState({ loading: true });
 
         FPTUSDK.authen
-            .loginFacebook(data.profileObj.email, data.accessToken)
+            .loginGoogle(data.profileObj.email, data.accessToken)
             .then(data => {
                 if (!data) {
                     message.error("Đăng nhập không thành công!");

@@ -45,14 +45,6 @@ const AdminCP = Loadable({
     webpack: () => [require.resolveWeak("../app/modules/admincp/AdminCP")],
 });
 
-const RadioCP = Loadable({
-    loader: () =>
-        import(/* webpackChunkName: "radiocp" */ "./modules/admincp/RadioCP"),
-    loading: () => <Loading />,
-    modules: ["../app/modules/admincp/RadioCP"],
-    webpack: () => [require.resolveWeak("../app/modules/admincp/RadioCP")],
-});
-
 const MyConfess = Loadable({
     loader: () =>
         import(
@@ -147,11 +139,6 @@ export default [
         path     : "/admin-cp",
         title    : "Admin CP",
         component: withAuth(AdminCP),
-    },
-    {
-        path     : "/radio-cp",
-        title    : "Radio CP",
-        component: withAuth(RadioCP),
     },
     {
         path     : "/my-confess",

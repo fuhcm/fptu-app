@@ -42,13 +42,6 @@ const MobileStyle = styled.div`
 
 const { Header } = Layout;
 
-function onLogout(e) {
-    e.preventDefault();
-    LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.JWT);
-    LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.EMAIL);
-    history.push("/login");
-}
-
 function openNotification() {
     const key = `open${Date.now()}`;
     const btn = (
@@ -85,6 +78,13 @@ function HeaderPage({ history }) {
 
     const onToggleMobileMenu = () => {
         setMobileMenu(!mobileMenu);
+    };
+
+    const onLogout = e => {
+        e.preventDefault();
+        LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.JWT);
+        LocalStorageUtils.removeItem(LOCAL_STORAGE_KEY.EMAIL);
+        history.push("/login");
     };
 
     if (typeof window === "undefined") {
@@ -293,14 +293,6 @@ function HeaderPage({ history }) {
                                             {LocalStorageUtils.getNickName()}
                                         </strong>
                                         )
-                                    </Link>
-                                </Menu.Item>
-                            )}
-                            {LocalStorageUtils.isAuthenticated() && (
-                                <Menu.Item key="/radio-cp">
-                                    <Link to="/radio-cp">
-                                        <Icon type="customer-service" />
-                                        Quản lí Radio
                                     </Link>
                                 </Menu.Item>
                             )}
