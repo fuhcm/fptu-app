@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
 import {
     Layout,
@@ -22,48 +22,48 @@ const { Content } = Layout;
 const { TextArea } = Input;
 const Step = Steps.Step;
 
-class Send extends Component {
-    state = {
-        disabledSendButton: false,
-        contentTextarea   : "",
-        step              : 0,
-        recaptchaToken    : null,
-    };
+function Send() {
+    const [disabledSendButton, setDisabledSendButton] = useState(false);
+    const [contentTextarea, setContentTextarea] = useState(null);
+    const [step, setStep] = useState(0);
+    const [captchaDemo, setCaptchaDemo] = useState(null);
+    const [recaptchaToken, setRecaptchaToken] = useState(null);
+    const [isUploading, setIsUploading] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [avatarURL, setAvatarURL] = useState(null);
 
-    componentDidMount() {
-        if (this.captchaDemo) {
-            this.captchaDemo.reset();
+    useEffect(() => {
+        if (captchaDemo) {
+            captchaDemo.reset();
         }
 
         // Init senderID
         FPTUSDK.send.init();
-    }
+    }, []);
 
-    onLoadRecaptcha = () => {
-        if (this.captchaDemo) {
-            this.captchaDemo.reset();
+    const onLoadRecaptcha = () => {
+        if (captchaDemo) {
+            captchaDemo.reset();
         }
     };
-    verifyCallback = recaptchaToken => {
-        this.setState({
-            recaptchaToken,
-        });
+
+    const verifyCallback = recaptchaToken => {
+        setRecaptchaToken(recaptchaToken);
     };
 
-    handleSend = () => {
-        const { contentTextarea, recaptchaToken } = this.state;
-
-        this.setState({ disabledSendButton: true });
+    const handleSend = () => {
+        setDisabledSendButton(false);
 
         if (!contentTextarea.trim()) {
             message.error("Không có gì để gửi cả");
-            this.setState({ disabledSendButton: false, contentTextarea: "" });
+            setDisabledSendButton(false);
+            setContentTextarea("");
             return;
         }
 
         if (contentTextarea.toLowerCase().includes("unihouse")) {
-            message.error("Hệ thống đang tạm lỗi, quay lại sau!");
-            this.setState({ disabledSendButton: false, contentTextarea: "" });
+            setDisabledSendButton(false);
+            setContentTextarea("");
             return;
         }
 
@@ -75,13 +75,11 @@ class Send extends Component {
                     message
                         .loading("Đang gửi tới admin..", 2.5)
                         .then(() => message.success("Đã gửi rồi đó", 2.5))
-                        .then(() =>
-                            this.setState({
-                                disabledSendButton: false,
-                                contentTextarea   : "",
-                                step              : 1,
-                            })
-                        )
+                        .then(() => {
+                            setDisabledSendButton(false);
+                            setContentTextarea("");
+                            setStep(1);
+                        })
                         .then(() =>
                             message.info(
                                 "Vui lòng chờ admin xét duyệt, tối đa chờ 2 ngày",
@@ -91,60 +89,54 @@ class Send extends Component {
                 } else {
                     message.error("Lỗi kết nối nên chưa gửi được");
 
-                    this.setState({
-                        disabledSendButton: false,
-                        contentTextarea   : contentTextarea,
-                        step              : 0,
-                    });
+                    setDisabledSendButton(false);
+                    setContentTextarea(contentTextarea);
+                    setStep(0);
                 }
             });
     };
 
-    handleChangeTextarea = e => {
+    const handleChangeTextarea = e => {
         e.preventDefault();
-
-        this.setState({
-            contentTextarea: e.target.value,
-        });
+        setContentTextarea(e.target.value);
     };
 
-    handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
+    const handleUploadStart = () => {
+        setIsUploading(true);
+        setProgress(0);
+    };
 
-    handleProgress = progress => this.setState({ progress });
+    const handleProgress = progress => setProgress(progress);
 
-    handleUploadError = () => {
-        this.setState({ isUploading: false });
+    const handleUploadError = () => {
+        setIsUploading(false);
 
         // Need to handle error here - the props
     };
 
-    handleUploadSuccess = filename => {
-        const { contentTextarea } = this.state;
-
+    const handleUploadSuccess = filename => {
         if (typeof window !== "undefined") {
-            this.setState({
-                progress   : 100,
-                isUploading: false,
-            });
+            setProgress(100);
+            setIsUploading(false);
+
             firebase
                 .storage()
                 .ref("fuhcm.com")
                 .child(filename)
                 .getDownloadURL()
-                .then(url =>
-                    this.setState({
-                        avatarURL      : url,
-                        contentTextarea:
-                            "Link ảnh của bài viết: [" +
+                .then(url => {
+                    setAvatarURL(url);
+                    setContentTextarea(
+                        "Link ảnh của bài viết: [" +
                             url +
                             "]\n\n" +
-                            contentTextarea,
-                    })
-                );
+                            contentTextarea
+                    );
+                });
         }
     };
 
-    handleStorageRef = () => {
+    const handleStorageRef = () => {
         if (typeof window !== "undefined") {
             return firebase.storage().ref("fuhcm.com");
         }
@@ -152,7 +144,7 @@ class Send extends Component {
         return null;
     };
 
-    askPermission = () => {
+    const askPermission = () => {
         if (typeof window !== "undefined") {
             const {
                 askForPermissionToReceiveNotifications,
@@ -166,182 +158,160 @@ class Send extends Component {
         }
     };
 
-    render() {
-        const {
-            disabledSendButton,
-            contentTextarea,
-            step,
-            recaptchaToken,
-            isUploading,
-            progress,
-            avatarURL,
-        } = this.state;
+    return (
+        <Content className="content-container">
+            <Helmet>
+                <title>Gửi Confesion - FPTU HCM Confession - FUHCM.com</title>
+            </Helmet>
+            <div className="content-wrapper">
+                <h2>Gửi Confession</h2>
 
-        return (
-            <Content className="content-container">
-                <Helmet>
-                    <title>
-                        Gửi Confesion - FPTU HCM Confession - FUHCM.com
-                    </title>
-                </Helmet>
-                <div className="content-wrapper">
-                    <h2>Gửi Confession</h2>
-
-                    <div hidden={step === 0} style={{ marginBottom: "1rem" }}>
-                        <Button
-                            type="dashed"
-                            size="large"
-                            shape="round"
-                            onClick={this.askPermission}
-                        >
-                            <Icon type="thunderbolt" />
-                            Nhận thông báo đẩy
-                        </Button>
-                    </div>
-
-                    <p hidden={step === 0}>
-                        Confession của bạn đã được gửi tới admin. Bạn có thể xem
-                        các confess đã gửi bằng cách bấm vào nút
-                        {" "}
-                        <strong>Confess của tui</strong>
-                        {' '}
-trên thanh menu. Nhấn
-                        vào nút
-                        <strong> Nhận thông báo đẩy</strong>
-, chúng mình sẽ gửi
-                        thông báo cho bạn trên trình duyệt ngay khi confess của
-                        bạn được duyệt.
-                    </p>
-                    <p hidden={step === 1}>
-                        Bạn đang buồn vì chuyện thất tình? Bạn thấy mình không
-                        đủ bản lĩnh để chắp nối tình yêu? Bạn thấy mình liêu
-                        xiêu trong vấn đề tình cảm hoặc mối quan hệ của bạn bị
-                        kìm hãm bởi những lí do? Và bạn khá đắn đo khi hỏi trực
-                        tiếp? Đừng lo vì bây giờ đã có confession nơi bạn có thể
-                        thổ lộ mà đố ai biết được.
-                    </p>
-
-                    <Steps
-                        current={step}
-                        style={{ marginTop: "1rem", marginBottom: "2rem" }}
+                <div hidden={step === 0} style={{ marginBottom: "1rem" }}>
+                    <Button
+                        type="dashed"
+                        size="large"
+                        shape="round"
+                        onClick={askPermission}
                     >
-                        <Step title="Nhập nội dung confess" />
-                        <Step title="Chờ duyệt" />
-                        <Step title="Được đăng lên page" />
-                    </Steps>
+                        <Icon type="thunderbolt" />
+                        Nhận thông báo đẩy
+                    </Button>
+                </div>
 
-                    <div hidden={step === 1}>
-                        <TextArea
-                            value={contentTextarea}
-                            onChange={e => this.handleChangeTextarea(e)}
-                            rows={4}
-                            placeholder="I need to tell you something..."
-                            disabled={disabledSendButton}
-                            style={{
-                                marginRight : "2rem",
-                                marginBottom: "1rem",
-                            }}
-                        />
+                <p hidden={step === 0}>
+                    Confession của bạn đã được gửi tới admin. Bạn có thể xem các
+                    confess đã gửi bằng cách bấm vào nút
+                    {" "}
+                    <strong>Confess của tui</strong>
+                    {' '}
+trên thanh menu. Nhấn vào
+                    nút
+                    <strong> Nhận thông báo đẩy</strong>
+, chúng mình sẽ gửi
+                    thông báo cho bạn trên trình duyệt ngay khi confess của bạn
+                    được duyệt.
+                </p>
+                <p hidden={step === 1}>
+                    Bạn đang buồn vì chuyện thất tình? Bạn thấy mình không đủ
+                    bản lĩnh để chắp nối tình yêu? Bạn thấy mình liêu xiêu trong
+                    vấn đề tình cảm hoặc mối quan hệ của bạn bị kìm hãm bởi
+                    những lí do? Và bạn khá đắn đo khi hỏi trực tiếp? Đừng lo vì
+                    bây giờ đã có confession nơi bạn có thể thổ lộ mà đố ai biết
+                    được.
+                </p>
 
-                        <div style={{ marginBottom: "1rem" }}>
-                            {isUploading && (
-                                <div style={{ marginBottom: "1rem" }}>
-                                    Đợi xíu, đang upload... 
-                                    {' '}
-                                    {progress}
+                <Steps
+                    current={step}
+                    style={{ marginTop: "1rem", marginBottom: "2rem" }}
+                >
+                    <Step title="Nhập nội dung confess" />
+                    <Step title="Chờ duyệt" />
+                    <Step title="Được đăng lên page" />
+                </Steps>
+
+                <div hidden={step === 1}>
+                    <TextArea
+                        value={contentTextarea}
+                        onChange={e => handleChangeTextarea(e)}
+                        rows={4}
+                        placeholder="I need to tell you something..."
+                        disabled={disabledSendButton}
+                        style={{
+                            marginRight : "2rem",
+                            marginBottom: "1rem",
+                        }}
+                    />
+
+                    <div style={{ marginBottom: "1rem" }}>
+                        {isUploading && (
+                            <div style={{ marginBottom: "1rem" }}>
+                                Đợi xíu, đang upload... 
+                                {' '}
+                                {progress}
 %
-                                </div>
-                            )}
-                            <div>
-                                {avatarURL && (
-                                    <img
-                                        src={avatarURL}
-                                        style={{
-                                            maxWidth    : "250px",
-                                            marginBottom: "0.5rem",
-                                        }}
-                                        alt="Upload"
-                                    />
-                                )}
                             </div>
-                            {!avatarURL && (
-                                <div>
-                                    <span hidden={recaptchaToken}>
-                                        <Alert
-                                            message="Tick vào reCAPTCHA để hiện khung Upload ảnh"
-                                            type="warning"
-                                            showIcon
-                                        />
-                                    </span>
-                                    {" "}
-                                    <label
-                                        htmlFor="avatar"
-                                        style={{
-                                            backgroundColor: "#1890ff",
-                                            color          : "white",
-                                            padding        : 10,
-                                            borderRadius   : 4,
-                                            pointer        : "cursor",
-                                        }}
-                                        hidden={!recaptchaToken}
-                                    >
-                                        <FileUploader
-                                            accept="image/*"
-                                            name="avatar"
-                                            randomizeFilename
-                                            storageRef={this.handleStorageRef()}
-                                            onUploadStart={
-                                                this.handleUploadStart
-                                            }
-                                            onUploadError={
-                                                this.handleUploadError
-                                            }
-                                            onUploadSuccess={
-                                                this.handleUploadSuccess
-                                            }
-                                            onProgress={this.handleProgress}
-                                        />
-                                    </label>
-                                </div>
+                        )}
+                        <div>
+                            {avatarURL && (
+                                <img
+                                    src={avatarURL}
+                                    style={{
+                                        maxWidth    : "250px",
+                                        marginBottom: "0.5rem",
+                                    }}
+                                    alt="Upload"
+                                />
                             )}
                         </div>
-
-                        <ReCaptcha
-                            ref={el => {
-                                this.captchaDemo = el;
-                            }}
-                            size="normal"
-                            data-theme="dark"
-                            render="explicit"
-                            sitekey="6LfM3YgUAAAAAKtd0Yg9dxxFL1dYhbGHUGPJanKL"
-                            onloadCallback={this.onLoadRecaptcha}
-                            verifyCallback={this.verifyCallback}
-                        />
-
-                        <Button
-                            type="primary"
-                            onClick={this.handleSend}
-                            disabled={disabledSendButton || !recaptchaToken}
-                            style={{ margin: ".5rem" }}
-                        >
-                            <Icon type="thunderbolt" />
-                            Gửi ngay và luôn!
-                        </Button>
+                        {!avatarURL && (
+                            <div>
+                                <span hidden={recaptchaToken}>
+                                    <Alert
+                                        message="Tick vào reCAPTCHA để hiện khung Upload ảnh"
+                                        type="warning"
+                                        showIcon
+                                    />
+                                </span>
+                                {" "}
+                                <label
+                                    htmlFor="avatar"
+                                    style={{
+                                        backgroundColor: "#1890ff",
+                                        color          : "white",
+                                        padding        : 10,
+                                        borderRadius   : 4,
+                                        pointer        : "cursor",
+                                    }}
+                                    hidden={!recaptchaToken}
+                                >
+                                    <FileUploader
+                                        accept="image/*"
+                                        name="avatar"
+                                        randomizeFilename
+                                        storageRef={handleStorageRef()}
+                                        onUploadStart={handleUploadStart}
+                                        onUploadError={handleUploadError}
+                                        onUploadSuccess={handleUploadSuccess}
+                                        onProgress={handleProgress}
+                                    />
+                                </label>
+                            </div>
+                        )}
                     </div>
 
-                    <Divider dashed />
-                    <Row>
-                        <Alert
-                            message="Làm sao để biết confess tui đã được đăng lên hay chưa? Bị từ chối vì sao?"
-                            description="Những confession mà bạn đã đăng sẽ được lưu vào trình duyệt của bạn, duyệt qua menu 'Confess của tui' để xem lại mấy confess đó, ngoài ra bạn cũng sẽ biết được nó được duyệt bởi ai, đăng khi nào, số thứ tự và lí do bị từ chối nếu có."
-                            type="info"
-                            showIcon
-                        />
-                    </Row>
+                    <ReCaptcha
+                        ref={el => setCaptchaDemo(el)}
+                        size="normal"
+                        data-theme="dark"
+                        render="explicit"
+                        sitekey="6LfM3YgUAAAAAKtd0Yg9dxxFL1dYhbGHUGPJanKL"
+                        onloadCallback={onLoadRecaptcha}
+                        verifyCallback={verifyCallback}
+                    />
+
+                    <Button
+                        type="primary"
+                        onClick={handleSend}
+                        disabled={disabledSendButton || !recaptchaToken}
+                        style={{ margin: ".5rem" }}
+                    >
+                        <Icon type="thunderbolt" />
+                        Gửi ngay và luôn!
+                    </Button>
                 </div>
-            </Content>
-        );
-    }
+
+                <Divider dashed />
+                <Row>
+                    <Alert
+                        message="Làm sao để biết confess tui đã được đăng lên hay chưa? Bị từ chối vì sao?"
+                        description="Những confession mà bạn đã đăng sẽ được lưu vào trình duyệt của bạn, duyệt qua menu 'Confess của tui' để xem lại mấy confess đó, ngoài ra bạn cũng sẽ biết được nó được duyệt bởi ai, đăng khi nào, số thứ tự và lí do bị từ chối nếu có."
+                        type="info"
+                        showIcon
+                    />
+                </Row>
+            </div>
+        </Content>
+    );
 }
 
 export default Send;
