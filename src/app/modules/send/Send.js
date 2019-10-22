@@ -52,7 +52,7 @@ function Send() {
     };
 
     const handleSend = () => {
-        setDisabledSendButton(false);
+        setDisabledSendButton(true);
 
         if (!contentTextarea.trim()) {
             message.error("Không có gì để gửi cả");
