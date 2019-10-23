@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Helmet from "react-helmet-async";
-import { Icon, Button, Layout, message, Progress, List } from "antd";
+import { Icon, Button, Layout, message, Progress, List, Skeleton } from "antd";
 import GoogleLogin from "react-google-login";
 
 const { Content } = Layout;
@@ -13,10 +13,33 @@ function ChangeForm() {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
-        FPTUSDK.change.getSignList().then(data => {
-            setSignList(data.list.map(e => e.email));
-            setCount(data.count || 0);
-        });
+        let fake = null;
+
+        setLoading(true);
+        FPTUSDK.change
+            .getSignList()
+            .then(data => {
+                setSignList(data.list.map(e => e.email));
+                setCount(data.count || 0);
+
+                fake = setInterval(() => {
+                    setLoading(true);
+                    FPTUSDK.change
+                        .getSignList()
+                        .then(data => {
+                            setSignList(data.list.map(e => e.email));
+                            setCount(data.count || 0);
+                        })
+                        .finally(() => {
+                            setLoading(false);
+                        });
+                }, 5000);
+            })
+            .finally(() => setLoading(false));
+
+        return () => {
+            clearInterval(fake);
+        };
     }, []);
 
     const responseGoogle = data => {
@@ -82,14 +105,14 @@ function ChangeForm() {
                         {count || 0}
                         /3000 chữ kí
                     </p>
-                    <p>
+                    <Skeleton loading={loading} active>
                         <Progress
                             percent={
                                 (count && (count / 3000) * 100).toFixed(2) || 0
                             }
                             status="active"
                         />
-                    </p>
+                    </Skeleton>
                     {!isSigned && (
                         <GoogleLogin
                             clientId="834798810236-ok8culnaru4ml7fanhjni43lr5i709jj.apps.googleusercontent.com"
@@ -121,13 +144,15 @@ function ChangeForm() {
                     }}
                 >
                     <h2>10 sinh viên kí mới nhất</h2>
-                    <List
-                        style={{ maxWidth: 480, margin: "auto" }}
-                        size="large"
-                        bordered
-                        dataSource={signList || []}
-                        renderItem={item => <List.Item>{item}</List.Item>}
-                    />
+                    <Skeleton loading={loading} active>
+                        <List
+                            style={{ maxWidth: 480, margin: "auto" }}
+                            size="large"
+                            bordered
+                            dataSource={signList || []}
+                            renderItem={item => <List.Item>{item}</List.Item>}
+                        />
+                    </Skeleton>
                 </div>
             </div>
         </Content>
