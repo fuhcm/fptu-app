@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from "react";
 
 import Helmet from "react-helmet-async";
-import { Icon, Button, Layout, message, Progress, List, Skeleton } from "antd";
+import {
+    Icon,
+    Button,
+    Layout,
+    message,
+    Progress,
+    List,
+    Skeleton,
+    Card,
+} from "antd";
 import GoogleLogin from "react-google-login";
 
 const { Content } = Layout;
@@ -105,15 +114,36 @@ function ChangeForm() {
                     >
                         Tạo chiến dịch kiến nghị
                     </Button>
-                    <h2>Sinh viên trường ĐH FPT đòi lại ổ điện</h2>
-                    <p>
-                        Chúng tôi - FPTU HCM Confessions kêu gọi tất cả các bạn
-                        sinh viên của FPTU HCM cùng nhau kí tên đồng ý việc lắp
-                        ổ điện tại các phòng học để thuận tiện cho việc học tập
-                        cũng như việc thi. Lá đơn này nếu đủ 3000 chữ kí chúng
-                        tôi sẽ gửi mail cho trường và forward cho các phòng ban
-                        và các trưởng phòng ban của trường Đại Học FPT.
-                    </p>
+                    <Card
+                        title="Save Your Laptop, Save your Exam!"
+                        extra={(
+                            <a
+                                href="https://facebook.com/FPTUHCMConfessions/photos/a.1745593425733390/2202083856751009/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Xem
+                            </a>
+)}
+                        style={{ marginBottom: "1rem" }}
+                    >
+                        <p>
+                            Chúng tôi - FPTU HCM Confessions kêu gọi tất cả các
+                            bạn sinh viên của FPTU HCM cùng nhau kí tên đồng ý
+                            việc lắp ổ điện tại các phòng học để thuận tiện cho
+                            việc học tập cũng như việc thi.
+                        </p>
+                        <p>
+                            Lá đơn này nếu đủ 3000 chữ kí chúng tôi sẽ gửi mail
+                            cho trường và forward cho các phòng ban và các
+                            trưởng phòng ban của trường Đại Học FPT.
+                        </p>
+                        <p>
+                            Bằng cách click vào button bên dưới và đăng nhập vào
+                            tài khoản email sinh viên ĐH FPT, bạn đã hoàn thành
+                            kí vào lá thư kiến nghị này.
+                        </p>
+                    </Card>
                     {!loading && (
                         <p>
                             Đã có
@@ -136,7 +166,7 @@ sinh viên kí
                             {' '}
                             {3000 - count || 0}
                             {' '}
-chữ kí nữa
+chữ kí nữa!
                         </p>
                     )}
                     {!isSigned && (
@@ -176,7 +206,13 @@ chữ kí nữa
                             size="large"
                             bordered
                             dataSource={signList || []}
-                            renderItem={item => <List.Item>{item}</List.Item>}
+                            renderItem={item => (
+                                <List.Item>
+                                    <strong>{item}</strong>
+                                    {' '}
+đã kí
+                                </List.Item>
+                            )}
                         />
                     </Skeleton>
                 </div>
