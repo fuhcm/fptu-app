@@ -110,20 +110,15 @@ function ChangeForm() {
                         Chúng tôi - FPTU HCM Confessions kêu gọi tất cả các bạn
                         sinh viên của FPTU HCM cùng nhau kí tên đồng ý việc lắp
                         ổ điện tại các phòng học để thuận tiện cho việc học tập
-                        cũng như việc thi. Lá đơn này nếu đủ (3000) chữ kí chúng
+                        cũng như việc thi. Lá đơn này nếu đủ 3000 chữ kí chúng
                         tôi sẽ gửi mail cho trường và forward cho các phòng ban
                         và các trưởng phòng ban của trường Đại Học FPT.
                     </p>
                     <p>
-                        Đã kêu gọi được: 
+                        Đã có
+                        {" " + count || 0}
                         {' '}
-                        {count || 0}
-                        /3000 chữ kí, còn thiếu 
-                        {' '}
-                        {3000 - count || 0}
-                        {' '}
-chữ kí nữa
-                        chiến dịch sẽ được gửi đến nhà trường
+sinh viên kí
                     </p>
                     <Skeleton loading={loading} active>
                         <Progress
@@ -133,6 +128,13 @@ chữ kí nữa
                             status="active"
                         />
                     </Skeleton>
+                    <p style={{ marginTop: "5px", textAlign: "right" }}>
+                        Còn thiếu 
+                        {' '}
+                        {3000 - count || 0}
+                        {' '}
+chữ kí nữa
+                    </p>
                     {!isSigned && (
                         <GoogleLogin
                             clientId="834798810236-ok8culnaru4ml7fanhjni43lr5i709jj.apps.googleusercontent.com"
