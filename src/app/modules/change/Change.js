@@ -114,12 +114,14 @@ function ChangeForm() {
                         tôi sẽ gửi mail cho trường và forward cho các phòng ban
                         và các trưởng phòng ban của trường Đại Học FPT.
                     </p>
-                    <p>
-                        Đã có
-                        {" " + count || 0}
-                        {' '}
+                    {!loading && (
+                        <p>
+                            Đã có
+                            {" " + count || 0}
+                            {' '}
 sinh viên kí
-                    </p>
+                        </p>
+                    )}
                     <Skeleton loading={loading} active>
                         <Progress
                             percent={
@@ -128,13 +130,15 @@ sinh viên kí
                             status="active"
                         />
                     </Skeleton>
-                    <p style={{ marginTop: "5px", textAlign: "right" }}>
-                        Còn thiếu 
-                        {' '}
-                        {3000 - count || 0}
-                        {' '}
+                    {!loading && (
+                        <p style={{ marginTop: "5px", textAlign: "right" }}>
+                            Còn thiếu 
+                            {' '}
+                            {3000 - count || 0}
+                            {' '}
 chữ kí nữa
-                    </p>
+                        </p>
+                    )}
                     {!isSigned && (
                         <GoogleLogin
                             clientId="834798810236-ok8culnaru4ml7fanhjni43lr5i709jj.apps.googleusercontent.com"
