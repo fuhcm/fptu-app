@@ -109,6 +109,14 @@ const Radio = Loadable({
     webpack: () => [require.resolveWeak("../app/modules/radio/Radio")],
 });
 
+const Change = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "change" */ "./modules/change/Change"),
+    loading: () => <Loading />,
+    modules: ["../app/modules/change/Change"],
+    webpack: () => [require.resolveWeak("../app/modules/change/Change")],
+});
+
 export default [
     {
         path     : "/home",
@@ -184,5 +192,10 @@ export default [
         path     : "/radio",
         title    : "Radio",
         component: Radio,
+    },
+    {
+        path     : "/change",
+        title    : "Change",
+        component: Change,
     },
 ];
