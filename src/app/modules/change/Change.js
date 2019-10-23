@@ -103,7 +103,7 @@ function ChangeForm() {
                         icon="plus"
                         onClick={() => toggleCreate()}
                     >
-                        Tạo chiến dịch kiến nghị riêng của bạn
+                        Tạo chiến dịch kiến nghị
                     </Button>
                     <h2>Sinh viên trường ĐH FPT đòi lại ổ điện</h2>
                     <p>
