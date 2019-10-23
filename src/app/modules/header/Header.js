@@ -206,6 +206,12 @@ function HeaderPage({ history }) {
                                         </a>
                                     </Menu.Item>
                                 )}
+                                <Menu.Item key="/change">
+                                    <Link to="/change">
+                                        <Icon type="fire" />
+                                        Change!
+                                    </Link>
+                                </Menu.Item>
                             </MenuItemGroup>
 
                             <MenuItemGroup key="dev-group" title="Dev Đọc">
@@ -308,6 +314,13 @@ function HeaderPage({ history }) {
                                 </Menu.Item>
                             )}
                         </SubMenu>
+
+                        <Menu.Item key="/change">
+                            <Link to="/change">
+                                <Icon type="fire" />
+                                Change!
+                            </Link>
+                        </Menu.Item>
 
                         <SubMenu
                             title={
