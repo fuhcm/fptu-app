@@ -52,7 +52,9 @@ function ChangeForm() {
     return (
         <Content className="content-container">
             <Helmet>
-                <title>Đăng nhập - FUHCM.com</title>
+                <title>
+                    Change! Sinh viên trường ĐH FPT đòi lại ổ điện - FUHCM.com
+                </title>
             </Helmet>
             <div className="content-wrapper">
                 <div
