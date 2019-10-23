@@ -36,7 +36,7 @@ function ChangeForm() {
 
                     FPTUSDK.change
                         .getSignList()
-                        .then(data => setSignList(data.map(e => e.email)));
+                        .then(data => setSignList(data.list.map(e => e.email)));
                 }
             })
             .catch(() => {
