@@ -85,16 +85,12 @@ function ChangeForm() {
                     <p>
                         <Progress
                             percent={
-                                (count &&
-                                    Math.round((count / 3000) * 100).toFixed(
-                                        2
-                                    )) ||
-                                0
+                                (count && (count / 3000) * 100).toFixed(2) || 0
                             }
                             status="active"
                         />
                     </p>
-                    {!isSigned && !loading && (
+                    {!isSigned && (
                         <GoogleLogin
                             clientId="834798810236-ok8culnaru4ml7fanhjni43lr5i709jj.apps.googleusercontent.com"
                             render={renderProps => (
@@ -106,9 +102,10 @@ function ChangeForm() {
                                     style={{
                                         marginTop: "0.5rem",
                                     }}
+                                    disabled={loading}
                                 >
                                     <Icon type="google" />
-                                    Đăng nhập email sinh viên ĐH FPT để kí
+                                    Đăng nhập email FPT để kí
                                 </Button>
                             )}
                             buttonText="Login with Google "
@@ -123,7 +120,7 @@ function ChangeForm() {
                         margin  : "auto",
                     }}
                 >
-                    <h2>Danh sách sinh viên kí mới nhất</h2>
+                    <h2>10 sinh viên kí mới nhất</h2>
                     <List
                         style={{ maxWidth: 480, margin: "auto" }}
                         size="large"
