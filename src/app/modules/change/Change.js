@@ -10,11 +10,13 @@ function ChangeForm() {
     const [loading, setLoading] = useState(false);
     const [isSigned, setIsSigned] = useState(false);
     const [signList, setSignList] = useState([]);
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
-        FPTUSDK.change
-            .getSignList()
-            .then(data => setSignList(data.map(e => e.email)));
+        FPTUSDK.change.getSignList().then(data => {
+            setSignList(data.list.map(e => e.email));
+            setCount(data.count || 0);
+        });
     }, []);
 
     const responseGoogle = data => {
@@ -34,9 +36,10 @@ function ChangeForm() {
 
                     message.success(`Cảm ơn bạn ${email} đã kí thành công!`);
 
-                    FPTUSDK.change
-                        .getSignList()
-                        .then(data => setSignList(data.list.map(e => e.email)));
+                    FPTUSDK.change.getSignList().then(data => {
+                        setSignList(data.list.map(e => e.email));
+                        setCount(data.count || 0);
+                    });
                 }
             })
             .catch(() => {
@@ -74,18 +77,18 @@ function ChangeForm() {
                         và các trưởng phòng ban của trường Đại Học FPT.
                     </p>
                     <p>
-                        Đã kêu gọi được:
-                        {" "}
-                        {(signList.length && signList.length) || 0}
+                        Đã kêu gọi được: 
+                        {' '}
+                        {count || 0}
                         /3000 chữ kí
                     </p>
                     <p>
                         <Progress
                             percent={
-                                (signList.length &&
-                                    Math.round(
-                                        (signList.length / 3000) * 100
-                                    ).toFixed(2)) ||
+                                (count &&
+                                    Math.round((count / 3000) * 100).toFixed(
+                                        2
+                                    )) ||
                                 0
                             }
                             status="active"
