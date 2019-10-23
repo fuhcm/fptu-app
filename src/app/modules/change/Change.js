@@ -32,7 +32,7 @@ function ChangeForm() {
 
                     setIsSigned(true);
 
-                    message.error(`Cảm ơn bạn ${email} đã kí thành công!`);
+                    message.success(`Cảm ơn bạn ${email} đã kí thành công!`);
 
                     FPTUSDK.change
                         .getSignList()
