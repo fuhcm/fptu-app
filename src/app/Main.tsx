@@ -7,7 +7,7 @@ import LandingPage from "./modules/landing-page/LandingPage";
 function Main() {
     useEffect(() => {
         loadReCaptcha();
-    });
+    }, []);
 
     return (
         <React.Fragment>
