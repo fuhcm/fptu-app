@@ -68,19 +68,25 @@ function ChangeForm() {
                         Chúng tôi - FPTU HCM Confessions kêu gọi tất cả các bạn
                         sinh viên của FPTU HCM cùng nhau kí tên đồng ý việc lắp
                         ổ điện tại các phòng học để thuận tiện cho việc học tập
-                        cũng như việc thi. Lá đơn này nếu đủ (số lượng) chữ kí
-                        chúng tôi sẽ gửi mail cho trường và cc cho các phòng ban
+                        cũng như việc thi. Lá đơn này nếu đủ (3000) chữ kí chúng
+                        tôi sẽ gửi mail cho trường và forward cho các phòng ban
                         và các trưởng phòng ban của trường Đại Học FPT.
                     </p>
                     <p>
-                        Đã kêu gọi được: 
-                        {' '}
-                        {(signList && signList.length) || 0}
+                        Đã kêu gọi được:
+                        {" "}
+                        {(signList.length && signList.length) || 0}
                         /3000 chữ kí
                     </p>
                     <p>
                         <Progress
-                            percent={(signList && signList.length) || 0}
+                            percent={
+                                (signList.length &&
+                                    Math.round(signList.length / 3000).toFixed(
+                                        2
+                                    )) ||
+                                0
+                            }
                             status="active"
                         />
                     </p>
