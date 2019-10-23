@@ -157,7 +157,7 @@ hàng ngày
                         <div>
                             <Alert
                                 message="Lỗi API Server"
-                                description="Có vấn đề gì đó nên API không lấy được bài mới nữa, bạn đọc tạm bài cũ nha, hoặc refresh trang lại thử"
+                                description="Tính năng đọc bài tạm thời ngưng hoạt động, chúng tôi đang làm việc chăm chỉ để mang tính năng này trở lại sớm nhất."
                                 type="error"
                                 closable
                             />
