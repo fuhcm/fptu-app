@@ -42,6 +42,12 @@ function ChangeForm() {
         };
     }, []);
 
+    const toggleCreate = () => {
+        message.error(
+            "Chúng tôi đang làm việc chăm chỉ để ra mắt tính năng này sớm nhất."
+        );
+    };
+
     const responseGoogle = data => {
         if (!data || !data.profileObj.email || !data.accessToken) return;
 
@@ -90,6 +96,15 @@ function ChangeForm() {
                         marginBottom: "2rem",
                     }}
                 >
+                    <Button
+                        style={{ marginBottom: "1rem" }}
+                        type="primary"
+                        size="large"
+                        icon="plus"
+                        onClick={() => toggleCreate()}
+                    >
+                        Tạo chiến dịch kiến nghị riêng của bạn
+                    </Button>
                     <h2>Sinh viên trường ĐH FPT đòi lại ổ điện</h2>
                     <p>
                         Chúng tôi - FPTU HCM Confessions kêu gọi tất cả các bạn
@@ -103,7 +118,12 @@ function ChangeForm() {
                         Đã kêu gọi được: 
                         {' '}
                         {count || 0}
-                        /3000 chữ kí
+                        /3000 chữ kí, còn thiếu 
+                        {' '}
+                        {3000 - count || 0}
+                        {' '}
+chữ kí nữa
+                        chiến dịch sẽ được gửi đến nhà trường
                     </p>
                     <Skeleton loading={loading} active>
                         <Progress
