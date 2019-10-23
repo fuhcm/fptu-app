@@ -82,9 +82,9 @@ function ChangeForm() {
                         <Progress
                             percent={
                                 (signList.length &&
-                                    Math.round(signList.length / 3000).toFixed(
-                                        2
-                                    )) ||
+                                    Math.round(
+                                        (signList.length / 3000) * 100
+                                    ).toFixed(2)) ||
                                 0
                             }
                             status="active"
