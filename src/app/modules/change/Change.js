@@ -94,8 +94,14 @@ function ChangeForm() {
         <Content className="content-container">
             <Helmet>
                 <title>
-                    Change! Sinh viên trường ĐH FPT đòi lại ổ điện - FUHCM.com
+                    Change! Sinh viên trường ĐH FPT đòi lại ổ điện - Save Your Laptop, Save your Exam! - FUHCM.com
                 </title>
+                <meta property="og:type" content="article" />
+                <meta property="og:description" content="Sinh viên của FPTU HCM cùng nhau kí tên đồng ý việc lắp ổ điện tại các phòng học để thuận tiện cho việc học tập cũng như việc thi." />
+                <meta
+                    property="og:image"
+                    content="https://scontent.fsgn5-7.fna.fbcdn.net/v/t1.0-9/72853199_2202083860084342_4602527138107621376_o.png?_nc_cat=103&_nc_oc=AQnfXl42YF8HozcMg4XqbJbSFH_nTdYal7IkSJ-Kv_SKR0WDJcwqOZEt7I6gSVE47aM&_nc_ht=scontent.fsgn5-7.fna&oh=6578155d6be382dbf2e5bb89c6bd26dd&oe=5E5FD643"
+                />
             </Helmet>
             <div className="content-wrapper">
                 <div
