@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import Helmet from "react-helmet-async";
 import { Icon, Button, Layout, message, Progress, List } from "antd";
-import LocalStorageUtils from "@utils/browser/LocalStorage";
 import GoogleLogin from "react-google-login";
 
 const { Content } = Layout;
