@@ -34,7 +34,7 @@ class FooterPage extends Component<Props> {
 ©2019 Developed
                     by
                     {" "}
-                    <Tooltip title="I am not responsible for the content (or approval) posted on the fanpage">
+                    <Tooltip title="I am not FPTU HCM Confessions (or related) and hence not responsible for the content (or approval) posted on the fanpage">
                         <strong>
                             <a
                                 href="https://mrhmt.com"
