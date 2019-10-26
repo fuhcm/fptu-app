@@ -1,5 +1,3 @@
-import { getAllEntries } from "@utils/contentful";
-
 import {
     GET_HOME_ARTICLE_LOADING,
     GET_HOME_ARTICLE_SUCCESS,
@@ -13,12 +11,16 @@ export const getHomeArticles = () => {
         });
 
         try {
-            const sdkData = await FPTUSDK.crawl.getArticles("fpt");
-            const contentfulData = await getAllEntries();
+            const crawlData = await FPTUSDK.crawl.getArticles("fpt");
+            const postData = await FPTUSDK.post.list();
+            const postDataWithGUID = postData.map(e => ({
+                ...e,
+                guid: e._id,
+            }));
 
             dispatch({
                 type   : GET_HOME_ARTICLE_SUCCESS,
-                payload: contentfulData.concat(sdkData),
+                payload: postDataWithGUID.reverse().concat(crawlData),
             });
         } catch (err) {
             dispatch({

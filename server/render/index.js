@@ -1,5 +1,4 @@
 import React from "react";
-import * as contentful from "contentful";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -98,19 +97,12 @@ class Renderer {
 }
 
 async function getData(feedName, articleID) {
-    if (articleID.includes("content")) {
-        const client = contentful.createClient({
-            space      : "421w0fsh4dri",
-            accessToken: "7HOOTT94pK3MmaosD5X6_ypZiw1tfRIDg1XTmI-BDJY",
-        });
+    if (feedName === "fpt" && articleID.length === 24) {
+        const { data } = await axios.get(
+            "https://api.fuhcm.com/api/v1/posts/" + articleID
+        );
 
-        const entry = await client.getEntry(articleID.slice(8));
-
-        return {
-            title      : entry.fields.title,
-            description: entry.fields.description,
-            thumbnail  : entry.fields.thumbnail.fields.file.url,
-        };
+        return data;
     } else {
         const { data } = await axios.get(
             "https://api.fuhcm.com/api/v1/crawl/" + feedName + "/" + articleID

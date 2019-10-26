@@ -196,6 +196,14 @@ function HeaderPage({ history }) {
                                     </Menu.Item>
                                 )}
                                 {LocalStorageUtils.isAuthenticated() && (
+                                    <Menu.Item key="/new">
+                                        <Link to="/new">
+                                            <Icon type="plus" />
+                                            Viết bài mới
+                                        </Link>
+                                    </Menu.Item>
+                                )}
+                                {LocalStorageUtils.isAuthenticated() && (
                                     <Menu.Item key="/logout">
                                         <a
                                             href="/logout"
@@ -299,6 +307,14 @@ function HeaderPage({ history }) {
                                             {LocalStorageUtils.getNickName()}
                                         </strong>
                                         )
+                                    </Link>
+                                </Menu.Item>
+                            )}
+                            {LocalStorageUtils.isAuthenticated() && (
+                                <Menu.Item key="/new">
+                                    <Link to="/new">
+                                        <Icon type="plus" />
+                                        Viết bài mới
                                     </Link>
                                 </Menu.Item>
                             )}

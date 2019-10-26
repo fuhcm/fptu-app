@@ -1,15 +1,25 @@
 import React, { Component } from "react";
 
-import { getEntry } from "@utils/contentful";
-
-import { Layout, Button, Icon, BackTop, Tag, Skeleton } from "antd";
-import { Link } from "react-router-dom";
+import {
+    Layout,
+    Button,
+    Icon,
+    BackTop,
+    Tag,
+    Skeleton,
+    Popconfirm,
+    message,
+} from "antd";
+import { Link, withRouter } from "react-router-dom";
 import Helmet from "react-helmet-async";
 import styled from "styled-components";
+import showdown from "showdown";
 import NotFound from "../not-found/NotFound";
 import DisqusComponent from "../../utils/shared/disqus/DisqusComponent";
 
 const { Content } = Layout;
+
+const converter = new showdown.Converter();
 
 const PostBody = styled.div`
     width: 740px;
@@ -78,7 +88,26 @@ class Post extends Component {
             window.scrollTo(0, 0);
         }
 
-        if (!guid.includes("content")) {
+        if (guid.length === 24) {
+            FPTUSDK.post
+                .get(guid)
+                .then(data => {
+                    this.setState({
+                        loading: false,
+                        post   : {
+                            ...data,
+                            categories: data ? data.categories.split(",") : [],
+                            content   : converter.makeHtml(data.content),
+                        },
+                    });
+                })
+                .catch(() => {
+                    this.setState({
+                        loading: false,
+                        post   : null,
+                    });
+                });
+        } else {
             FPTUSDK.crawl
                 .getArticleDetails("fpt", guid)
                 .then(data => {
@@ -93,23 +122,18 @@ class Post extends Component {
                         post   : null,
                     });
                 });
-        } else {
-            try {
-                const post = await getEntry(guid);
-
-                this.setState({
-                    loading: false,
-                    post,
-                });
-            } catch (err) {
-                console.log(err);
-                this.setState({
-                    loading: false,
-                    post   : null,
-                });
-            }
         }
     }
+
+    handleDelete = id => {
+        FPTUSDK.post
+            .delete(id)
+            .then(() => {
+                const { history } = this.props;
+                history.push("/home");
+            })
+            .catch(() => message.error("Có lỗi xảy ra"));
+    };
 
     render() {
         const { post, loading } = this.state;
@@ -180,6 +204,38 @@ Quay lại danh sách bài
                             }}
                         />
 
+                        {post.type === "markdown" && (
+                            <div
+                                style={{ float: "right", marginBottom: "1rem" }}
+                            >
+                                <Link to={`/edit/${post._id}`}>
+                                    <Button style={{ marginRight: "1rem" }}>
+                                        <Icon type="edit" />
+                                        Sửa bài
+                                    </Button>
+                                </Link>
+                                <Popconfirm
+                                    title="Chắc chưa？"
+                                    okText="Chắc mà"
+                                    cancelText="Chưa chắc"
+                                    icon={(
+                                        <Icon
+                                            type="question-circle-o"
+                                            style={{ color: "red" }}
+                                        />
+)}
+                                    onConfirm={() =>
+                                        this.handleDelete(post._id)
+                                    }
+                                >
+                                    <Button type="danger">
+                                        <Icon type="delete" />
+                                        Xoá bài
+                                    </Button>
+                                </Popconfirm>
+                            </div>
+                        )}
+
                         <DisqusComponent
                             guid={post && post.guid}
                             title={post && post.title}
@@ -191,4 +247,4 @@ Quay lại danh sách bài
     }
 }
 
-export default Post;
+export default withRouter(Post);

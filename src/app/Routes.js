@@ -117,6 +117,14 @@ const Change = Loadable({
     webpack: () => [require.resolveWeak("../app/modules/change/Change")],
 });
 
+const NewPost = Loadable({
+    loader: () =>
+        import(/* webpackChunkName: "new-post" */ "./modules/new-post/NewPost"),
+    loading: () => <Loading />,
+    modules: ["../app/modules/new-post/NewPost"],
+    webpack: () => [require.resolveWeak("../app/modules/new-post/NewPost")],
+});
+
 export default [
     {
         path     : "/home",
@@ -197,5 +205,15 @@ export default [
         path     : "/change",
         title    : "Change",
         component: Change,
+    },
+    {
+        path     : "/new",
+        title    : "NewPost",
+        component: withAuth(NewPost),
+    },
+    {
+        path     : "/edit/:id",
+        title    : "EditPost",
+        component: withAuth(NewPost),
     },
 ];

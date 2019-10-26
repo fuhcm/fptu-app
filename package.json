@@ -3,11 +3,9 @@
     "version": "1.2.0",
     "private": true,
     "dependencies": {
-        "@contentful/rich-text-html-renderer": "^13.4.0",
         "ant-design-pro": "^2.2.1",
         "antd": "^3.24.1",
         "axios": "^0.18.0",
-        "contentful": "^7.10.0",
         "debounce": "^1.2.0",
         "disqus-react": "^1.0.5",
         "dotenv": "6.0.0",

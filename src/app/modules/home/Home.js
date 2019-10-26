@@ -28,9 +28,9 @@ class Home extends Component {
 
             const patt = /p=(\d+)$/;
             const guid =
-                post.type === "contentful"
-                    ? "content-" + post.guid
-                    : patt.exec(post.guid.substring(0, post.guid.length))[1];
+                (post.type !== "markdown" &&
+                    patt.exec(post.guid.substring(0, post.guid.length))[1]) ||
+                post.guid;
 
             const postTitle = paramCase(this.removeVnStr(post.title));
 
