@@ -122,7 +122,8 @@ function NewPost(props) {
                             value={content}
                             onChange={e => setContent(e.target.value)}
                             placeholder="Nội dung bài viết (dùng Markdown)"
-                            rows={8}
+                            rows={12}
+                            autoSize={content && content.length > 500}
                             style={{ marginBottom: "1rem" }}
                         />
                         <div style={{ float: "right" }}>
