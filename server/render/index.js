@@ -113,7 +113,7 @@ async function getData(feedName, articleID) {
         };
     } else {
         const { data } = await axios.get(
-            "https://api.fuhcm.com/crawl/" + feedName + "/" + articleID
+            "https://api.fuhcm.com/api/v1/crawl/" + feedName + "/" + articleID
         );
 
         return data;
