@@ -1,4 +1,4 @@
-FROM node:10.15.3 as builder
+FROM node:10.17.0 as builder
 
 RUN mkdir -p /root/src/app
 WORKDIR /root/src/app
@@ -9,7 +9,7 @@ COPY . .
 RUN npm install
 RUN npm run build
 
-FROM node:10.15.3-alpine
+FROM node:10.17.0-alpine
 
 WORKDIR /root/src/app
 
