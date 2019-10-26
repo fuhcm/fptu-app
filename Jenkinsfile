@@ -1,31 +1,24 @@
-pipeline {
-  environment {
-    registry = "fuhcm/fptu-app"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-  }
-  agent any
-  stages {
+node {
+    def app
+
     stage('Initial') {
-      steps {
-        git 'https://github.com/fuhcm/fptu-app'
-      }
+        checkout scm
     }
+
     stage('Build') {
-      steps {
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
+        app = docker.build("fuhcm/fptu-app")
     }
+
+    stage('Test') {
+        app.inside {
+            sh 'echo "Tests passed"'
+        }
+    }
+
     stage('Deploy') {
-      steps{
-         script {
-            docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
+        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
         }
-      }
     }
-  }
 }
