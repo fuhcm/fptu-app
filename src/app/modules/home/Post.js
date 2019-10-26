@@ -14,6 +14,7 @@ import { Link, withRouter } from "react-router-dom";
 import Helmet from "react-helmet-async";
 import styled from "styled-components";
 import showdown from "showdown";
+import LocalStorageUtils from "@utils/browser/LocalStorage";
 import NotFound from "../not-found/NotFound";
 import DisqusComponent from "../../utils/shared/disqus/DisqusComponent";
 
@@ -204,37 +205,41 @@ Quay lại danh sách bài
                             }}
                         />
 
-                        {post.type === "markdown" && (
-                            <div
-                                style={{ float: "right", marginBottom: "1rem" }}
-                            >
-                                <Link to={`/edit/${post._id}`}>
-                                    <Button style={{ marginRight: "1rem" }}>
-                                        <Icon type="edit" />
-                                        Sửa bài
-                                    </Button>
-                                </Link>
-                                <Popconfirm
-                                    title="Chắc chưa？"
-                                    okText="Chắc mà"
-                                    cancelText="Chưa chắc"
-                                    icon={(
-                                        <Icon
-                                            type="question-circle-o"
-                                            style={{ color: "red" }}
-                                        />
-)}
-                                    onConfirm={() =>
-                                        this.handleDelete(post._id)
-                                    }
+                        {post.type === "markdown" &&
+                            LocalStorageUtils.isAuthenticated() && (
+                                <div
+                                    style={{
+                                        textAlign   : "right",
+                                        marginBottom: "1rem",
+                                    }}
                                 >
-                                    <Button type="danger">
-                                        <Icon type="delete" />
-                                        Xoá bài
-                                    </Button>
-                                </Popconfirm>
-                            </div>
-                        )}
+                                    <Link to={`/edit/${post._id}`}>
+                                        <Button style={{ marginRight: "1rem" }}>
+                                            <Icon type="edit" />
+                                            Sửa bài
+                                        </Button>
+                                    </Link>
+                                    <Popconfirm
+                                        title="Chắc chưa？"
+                                        okText="Chắc mà"
+                                        cancelText="Chưa chắc"
+                                        icon={(
+                                            <Icon
+                                                type="question-circle-o"
+                                                style={{ color: "red" }}
+                                            />
+)}
+                                        onConfirm={() =>
+                                            this.handleDelete(post._id)
+                                        }
+                                    >
+                                        <Button type="danger">
+                                            <Icon type="delete" />
+                                            Xoá bài
+                                        </Button>
+                                    </Popconfirm>
+                                </div>
+                            )}
 
                         <DisqusComponent
                             guid={post && post.guid}
