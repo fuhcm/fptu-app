@@ -3,6 +3,8 @@ import { withRouter } from "react-router-dom";
 
 import { Layout, Input, Button, Skeleton, message } from "antd";
 
+import Helmet from "react-helmet-async";
+
 const { Content } = Layout;
 const { TextArea } = Input;
 
@@ -73,6 +75,9 @@ function NewPost(props) {
 
     return (
         <Content className="content-container">
+            <Helmet>
+                <title>Soạn thảo bài viết</title>
+            </Helmet>
             <div className="content-wrapper">
                 <div
                     style={{
