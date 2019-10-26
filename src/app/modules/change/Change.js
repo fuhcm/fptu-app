@@ -150,7 +150,7 @@ function ChangeForm() {
                             việc học tập cũng như việc thi.
                         </p>
                         <p>
-                            Lá đơn này nếu đủ 3000 chữ kí chúng tôi sẽ gửi mail
+                            Lá đơn này nếu đủ 1000 chữ kí chúng tôi sẽ gửi mail
                             cho trường và forward cho các phòng ban và các
                             trưởng phòng ban của trường Đại Học FPT.
                         </p>
@@ -170,18 +170,20 @@ sinh viên kí
                     <Skeleton loading={loading && !signList.length} active>
                         <Progress
                             percent={
-                                (count && (count / 3000) * 100).toFixed(2) || 0
+                                (count && (count / 1000) * 100).toFixed(2) || 0
                             }
                             status="active"
                         />
                     </Skeleton>
-                    <p style={{ marginTop: "5px", textAlign: "right" }}>
-                        Còn thiếu 
-                        {' '}
-                        {3000 - count || 0}
-                        {' '}
+                    {count && 1000 - count > 0 && (
+                        <p style={{ marginTop: "5px", textAlign: "right" }}>
+                            Còn thiếu 
+                            {' '}
+                            {1000 - count || 0}
+                            {' '}
 chữ kí nữa!
-                    </p>
+                        </p>
+                    )}
                     {!isSigned && (
                         <GoogleLogin
                             clientId="834798810236-ok8culnaru4ml7fanhjni43lr5i709jj.apps.googleusercontent.com"
