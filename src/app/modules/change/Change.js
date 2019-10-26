@@ -160,15 +160,14 @@ function ChangeForm() {
                             kí vào lá thư kiến nghị này.
                         </p>
                     </Card>
-                    {!loading && (
-                        <p>
-                            Đã có
-                            {" " + count || 0}
-                            {' '}
+                    <p>
+                        Đã có
+                        {" " + count || 0}
+                        {' '}
 sinh viên kí
-                        </p>
-                    )}
-                    <Skeleton loading={loading} active>
+                    </p>
+
+                    <Skeleton loading={loading && !signList.length} active>
                         <Progress
                             percent={
                                 (count && (count / 3000) * 100).toFixed(2) || 0
@@ -176,15 +175,13 @@ sinh viên kí
                             status="active"
                         />
                     </Skeleton>
-                    {!loading && (
-                        <p style={{ marginTop: "5px", textAlign: "right" }}>
-                            Còn thiếu 
-                            {' '}
-                            {3000 - count || 0}
-                            {' '}
+                    <p style={{ marginTop: "5px", textAlign: "right" }}>
+                        Còn thiếu 
+                        {' '}
+                        {3000 - count || 0}
+                        {' '}
 chữ kí nữa!
-                        </p>
-                    )}
+                    </p>
                     {!isSigned && (
                         <GoogleLogin
                             clientId="834798810236-ok8culnaru4ml7fanhjni43lr5i709jj.apps.googleusercontent.com"
@@ -197,7 +194,7 @@ chữ kí nữa!
                                     style={{
                                         marginTop: "0.5rem",
                                     }}
-                                    disabled={loading}
+                                    disabled={loading && !signList.length}
                                 >
                                     <Icon type="google" />
                                     Đăng nhập email FPT để kí
@@ -216,7 +213,12 @@ chữ kí nữa!
                     }}
                 >
                     <h2>10 sinh viên kí mới nhất</h2>
-                    <Skeleton loading={loading} active>
+                    <Skeleton
+                        loading={
+                            loading && !signList.length && !signList.length
+                        }
+                        active
+                    >
                         <List
                             style={{ maxWidth: 480, margin: "auto" }}
                             size="large"
