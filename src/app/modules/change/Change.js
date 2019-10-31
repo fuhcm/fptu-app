@@ -175,7 +175,7 @@ sinh viên kí
                             status="active"
                         />
                     </Skeleton>
-                    {count && 3000 - count > 0 && (
+                    {false && count && 3000 - count > 0 ? (
                         <p style={{ marginTop: "5px", textAlign: "right" }}>
                             Còn thiếu 
                             {' '}
@@ -183,7 +183,7 @@ sinh viên kí
                             {' '}
 chữ kí nữa!
                         </p>
-                    )}
+                    ) : null}
                     {!isSigned && (
                         <GoogleLogin
                             clientId="834798810236-ok8culnaru4ml7fanhjni43lr5i709jj.apps.googleusercontent.com"
@@ -196,10 +196,12 @@ chữ kí nữa!
                                     style={{
                                         marginTop: "0.5rem",
                                     }}
-                                    disabled={loading && !signList.length}
+                                    disabled={
+                                        true || (loading && !signList.length)
+                                    }
                                 >
                                     <Icon type="google" />
-                                    Đăng nhập email FPT để kí
+                                    Đã hết hạn kí tên
                                 </Button>
                             )}
                             buttonText="Login with Google "
