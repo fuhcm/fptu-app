@@ -58,6 +58,7 @@ function Send() {
             message.error("Không có gì để gửi cả");
             setDisabledSendButton(false);
             setContentTextarea("");
+            setDisabledSendButton(false);
             return;
         }
 
@@ -93,6 +94,11 @@ function Send() {
                     setContentTextarea(contentTextarea);
                     setStep(0);
                 }
+            })
+            .catch(() => {
+                message.error("Lỗi kết nối nên chưa gửi được");
+
+                setDisabledSendButton(false);
             });
     };
 

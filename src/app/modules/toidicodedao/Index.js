@@ -155,7 +155,7 @@ class Index extends Component {
                     {error && (
                         <div>
                             <Alert
-                                message="Lỗi API Server"
+                                message="Đang cập nhật phiên bản"
                                 description="Tính năng đọc bài tạm thời ngưng hoạt động, chúng tôi đang làm việc chăm chỉ để mang tính năng này trở lại sớm nhất."
                                 type="error"
                                 closable

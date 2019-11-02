@@ -89,9 +89,7 @@ class MyConfess extends Component {
             <div style={{ margin: ".5rem 0" }}>
                 <Tag color="green">
                     <a
-                        href={`https://www.facebook.com/hashtag/${
-                            APP_ENV.FB_TAGNAME
-                        }_${cfs_id}`}
+                        href={`https://www.facebook.com/hashtag/${APP_ENV.FB_TAGNAME}_${cfs_id}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
@@ -161,7 +159,7 @@ từ chối:
                 >
                     <Button
                         onClick={this.onLoadMore}
-                        hidden={list && !list.length}
+                        hidden={(list && !list.length) || list.length < 10}
                     >
                         Cho xem thêm vài cài nữa đê
                     </Button>

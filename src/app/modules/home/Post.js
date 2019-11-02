@@ -59,10 +59,6 @@ const PostContent = styled.div`
         font-size: 1rem;
     }
 
-    p:last-child {
-        display: none;
-    }
-
     a {
         color: #000;
     }
