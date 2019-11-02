@@ -21,6 +21,8 @@ class Home extends Component {
 
     renderPosts = (posts = []) => {
         return posts.map(post => {
+            if (!post || !post.guid) return null;
+
             post.description = post.description
                 .replace(/<(.|\n)*?>/g, "")
                 .trim();
@@ -28,9 +30,9 @@ class Home extends Component {
 
             const patt = /p=(\d+)$/;
             const guid =
-                (post.type !== "markdown" &&
-                    patt.exec(post.guid.substring(0, post.guid.length))[1]) ||
-                post.guid;
+                post.type !== "markdown"
+                    ? patt.exec(post.guid.substring(0, post.guid.length))[1]
+                    : post.guid;
 
             const postTitle = paramCase(this.removeVnStr(post.title));
 
