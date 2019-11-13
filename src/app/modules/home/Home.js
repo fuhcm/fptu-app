@@ -157,7 +157,7 @@ const mapStateToProps = ({ homeReducer }) => {
 };
 
 const mapDispatchToProps = {
-    getHomeArticles: getHomeArticles,
+    getHomeArticles,
 };
 
 export default connect(
