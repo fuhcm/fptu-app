@@ -27,13 +27,8 @@ class FooterPage extends Component<Props> {
                 }}
             >
                 <div>
-                    <strong>FUHCM</strong>
-                    .
-                    <strong>com</strong>
-                    {' '}
-                    ©2019 Developed
-                                        by
-                    {" "}
+                    <strong>FUHCM</strong>.<strong>com</strong> ©2019 Developed
+                    by{" "}
                     <Tooltip title="I am not FPTU HCM Confessions (or related) and hence not responsible for the content (or approval) posted on the fanpage">
                         <strong>
                             <a
@@ -45,7 +40,8 @@ class FooterPage extends Component<Props> {
                             </a>
                         </strong>
                     </Tooltip>
-                    . Built on top of JavaScript, hosted at Google Cloud Platform.
+                    . Built on top of JavaScript and Go hosted at Google Cloud
+                    Platform.
                 </div>
             </Footer>
         );

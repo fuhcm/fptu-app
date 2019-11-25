@@ -13,14 +13,56 @@ const { Content } = Layout;
 const { Meta } = Card;
 
 class Home extends Component {
+    state = { numLoad: 9, isLoading: false };
+
     componentDidMount() {
         const { getHomeArticles } = this.props;
 
         getHomeArticles();
+
+        window.addEventListener("scroll", this.onScroll, false);
     }
 
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.onScroll);
+    }
+
+    onScroll = () => {
+        const { numLoad, isLoading } = this.state;
+        const { homeReducer } = this.props;
+        const { posts } = homeReducer;
+
+        if (!posts.length) return;
+
+        const scrollTop =
+            (document.documentElement && document.documentElement.scrollTop) ||
+            document.body.scrollTop;
+        const scrollHeight =
+            (document.documentElement &&
+                document.documentElement.scrollHeight) ||
+            document.body.scrollHeight;
+        const clientHeight =
+            document.documentElement.clientHeight || window.innerHeight;
+        const scrolledToBottom =
+            Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+
+        if (scrolledToBottom && !isLoading && numLoad <= posts.length) {
+            this.setState({
+                isLoading: true,
+            });
+
+            setTimeout(() => {
+                this.setState({
+                    numLoad  : numLoad + 9,
+                    isLoading: false,
+                });
+            }, 500);
+        }
+    };
+
     renderPosts = (posts = []) => {
-        return posts.map(post => {
+        const { numLoad } = this.state;
+        return posts.slice(0, numLoad).map(post => {
             if (!post || !post.guid) return null;
 
             post.description = post.description
@@ -105,6 +147,7 @@ class Home extends Component {
     render() {
         const { homeReducer } = this.props;
         const { loading, posts, error } = homeReducer;
+        const { isLoading } = this.state;
 
         return (
             <Content className="content-container">
@@ -137,13 +180,14 @@ class Home extends Component {
                     )}
 
                     {posts && <Row gutter={16}>{this.renderPosts(posts)}</Row>}
-                    {loading && !posts.length && (
-                        <div>
-                            <Skeleton active />
-                            <Skeleton active />
-                            <Skeleton active />
-                        </div>
-                    )}
+                    {(loading && !posts.length) ||
+                        (isLoading && (
+                            <div>
+                                <Skeleton active />
+                                <Skeleton active />
+                                <Skeleton active />
+                            </div>
+                        ))}
                 </div>
             </Content>
         );

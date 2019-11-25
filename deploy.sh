@@ -1,4 +1,5 @@
-ssh root@5.247.181.39 <<EOF
+#!/bin/sh
+ssh root@35.247.181.39 <<EOF
     cd /home/fuhcm/fptu-app
     git checkout .
     git pull origin develop
