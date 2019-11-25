@@ -21,6 +21,11 @@ import DisqusComponent from "../../utils/shared/disqus/DisqusComponent";
 const { Content } = Layout;
 
 const converter = new showdown.Converter();
+converter.setOption("strikethrough", true);
+converter.setOption("emoji", true);
+converter.setOption("openLinksInNewWindow", true);
+converter.setOption("underline", true);
+converter.setOption("requireSpaceBeforeHeadingText", true);
 
 const PostBody = styled.div`
     width: 740px;
