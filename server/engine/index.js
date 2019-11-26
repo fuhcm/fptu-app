@@ -57,7 +57,7 @@ export default ({ html, preState, helmet, bundles }) => {
                 "https://api.fuhcm.com"}",
         };
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/fptu-sdk@1.0.12/dist/fptu-sdk.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fptu-sdk@latest/dist/fptu-sdk.js"></script>
     ${scripts
         .map(script => {
             return `<script type="text/javascript" src="/client/${script.file}"></script>`;
