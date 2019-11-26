@@ -170,7 +170,7 @@ sinh viên kí
                     <Skeleton loading={loading && !signList.length} active>
                         <Progress
                             percent={
-                                (count && (count / 3000) * 100).toFixed(2) || 0
+                                parseInt((count && (count / 3000) * 100).toFixed(2)) || 0
                             }
                             status="active"
                         />
