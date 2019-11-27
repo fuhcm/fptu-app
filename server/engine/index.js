@@ -5,10 +5,10 @@ const vendorCss = [manifest["vendors.css"], manifest["browser.css"]];
 const vendorJs = [manifest["vendors.js"], manifest["browser.js"]];
 
 export default ({ html, preState, helmet, bundles }) => {
-    let styles = bundles.filter(bundle => bundle.file.endsWith(".css"));
-    let scripts = bundles.filter(bundle => bundle.file.endsWith(".js"));
+  let styles = bundles.filter(bundle => bundle.file.endsWith(".css"));
+  let scripts = bundles.filter(bundle => bundle.file.endsWith(".js"));
 
-    return `<!doctype html>
+  return `<!doctype html>
 <html lang="en" ${helmet.htmlAttributes.toString()}>
 <head>
     <meta charset="UTF-8">
@@ -31,43 +31,43 @@ export default ({ html, preState, helmet, bundles }) => {
     ${helmet.link.toString()}
     ${helmet.meta.toString()}
     ${vendorCss
-        .map(style => {
-            return `<link href="${style}" rel="stylesheet">`;
-        })
-        .join("\n")}
+      .map(style => {
+        return `<link href="${style}" rel="stylesheet">`;
+      })
+      .join("\n")}
     ${styles
-        .map(style => {
-            return `<link href="/client/${style.file}" rel="stylesheet">`;
-        })
-        .join("\n")}
+      .map(style => {
+        return `<link href="/client/${style.file}" rel="stylesheet">`;
+      })
+      .join("\n")}
     <link rel="shortcut icon" href="/assets/favicon.ico">
 </head>
 <body ${helmet.bodyAttributes.toString()}>
     <div id="root">${html}</div>
     <script>
         window.__PRELOADED_STATE__ = ${JSON.stringify(preState).replace(
-            /</g,
-            "\\u003c"
+          /</g,
+          "\\u003c"
         )}
     </script>
     <!-- FPTU Tech Javascript SDK -->
     <script>
         window.APP_ENV = {
             API_BASE_URL: "${process.env.API_BASE_URL ||
-                "https://api.fuhcm.com"}",
+              "https://api.fuhcm.com"}",
         };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/fptu-sdk@latest/dist/fptu-sdk.js"></script>
     ${scripts
-        .map(script => {
-            return `<script type="text/javascript" src="/client/${script.file}"></script>`;
-        })
-        .join("\n")}
+      .map(script => {
+        return `<script type="text/javascript" src="/client/${script.file}"></script>`;
+      })
+      .join("\n")}
     ${vendorJs
-        .map(style => {
-            return `<script type="text/javascript" src="${style}"></script>`;
-        })
-        .join("\n")}
+      .map(style => {
+        return `<script type="text/javascript" src="${style}"></script>`;
+      })
+      .join("\n")}
     <script>
     if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {

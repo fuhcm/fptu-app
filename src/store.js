@@ -9,25 +9,25 @@ import reducers from "./app/reducers";
 const initialState = {};
 
 const persistConfig = {
-    key: "root",
-    storage,
+  key: "root",
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 export default function configureStore() {
-    const middlewares = [thunk];
-    const enhancers =
-        APP_ENV.NODE_ENV === "production"
-            ? [applyMiddleware(...middlewares)]
-            : [applyMiddleware(...middlewares, logger)];
-    const store = createStore(
-        persistedReducer,
-        initialState,
-        compose(...enhancers)
-    );
+  const middlewares = [thunk];
+  const enhancers =
+    APP_ENV.NODE_ENV === "production"
+      ? [applyMiddleware(...middlewares)]
+      : [applyMiddleware(...middlewares, logger)];
+  const store = createStore(
+    persistedReducer,
+    initialState,
+    compose(...enhancers)
+  );
 
-    let persistor = persistStore(store);
+  let persistor = persistStore(store);
 
-    return { store, persistor };
+  return { store, persistor };
 }

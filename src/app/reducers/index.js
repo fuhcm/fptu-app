@@ -6,10 +6,10 @@ import mediumReducer from "../modules/medium/reducers/MediumReducer";
 import codedaoReducer from "../modules/toidicodedao/reducers/CodeDaoReducer";
 
 const reducers = combineReducers({
-    authReducer,
-    homeReducer,
-    mediumReducer,
-    codedaoReducer,
+  authReducer,
+  homeReducer,
+  mediumReducer,
+  codedaoReducer,
 });
 
 export default reducers;

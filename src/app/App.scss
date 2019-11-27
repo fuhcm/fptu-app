@@ -2,46 +2,46 @@
 @import "~ant-design-pro/dist/ant-design-pro.css";
 
 body {
-    background-color: #f0f2f5;
+  background-color: #f0f2f5;
 }
 
 .content-container {
-    padding: 0 50px;
+  padding: 0 50px;
 }
 
 .content-wrapper {
-    background: #fff;
-    min-height: 70vh;
-    padding: 2rem;
+  background: #fff;
+  min-height: 70vh;
+  padding: 2rem;
 }
 
 @media screen and (max-width: 640px) {
-    .ant-layout-header {
-        padding: 0;
-    }
+  .ant-layout-header {
+    padding: 0;
+  }
 
-    .ant-layout-content {
-        padding: 0;
-    }
+  .ant-layout-content {
+    padding: 0;
+  }
 }
 
 .ant-list {
-    margin: 0 auto;
-    width: 860px;
+  margin: 0 auto;
+  width: 860px;
 
-    @media screen and (max-width: 1024px) {
-        width: 100%;
-    }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 }
 
 pre {
-    background: rgba(0, 0, 0, 0.05);
-    font-size: 14px;
-    margin-top: 0;
-    padding: 20px;
-    white-space: pre-wrap;
+  background: rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+  margin-top: 0;
+  padding: 20px;
+  white-space: pre-wrap;
 }
 
 .ant-layout-header {
-    background: #000;
+  background: #000;
 }

@@ -14,29 +14,29 @@ import configureStore from "./store";
 const { store, persistor } = configureStore();
 
 const AppBundle = (
-    <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-            <BrowserRouter>
-                <HelmetProvider>
-                    <Main />
-                </HelmetProvider>
-            </BrowserRouter>
-        </PersistGate>
-    </Provider>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <HelmetProvider>
+          <Main />
+        </HelmetProvider>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
 );
 
 Loadable.preloadReady().then(() => {
-    const loadingDOM = document.getElementById("loading-bg");
-    if (loadingDOM) {
-        loadingDOM.remove();
-    }
+  const loadingDOM = document.getElementById("loading-bg");
+  if (loadingDOM) {
+    loadingDOM.remove();
+  }
 
-    ReactDOM.render(AppBundle, document.getElementById("root"));
+  ReactDOM.render(AppBundle, document.getElementById("root"));
 });
 
 // Hot reload
 if (module.hot) {
-    module.hot.accept();
+  module.hot.accept();
 }
 
 serverStyleCleanup();

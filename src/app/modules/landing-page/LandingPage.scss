@@ -20,7 +20,7 @@ body {
 }
 
 a {
-  transition: color .3s ease;
+  transition: color 0.3s ease;
   &:focus {
     text-decoration: none;
     text-decoration-skip: ink;
@@ -37,7 +37,7 @@ a {
     font-size: 16px;
     &:hover {
       transform: translateY(-4px);
-      box-shadow: 0 4px 12px rgba(24, 144, 255, .4);
+      box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
     }
   }
 }
@@ -85,7 +85,11 @@ svg g {
           height: 28px;
           border-radius: 4px;
           background: rgba(243, 243, 243, 1);
-          background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(243, 243, 243, 1) 100%);
+          background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(243, 243, 243, 1) 100%
+          );
           border: 1px solid #ebedf0;
           align-items: center;
           display: flex;
@@ -139,7 +143,11 @@ svg g {
     height: 100%;
     width: 64px;
     transform: translateX(-64px);
-    background: linear-gradient(to right, rgba(24, 144, 255, 0) 0%, rgba(24, 144, 255, 1) 100%);
+    background: linear-gradient(
+      to right,
+      rgba(24, 144, 255, 0) 0%,
+      rgba(24, 144, 255, 1) 100%
+    );
   }
 }
 
@@ -211,7 +219,7 @@ svg g {
         align-items: center;
         justify-content: center;
         background: #fff;
-        transition: box-shadow .3s ease-out, transform .3s ease-out;
+        transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
       }
       &:hover .page1-image {
         transform: translateY(-5px);
@@ -233,7 +241,8 @@ svg g {
     width: 4px;
     height: 4px;
   }
-  .point-2, .point-ring {
+  .point-2,
+  .point-ring {
     width: 10px;
     height: 10px;
   }
@@ -304,63 +313,69 @@ svg g {
 }
 
 @keyframes bannerTitleLine {
-  0%, 25% {
+  0%,
+  25% {
     transform: translateX(-64px);
   }
-  75%, 100% {
+  75%,
+  100% {
     transform: translateX(544px);
   }
 }
 
 @keyframes page1TitleLine {
-  0%, 25% {
+  0%,
+  25% {
     transform: translateX(-64px);
   }
-  75%, 100% {
+  75%,
+  100% {
     transform: translateX(376px);
   }
 }
 
 @keyframes page2TitleLine {
-  0%, 25% {
+  0%,
+  25% {
     transform: translateX(-64px);
   }
-  75%, 100% {
+  75%,
+  100% {
     transform: translateX(178px);
   }
 }
 
 // Media queries breakpoints
 // Extra small screen / phone
-$screen-xs : 480px;
-$screen-xs-min : $screen-xs;
+$screen-xs: 480px;
+$screen-xs-min: $screen-xs;
 
 // Small screen / tablet
-$screen-sm : 576px;
-$screen-sm-min : $screen-sm;
+$screen-sm: 576px;
+$screen-sm-min: $screen-sm;
 
 // Medium screen / desktop
-$screen-md : 768px;
-$screen-md-min : $screen-md;
+$screen-md: 768px;
+$screen-md-min: $screen-md;
 
 // Large screen / wide desktop
-$screen-lg : 992px;
-$screen-lg-min : $screen-lg;
+$screen-lg: 992px;
+$screen-lg-min: $screen-lg;
 
 // Extra large screen / full hd
-$screen-xl : 1200px;
-$screen-xl-min : $screen-xl;
+$screen-xl: 1200px;
+$screen-xl-min: $screen-xl;
 
 // Extra extra large screen / large descktop
-$screen-xxl : 1600px;
-$screen-xxl-min : $screen-xxl;
+$screen-xxl: 1600px;
+$screen-xxl-min: $screen-xxl;
 
 // provide a maximum
-$screen-xs-max : ($screen-sm-min - 1px);
-$screen-sm-max : ($screen-md-min - 1px);
-$screen-md-max : ($screen-lg-min - 1px);
-$screen-lg-max : ($screen-xl-min - 1px);
-$screen-xl-max : ($screen-xxl-min - 1px);
+$screen-xs-max: ($screen-sm-min - 1px);
+$screen-sm-max: ($screen-md-min - 1px);
+$screen-md-max: ($screen-lg-min - 1px);
+$screen-lg-max: ($screen-xl-min - 1px);
+$screen-xl-max: ($screen-xxl-min - 1px);
 
 .nav-phone-icon {
   display: none;
@@ -404,7 +419,8 @@ $screen-xl-max : ($screen-xxl-min - 1px);
 }
 
 @media only screen and (max-width: $screen-lg) {
-  .code-boxes-col-2-1, .code-boxes-col-1-1 {
+  .code-boxes-col-2-1,
+  .code-boxes-col-1-1 {
     float: none;
     width: 100%;
   }
@@ -614,7 +630,8 @@ $screen-xl-max : ($screen-xxl-min - 1px);
     width: 80%;
     height: calc(#{"100vh - 64px"});
     overflow: hidden;
-    .banner-title-wrapper, .banner-image-wrapper {
+    .banner-title-wrapper,
+    .banner-image-wrapper {
       display: block;
       position: initial;
       width: 100%;
@@ -645,7 +662,8 @@ $screen-xl-max : ($screen-xxl-min - 1px);
   .home-page {
     width: 90%;
   }
-  .home-code, .page-content {
+  .home-code,
+  .page-content {
     width: 100%;
   }
   #footer {

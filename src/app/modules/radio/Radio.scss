@@ -1,36 +1,36 @@
 iframe {
-    max-width: 100%;
+  max-width: 100%;
 
-    @media screen and (max-width: 1024px) {
-        height: 250px;
-    }
+  @media screen and (max-width: 1024px) {
+    height: 250px;
+  }
 }
 
 .radio-wrapper {
-    background: url("/assets/images/radio-background.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-color: #FAEBCA;
+  background: url("/assets/images/radio-background.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: #faebca;
 }
 
 .selected-row {
-    color: darkblue;
-    font-weight: bold;
-    font-size: 1rem;
+  color: darkblue;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .list-radio-inside {
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 1rem;
-    max-height: 300px;
-    overflow-y: scroll !important;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 1rem;
+  max-height: 300px;
+  overflow-y: scroll !important;
 }
 
 .ant-list-split .ant-list-item {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 h2 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
