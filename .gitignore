@@ -25,3 +25,5 @@ yarn-error.log*
 # src/**/*.css.map
 
 .idea
+
+deploy.sh
