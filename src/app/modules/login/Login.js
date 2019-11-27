@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
 import Helmet from "react-helmet-async";
 import { Form, Icon, Input, Button, Checkbox, Layout, message } from "antd";
@@ -8,47 +8,42 @@ import GoogleLogin from "react-google-login";
 const { Content } = Layout;
 const FormItem = Form.Item;
 
-class LoginForm extends Component {
-    state = {
-        loading: false,
-    };
+function LoginForm({ form, history }) {
+    const [loading, setLoading] = useState(false);
 
-    componentDidMount() {
+    useEffect(() => {
         if (LocalStorageUtils.isAuthenticated()) {
-            const { history } = this.props;
             history.push("/admin-cp");
         }
-    }
+    }, []);
 
-    handleSubmit = e => {
+    const handleSubmit = e => {
         e.preventDefault();
-        const { form } = this.props;
 
         form.validateFields((err, values) => {
             if (!err) {
-                this.setState({ loading: true });
+                setLoading(true);
 
                 FPTUSDK.authen
                     .basicLogin(values.email, values.password)
                     .then(data => {
                         const { token, nickname } = data;
-
-                        this.setState({ loading: false });
-                        this.handleRedirect(token, values.email, nickname);
+                        handleRedirect(token, values.email, nickname);
                     })
                     .catch(() => {
-                        this.setState({ loading: false });
-
                         message.error("Thông tin đăng nhập không chính xác!");
+                    })
+                    .finally(() => {
+                        setLoading(false);
                     });
             }
         });
     };
 
-    responseGoogle = data => {
+    const responseGoogle = data => {
         if (!data || !data.profileObj.email || !data.accessToken) return;
 
-        this.setState({ loading: true });
+        setLoading(true);
 
         FPTUSDK.authen
             .loginGoogle(data.profileObj.email, data.accessToken)
@@ -57,22 +52,19 @@ class LoginForm extends Component {
                     message.error("Đăng nhập không thành công!");
                 } else {
                     const { token, nickname } = data;
-
-                    this.handleRedirect(token, data.email, nickname);
+                    handleRedirect(token, data.email, nickname);
                 }
             })
             .catch(() => {
                 message.error("Tài khoản của bạn chưa được cấp phép truy cập!");
             })
             .finally(() => {
-                this.setState({ loading: false });
+                setLoading(false);
             });
     };
 
-    handleRedirect(token, email, nickname) {
+    function handleRedirect(token, email, nickname) {
         if (token) {
-            const { history } = this.props;
-
             FPTUSDK.authen.saveToken(token, email, nickname);
             message.success(`Chào mừng bợn ${nickname} đã quay lại ahihi`);
             history.push("/admin-cp");
@@ -81,111 +73,107 @@ class LoginForm extends Component {
         }
     }
 
-    render() {
-        const { form } = this.props;
-        const { getFieldDecorator } = form;
-        const { loading } = this.state;
+    const { getFieldDecorator } = form;
 
-        return (
-            <Content className="content-container">
-                <Helmet>
-                    <title>Đăng nhập - FUHCM.com</title>
-                </Helmet>
-                <div className="content-wrapper">
-                    <Form
-                        onSubmit={this.handleSubmit}
-                        className="login-form"
-                        style={{ maxWidth: 480, margin: "auto" }}
-                    >
-                        <h2>Đăng nhập</h2>
-                        <FormItem>
-                            {getFieldDecorator("email", {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message : "Vui lòng nhập email!",
-                                    },
-                                ],
-                            })(
-                                <Input
-                                    prefix={(
-                                        <Icon
-                                            type="user"
-                                            style={{ color: "rgba(0,0,0,.25)" }}
-                                        />
+    return (
+        <Content className="content-container">
+            <Helmet>
+                <title>Đăng nhập - FUHCM.com</title>
+            </Helmet>
+            <div className="content-wrapper">
+                <Form
+                    onSubmit={handleSubmit}
+                    className="login-form"
+                    style={{ maxWidth: 480, margin: "auto" }}
+                >
+                    <h2>Đăng nhập</h2>
+                    <FormItem>
+                        {getFieldDecorator("email", {
+                            rules: [
+                                {
+                                    required: true,
+                                    message : "Vui lòng nhập email!",
+                                },
+                            ],
+                        })(
+                            <Input
+                                prefix={(
+                                    <Icon
+                                        type="user"
+                                        style={{ color: "rgba(0,0,0,.25)" }}
+                                    />
 )}
-                                    placeholder="Email"
-                                    disabled={loading}
-                                />
-                            )}
-                        </FormItem>
-                        <FormItem>
-                            {getFieldDecorator("password", {
-                                rules: [
-                                    {
-                                        required: true,
-                                        message : "Vui lòng nhập mật khẩu!",
-                                    },
-                                ],
-                            })(
-                                <Input
-                                    prefix={(
-                                        <Icon
-                                            type="lock"
-                                            style={{ color: "rgba(0,0,0,.25)" }}
-                                        />
+                                placeholder="Email"
+                                disabled={loading}
+                            />
+                        )}
+                    </FormItem>
+                    <FormItem>
+                        {getFieldDecorator("password", {
+                            rules: [
+                                {
+                                    required: true,
+                                    message : "Vui lòng nhập mật khẩu!",
+                                },
+                            ],
+                        })(
+                            <Input
+                                prefix={(
+                                    <Icon
+                                        type="lock"
+                                        style={{ color: "rgba(0,0,0,.25)" }}
+                                    />
 )}
-                                    type="password"
-                                    placeholder="Mật khẩu"
-                                    disabled={loading}
-                                />
-                            )}
-                        </FormItem>
-                        <FormItem>
+                                type="password"
+                                placeholder="Mật khẩu"
+                                disabled={loading}
+                            />
+                        )}
+                    </FormItem>
+                    <FormItem>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            className="login-form-button"
+                            loading={loading}
+                        >
+                            <Icon type="login" hidden={loading} />
+                            Đăng nhập
+                        </Button>
+                        {getFieldDecorator("remember", {
+                            valuePropName: "checked",
+                            initialValue : true,
+                        })(
+                            <Checkbox style={{ float: "right" }}>
+                                Ghi nhớ
+                            </Checkbox>
+                        )}
+                    </FormItem>
+
+                    <GoogleLogin
+                        clientId="834798810236-ok8culnaru4ml7fanhjni43lr5i709jj.apps.googleusercontent.com"
+                        render={renderProps => (
                             <Button
-                                type="primary"
-                                htmlType="submit"
+                                type="default"
+                                size="large"
                                 className="login-form-button"
-                                loading={loading}
+                                onClick={renderProps.onClick}
+                                style={{
+                                    marginTop: "0.5rem",
+                                }}
                             >
-                                <Icon type="login" hidden={loading} />
-                                Đăng nhập
+                                <Icon type="google" />
+                                Đăng nhập bằng Google
                             </Button>
-                            {getFieldDecorator("remember", {
-                                valuePropName: "checked",
-                                initialValue : true,
-                            })(
-                                <Checkbox style={{ float: "right" }}>
-                                    Ghi nhớ
-                                </Checkbox>
-                            )}
-                        </FormItem>
-
-                        <GoogleLogin
-                            clientId="834798810236-ok8culnaru4ml7fanhjni43lr5i709jj.apps.googleusercontent.com"
-                            render={renderProps => (
-                                <Button
-                                    type="default"
-                                    size="large"
-                                    className="login-form-button"
-                                    onClick={renderProps.onClick}
-                                    style={{
-                                        marginTop: "0.5rem",
-                                    }}
-                                >
-                                    <Icon type="google" />
-                                    Đăng nhập bằng Google
-                                </Button>
-                            )}
-                            buttonText="Login with Google "
-                            onSuccess={this.responseGoogle}
-                            onFailure={this.responseGoogle}
-                        />
-                    </Form>
-                </div>
-            </Content>
-        );
-    }
+                        )}
+                        buttonText="Login with Google "
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                    />
+                </Form>
+            </div>
+        </Content>
+    );
 }
 
 export default Form.create()(LoginForm);
