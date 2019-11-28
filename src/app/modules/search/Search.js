@@ -1,7 +1,5 @@
 import React, { PureComponent } from "react";
 
-import moment from "moment";
-
 import {
   Layout,
   List,
