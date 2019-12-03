@@ -241,7 +241,7 @@ trên
             onChange={e => handleChangeTextarea(e)}
             rows={8}
             placeholder="Viết nội dung confession ở đây..."
-            disabled={disabledSendButton}
+            disabled={disabledSendButton || !checked}
             style={{
               marginRight : "2rem",
               marginBottom: "1rem",
