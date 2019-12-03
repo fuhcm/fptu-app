@@ -16,11 +16,14 @@ class Error extends Component<Props> {
   componentDidMount() {
     const { error } = this.props;
 
-    if (error === "ReferenceError: FPTUSDK is not defined") {
+    if (
+      error === "ReferenceError: FPTUSDK is not defined" ||
+      error === "ReferenceError: Can't find variable: FPTUSDK"
+    ) {
       message.error("Lỗi bất ngờ xảy ra, chúng tôi sẽ reload lại app!");
       setTimeout(() => {
         window.location.reload();
-      }, 500);
+      }, 1000);
     }
   }
 
@@ -29,7 +32,14 @@ class Error extends Component<Props> {
   };
 
   render() {
-    const { error } = this.props;
+    let { error } = this.props;
+
+    if (
+      error === "ReferenceError: FPTUSDK is not defined" ||
+      error === "ReferenceError: Can't find variable: FPTUSDK"
+    ) {
+      error = "Mạng không ổn định, tải thiếu thành phần ứng dụng";
+    }
 
     const msg: string =
       error === "TypeError: grecaptcha.render is not a function"
