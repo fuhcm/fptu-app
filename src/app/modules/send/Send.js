@@ -9,6 +9,7 @@ import {
   Alert,
   Icon,
   Steps,
+  Checkbox,
   message,
 } from "antd";
 import Helmet from "react-helmet-async";
@@ -31,6 +32,7 @@ function Send() {
   const [isUploading, setIsUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [avatarURL, setAvatarURL] = useState(null);
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     if (captchaDemo) {
@@ -40,6 +42,12 @@ function Send() {
     // Init senderID
     FPTUSDK.send.init();
   }, []);
+
+  const handleChecked = e => {
+    e.preventDefault();
+
+    setChecked(!checked);
+  };
 
   const onLoadRecaptcha = () => {
     if (captchaDemo) {
@@ -210,8 +218,25 @@ trên
           <Step title="Được đăng lên page" />
         </Steps>
 
+        <div style={{ marginBottom: "1rem" }}>
+          <Checkbox checked={checked} onChange={e => handleChecked(e)}>
+            Đây không phải là bài đăng tìm đồ, tìm phòng trọ, cho thuê, tuyển
+            dụng (mời đăng
+            {" "}
+            <a
+              href="https://www.facebook.com/groups/FPTUHCMStudents/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              vào group này
+            </a>
+            )
+          </Checkbox>
+        </div>
+
         <div hidden={step === 1}>
           <TextArea
+            autoFocus
             value={contentTextarea}
             onChange={e => handleChangeTextarea(e)}
             rows={8}
@@ -293,7 +318,12 @@ trên
           <Button
             type="primary"
             onClick={handleSend}
-            disabled={disabledSendButton || !recaptchaToken || !contentTextarea}
+            disabled={
+              disabledSendButton ||
+              !recaptchaToken ||
+              !contentTextarea ||
+              !checked
+            }
             style={{ margin: ".5rem" }}
           >
             <Icon type="thunderbolt" />
