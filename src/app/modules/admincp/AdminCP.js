@@ -594,7 +594,7 @@ class AdminCP extends Component {
             ]
             <br />
             {'"'}
-            {approveModal.content}
+            <ConfessContent>{approveModal.content}</ConfessContent>
             {'"'}
             <br />
             -----------------

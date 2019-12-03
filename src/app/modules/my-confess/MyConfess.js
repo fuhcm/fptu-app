@@ -16,10 +16,15 @@ import {
   message,
 } from "antd";
 import Helmet from "react-helmet-async";
+import styled from "styled-components";
 
 const { Content } = Layout;
 
 const stepLoad = 10;
+
+const ConfessContent = styled.div`
+  white-space: pre-line;
+`;
 
 class MyConfess extends Component {
   state = {
@@ -76,7 +81,9 @@ class MyConfess extends Component {
 
   pendingConfess = content => (
     <div>
-      <div className="confess-content">{content}</div>
+      <div className="confess-content">
+        <ConfessContent>{content}</ConfessContent>
+      </div>
       <div style={{ margin: ".5rem 0" }}>
         <Tag color="pink">#đang_đợi_duyệt</Tag>
       </div>
@@ -85,7 +92,9 @@ class MyConfess extends Component {
 
   approvedConfess = (content, approver = "admin@fptu.cf", cfs_id = "0") => (
     <div>
-      <div className="confess-content">{content}</div>
+      <div className="confess-content">
+        <ConfessContent>{content}</ConfessContent>
+      </div>
       <div style={{ margin: ".5rem 0" }}>
         <Tag color="green">
           <a
@@ -109,7 +118,9 @@ class MyConfess extends Component {
   rejectedConfess = (content, approver = "admin@fptu.cf", reason) => (
     <div>
       <div className="confess-content">
-        <strike>{content}</strike>
+        <ConfessContent>
+          <strike>{content}</strike>
+        </ConfessContent>
       </div>
       <div style={{ margin: ".5rem 0" }}>
         <Tag color="red">

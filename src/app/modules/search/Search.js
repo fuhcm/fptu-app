@@ -18,6 +18,7 @@ import {
 import Helmet from "react-helmet-async";
 import Highlighter from "react-highlight-words";
 import { debounce } from "debounce";
+import styled from "styled-components";
 
 import TimeAgo from "react-timeago";
 import viStrings from "react-timeago/lib/language-strings/vi";
@@ -27,6 +28,10 @@ const formatter = buildFormatter(viStrings);
 
 const { Content } = Layout;
 const Search = Input.Search;
+
+const ConfessContent = styled.div`
+  white-space: pre-line;
+`;
 
 class SearchPage extends PureComponent {
   state = {
@@ -153,15 +158,17 @@ class SearchPage extends PureComponent {
   ) => (
     <div>
       <div className="confess-content">
-        {!isSearchMode && content}
+        {!isSearchMode && <ConfessContent>{content}</ConfessContent>}
         {isSearchMode && (
-          <Highlighter
-            highlightStyle={{ backgroundColor: "yellow" }}
-            searchWords={[searchKeyword]}
-            sanitize={this.removeVnStr}
-            autoEscape
-            textToHighlight={content}
-          />
+          <ConfessContent>
+            <Highlighter
+              highlightStyle={{ backgroundColor: "yellow" }}
+              searchWords={[searchKeyword]}
+              sanitize={this.removeVnStr}
+              autoEscape
+              textToHighlight={content}
+            />
+          </ConfessContent>
         )}
       </div>
       <div style={{ margin: ".5rem 0" }}>
