@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from "react";
 
 import {
@@ -220,17 +221,22 @@ trên
 
         <div style={{ marginBottom: "1rem" }}>
           <Checkbox checked={checked} onChange={e => handleChecked(e)}>
-            Đây không phải là bài đăng tìm đồ, tìm phòng trọ, cho thuê, tuyển
-            dụng (mời đăng
-            {" "}
-            <a
-              href="https://www.facebook.com/groups/FPTUHCMStudents/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              vào group này
-            </a>
-            )
+            <span onClick={e => handleChecked(e)} style={{ cursor: "pointer" }}>
+              Đây
+              {" "}
+              <span style={{ color: "red", fontWeight: 900 }}>không phải</span>
+              {" "}
+              là bài đăng tìm đồ, tìm phòng trọ, cho thuê, tuyển dụng (mời đăng
+              {" "}
+              <a
+                href="https://www.facebook.com/groups/FPTUHCMStudents/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                vào group này
+              </a>
+              )
+            </span>
           </Checkbox>
         </div>
 
