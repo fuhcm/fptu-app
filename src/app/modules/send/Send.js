@@ -54,7 +54,7 @@ function Send() {
   const handleSend = () => {
     setDisabledSendButton(true);
 
-    if (!contentTextarea.trim()) {
+    if (!contentTextarea || !contentTextarea.trim()) {
       message.error("Không có gì để gửi cả");
       setDisabledSendButton(false);
       setContentTextarea("");
@@ -214,8 +214,8 @@ trên
           <TextArea
             value={contentTextarea}
             onChange={e => handleChangeTextarea(e)}
-            rows={4}
-            placeholder="I need to tell you something..."
+            rows={8}
+            placeholder="Viết nội dung confession ở đây..."
             disabled={disabledSendButton}
             style={{
               marginRight : "2rem",
@@ -248,7 +248,7 @@ trên
               <div>
                 <span hidden={recaptchaToken}>
                   <Alert
-                    message="Tick vào reCAPTCHA để hiện khung Upload ảnh"
+                    message="Tick vào I'm not a Robot để hiện khung Upload ảnh"
                     type="warning"
                     showIcon
                   />
@@ -293,7 +293,7 @@ trên
           <Button
             type="primary"
             onClick={handleSend}
-            disabled={disabledSendButton || !recaptchaToken}
+            disabled={disabledSendButton || !recaptchaToken || !contentTextarea}
             style={{ margin: ".5rem" }}
           >
             <Icon type="thunderbolt" />
