@@ -273,7 +273,7 @@ class AdminCP extends Component {
             padding   : "0.4rem",
           }}
         >
-          {reason || "Không có lí do luôn"}
+          {reason || "Bị từ chối mà không có lí do"}
         </span>
       </div>
     </div>
@@ -467,7 +467,7 @@ class AdminCP extends Component {
                 : list || []
             }
             locale={{
-              emptyText: "Không có confess nào chưa được duyệt",
+              emptyText: "Không có confess nào chưa được duyệt, quẩy lên đi",
             }}
             renderItem={(item, index) => (
               <List.Item
@@ -593,9 +593,7 @@ class AdminCP extends Component {
             {approveModal.time}
             ]
             <br />
-            {'"'}
-            <ConfessContent>{approveModal.content}</ConfessContent>
-            {'"'}
+            <ConfessContent>{'"' + approveModal.content + '"'}</ConfessContent>
             <br />
             -----------------
             <br />

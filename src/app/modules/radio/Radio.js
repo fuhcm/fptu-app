@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./Radio.scss";
 
-import { Layout, List, Spin, Tag, Skeleton, Switch } from "antd";
+import { Layout, List, Spin, Tag, Skeleton, Switch, message } from "antd";
 
 import Helmet from "react-helmet-async";
 import YouTube from "react-youtube";
@@ -22,6 +22,8 @@ class Radio extends Component {
     loading     : true,
   };
   async componentDidMount() {
+    message.error("Tính năng này sẽ trở lại vào phiên bản tiếp theo");
+
     try {
       const { radios: radiosStr } = await FPTUSDK.radio.getRadios();
       const radios = JSON.parse(radiosStr);
@@ -159,7 +161,7 @@ người đang nghe Radio với bạn
                     {" "}
                     {item.top && (
                       <Tag color="blue">
-Top #1
+                        Top #1
                         {item.top.toUpperCase()}
                       </Tag>
                     )}
