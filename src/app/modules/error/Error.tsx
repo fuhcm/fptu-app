@@ -9,50 +9,61 @@ import Helmet from "react-helmet-async";
 const { Content } = Layout;
 
 type Props = {
-    error: string;
+  error: string;
 };
 
 class Error extends Component<Props> {
-    report = (): void => {
-        message.info("Đã báo công an!");
-    };
+  componentDidMount() {
+    const { error } = this.props;
 
-    render() {
-        const { error } = this.props;
-
-        const msg: string =
-            error === "TypeError: grecaptcha.render is not a function"
-                ? "Lỗi load captcha, bạn reload lại trang là được nhé!"
-                : `Đệt, lỗi "${error}"`;
-
-        return (
-            <Content className="content-container">
-                <Helmet>
-                    <title>500 - FUHCM.com</title>
-                </Helmet>
-                <div
-                    style={{
-                        background: "#fff",
-                        padding   : "2rem",
-                        textAlign : "center",
-                    }}
-                >
-                    <Exception
-                        type="500"
-                        actions={(
-                            <Link to="/medium">
-                                <Button type="primary" onClick={this.report}>
-                                    Báo cho team Developer!
-                                </Button>
-                            </Link>
-)}
-                        title="500"
-                        desc={msg}
-                    />
-                </div>
-            </Content>
-        );
+    if (error === "ReferenceError: FPTUSDK is not defined") {
+      message.error("Lỗi bất ngờ xảy ra, chúng tôi sẽ reload lại app!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     }
+  }
+
+  report = (): void => {
+    message.info("Đã báo công an!");
+  };
+
+  render() {
+    const { error } = this.props;
+
+    const msg: string =
+      error === "TypeError: grecaptcha.render is not a function"
+        ? "Lỗi load captcha, bạn reload lại trang là được nhé!"
+        : `Đệt, lỗi "${error}"`;
+
+    return (
+      <Content className="content-container">
+        <Helmet>
+          <title>500 - FUHCM.com</title>
+        </Helmet>
+        <div
+          style={{
+            background: "#fff",
+            padding: "2rem",
+            textAlign: "center",
+          }}
+        >
+          <Exception
+            type="500"
+            actions={
+              <Link to="/medium">
+                <Button type="primary" onClick={this.report}>
+                  Báo cho team Developer!
+                </Button>
+              </Link>
+            }
+            title="500"
+            desc={msg}
+          />
+        </div>
+      </Content>
+    );
+  }
 }
 
 export default Error;
