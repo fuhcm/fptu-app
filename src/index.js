@@ -31,7 +31,7 @@ Loadable.preloadReady().then(() => {
     loadingDOM.remove();
   }
 
-  ReactDOM.render(AppBundle, document.getElementById("root"));
+  ReactDOM.hydrate(AppBundle, document.getElementById("root"));
 });
 
 // Hot reload
