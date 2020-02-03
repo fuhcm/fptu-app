@@ -20,7 +20,7 @@ export const getHomeArticles = () => {
 
       dispatch({
         type   : GET_HOME_ARTICLE_SUCCESS,
-        payload: postDataWithGUID.reverse().concat(crawlData),
+        payload: postDataWithGUID.reverse().concat(crawlData.reverse()),
       });
     } catch (err) {
       dispatch({

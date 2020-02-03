@@ -7,7 +7,13 @@ import { Link } from "react-router-dom";
 import Helmet from "react-helmet-async";
 import paramCase from "param-case";
 import { connect } from "react-redux";
+
+import TimeAgo from "react-timeago";
+import viStrings from "react-timeago/lib/language-strings/vi";
+import buildFormatter from "react-timeago/lib/formatters/buildFormatter";
 import { getHomeArticles } from "./actions/HomeActions";
+
+const formatter = buildFormatter(viStrings);
 
 const { Content } = Layout;
 const { Meta } = Card;
@@ -112,6 +118,18 @@ class Home extends Component {
                 title={post.title}
                 description={post.description}
               />
+
+              <div
+                style={{
+                  textAlign : "right",
+                  marginTop : "0.5rem",
+                  fontWeight: "lighter",
+                }}
+              >
+                đăng 
+                {' '}
+                <TimeAgo date={post.pubDate} formatter={formatter} />
+              </div>
             </Card>
           </Col>
         </Link>
