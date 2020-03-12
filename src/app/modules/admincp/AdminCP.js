@@ -18,6 +18,7 @@ import {
   Icon,
   Statistic,
   Popconfirm,
+  Select
 } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import Helmet from "react-helmet-async";
@@ -31,6 +32,7 @@ import buildFormatter from "react-timeago/lib/formatters/buildFormatter";
 const formatter = buildFormatter(viStrings);
 
 const { Content } = Layout;
+const { Option } = Select;
 
 const stepLoad = 10;
 
@@ -54,6 +56,7 @@ class AdminCP extends Component {
     },
     isPosting   : false,
     approvalMode: true,
+    rejectReasonSelect: "Lí do khác: ",
   };
 
   componentDidMount() {
@@ -78,6 +81,12 @@ class AdminCP extends Component {
       this.setState({
         overview: data,
       });
+    });
+  }
+
+  handleReasonBoxChange = value => {
+    this.setState({
+      rejectReasonSelect: value
     });
   }
 
@@ -290,10 +299,12 @@ class AdminCP extends Component {
 
   handleOkRejectModal = e => {
     e.preventDefault();
-    const { rejectModal } = this.state;
+    const { rejectModal, rejectReasonSelect } = this.state;
     const { id, reason } = rejectModal;
 
-    this.handleReject(id, (reason && reason.trim()) || null);
+    const reasonText = rejectReasonSelect + " " + (reason ? reason : "");
+
+    this.handleReject(id,  reasonText || null);
 
     this.setState({
       rejectModal: {
@@ -562,11 +573,19 @@ class AdminCP extends Component {
             </Button>,
           ]}
         >
+          <Select defaultValue={this.state.rejectReasonSelect} style={{ width: "100%", minWidth: "400px" }} style={{ marginBottom: "1rem" }} onChange={this.handleReasonBoxChange}>
+            <Option value="Trùng lặp nội dung đã được đăng">Trùng lặp nội dung đã được đăng</Option>
+            <Option value="Ngôn từ chưa phù hợp, hãy kiểm tra nội dung và gửi lại.">Ngôn từ chưa phù hợp, hãy kiểm tra nội dung và gửi lại</Option>
+            <Option value="Nội dung không liên quan tới FPTU HCM">Nội dung không liên quan tới FPTU HCM</Option>
+            <Option value="Hãy đăng nội dung này vào group FPTU HCM's STUDENT">Hãy đăng nội dung này vào group FPTU HCM's STUDENT</Option>
+            <Option value="Lí do khác: ">Lí do khác (ghi rõ lí do vào hộp bên dưới)</Option>
+          </Select>
           <TextArea
             value={rejectModal.reason}
             onChange={e => this.handleChangeTextarea(e)}
             rows={4}
             placeholder="Ghi gì lí do vì sao confess này bị từ chối..."
+            disabled={this.state.rejectReasonSelect !== "Lí do khác: "}
           />
         </Modal>
 

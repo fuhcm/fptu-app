@@ -1,6 +1,4 @@
 #!/bin/sh
-npm run build || exit 1
-
 ssh root@35.247.181.39 <<EOF
     cd /home/fuhcm/fptu-app
     git checkout .
