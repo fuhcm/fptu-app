@@ -192,7 +192,7 @@ function Send() {
 
         <p hidden={step === 0}>
           Confession của bạn đã được gửi tới admin. Bạn có thể xem các confess
-          đã gửi bằng cách bấm vào nút 
+          đã gửi bằng cách bấm vào nút
           {' '}
           <strong>Confess của tui</strong>
           {' '}
@@ -219,7 +219,7 @@ trên
           <Step title="Được đăng lên page" />
         </Steps>
 
-        <div style={{ marginBottom: "1rem" }}>
+        <div style={{ marginBottom: "1rem" }} hidden={step === 1}>
           <Checkbox checked={checked} onChange={e => handleChecked(e)}>
             <span onClick={e => handleChecked(e)} style={{ cursor: "pointer" }}>
               Đây
@@ -233,7 +233,7 @@ trên
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                vào group này
+                vào group facebook
               </a>
               )
             </span>
@@ -257,7 +257,7 @@ trên
           <div style={{ marginBottom: "1rem" }}>
             {isUploading && (
               <div style={{ marginBottom: "1rem" }}>
-                Đợi xíu, đang upload... 
+                Đợi xíu, đang upload...
                 {' '}
                 {progress}
 %
