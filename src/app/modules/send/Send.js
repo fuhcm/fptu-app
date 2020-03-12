@@ -222,7 +222,7 @@ trên
         <div style={{ marginBottom: "1rem" }} hidden={step === 1}>
           <Checkbox checked={checked} onChange={e => handleChecked(e)}>
             <span onClick={e => handleChecked(e)} style={{ cursor: "pointer" }}>
-              Đây
+              Tôi xác nhận đây
               {" "}
               <span style={{ color: "red", fontWeight: 900 }}>không phải</span>
               {" "}

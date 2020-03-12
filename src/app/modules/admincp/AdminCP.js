@@ -228,7 +228,8 @@ class AdminCP extends Component {
     approver = "admin",
     cfsID = "0",
     approveTime,
-    pushID
+    pushID,
+    postTime
   ) => (
     <ConfessContent>
       <ConfessContent>{content}</ConfessContent>
@@ -257,6 +258,9 @@ class AdminCP extends Component {
           <strong>
             <TimeAgo date={approveTime} formatter={formatter} />
           </strong>
+          <span>
+            &nbsp;(thời gian duyệt: <strong>{parseFloat(Math.abs(new Date(postTime) - new Date(approveTime)) / 36e5).toFixed(2)}</strong> giờ)
+          </span>
         </span>
       </div>
     </ConfessContent>
@@ -540,7 +544,8 @@ class AdminCP extends Component {
                       item.approver,
                       item.cfsID,
                       item.updatedAt,
-                      item.push_id
+                      item.push_id,
+                      item.createdAt
                     )}
                   {item.status === 2 &&
                     this.rejectedConfess(
@@ -585,7 +590,7 @@ class AdminCP extends Component {
             onChange={e => this.handleChangeTextarea(e)}
             rows={4}
             placeholder="Ghi gì lí do vì sao confess này bị từ chối..."
-            disabled={this.state.rejectReasonSelect !== "Lí do khác: "}
+            hidden={this.state.rejectReasonSelect !== "Lí do khác: "}
           />
         </Modal>
 
