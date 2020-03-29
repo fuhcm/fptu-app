@@ -100,17 +100,16 @@ function ChangeForm() {
     <Content className="content-container">
       <Helmet>
         <title>
-          Change! Sinh viên trường ĐH FPT đòi lại ổ điện - Save Your Laptop,
-          Save your Exam! - FUHCM.com
+          Change! Kiến nghị hỗ trợ học phí - FUHCM.com
         </title>
         <meta property="og:type" content="article" />
         <meta
           property="og:description"
-          content="Sinh viên của FPTU HCM cùng nhau kí tên đồng ý việc lắp ổ điện tại các phòng học để thuận tiện cho việc học tập cũng như việc thi."
+          content="Sinh viên của FPTU HCM cùng nhau kí tên kêu gọi nhà trường hỗ trợ học phí"
         />
         <meta
           property="og:image"
-          content="https://scontent.fsgn5-7.fna.fbcdn.net/v/t1.0-9/72853199_2202083860084342_4602527138107621376_o.png?_nc_cat=103&_nc_oc=AQnfXl42YF8HozcMg4XqbJbSFH_nTdYal7IkSJ-Kv_SKR0WDJcwqOZEt7I6gSVE47aM&_nc_ht=scontent.fsgn5-7.fna&oh=6578155d6be382dbf2e5bb89c6bd26dd&oe=5E5FD643"
+          content="https://i.imgur.com/1pNWLg6.png"
         />
       </Helmet>
       <div className="content-wrapper">
@@ -131,10 +130,10 @@ function ChangeForm() {
             Tạo chiến dịch kiến nghị
           </Button>
           <Card
-            title="Save Your Laptop, Save your Exam!"
+            title="Đơn kiến nghị nhà trường hỗ trợ học phí"
             extra={(
               <a
-                href="https://facebook.com/FPTUHCMConfessions/photos/a.1745593425733390/2202083856751009/"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfwwbMhzU1KPW8H3rdgkLDIEul5B-6H90ChBtLxLYyEvBb2KA/viewform?fbzx=7874155949367152925"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -143,21 +142,20 @@ function ChangeForm() {
 )}
             style={{ marginBottom: "1rem" }}
           >
+            <p>Đơn kiến nghị bản đầy đủ: <a href={"https://docs.google.com/forms/d/e/1FAIpQLSfwwbMhzU1KPW8H3rdgkLDIEul5B-6H90ChBtLxLYyEvBb2KA/viewform?fbzx=7874155949367152925"} target={"_blank"}>Google Forms</a></p>
             <p>
-              Chúng tôi - FPTU HCM Confessions kêu gọi tất cả các bạn sinh viên
-              của FPTU HCM cùng nhau kí tên đồng ý việc lắp ổ điện tại các phòng
-              học để thuận tiện cho việc học tập cũng như việc thi.
+              Trong tình hình dịch bệnh diễn biến phức tạp, chúng tôi hiểu rằng việc học online là điều bất khả kháng và chúng tôi hoàn toàn chấp nhận. Tuy nhiên chúng tôi cảm thấy rằng, những giá trị mà sinh viên được nhận từ trường trong kì vừa rồi (kì Spring 2020) không thỏa đáng với số tiền mà chúng tôi đã đóng. Cụ thể hơn, học phí 25.300.000VNĐ bao gồm chi phí cho cơ sở vật chất, giáo trình, chi phí vận hành, chi phí giảng dạy của giảng viên và chất lượng đào tạo. Nhưng sự thật trong kì vừa qua, chúng tôi chỉ được đến học tại khuôn viên trường và hưởng đủ các giá trị mà học phí đem lại trong 2 tuần đầu kì (05/01/2020 - 18/01/2020), từ tuần thứ 3 đến tuần thứ 10, chúng tôi chỉ nhận giá trị là giờ dạy của các giảng viên thông qua nền tảng Google Meet và giáo trình. Hơn nữa, chất lượng của quá trình học online này không hiệu quả bằng việc học offline ở trường.
             </p>
             <p>
-              Lá đơn này nếu đủ 3000 chữ kí chúng tôi sẽ gửi mail cho trường và
-              forward cho các phòng ban và các trưởng phòng ban của trường Đại
-              Học FPT.
+              Chính vì những lý do trên, chúng tôi xin được đề xuất với quý Ban giám hiệu, Ban đào tạo trường Đại học FPT giảm 30 - 35% học phí cho kì Summer 2020 để tạo điều kiện và động lực cho sinh viên có thể tiếp tục việc học online, cũng như là quá trình theo học tại trường ĐH FPT. Mặc khác, đây cũng là hành động thể hiện sự san sẻ, thấu hiểu của nhà trường dành cho bậc phụ huynh trên con đường nuôi dưỡng và phát triển tài năng của thế hệ trẻ.
+
             </p>
             <p>
               Bằng cách click vào button bên dưới và đăng nhập vào tài khoản
               email sinh viên ĐH FPT, bạn đã hoàn thành kí vào lá thư kiến nghị
               này.
             </p>
+            <p>(Hoặc các bạn có thể điền vào Google Forms <a href={"https://docs.google.com/forms/d/e/1FAIpQLSfwwbMhzU1KPW8H3rdgkLDIEul5B-6H90ChBtLxLYyEvBb2KA/viewform?fbzx=7874155949367152925"} target={"_blank"}>ở đây</a>)</p>
           </Card>
           <p>
             Đã có
@@ -176,7 +174,7 @@ sinh viên kí
           </Skeleton>
           {false && count && 3000 - count > 0 ? (
             <p style={{ marginTop: "5px", textAlign: "right" }}>
-              Còn thiếu 
+              Còn thiếu
               {' '}
               {3000 - count || 0}
               {' '}
@@ -195,10 +193,10 @@ chữ kí nữa!
                   style={{
                     marginTop: "0.5rem",
                   }}
-                  disabled={true || (loading && !signList.length)}
+                  disabled={loading && !signList.length}
                 >
                   <Icon type="google" />
-                  Đã hết hạn kí tên
+                  Đăng nhập email và kí tên
                 </Button>
               )}
               buttonText="Login with Google "
