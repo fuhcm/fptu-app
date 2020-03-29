@@ -167,16 +167,16 @@ sinh viên kí
           <Skeleton loading={loading && !signList.length} active>
             <Progress
               percent={
-                parseInt((count && (count / 3000) * 100).toFixed(2)) || 0
+                parseInt((count && (count / 1000) * 100).toFixed(2)) || 0
               }
               status="active"
             />
           </Skeleton>
-          {false && count && 3000 - count > 0 ? (
+          {false && count && 1000 - count > 0 ? (
             <p style={{ marginTop: "5px", textAlign: "right" }}>
               Còn thiếu
               {' '}
-              {3000 - count || 0}
+              {1000 - count || 0}
               {' '}
 chữ kí nữa!
             </p>
