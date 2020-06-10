@@ -16,7 +16,6 @@ import styled from "styled-components";
 import showdown from "showdown";
 import LocalStorageUtils from "@utils/browser/LocalStorage";
 import NotFound from "../not-found/NotFound";
-import DisqusComponent from "../../utils/shared/disqus/DisqusComponent";
 
 const { Content } = Layout;
 
@@ -230,11 +229,6 @@ Quay lại danh sách bài
                 </Popconfirm>
               </div>
             )}
-
-            <DisqusComponent
-              guid={post && post.guid}
-              title={post && post.title}
-            />
           </PostBody>
         </div>
       </Content>

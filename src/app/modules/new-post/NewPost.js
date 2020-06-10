@@ -61,7 +61,7 @@ function NewPost(props) {
         .finally(() => setLoading(false));
     } else {
       FPTUSDK.post
-        .update(props.match.params.id, { content })
+        .update(props.match.params.id, { title, categories, description, thumbnail, content })
         .then(() => {
           message.success("Đã cập nhật bài viết");
           props.history.push(`/fpt/${props.match.params.id}`);

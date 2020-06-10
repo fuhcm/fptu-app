@@ -34,7 +34,7 @@ const formatter = buildFormatter(viStrings);
 const { Content } = Layout;
 const { Option } = Select;
 
-const stepLoad = 1000;
+const stepLoad = 10;
 
 const ConfessContent = styled.div`
   white-space: pre-line;

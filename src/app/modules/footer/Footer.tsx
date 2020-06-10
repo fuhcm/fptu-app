@@ -32,7 +32,7 @@ class FooterPage extends Component<Props> {
                     <Tooltip title="I am not FPTU HCM Confessions (or related) and hence not responsible for the content (or approval) posted on the fanpage">
                         <strong>
                             <a
-                                href="https://mrhmt.com"
+                                href="https://tuhuynh.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
@@ -40,8 +40,7 @@ class FooterPage extends Component<Props> {
                             </a>
                         </strong>
                     </Tooltip>
-                    . Built on top of JavaScript and Go hosted at Google Cloud
-                    Platform.
+                    .
                 </div>
             </Footer>
         );

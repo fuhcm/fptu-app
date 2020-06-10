@@ -19,12 +19,13 @@ const { Content } = Layout;
 const { Meta } = Card;
 
 class Home extends Component {
-  state = { numLoad: 9, isLoading: false };
+  state = { numLoad: 10 };
 
   componentDidMount() {
     const { getHomeArticles } = this.props;
+    const { numLoad } = this.state;
 
-    getHomeArticles();
+    getHomeArticles(numLoad);
 
     window.addEventListener("scroll", this.onScroll, false);
   }
@@ -34,7 +35,7 @@ class Home extends Component {
   }
 
   onScroll = () => {
-    const { numLoad, isLoading } = this.state;
+    const { numLoad, loading } = this.state;
     const { homeReducer } = this.props;
     const { posts } = homeReducer;
 
@@ -51,23 +52,20 @@ class Home extends Component {
     const scrolledToBottom =
       Math.ceil(scrollTop + clientHeight) >= scrollHeight;
 
-    if (scrolledToBottom && !isLoading && numLoad <= posts.length) {
-      this.setState({
-        isLoading: true,
-      });
+    if (scrolledToBottom && !loading && numLoad < posts.length) {
+      const { getHomeArticles } = this.props;
+      const { numLoad } = this.state;
 
-      setTimeout(() => {
-        this.setState({
-          numLoad  : numLoad + 9,
-          isLoading: false,
-        });
-      }, 500);
+      this.setState({
+        numLoad: numLoad + 10,
+      }, () => {
+        getHomeArticles(numLoad + 10);
+      });
     }
   };
 
   renderPosts = (posts = []) => {
-    const { numLoad } = this.state;
-    return posts.slice(0, numLoad).map(post => {
+    return posts.map(post => {
       if (!post || !post.guid) return null;
 
       post.description = post.description.replace(/<(.|\n)*?>/g, "").trim();
@@ -126,9 +124,9 @@ class Home extends Component {
                   fontWeight: "lighter",
                 }}
               >
-                đăng 
+                đăng
                 {' '}
-                <TimeAgo date={post.pubDate} formatter={formatter} />
+                { (post.pubDate || post.updatedAt) ? <TimeAgo date={post.pubDate || post.updatedAt} formatter={formatter} /> : "cách đây một vài giờ" }
               </div>
             </Card>
           </Col>
@@ -159,7 +157,6 @@ class Home extends Component {
   render() {
     const { homeReducer } = this.props;
     const { loading, posts, error } = homeReducer;
-    const { isLoading } = this.state;
 
     return (
       <Content className="content-container">
@@ -185,8 +182,8 @@ class Home extends Component {
           )}
 
           {posts && <Row gutter={16}>{this.renderPosts(posts)}</Row>}
-          {(loading && !posts.length) ||
-            (isLoading && (
+          {loading &&
+            ((
               <div>
                 <Skeleton active />
                 <Skeleton active />
