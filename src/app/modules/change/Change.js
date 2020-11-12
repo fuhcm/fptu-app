@@ -189,12 +189,12 @@ sinh viên kí
           <Skeleton loading={loading && !signList.length} active>
             <Progress
               percent={
-                parseInt((count && (count / 1000) * 100).toFixed(2)) || 0
+                parseInt((count && (count / 100) * 100).toFixed(2)) || 0
               }
               status="active"
             />
           </Skeleton>
-          {false && count && 100 - count > 0 ? (
+          {count && 100 - count > 0 ? (
             <p style={{ marginTop: "5px", textAlign: "right" }}>
               Còn thiếu
               {' '}
@@ -260,7 +260,7 @@ chữ kí nữa!
             padding : "10px",
           }}
         >
-          <img style={{ maxWidth: "460px" }} src="https://i.imgur.com/j5JKflj.png" />
+          <img style={{ maxWidth: "100%" }} src="https://i.imgur.com/j5JKflj.png" />
         </div>
       </div>
     </Content>
