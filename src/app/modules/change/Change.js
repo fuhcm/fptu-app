@@ -109,7 +109,7 @@ function ChangeForm() {
         />
         <meta
           property="og:image"
-          content="https://scontent.fhan1-1.fna.fbcdn.net/v/t39.30808-6/124000158_3596788330359902_7808246785184470399_n.avif?_nc_cat=105&cb=42ec8437-ce386d47&ccb=2&_nc_sid=e3f864&_nc_ohc=4d1Il6WD4sMAX8FiviD&_nc_ht=scontent.fhan1-1.fna&oh=b696cf851b2239ef5ed4590adde2906b&oe=5FD36B37"
+          content="https://i.imgur.com/j5JKflj.png"
         />
       </Helmet>
       <div className="content-wrapper">
@@ -260,7 +260,7 @@ chữ kí nữa!
             padding : "10px",
           }}
         >
-          <img style={{ maxWidth: "460px" }} src="https://scontent.fhan1-1.fna.fbcdn.net/v/t39.30808-6/124000158_3596788330359902_7808246785184470399_n.avif?_nc_cat=105&cb=42ec8437-ce386d47&ccb=2&_nc_sid=e3f864&_nc_ohc=4d1Il6WD4sMAX8FiviD&_nc_ht=scontent.fhan1-1.fna&oh=b696cf851b2239ef5ed4590adde2906b&oe=5FD36B37" />
+          <img style={{ maxWidth: "460px" }} src="https://i.imgur.com/j5JKflj.png" />
         </div>
       </div>
     </Content>
