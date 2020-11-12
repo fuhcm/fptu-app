@@ -107,10 +107,10 @@ function ChangeForm() {
           property="og:description"
           content="Sinh viên của FPTU HCM cùng nhau kí tên kêu gọi nhà trường thay đổi thời gian và địa điểm của buổi lễ tốt nghiệp 2020"
         />
-        {/*<meta*/}
-        {/*  property="og:image"*/}
-        {/*  content="https://i.imgur.com/1pNWLg6.png"*/}
-        {/*/>*/}
+        <meta
+          property="og:image"
+          content="https://scontent.fhan1-1.fna.fbcdn.net/v/t39.30808-6/124000158_3596788330359902_7808246785184470399_n.avif?_nc_cat=105&cb=42ec8437-ce386d47&ccb=2&_nc_sid=e3f864&_nc_ohc=4d1Il6WD4sMAX8FiviD&_nc_ht=scontent.fhan1-1.fna&oh=b696cf851b2239ef5ed4590adde2906b&oe=5FD36B37"
+        />
       </Helmet>
       <div className="content-wrapper">
         <div
@@ -131,6 +131,15 @@ function ChangeForm() {
           </Button>
           <Card
             title="Đơn kiến nghị nhà trường thay đổi lễ tốt nghiệp 2020"
+            extra={(
+              <a
+                href="https://fuhcm.com/fpt/5fa4e5a0df963846e29898cd/sinh-vien-phan-doi-le-tot-nghiep-to-chuc-vao-thu-6"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Xem
+              </a>
+            )}
             style={{ marginBottom: "1rem" }}
           >
             <p>
@@ -165,6 +174,9 @@ function ChangeForm() {
             </p>
             <p>
               Với 3 bước này mình mong là tất cả các CSV có thể có được Lễ tốt nghiệp trọn vẹn nhất. Mong các bạn có thể đồng hành cùng nhau.
+            </p>
+            <p>
+              (từ bài chia sẻ của page <a href="https://www.facebook.com/FPTUHCMReview/posts/111167514135350">FPTUHCMReview</a>)
             </p>
           </Card>
           <p>
