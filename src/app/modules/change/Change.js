@@ -100,17 +100,17 @@ function ChangeForm() {
     <Content className="content-container">
       <Helmet>
         <title>
-          Change! Kiến nghị hỗ trợ học phí - FUHCM.com
+          Change! Thay đổi thời gian và địa điểm lễ tốt nghiệp - FUHCM.com
         </title>
         <meta property="og:type" content="article" />
         <meta
           property="og:description"
-          content="Sinh viên của FPTU HCM cùng nhau kí tên kêu gọi nhà trường hỗ trợ học phí"
+          content="Sinh viên của FPTU HCM cùng nhau kí tên kêu gọi nhà trường thay đổi thời gian và địa điểm của buổi lễ tốt nghiệp 2020"
         />
-        <meta
-          property="og:image"
-          content="https://i.imgur.com/1pNWLg6.png"
-        />
+        {/*<meta*/}
+        {/*  property="og:image"*/}
+        {/*  content="https://i.imgur.com/1pNWLg6.png"*/}
+        {/*/>*/}
       </Helmet>
       <div className="content-wrapper">
         <div
@@ -130,32 +130,42 @@ function ChangeForm() {
             Tạo chiến dịch kiến nghị
           </Button>
           <Card
-            title="Đơn kiến nghị nhà trường hỗ trợ học phí"
-            extra={(
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfwwbMhzU1KPW8H3rdgkLDIEul5B-6H90ChBtLxLYyEvBb2KA/viewform?fbzx=7874155949367152925"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Xem
-              </a>
-)}
+            title="Đơn kiến nghị nhà trường thay đổi lễ tốt nghiệp 2020"
             style={{ marginBottom: "1rem" }}
           >
-            <p>Đơn kiến nghị bản đầy đủ: <a href={"https://docs.google.com/forms/d/e/1FAIpQLSfwwbMhzU1KPW8H3rdgkLDIEul5B-6H90ChBtLxLYyEvBb2KA/viewform?fbzx=7874155949367152925"} target={"_blank"}>Google Forms</a></p>
             <p>
-              Trong tình hình dịch bệnh diễn biến phức tạp, chúng tôi hiểu rằng việc học online là điều bất khả kháng và chúng tôi hoàn toàn chấp nhận. Tuy nhiên chúng tôi cảm thấy rằng, những giá trị mà sinh viên được nhận từ trường trong kì vừa rồi (kì Spring 2020) không thỏa đáng với số tiền mà chúng tôi đã đóng. Cụ thể hơn, học phí 25.300.000VNĐ bao gồm chi phí cho cơ sở vật chất, giáo trình, chi phí vận hành, chi phí giảng dạy của giảng viên và chất lượng đào tạo. Nhưng sự thật trong kì vừa qua, chúng tôi chỉ được đến học tại khuôn viên trường và hưởng đủ các giá trị mà học phí đem lại trong 2 tuần đầu kì (05/01/2020 - 18/01/2020), từ tuần thứ 3 đến tuần thứ 10, chúng tôi chỉ nhận giá trị là giờ dạy của các giảng viên thông qua nền tảng Google Meet và giáo trình. Hơn nữa, chất lượng của quá trình học online này không hiệu quả bằng việc học offline ở trường.
+              Cựu sinh viên chúng tôi muốn được dự lễ tốt nghiệp cùng cả gia đình, cựu sinh viên chúng tôi muốn lễ tốt nghiệp được diễn ra vào những ngày cuối tuần
             </p>
             <p>
-              Chính vì những lý do trên, chúng tôi xin được đề xuất với quý Ban giám hiệu, Ban đào tạo trường Đại học FPT giảm 30 - 35% học phí cho kì Summer 2020 để tạo điều kiện và động lực cho sinh viên có thể tiếp tục việc học online, cũng như là quá trình theo học tại trường ĐH FPT. Mặc khác, đây cũng là hành động thể hiện sự san sẻ, thấu hiểu của nhà trường dành cho bậc phụ huynh trên con đường nuôi dưỡng và phát triển tài năng của thế hệ trẻ.
-
+              Đó là những gì mà hầu hết các bạn Cựu Sinh Viên (CSV) đã ý kiến trong những ngày qua và mong chờ nhà trường trả lời nhưng vẫn không thấy hồi đáp!
             </p>
             <p>
-              Bằng cách click vào button bên dưới và đăng nhập vào tài khoản
-              email sinh viên ĐH FPT, bạn đã hoàn thành kí vào lá thư kiến nghị
-              này.
+              Trách nhiệm của FPT University HCM trong lễ tốt nghiệp của chúng ta ở đâu khi chúng ta đã hoàn thành trách nhiệm học phí?
             </p>
-            <p>(Hoặc các bạn có thể điền vào Google Forms <a href={"https://docs.google.com/forms/d/e/1FAIpQLSfwwbMhzU1KPW8H3rdgkLDIEul5B-6H90ChBtLxLYyEvBb2KA/viewform?fbzx=7874155949367152925"} target={"_blank"}>ở đây</a>)</p>
+            <p>
+              Là dấu mốc của việc hoàn thành 4 năm ròng rã tại Đại Học, chúng ta đáng lẽ ra phải được hưởng một buổi lễ trang trọng và nhiều cảm xúc cùng với gia đình và bạn bè, cũng như là lúc mà chúng ta có thể gởi những sự tri ân đến các Thầy các Cô đã dạy dỗ chúng ta. Điều kiện lý tưởng nhất sẽ luôn là ngày cuối tuần, khi mà gia đình, bạn bè và cả chúng ta có thể sắp xếp công việc và cùng bên nhau ở giây phút đặc biệt ấy.
+            </p>
+            <p>
+              Nhưng không! 20/11/2020 là thứ 6, là ngày mà mọi người phải đi làm. Nhưng không! Vì hội trường sức chứa có hạn nên chỉ được dẫn theo 01 phụ huynh! Nghe sao thật khó để lựa chọn giữa deadline và và cái lễ ra trường, giữa Bố và Mẹ, ... Nói thẳng ra, bản thân mình không thể để ai ở nhà!
+            </p>
+            <p>
+              Có nhiều bạn cũng sẽ cảm thấy như mình và có cùng mong muốn. Và để làm được điều đó chúng ta phải lên tiếng.
+            </p>
+            <p>
+              Vậy nên mình mong mọi người có thể làm theo các bước sau để có thể truyền đi thông điệp một cách rõ ràng hơn cho Nhà Trường:
+            </p>
+            <p>
+              (1) Kí tên vào chiến dịch kiến nghị này bằng cách đăng nhập vào email trường (@fpt.edu.vn)
+            </p>
+            <p>
+              (2) Cùng viết 1 chiếc mail reply lại mail mời tham gia lễ tốt nghiệp với nội dung mong muốn buổi lễ sẽ diễn ra vào T7 hoặc CN và ở nơi đủ rộng để có thể đưa gia đình theo cùng chung vui.
+            </p>
+            <p>
+              (3) Vào fanpage FPT University HCM và comment vào <a href="https://www.facebook.com/FPTU.HCM/photos/a.360014474037320/3596787310360004">post này</a> với nội dung mong muốn và share lại post kèm hashtag #WeWantGraduationCeremonyWithFamily.
+            </p>
+            <p>
+              Với 3 bước này mình mong là tất cả các CSV có thể có được Lễ tốt nghiệp trọn vẹn nhất. Mong các bạn có thể đồng hành cùng nhau.
+            </p>
           </Card>
           <p>
             Đã có
