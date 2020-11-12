@@ -194,11 +194,11 @@ sinh viên kí
               status="active"
             />
           </Skeleton>
-          {false && count && 1000 - count > 0 ? (
+          {false && count && 100 - count > 0 ? (
             <p style={{ marginTop: "5px", textAlign: "right" }}>
               Còn thiếu
               {' '}
-              {1000 - count || 0}
+              {100 - count || 0}
               {' '}
 chữ kí nữa!
             </p>
@@ -252,6 +252,15 @@ chữ kí nữa!
               )}
             />
           </Skeleton>
+        </div>
+        <div
+          style={{
+            maxWidth: 480,
+            margin  : "auto",
+            padding : "10px",
+          }}
+        >
+          <img style={{ maxWidth: "460px" }} src="https://scontent.fhan1-1.fna.fbcdn.net/v/t39.30808-6/124000158_3596788330359902_7808246785184470399_n.avif?_nc_cat=105&cb=42ec8437-ce386d47&ccb=2&_nc_sid=e3f864&_nc_ohc=4d1Il6WD4sMAX8FiviD&_nc_ht=scontent.fhan1-1.fna&oh=b696cf851b2239ef5ed4590adde2906b&oe=5FD36B37" />
         </div>
       </div>
     </Content>
