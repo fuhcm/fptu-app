@@ -1,4 +1,3 @@
-import moment from "moment";
 import {
   GET_CODEDAO_ARTICLE_LOADING,
   GET_CODEDAO_ARTICLE_SUCCESS,
@@ -21,9 +20,9 @@ export default (state = initialState, action) => {
     case GET_CODEDAO_ARTICLE_SUCCESS:
       if (action.payload && action.payload.length) {
         // Sort posts by pubDate
-        action.payload.sort((left, right) => {
-          return moment.utc(right.pubDate).diff(moment.utc(left.pubDate));
-        });
+        // action.payload.sort((left, right) => {
+        //   return moment.utc(right.pubDate).diff(moment.utc(left.pubDate));
+        // });
 
         return {
           ...state,

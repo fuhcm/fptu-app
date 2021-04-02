@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import moment from "moment";
+import dayjs from "dayjs";
 import axios from "axios";
 
 import {
@@ -143,7 +143,7 @@ class AdminCP extends Component {
 
         this.showApproveModal(
           data.cfsID,
-          moment(data.createdAt).format("HH:mm DD/MM/YYYY"),
+          dayjs(data.createdAt, "HH:mm DD/MM/YYYY"),
           data.content,
           LocalStorageUtils.getNickName()
         );

@@ -52,7 +52,7 @@ class Home extends Component {
     const scrolledToBottom =
       Math.ceil(scrollTop + clientHeight) >= scrollHeight;
 
-    if (scrolledToBottom && !loading && numLoad < posts.length) {
+    if (scrolledToBottom && !loading) {
       const { getHomeArticles } = this.props;
       const { numLoad } = this.state;
 

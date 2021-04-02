@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import moment from "moment";
+import dayjs from "dayjs";
 
 import {
   Layout,
@@ -243,9 +243,7 @@ từ chối:
               <List.Item key={index}>
                 <Skeleton title loading={item.loading} active>
                   <List.Item.Meta
-                    description={moment(item.created_at).format(
-                      "HH:mm DD/MM/YYYY"
-                    )}
+                    description={dayjs(item.created_at, "HH:mm DD/MM/YYYY")}
                   />
                   {(item.status === null || item.status === 0) &&
                     this.pendingConfess(item.content)}

@@ -6,6 +6,7 @@
         "ant-design-pro": "^2.2.1",
         "antd": "^3.25.3",
         "axios": "^0.18.0",
+        "dayjs": "^1.10.4",
         "debounce": "^1.2.0",
         "disqus-react": "^1.0.5",
         "dotenv": "6.0.0",

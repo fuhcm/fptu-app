@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import { withRouter } from "react-router-dom";
 
@@ -14,7 +14,7 @@ type Location = {
     pathname: String;
 };
 
-class FooterPage extends Component<Props> {
+class FooterPage extends PureComponent<Props> {
     render() {
         const { location } = this.props;
         const isRadio: boolean = location.pathname === "/radio" ? true : false;
@@ -27,7 +27,7 @@ class FooterPage extends Component<Props> {
                 }}
             >
                 <div>
-                    <strong>FUHCM</strong>.<strong>com</strong> ©2019 Developed
+                    <strong>FUHCM</strong>.<strong>com</strong> ©2021 Developed
                     by{" "}
                     <Tooltip title="I am not FPTU HCM Confessions (or related) and hence not responsible for the content (or approval) posted on the fanpage">
                         <strong>
