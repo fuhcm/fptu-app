@@ -5,7 +5,7 @@
     "dependencies": {
         "ant-design-pro": "^2.2.1",
         "antd": "^3.25.3",
-        "axios": "^0.18.0",
+        "axios": "^0.21.1",
         "dayjs": "^1.10.4",
         "debounce": "^1.2.0",
         "disqus-react": "^1.0.5",
