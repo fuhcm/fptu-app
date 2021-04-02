@@ -19,7 +19,7 @@ const { Content } = Layout;
 const { Meta } = Card;
 
 class Home extends Component {
-  state = { numLoad: 10 };
+  state = { numLoad: 9 };
 
   componentDidMount() {
     const { getHomeArticles } = this.props;
@@ -57,9 +57,9 @@ class Home extends Component {
       const { numLoad } = this.state;
 
       this.setState({
-        numLoad: numLoad + 10,
+        numLoad: numLoad + 9,
       }, () => {
-        getHomeArticles(numLoad + 10);
+        getHomeArticles(numLoad + 9);
       });
     }
   };
