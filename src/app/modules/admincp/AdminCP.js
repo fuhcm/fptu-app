@@ -141,9 +141,11 @@ class AdminCP extends Component {
         this.setState({ list });
         message.success(`Confession đã được duyệt với ID là ${data.cfsID}`);
 
+        const createAtDate = new Date(data.createdAt);
+
         this.showApproveModal(
           data.cfsID,
-          dayjs(data.createdAt, "HH:mm DD/MM/YYYY"),
+          dayjs(createAtDate).format("HH:mm DD/MM/YYYY"),
           data.content,
           LocalStorageUtils.getNickName()
         );
