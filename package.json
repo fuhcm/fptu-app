@@ -96,7 +96,7 @@
         "isomorphic-style-loader": "^4.0.0",
         "jest": "^24.9.0",
         "mini-css-extract-plugin": "^0.5.0",
-        "node-sass": "^4.11.0",
+        "node-sass": "^7.0.0",
         "optimize-css-assets-webpack-plugin": "^5.0.1",
         "prettier": "^1.14.3",
         "prettier-eslint": "^8.8.2",
